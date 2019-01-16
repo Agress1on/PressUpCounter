@@ -1,20 +1,20 @@
 package com.example.alexa.pressupcounter.firstlaunch.view;
 
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityFirstLaunchBinding;
 
 public class FirstLaunchActivity extends AppCompatActivity {
 
-    static final  int PAGE_COUNT = 20;
+    static final  int PAGE_COUNT = 2;
 
     ViewPager mPager;
     PagerAdapter mPagerAdapter;
@@ -36,7 +36,7 @@ public class FirstLaunchActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-
+                   // mPageIndicatorView.setSelection(position);
             }
 
             @Override
@@ -54,7 +54,12 @@ public class FirstLaunchActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return PageFragment.newInstance(position);
+            Fragment fragment = null;
+            switch (position) {
+                case 0: fragment = PageFragment.newInstance(position); break;
+                case 1: fragment = SecondFragment.newInstance(); break;
+            }
+            return fragment;
         }
 
         @Override
