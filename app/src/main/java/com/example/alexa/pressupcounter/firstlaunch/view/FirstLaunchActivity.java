@@ -16,9 +16,9 @@ import com.example.alexa.pressupcounter.databinding.ActivityFirstLaunchBinding;
 
 public class FirstLaunchActivity extends AppCompatActivity {
 
-    ViewPager mPager;
-    PagerAdapter mPagerAdapter;
-    TabLayout mTabLayout;
+    private ViewPager mPager;
+    private PagerAdapter mPagerAdapter;
+    private TabLayout mTabLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
