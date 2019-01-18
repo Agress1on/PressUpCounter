@@ -45,7 +45,7 @@ public class PageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, container, false); //
+        View view = inflater.inflate(R.layout.fragment_page, container, false); //
         TextView tvPage = (TextView) view.findViewById(R.id.tvPage);
         tvPage.setText("Page " + pageNumber);
         tvPage.setBackgroundColor(backColor);
