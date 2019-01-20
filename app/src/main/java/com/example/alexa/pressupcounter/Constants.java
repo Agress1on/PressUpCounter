@@ -6,6 +6,7 @@ package com.example.alexa.pressupcounter;
  * @author Alexandr Mikhalev
  */
 public class Constants {
+
     public static final int PAGE_COUNT = 3;
 
     public static final String LOGGER = "LOGGER";

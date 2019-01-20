@@ -32,14 +32,14 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     @Override
     public void onIncrementButton() {
-       if (listOfRepetition.get(0).get() == listOfRepetition.get(1).get()) {
-           increaseRepetition(1);
-           increaseRepetition(4);
-       } else {
-           increaseRepetition(0);
-           increaseRepetition(2);
-           increaseRepetition(3);
-       }
+        if (listOfRepetition.get(0).get() == listOfRepetition.get(1).get()) {
+            increaseRepetition(1);
+            increaseRepetition(4);
+        } else {
+            increaseRepetition(0);
+            increaseRepetition(2);
+            increaseRepetition(3);
+        }
         setFinalQuantity();
     }
 

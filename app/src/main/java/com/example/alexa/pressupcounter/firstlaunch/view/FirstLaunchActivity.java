@@ -63,9 +63,15 @@ public class FirstLaunchActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             Fragment fragment = null;
             switch (position) {
-                case 0: fragment = FirstFragment.newInstance(); break;
-                case 1: fragment = SecondFragment.newInstance(); break;
-                case 2: fragment = ThirdFragment.newInstance(); break;
+                case 0:
+                    fragment = FirstFragment.newInstance();
+                    break;
+                case 1:
+                    fragment = SecondFragment.newInstance();
+                    break;
+                case 2:
+                    fragment = ThirdFragment.newInstance();
+                    break;
             }
             return fragment;
         }

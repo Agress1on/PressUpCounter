@@ -10,8 +10,12 @@ import java.util.List;
  * @author Alexandr Mikhalev
  */
 public interface StartViewModel {
+
     List<ObservableField<Integer>> getListOfRepetition();
+
     void onIncrementButton();
+
     void onDecrementButton();
+
     ObservableField<Integer> getFinalQuantity();
 }

@@ -8,6 +8,7 @@ import android.util.Log;
  * @author Alexandr Mikhalev
  */
 public class Logger {
+
     public static void d(String tag, String message) {
         if (BuildConfig.DEBUG) {
             Log.d(tag, message);
