@@ -6,4 +6,5 @@ package com.example.alexa.pressupcounter.firstlaunch.viewmodel;
  * @author Alexandr Mikhalev
  */
 public interface FirstLaunchViewModel {
+    void onStartMainActivityButton();
 }

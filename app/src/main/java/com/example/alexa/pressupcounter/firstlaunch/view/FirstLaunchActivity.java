@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.firstlaunch.view;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -11,10 +12,16 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityFirstLaunchBinding;
+import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
+import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModelImpl;
+import com.example.alexa.pressupcounter.main.view.MainActivity;
 
 public class FirstLaunchActivity extends AppCompatActivity {
+
+    private FirstLaunchViewModel mViewModel;
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
@@ -23,13 +30,27 @@ public class FirstLaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logger.d(Constants.LOGGER, "Main");
         ActivityFirstLaunchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_first_launch);
+        mViewModel = new FirstLaunchViewModelImpl(new FirstLaunchViewModelImpl.OnStartMainActivityListener() {
+            @Override
+            public void onClick() {
+                startMainActivity();
+            }
+        });
+        binding.setViewModel(mViewModel);
+
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         mTabLayout.setupWithViewPager(mPager, true);
+    }
+
+    void startMainActivity() {
+        Intent intent = MainActivity.getIntent(this);
+        startActivity(intent);
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
