@@ -18,4 +18,6 @@ public interface StartViewModel {
     void onDecrementButton();
 
     ObservableField<Integer> getFinalQuantity();
+
+    void onClickTrainingButton(StartViewModelImpl.OnTrainingListener onTrainingListener);
 }

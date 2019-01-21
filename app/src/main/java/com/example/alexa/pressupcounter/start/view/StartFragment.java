@@ -14,6 +14,7 @@ import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentStartBinding;
 import com.example.alexa.pressupcounter.start.viewmodel.StartViewModel;
 import com.example.alexa.pressupcounter.start.viewmodel.StartViewModelImpl;
+import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -35,7 +36,19 @@ public class StartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentStartBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start, container, false);
         binding.setViewModel(mStartViewModel);
+        mStartViewModel.onClickTrainingButton(new StartViewModelImpl.OnTrainingListener() {
+            @Override
+            public void onClick() {
+                startTrainingFragment();
+            }
+        });
         return binding.getRoot();
+    }
+
+    private void startTrainingFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, TrainingFragment.newInstance())
+                .commit();
     }
 
     public static StartFragment newInstance() {

@@ -15,10 +15,11 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     private List<ObservableField<Integer>> listOfRepetition = new ArrayList<>();
     private ObservableField<Integer> mSummQuantity;
+    private OnTrainingListener mOnTrainingListener;
 
     public StartViewModelImpl() {
         listOfRepetition.add(new ObservableField<>(2)); //first repetition
-        listOfRepetition.add(new ObservableField<>(3)); // secont repetition
+        listOfRepetition.add(new ObservableField<>(3)); // second repetition
         listOfRepetition.add(new ObservableField<>(1)); // third repetition
         listOfRepetition.add(new ObservableField<>(1)); // fourth repetition
         listOfRepetition.add(new ObservableField<>(3)); // fifth repetition
@@ -62,6 +63,12 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
         return mSummQuantity;
     }
 
+    @Override
+    public void onClickTrainingButton(OnTrainingListener onTrainingListener) {
+        mOnTrainingListener = onTrainingListener;
+        mOnTrainingListener.onClick();
+    }
+
     private void setFinalQuantity() {
         mSummQuantity.set(0);
         for (ObservableField<Integer> integerObservableField : listOfRepetition) {
@@ -75,5 +82,9 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     private void decreaseRepetition(int numberOfList) {
         listOfRepetition.get(numberOfList).set(listOfRepetition.get(numberOfList).get() - 1);
+    }
+
+    public interface OnTrainingListener {
+        void onClick();
     }
 }
