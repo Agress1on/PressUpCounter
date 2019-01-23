@@ -48,6 +48,7 @@ public class StartFragment extends Fragment {
             public void onChanged(@Nullable FragmentEvent fragmentEvent) {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
                         .replace(R.id.fragment_container, TrainingFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappend(true);

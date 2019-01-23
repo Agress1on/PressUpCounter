@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.training.view;
+package com.example.alexa.pressupcounter.choisetraining.view;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -11,38 +11,38 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.choisetraining.viewmodel.ChoiseTrainingViewModelImpl;
+import com.example.alexa.pressupcounter.databinding.FragmentChoiseTrainingBinding;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
-import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
-import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
+import com.example.alexa.pressupcounter.choisetraining.viewmodel.ChoiseTrainingViewModel;
 
 /**
- * Created by Alexandr Mikhalev on 23.01.2019.
+ * Created by Alexandr Mikhalev on 20.01.2019.
  *
  * @author Alexandr Mikhalev
  */
-public class TrainingFragment extends Fragment {
+public class ChoiseTrainingFragment extends Fragment {
 
-    private TrainingViewModel mTrainingViewModel;
+    private ChoiseTrainingViewModel mChoiseTrainingViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTrainingViewModel = ViewModelProviders.of(this).get(TrainingViewModelImpl.class);
+        mChoiseTrainingViewModel = ViewModelProviders.of(this).get(ChoiseTrainingViewModelImpl.class);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training, container, false);
-        binding.setViewModel(mTrainingViewModel);
+        FragmentChoiseTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_choise_training, container, false);
+        binding.setViewModel(mChoiseTrainingViewModel);
         return binding.getRoot();
     }
 
-    public static TrainingFragment newInstance() {
+    public static ChoiseTrainingFragment newInstance() {
         Bundle args = new Bundle();
-        TrainingFragment fragment = new TrainingFragment();
+        ChoiseTrainingFragment fragment = new ChoiseTrainingFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
 }
