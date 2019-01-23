@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.start.view;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentStartBinding;
 import com.example.alexa.pressupcounter.start.viewmodel.StartViewModel;
@@ -29,6 +31,7 @@ public class StartFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mStartViewModel = ViewModelProviders.of(this).get(StartViewModelImpl.class);
+        init();
     }
 
     @Nullable
@@ -36,19 +39,20 @@ public class StartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentStartBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start, container, false);
         binding.setViewModel(mStartViewModel);
-        mStartViewModel.onClickTrainingButton(new StartViewModelImpl.OnTrainingListener() {
-            @Override
-            public void onClick() {
-                startTrainingFragment();
-            }
-        });
         return binding.getRoot();
     }
 
-    private void startTrainingFragment() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, TrainingFragment.newInstance())
-                .commit();
+    private void init() {
+        mStartViewModel.getFragmentEvent().observe(this, new Observer<FragmentEvent>() {
+            @Override
+            public void onChanged(@Nullable FragmentEvent fragmentEvent) {
+                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, TrainingFragment.newInstance())
+                        .commit();
+                fragmentEvent.setHappend(true);
+            }
+        });
     }
 
     public static StartFragment newInstance() {

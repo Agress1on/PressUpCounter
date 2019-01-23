@@ -1,7 +1,11 @@
 package com.example.alexa.pressupcounter.start.viewmodel;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
+
+import com.example.alexa.pressupcounter.FragmentEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +19,7 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     private List<ObservableField<Integer>> listOfRepetition = new ArrayList<>();
     private ObservableField<Integer> mSummQuantity;
-    private OnTrainingListener mOnTrainingListener;
+    private MutableLiveData<FragmentEvent> mLiveData;
 
     public StartViewModelImpl() {
         listOfRepetition.add(new ObservableField<>(2)); //first repetition
@@ -24,11 +28,17 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
         listOfRepetition.add(new ObservableField<>(1)); // fourth repetition
         listOfRepetition.add(new ObservableField<>(3)); // fifth repetition
         mSummQuantity = new ObservableField<>(10);
+        mLiveData = new MutableLiveData<>();
     }
 
     @Override
     public List<ObservableField<Integer>> getListOfRepetition() {
         return listOfRepetition;
+    }
+
+    @Override
+    public LiveData<FragmentEvent> getFragmentEvent() {
+        return mLiveData;
     }
 
     @Override
@@ -64,9 +74,8 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
     }
 
     @Override
-    public void onClickTrainingButton(OnTrainingListener onTrainingListener) {
-        mOnTrainingListener = onTrainingListener;
-        mOnTrainingListener.onClick();
+    public void onClickTrainingButton() {
+        mLiveData.postValue(new FragmentEvent());
     }
 
     private void setFinalQuantity() {

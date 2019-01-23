@@ -23,6 +23,30 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, StartFragment.newInstance())
                     .commit();
         }
+
+        // JSON example
+        /*
+        try {
+            JSONObject object = new JSONObject();
+            object.put("test", true);
+            JSONObject data = new JSONObject();
+            data.put("age", 25);
+            JSONArray array = new JSONArray();
+            array.put("blond");
+            array.put("brown");
+            data.put("hair", array);
+            object.put("data", data);
+            Log.d("MAIN", "json: " + object.toString());
+
+            boolean test = object.getBoolean("test");
+            JSONObject jData = object.getJSONObject("data");
+            int age = jData.getInt("age");
+            Log.d("MAIN", "test=" + test + " age=" + age);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        */
+
     }
 
     public static Intent getIntent(Context context) {
