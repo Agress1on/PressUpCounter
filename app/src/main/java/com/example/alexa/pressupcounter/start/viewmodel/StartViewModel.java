@@ -4,8 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
-
-import java.util.List;
+import com.example.alexa.pressupcounter.PressUp;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -14,9 +13,14 @@ import java.util.List;
  */
 public interface StartViewModel {
 
+    /*
     List<ObservableField<Integer>> getListOfRepetition();
 
     ObservableField<Integer> getFinalQuantity();
+    */
+    ObservableField<Integer> getFinalQuantity();
+
+    ObservableField<PressUp> getPressUp();
 
     LiveData<FragmentEvent> getFragmentEvent();
 

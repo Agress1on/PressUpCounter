@@ -6,9 +6,7 @@ import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.alexa.pressupcounter.PressUp;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -17,23 +15,19 @@ import java.util.List;
  */
 public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
-    private List<ObservableField<Integer>> listOfRepetition = new ArrayList<>();
+    private ObservableField<PressUp> mPressUp;
     private ObservableField<Integer> mSummQuantity;
     private MutableLiveData<FragmentEvent> mLiveData;
 
     public StartViewModelImpl() {
-        listOfRepetition.add(new ObservableField<>(2)); //first repetition
-        listOfRepetition.add(new ObservableField<>(3)); // second repetition
-        listOfRepetition.add(new ObservableField<>(1)); // third repetition
-        listOfRepetition.add(new ObservableField<>(1)); // fourth repetition
-        listOfRepetition.add(new ObservableField<>(3)); // fifth repetition
+        mPressUp = new ObservableField<>(new PressUp(new ObservableField<Integer>(2), new ObservableField<Integer>(3), new ObservableField<Integer>(1), new ObservableField<Integer>(1), new ObservableField<Integer>(3)));
         mSummQuantity = new ObservableField<>(10);
         mLiveData = new MutableLiveData<>();
     }
 
     @Override
-    public List<ObservableField<Integer>> getListOfRepetition() {
-        return listOfRepetition;
+    public ObservableField<PressUp> getPressUp() {
+        return mPressUp;
     }
 
     @Override
@@ -43,6 +37,13 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     @Override
     public void onIncrementButton() {
+        if (mPressUp.get().getFirstRepetition().get() == mPressUp.get().getSecondRepetition().get()) {
+            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), new ObservableField<Integer>(mPressUp.get().getSecondRepetition().get() + 1), mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), new ObservableField<Integer>(mPressUp.get().getFifthRepetition().get() + 1)));
+        } else {
+            mPressUp.set(new PressUp(new ObservableField<Integer>(mPressUp.get().getFirstRepetition().get() + 1), mPressUp.get().getSecondRepetition(), new ObservableField<Integer>(mPressUp.get().getThirdRepetition().get() + 1), new ObservableField<Integer>(mPressUp.get().getFourthRepetition().get() + 1), mPressUp.get().getFifthRepetition()));
+        }
+        setFinalQuantity();
+        /*
         if (listOfRepetition.get(0).get() == listOfRepetition.get(1).get()) {
             increaseRepetition(1);
             increaseRepetition(4);
@@ -52,10 +53,19 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
             increaseRepetition(3);
         }
         setFinalQuantity();
+        */
     }
 
     @Override
     public void onDecrementButton() {
+        if (mSummQuantity.get() == 10) return;
+        if (mPressUp.get().getFirstRepetition().get() == mPressUp.get().getSecondRepetition().get()) {
+            mPressUp.set(new PressUp(new ObservableField<Integer>(mPressUp.get().getFirstRepetition().get() - 1), mPressUp.get().getSecondRepetition(), new ObservableField<Integer>(mPressUp.get().getThirdRepetition().get() - 1), new ObservableField<Integer>(mPressUp.get().getFourthRepetition().get() - 1), mPressUp.get().getFifthRepetition()));
+        } else {
+            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), new ObservableField<Integer>(mPressUp.get().getSecondRepetition().get() - 1), mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), new ObservableField<Integer>(mPressUp.get().getFifthRepetition().get() - 1)));
+        }
+        setFinalQuantity();
+        /*
         if (mSummQuantity.get() == 10) return;
         if (listOfRepetition.get(0).get() == listOfRepetition.get(1).get()) {
             decreaseRepetition(0);
@@ -66,12 +76,14 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
             decreaseRepetition(4);
         }
         setFinalQuantity();
+        */
     }
 
     @Override
     public ObservableField<Integer> getFinalQuantity() {
         return mSummQuantity;
     }
+
 
     @Override
     public void onClickTrainingButton() {
@@ -80,17 +92,7 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     private void setFinalQuantity() {
         mSummQuantity.set(0);
-        for (ObservableField<Integer> integerObservableField : listOfRepetition) {
-            mSummQuantity.set(mSummQuantity.get() + integerObservableField.get());
-        }
-    }
-
-    private void increaseRepetition(int numberOfList) {
-        listOfRepetition.get(numberOfList).set(listOfRepetition.get(numberOfList).get() + 1);
-    }
-
-    private void decreaseRepetition(int numberOfList) {
-        listOfRepetition.get(numberOfList).set(listOfRepetition.get(numberOfList).get() - 1);
+        mSummQuantity.set(mPressUp.get().getFirstRepetition().get() + mPressUp.get().getSecondRepetition().get() + mPressUp.get().getThirdRepetition().get() + mPressUp.get().getFourthRepetition().get() + mPressUp.get().getFifthRepetition().get());
     }
 
     public interface OnTrainingListener {
