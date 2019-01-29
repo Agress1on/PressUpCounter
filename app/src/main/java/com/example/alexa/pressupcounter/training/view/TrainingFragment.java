@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
+import com.example.alexa.pressupcounter.training.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
 
@@ -27,7 +28,7 @@ public class TrainingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTrainingViewModel = ViewModelProviders.of(this).get(TrainingViewModelImpl.class);
+        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory()).get(TrainingViewModelImpl.class);
     }
 
     @Nullable
