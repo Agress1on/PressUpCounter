@@ -1,22 +1,22 @@
 package com.example.alexa.pressupcounter;
 
-import android.databinding.ObservableField;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Alexandr Mikhalev on 23.01.2019.
+ * Created by Alexandr Mikhalev on 29.01.2019.
  *
  * @author Alexandr Mikhalev
  */
 public class PressUp implements Parcelable {
-    private ObservableField<Integer> mFirstRepetition;
-    private ObservableField<Integer> mSecondRepetition;
-    private ObservableField<Integer> mThirdRepetition;
-    private ObservableField<Integer> mFourthRepetition;
-    private ObservableField<Integer> mFifthRepetition;
 
-    public PressUp(ObservableField<Integer> firstRepetition, ObservableField<Integer> secondRepetition, ObservableField<Integer> thirdRepetition, ObservableField<Integer> fourthRepetition, ObservableField<Integer> fifthRepetition) {
+    private int mFirstRepetition;
+    private int mSecondRepetition;
+    private int mThirdRepetition;
+    private int mFourthRepetition;
+    private int mFifthRepetition;
+
+    public PressUp(int firstRepetition, int secondRepetition, int thirdRepetition, int fourthRepetition, int fifthRepetition) {
         mFirstRepetition = firstRepetition;
         mSecondRepetition = secondRepetition;
         mThirdRepetition = thirdRepetition;
@@ -24,23 +24,23 @@ public class PressUp implements Parcelable {
         mFifthRepetition = fifthRepetition;
     }
 
-    public ObservableField<Integer> getFirstRepetition() {
+    public int getFirstRepetition() {
         return mFirstRepetition;
     }
 
-    public ObservableField<Integer> getSecondRepetition() {
+    public int getSecondRepetition() {
         return mSecondRepetition;
     }
 
-    public ObservableField<Integer> getThirdRepetition() {
+    public int getThirdRepetition() {
         return mThirdRepetition;
     }
 
-    public ObservableField<Integer> getFourthRepetition() {
+    public int getFourthRepetition() {
         return mFourthRepetition;
     }
 
-    public ObservableField<Integer> getFifthRepetition() {
+    public int getFifthRepetition() {
         return mFifthRepetition;
     }
 
@@ -51,19 +51,19 @@ public class PressUp implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(mFirstRepetition.get());
-        dest.writeInt(mSecondRepetition.get());
-        dest.writeInt(mThirdRepetition.get());
-        dest.writeInt(mFourthRepetition.get());
-        dest.writeInt(mFifthRepetition.get());
+        dest.writeInt(mFirstRepetition);
+        dest.writeInt(mSecondRepetition);
+        dest.writeInt(mThirdRepetition);
+        dest.writeInt(mFourthRepetition);
+        dest.writeInt(mFifthRepetition);
     }
 
     protected PressUp(Parcel in) {
-        mFirstRepetition = new ObservableField<>(in.readInt());
-        mSecondRepetition = new ObservableField<>(in.readInt());
-        mThirdRepetition = new ObservableField<>(in.readInt());
-        mFourthRepetition = new ObservableField<>(in.readInt());
-        mFifthRepetition = new ObservableField<>(in.readInt());
+        mFirstRepetition = in.readInt();
+        mSecondRepetition = in.readInt();
+        mThirdRepetition = in.readInt();
+        mFourthRepetition = in.readInt();
+        mFifthRepetition = in.readInt();
     }
 
     public static final Creator<PressUp> CREATOR = new Creator<PressUp>() {

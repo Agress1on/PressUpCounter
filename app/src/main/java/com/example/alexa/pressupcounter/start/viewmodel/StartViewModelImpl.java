@@ -20,7 +20,7 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
     private MutableLiveData<FragmentEvent> mLiveData;
 
     public StartViewModelImpl() {
-        mPressUp = new ObservableField<>(new PressUp(new ObservableField<Integer>(2), new ObservableField<Integer>(3), new ObservableField<Integer>(1), new ObservableField<Integer>(1), new ObservableField<Integer>(3)));
+        mPressUp = new ObservableField<>(new PressUp(2,3,1,1,3));
         mSummQuantity = new ObservableField<>(10);
         mLiveData = new MutableLiveData<>();
     }
@@ -37,10 +37,10 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     @Override
     public void onIncrementButton() {
-        if (mPressUp.get().getFirstRepetition().get() == mPressUp.get().getSecondRepetition().get()) {
-            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), new ObservableField<Integer>(mPressUp.get().getSecondRepetition().get() + 1), mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), new ObservableField<Integer>(mPressUp.get().getFifthRepetition().get() + 1)));
+        if (mPressUp.get().getFirstRepetition() == mPressUp.get().getSecondRepetition()) {
+            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), mPressUp.get().getSecondRepetition() + 1, mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), mPressUp.get().getFifthRepetition() + 1));
         } else {
-            mPressUp.set(new PressUp(new ObservableField<Integer>(mPressUp.get().getFirstRepetition().get() + 1), mPressUp.get().getSecondRepetition(), new ObservableField<Integer>(mPressUp.get().getThirdRepetition().get() + 1), new ObservableField<Integer>(mPressUp.get().getFourthRepetition().get() + 1), mPressUp.get().getFifthRepetition()));
+            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition() + 1, mPressUp.get().getSecondRepetition(), mPressUp.get().getThirdRepetition() + 1, mPressUp.get().getFourthRepetition() + 1, mPressUp.get().getFifthRepetition()));
         }
         setFinalQuantity();
         /*
@@ -58,11 +58,10 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     @Override
     public void onDecrementButton() {
-        if (mSummQuantity.get() == 10) return;
-        if (mPressUp.get().getFirstRepetition().get() == mPressUp.get().getSecondRepetition().get()) {
-            mPressUp.set(new PressUp(new ObservableField<Integer>(mPressUp.get().getFirstRepetition().get() - 1), mPressUp.get().getSecondRepetition(), new ObservableField<Integer>(mPressUp.get().getThirdRepetition().get() - 1), new ObservableField<Integer>(mPressUp.get().getFourthRepetition().get() - 1), mPressUp.get().getFifthRepetition()));
+        if (mPressUp.get().getFirstRepetition() == mPressUp.get().getSecondRepetition()) {
+            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition() - 1, mPressUp.get().getSecondRepetition(), mPressUp.get().getThirdRepetition() - 1, mPressUp.get().getFourthRepetition() - 1, mPressUp.get().getFifthRepetition()));
         } else {
-            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), new ObservableField<Integer>(mPressUp.get().getSecondRepetition().get() - 1), mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), new ObservableField<Integer>(mPressUp.get().getFifthRepetition().get() - 1)));
+            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), mPressUp.get().getSecondRepetition() - 1, mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), mPressUp.get().getFifthRepetition() - 1));
         }
         setFinalQuantity();
         /*
@@ -92,8 +91,9 @@ public class StartViewModelImpl extends ViewModel implements StartViewModel {
 
     private void setFinalQuantity() {
         mSummQuantity.set(0);
-        mSummQuantity.set(mPressUp.get().getFirstRepetition().get() + mPressUp.get().getSecondRepetition().get() + mPressUp.get().getThirdRepetition().get() + mPressUp.get().getFourthRepetition().get() + mPressUp.get().getFifthRepetition().get());
+        mSummQuantity.set(mPressUp.get().getFirstRepetition() + mPressUp.get().getSecondRepetition() + mPressUp.get().getThirdRepetition() + mPressUp.get().getFourthRepetition() + mPressUp.get().getFifthRepetition());
     }
+
 
     public interface OnTrainingListener {
         void onClick();

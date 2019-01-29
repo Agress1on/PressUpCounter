@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.alexa.pressupcounter.PressUp;
-
 /**
  * Created by Alexandr Mikhalev on 26.01.2019.
  *

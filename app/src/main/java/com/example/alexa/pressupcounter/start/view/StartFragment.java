@@ -49,7 +49,7 @@ public class StartFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, TrainingFragment.newInstance())
+                        .replace(R.id.fragment_container, TrainingFragment.newInstance(mStartViewModel.getPressUp().get()))
                         .commit();
                 fragmentEvent.setHappend(true);
             }

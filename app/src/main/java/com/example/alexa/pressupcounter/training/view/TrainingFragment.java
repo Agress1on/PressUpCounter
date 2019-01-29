@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
-import com.example.alexa.pressupcounter.training.TrainingViewModelFactory;
+import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
 
@@ -28,7 +30,8 @@ public class TrainingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory()).get(TrainingViewModelImpl.class);
+        PressUp pressUp2 = getArguments().getParcelable(Constants.KEY_FOR_PRESS_UP);
+        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(pressUp2)).get(TrainingViewModelImpl.class);
     }
 
     @Nullable
@@ -39,25 +42,11 @@ public class TrainingFragment extends Fragment {
         return binding.getRoot();
     }
 
-    /*
-    public static TrainingFragment newInstance(int firstRepetition, int secondRepetition, int thirdRepetition, int fourthRepetition, int fifthRepetition) {
+    public static TrainingFragment newInstance(PressUp pressUp) {
         Bundle args = new Bundle();
-        args.putInt(Constants.KEY_FOR_FIRST_REPETITION, firstRepetition);
-        args.putInt(Constants.KEY_FOR_SECOND_REPETITION, secondRepetition);
-        args.putInt(Constants.KEY_FOR_THIRD_REPETITION, thirdRepetition);
-        args.putInt(Constants.KEY_FOR_FOURTH_REPETITION, fourthRepetition);
-        args.putInt(Constants.KEY_FOR_FIFTH_REPETITION, fifthRepetition);
+        args.putParcelable(Constants.KEY_FOR_PRESS_UP, pressUp);
         TrainingFragment fragment = new TrainingFragment();
         fragment.setArguments(args);
         return fragment;
     }
-    */
-
-    public static TrainingFragment newInstance() {
-        Bundle args = new Bundle();
-        TrainingFragment fragment = new TrainingFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
 }

@@ -1,11 +1,10 @@
-package com.example.alexa.pressupcounter.training;
+package com.example.alexa.pressupcounter.training.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
 
 import com.example.alexa.pressupcounter.PressUp;
-import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
 
 /**
  * Created by Alexandr Mikhalev on 29.01.2019.
@@ -16,10 +15,9 @@ public class TrainingViewModelFactory extends ViewModelProvider.NewInstanceFacto
 
     private final PressUp mPressUp;
 
-
-    public TrainingViewModelFactory(PressUp pressUp) {
+    public TrainingViewModelFactory(PressUp pressUp2) {
         super();
-        mPressUp = pressUp;
+        mPressUp = pressUp2;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
