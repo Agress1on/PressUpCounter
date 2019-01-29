@@ -38,6 +38,20 @@ public class TrainingFragment extends Fragment {
         return binding.getRoot();
     }
 
+    /*
+    public static TrainingFragment newInstance(int firstRepetition, int secondRepetition, int thirdRepetition, int fourthRepetition, int fifthRepetition) {
+        Bundle args = new Bundle();
+        args.putInt(Constants.KEY_FOR_FIRST_REPETITION, firstRepetition);
+        args.putInt(Constants.KEY_FOR_SECOND_REPETITION, secondRepetition);
+        args.putInt(Constants.KEY_FOR_THIRD_REPETITION, thirdRepetition);
+        args.putInt(Constants.KEY_FOR_FOURTH_REPETITION, fourthRepetition);
+        args.putInt(Constants.KEY_FOR_FIFTH_REPETITION, fifthRepetition);
+        TrainingFragment fragment = new TrainingFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+    */
+
     public static TrainingFragment newInstance() {
         Bundle args = new Bundle();
         TrainingFragment fragment = new TrainingFragment();

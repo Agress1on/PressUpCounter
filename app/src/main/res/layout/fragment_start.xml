@@ -40,6 +40,7 @@
             android:text="Повторения"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/repetition_header_text_view" />
 
         <View
@@ -71,6 +72,7 @@
             android:text="1"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
             app:layout_constraintEnd_toEndOf="@id/first_repetition_counter"
             app:layout_constraintStart_toStartOf="@id/first_repetition_counter" />
 
@@ -94,6 +96,7 @@
             android:text="2"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
             app:layout_constraintEnd_toEndOf="@id/second_repetition_counter"
             app:layout_constraintStart_toStartOf="@id/second_repetition_counter" />
 
@@ -117,6 +120,7 @@
             android:text="3"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
             app:layout_constraintEnd_toEndOf="@id/third_repetition_counter"
             app:layout_constraintStart_toStartOf="@id/third_repetition_counter" />
 
@@ -140,6 +144,7 @@
             android:text="4"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
             app:layout_constraintEnd_toEndOf="@id/fourth_repetition_counter"
             app:layout_constraintStart_toStartOf="@id/fourth_repetition_counter" />
 
@@ -163,6 +168,7 @@
             android:text="5"
             android:textColor="@color/colorBlack"
             android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
             app:layout_constraintEnd_toEndOf="@id/fifth_repetition_counter"
             app:layout_constraintStart_toStartOf="@id/fifth_repetition_counter" />
 
