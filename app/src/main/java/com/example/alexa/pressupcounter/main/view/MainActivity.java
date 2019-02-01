@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
-import com.example.alexa.pressupcounter.start.view.StartFragment;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, StartFragment.newInstance())
+                    .add(R.id.fragment_container, SetProgramFragment.newInstance())
                     .commit();
         }
 
