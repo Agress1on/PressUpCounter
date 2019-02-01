@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.alexa.pressupcounter.PressUp;
+
 /**
  * Created by Alexandr Mikhalev on 26.01.2019.
  *
@@ -43,11 +45,11 @@ public class DataBaseHelperImpl extends SQLiteOpenHelper implements DatabaseHelp
     public void addPressUp(PressUp pressUp) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(KEY_FIRST_REPETITION, pressUp.getFirstRepetition().get());
-        cv.put(KEY_SECOND_REPETITION, pressUp.getSecondRepetition().get());
-        cv.put(KEY_THIRD_REPETITION, pressUp.getThirdRepetition().get());
-        cv.put(KEY_FOURTH_REPETITION, pressUp.getFourthRepetition().get());
-        cv.put(KEY_FIFTH_REPETITION, pressUp.getFifthRepetition().get());
+        cv.put(KEY_FIRST_REPETITION, pressUp.getFirstRepetition());
+        cv.put(KEY_SECOND_REPETITION, pressUp.getSecondRepetition());
+        cv.put(KEY_THIRD_REPETITION, pressUp.getThirdRepetition());
+        cv.put(KEY_FOURTH_REPETITION, pressUp.getFourthRepetition());
+        cv.put(KEY_FIFTH_REPETITION, pressUp.getFifthRepetition());
 
         db.insert(TABLE_PRESS_UP, null, cv);
         db.close();

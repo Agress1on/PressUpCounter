@@ -8,5 +8,10 @@ import android.databinding.ObservableField;
  * @author Alexandr Mikhalev
  */
 public interface TrainingViewModel {
-    ObservableField<String> getText();
+
+    ObservableField<Integer> getRepetition();
+
+    ObservableField<Integer> getQuantityOfRepetition();
+
+    void onClickRestButton();
 }

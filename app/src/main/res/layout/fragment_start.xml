@@ -186,7 +186,7 @@
             android:id="@+id/summ_static"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(viewModel.finalQuantity)}"
+            android:text="@{String.valueOf(safeUnbox(viewModel.finalQuantity))}"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@id/summ_header"
