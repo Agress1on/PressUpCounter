@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.databinding.FragmentStartBinding;
+import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
@@ -37,7 +37,7 @@ public class SetProgramFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentStartBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_program, container, false);
+        FragmentSetProgramBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_program, container, false);
         binding.setViewModel(mSetProgramViewModel);
         return binding.getRoot();
     }
