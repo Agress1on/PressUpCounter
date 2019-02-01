@@ -6,8 +6,8 @@
     <string name="for_second_repetition">2</string>
     <string name="for_fourth_repetition">4</string>
     <string name="for_fifth_repetition">5</string>
-    <string name="for_header_quantity_current_repition">Амиго! Сделай повторений:</string>
-    <string name="for_header_for_time_of_rest">и нажми кнопку отдыха,   чтобы запустить время отдыха</string>
+    <string name="for_header_quantity_current_repition">Амиго! \n Сделай повторений:</string>
+    <string name="for_header_for_time_of_rest">и нажми кнопку отдыха, \n чтобы запустить время отдыха</string>
     <string name="for_start_rest_button">Начать отдых</string>
     <string name="for_go_to_next_repetition_button">перейти к следующему подходу</string>
 </resources>
