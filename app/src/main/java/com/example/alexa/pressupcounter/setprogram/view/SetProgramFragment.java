@@ -16,7 +16,7 @@ import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
-import com.example.alexa.pressupcounter.training.view.TrainingFragment;
+import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -49,7 +49,7 @@ public class SetProgramFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, TrainingFragment.newInstance(mSetProgramViewModel.getPressUp().get()))
+                        .replace(R.id.fragment_container, StartTrainingFragment.newInstance(mSetProgramViewModel.getPressUp().get()))
                         .commit();
                 fragmentEvent.setHappend(true);
             }
