@@ -17,6 +17,7 @@ import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
+import com.example.alexa.pressupcounter.utils.Timer;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -31,7 +32,8 @@ public class TrainingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         PressUp pressUp2 = getArguments().getParcelable(Constants.KEY_FOR_PRESS_UP);
-        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(pressUp2)).get(TrainingViewModelImpl.class);
+        Timer timer = new Timer();
+        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(pressUp2, timer)).get(TrainingViewModelImpl.class);
     }
 
     @Nullable

@@ -4,6 +4,11 @@ import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.utils.Timer;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -13,14 +18,24 @@ import com.example.alexa.pressupcounter.PressUp;
 public class TrainingViewModelImpl extends ViewModel implements TrainingViewModel {
 
     private PressUp mPressUp;
+    private Timer mTimer;
 
     private ObservableField<Integer> mRepetition;
     private ObservableField<Integer> mQuantityOfRepetition;
 
-    public TrainingViewModelImpl(PressUp pressUp) {
+    private ObservableField<String> mRestTime;
+
+    private ObservableField<Boolean> mStateOfRestButton;
+
+    public TrainingViewModelImpl(PressUp pressUp, Timer timer) {
         mPressUp = pressUp;
+        mTimer = timer;
+
         mRepetition = new ObservableField<>(1);
         mQuantityOfRepetition = new ObservableField<>(mPressUp.getFirstRepetition());
+        mRestTime = new ObservableField<>("0");
+
+        mStateOfRestButton = new ObservableField<>(true);
     }
 
     @Override
@@ -34,7 +49,17 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public void onClickRestButton() {
+    public ObservableField<String> getRestTime() {
+        return mRestTime;
+    }
+
+    @Override
+    public ObservableField<Boolean> getStateOfRestButton() {
+        return mStateOfRestButton;
+    }
+
+    @Override
+    public void onClickNextRepetitionButton() {
         if (mRepetition.get() < 5) {
             mRepetition.set(mRepetition.get() + 1);
         } else {
@@ -58,4 +83,35 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 break;
         }
     }
+
+    @Override
+    public void onClickRestButton() {
+        mStateOfRestButton.set(false);
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                mRestTime.set("Start");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                mRestTime.set(String.valueOf(aLong));
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mRestTime.set("Error");
+            }
+
+            @Override
+            public void onComplete() {
+                mRestTime.set("Отдых закончен");
+                mStateOfRestButton.set(true);
+            }
+        };
+        Observable<Long> observable = mTimer.getLongObservable();
+        observable.subscribe(observer);
+    }
+
+
 }

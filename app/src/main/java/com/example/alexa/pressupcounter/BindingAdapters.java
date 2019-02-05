@@ -3,6 +3,7 @@ package com.example.alexa.pressupcounter;
 import android.content.res.Resources;
 import android.databinding.BindingAdapter;
 import android.util.TypedValue;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
@@ -19,5 +20,10 @@ public class BindingAdapters {
         float size = isCurrent ? res.getDimension(R.dimen.big_size_of_repetition_text_view) : res.getDimension(R.dimen.small_size_of_repetition_text_view);
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
         view.setBackgroundColor(color);
+    }
+
+    @BindingAdapter("app:setButtonState")
+    public static void setButtonState(Button button, Boolean isEnabled) {
+        button.setEnabled(isEnabled);
     }
 }
