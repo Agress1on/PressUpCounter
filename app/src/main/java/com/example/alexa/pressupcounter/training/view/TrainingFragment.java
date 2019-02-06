@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.training.view;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -11,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.DialogEvent;
 import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
+import com.example.alexa.pressupcounter.utils.DialogTrainingRest;
 import com.example.alexa.pressupcounter.utils.Timer;
 
 /**
@@ -34,6 +37,7 @@ public class TrainingFragment extends Fragment {
         PressUp pressUp2 = getArguments().getParcelable(Constants.KEY_FOR_PRESS_UP);
         Timer timer = new Timer();
         mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(pressUp2, timer)).get(TrainingViewModelImpl.class);
+        init();
     }
 
     @Nullable
@@ -42,6 +46,30 @@ public class TrainingFragment extends Fragment {
         FragmentTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training, container, false);
         binding.setViewModel(mTrainingViewModel);
         return binding.getRoot();
+    }
+
+    private void init() {
+        final DialogTrainingRest dg = new DialogTrainingRest();
+        dg.initDialog(new DialogTrainingRest.OnButtonClick() {
+            @Override
+            public void onPositiveButton() {
+                mTrainingViewModel.onClickPositiveButtonDialog();
+                dg.dismiss();
+            }
+
+            @Override
+            public void onNegativeButton() {
+                mTrainingViewModel.onClickNegativeButtonDialog();
+                dg.dismiss();
+            }
+        });
+
+        mTrainingViewModel.getDialogEventMutableLiveData().observe(this, new Observer<DialogEvent>() {
+            @Override
+            public void onChanged(@Nullable DialogEvent dialogEvent) {
+                dg.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST);
+            }
+        });
     }
 
     public static TrainingFragment newInstance(PressUp pressUp) {

@@ -1,8 +1,10 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 
+import com.example.alexa.pressupcounter.DialogEvent;
 import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.utils.Timer;
 
@@ -22,10 +24,10 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     private ObservableField<Integer> mRepetition;
     private ObservableField<Integer> mQuantityOfRepetition;
-
     private ObservableField<String> mRestTime;
-
     private ObservableField<Boolean> mStateOfRestButton;
+
+    private MutableLiveData<DialogEvent> mDialogEventMutableLiveData;
 
     public TrainingViewModelImpl(PressUp pressUp, Timer timer) {
         mPressUp = pressUp;
@@ -36,6 +38,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         mRestTime = new ObservableField<>("0");
 
         mStateOfRestButton = new ObservableField<>(true);
+
+        mDialogEventMutableLiveData = new MutableLiveData<>();
     }
 
     @Override
@@ -59,7 +63,57 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
+    public MutableLiveData<DialogEvent> getDialogEventMutableLiveData() {
+        return mDialogEventMutableLiveData;
+    }
+
+    @Override
+    public void onClickNegativeButtonDialog() {
+        mStateOfRestButton.set(true);
+    }
+
+    @Override
     public void onClickNextRepetitionButton() {
+        goToNextRepetition();
+    }
+
+    @Override
+    public void onClickRestButton() {
+        mDialogEventMutableLiveData.postValue(new DialogEvent());
+        mStateOfRestButton.set(false);
+
+    }
+
+    @Override
+    public void onClickPositiveButtonDialog() {
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                mRestTime.set("Start");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                mRestTime.set(String.valueOf(aLong));
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mRestTime.set("Error");
+            }
+
+            @Override
+            public void onComplete() {
+                mRestTime.set("Отдых закончен");
+                mStateOfRestButton.set(true);
+                goToNextRepetition();
+            }
+        };
+        Observable<Long> observable = mTimer.getLongObservable();
+        observable.subscribe(observer);
+    }
+
+    private void goToNextRepetition() {
         if (mRepetition.get() < 5) {
             mRepetition.set(mRepetition.get() + 1);
         } else {
@@ -83,35 +137,4 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 break;
         }
     }
-
-    @Override
-    public void onClickRestButton() {
-        mStateOfRestButton.set(false);
-        Observer<Long> observer = new Observer<Long>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                mRestTime.set("Start");
-            }
-
-            @Override
-            public void onNext(Long aLong) {
-                mRestTime.set(String.valueOf(aLong));
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                mRestTime.set("Error");
-            }
-
-            @Override
-            public void onComplete() {
-                mRestTime.set("Отдых закончен");
-                mStateOfRestButton.set(true);
-            }
-        };
-        Observable<Long> observable = mTimer.getLongObservable();
-        observable.subscribe(observer);
-    }
-
-
 }

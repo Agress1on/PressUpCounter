@@ -12,4 +12,6 @@ public class Constants {
     public static final String LOGGER = "LOGGER";
 
     public static final String KEY_FOR_PRESS_UP = "KEY_FOR_PRESS_UP";
+
+    public static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
 }
