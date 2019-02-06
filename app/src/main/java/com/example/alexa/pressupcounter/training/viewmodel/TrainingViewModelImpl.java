@@ -27,7 +27,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private ObservableField<String> mRestTime;
     private ObservableField<Boolean> mStateOfRestButton;
 
-    private MutableLiveData<DialogEvent> mDialogEventMutableLiveData;
+    private MutableLiveData<DialogEvent> mDialogEventForRest;
+    private MutableLiveData<DialogEvent> mDialogEventForRestOff;
 
     public TrainingViewModelImpl(PressUp pressUp, Timer timer) {
         mPressUp = pressUp;
@@ -39,7 +40,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
         mStateOfRestButton = new ObservableField<>(true);
 
-        mDialogEventMutableLiveData = new MutableLiveData<>();
+        mDialogEventForRest = new MutableLiveData<>();
+        mDialogEventForRestOff = new MutableLiveData<>();
     }
 
     @Override
@@ -63,8 +65,13 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public MutableLiveData<DialogEvent> getDialogEventMutableLiveData() {
-        return mDialogEventMutableLiveData;
+    public MutableLiveData<DialogEvent> getDialogEventForRest() {
+        return mDialogEventForRest;
+    }
+
+    @Override
+    public MutableLiveData<DialogEvent> getDialogEventForRestOff() {
+        return mDialogEventForRestOff;
     }
 
     @Override
@@ -79,9 +86,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickRestButton() {
-        mDialogEventMutableLiveData.postValue(new DialogEvent());
+        mDialogEventForRest.postValue(new DialogEvent());
         mStateOfRestButton.set(false);
-
     }
 
     @Override
@@ -106,14 +112,16 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
             public void onComplete() {
                 mRestTime.set("Отдых закончен");
                 mStateOfRestButton.set(true);
-                goToNextRepetition();
+                //goToNextRepetition();
+                mDialogEventForRestOff.postValue(new DialogEvent());
             }
         };
         Observable<Long> observable = mTimer.getLongObservable();
         observable.subscribe(observer);
     }
 
-    private void goToNextRepetition() {
+    @Override
+    public void goToNextRepetition() {
         if (mRepetition.get() < 5) {
             mRepetition.set(mRepetition.get() + 1);
         } else {

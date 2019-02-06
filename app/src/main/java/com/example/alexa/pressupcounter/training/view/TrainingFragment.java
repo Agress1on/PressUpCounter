@@ -20,6 +20,7 @@ import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFact
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
 import com.example.alexa.pressupcounter.utils.DialogTrainingRest;
+import com.example.alexa.pressupcounter.utils.DialogTrainingRestOff;
 import com.example.alexa.pressupcounter.utils.Timer;
 
 /**
@@ -64,10 +65,31 @@ public class TrainingFragment extends Fragment {
             }
         });
 
-        mTrainingViewModel.getDialogEventMutableLiveData().observe(this, new Observer<DialogEvent>() {
+        mTrainingViewModel.getDialogEventForRest().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
                 dg.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST);
+            }
+        });
+
+        final DialogTrainingRestOff dg2 = new DialogTrainingRestOff();
+        dg2.initDialog(new DialogTrainingRestOff.OnButtonClick() {
+            @Override
+            public void onPositiveButton() {
+                mTrainingViewModel.goToNextRepetition();
+                dg2.dismiss();
+            }
+
+            @Override
+            public void onNegativeButton() {
+                dg2.dismiss();
+            }
+        });
+
+        mTrainingViewModel.getDialogEventForRestOff().observe(this, new Observer<DialogEvent>() {
+            @Override
+            public void onChanged(@Nullable DialogEvent dialogEvent) {
+                dg2.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST_OFF);
             }
         });
     }

@@ -20,7 +20,11 @@ public interface TrainingViewModel {
 
     ObservableField<Boolean> getStateOfRestButton();
 
-    MutableLiveData<DialogEvent> getDialogEventMutableLiveData();
+    MutableLiveData<DialogEvent> getDialogEventForRest();
+
+    MutableLiveData<DialogEvent> getDialogEventForRestOff();
+
+    void goToNextRepetition();
 
     void onClickPositiveButtonDialog();
 

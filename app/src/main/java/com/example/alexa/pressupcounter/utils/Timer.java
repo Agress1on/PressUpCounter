@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.utils;
 
+import com.example.alexa.pressupcounter.Constants;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -20,7 +22,7 @@ public class Timer {
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
-                        return 30 - aLong;
+                        return Constants.TIME_OF_MAIN_REST - aLong;
                     }
                 }).takeUntil(new Predicate<Long>() {
                     @Override
