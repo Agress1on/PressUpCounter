@@ -24,6 +24,8 @@ public interface TrainingViewModel {
 
     MutableLiveData<DialogEvent> getDialogEventForRestOff();
 
+    MutableLiveData<DialogEvent> getDialogEventFinishTraining();
+
     void goToNextRepetition();
 
     void onClickPositiveButtonDialog();

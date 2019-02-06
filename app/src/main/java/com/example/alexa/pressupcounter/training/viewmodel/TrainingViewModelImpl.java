@@ -29,6 +29,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     private MutableLiveData<DialogEvent> mDialogEventForRest;
     private MutableLiveData<DialogEvent> mDialogEventForRestOff;
+    private MutableLiveData<DialogEvent> mDialogEventFinishTraining;
 
     public TrainingViewModelImpl(PressUp pressUp, Timer timer) {
         mPressUp = pressUp;
@@ -42,6 +43,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
         mDialogEventForRest = new MutableLiveData<>();
         mDialogEventForRestOff = new MutableLiveData<>();
+        mDialogEventFinishTraining = new MutableLiveData<>();
     }
 
     @Override
@@ -72,6 +74,11 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     @Override
     public MutableLiveData<DialogEvent> getDialogEventForRestOff() {
         return mDialogEventForRestOff;
+    }
+
+    @Override
+    public MutableLiveData<DialogEvent> getDialogEventFinishTraining() {
+        return mDialogEventFinishTraining;
     }
 
     @Override
@@ -112,7 +119,10 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
             public void onComplete() {
                 mRestTime.set("Отдых закончен");
                 mStateOfRestButton.set(true);
-                //goToNextRepetition();
+                if (mRepetition.get() == 5) {
+                    mDialogEventFinishTraining.postValue(new DialogEvent());
+                    return;
+                }
                 mDialogEventForRestOff.postValue(new DialogEvent());
             }
         };

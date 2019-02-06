@@ -16,9 +16,11 @@ import com.example.alexa.pressupcounter.DialogEvent;
 import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
+import com.example.alexa.pressupcounter.finishtraining.view.FinishTrainingFragment;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
+import com.example.alexa.pressupcounter.utils.DialogFinishTraining;
 import com.example.alexa.pressupcounter.utils.DialogTrainingRest;
 import com.example.alexa.pressupcounter.utils.DialogTrainingRestOff;
 import com.example.alexa.pressupcounter.utils.Timer;
@@ -90,6 +92,29 @@ public class TrainingFragment extends Fragment {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
                 dg2.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST_OFF);
+            }
+        });
+
+        final DialogFinishTraining dg3 = new DialogFinishTraining();
+        dg3.init(new DialogFinishTraining.OnButtonClick() {
+            @Override
+            public void onPositiveButton() {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, FinishTrainingFragment.newInstance())
+                        .commit();
+                dg3.dismiss();
+            }
+
+            @Override
+            public void onNegativeButton() {
+                dg3.dismiss();
+            }
+        });
+        mTrainingViewModel.getDialogEventFinishTraining().observe(this, new Observer<DialogEvent>() {
+            @Override
+            public void onChanged(@Nullable DialogEvent dialogEvent) {
+                dg3.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_FINISH);
             }
         });
     }
