@@ -27,6 +27,7 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().setTitle("Удалось сделать подход?");
+        getDialog().setCanceledOnTouchOutside(false);
         View v = inflater.inflate(R.layout.dialog_training_rest_off, null);
         v.findViewById(R.id.positive_button).setOnClickListener(this);
         v.findViewById(R.id.negative_button).setOnClickListener(this);
@@ -36,10 +37,10 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.positive_button :
+            case R.id.positive_button:
                 mOnButtonClick.onPositiveButton();
                 break;
-            case R.id.negative_button :
+            case R.id.negative_button:
                 mOnButtonClick.onNegativeButton();
                 break;
         }
@@ -47,6 +48,7 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
 
     public interface OnButtonClick {
         void onPositiveButton();
+
         void onNegativeButton();
     }
 }

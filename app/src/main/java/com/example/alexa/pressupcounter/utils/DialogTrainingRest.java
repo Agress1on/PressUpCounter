@@ -26,6 +26,7 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         getDialog().setTitle("Начать отдых?");
+        getDialog().setCanceledOnTouchOutside(false);
         View v = inflater.inflate(R.layout.dialog_training_rest, null);
         v.findViewById(R.id.positive_button).setOnClickListener(this);
         v.findViewById(R.id.negative_button).setOnClickListener(this);
@@ -35,8 +36,12 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.positive_button: mOnButtonClick.onPositiveButton(); break;
-            case R.id.negative_button: mOnButtonClick.onNegativeButton(); break;
+            case R.id.positive_button:
+                mOnButtonClick.onPositiveButton();
+                break;
+            case R.id.negative_button:
+                mOnButtonClick.onNegativeButton();
+                break;
         }
     }
 
@@ -47,6 +52,7 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
 
     public interface OnButtonClick {
         void onPositiveButton();
+
         void onNegativeButton();
     }
 }

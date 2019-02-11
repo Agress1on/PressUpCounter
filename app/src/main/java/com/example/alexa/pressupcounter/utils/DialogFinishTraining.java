@@ -14,7 +14,7 @@ import com.example.alexa.pressupcounter.R;
  *
  * @author Alexandr Mikhalev
  */
-public class DialogFinishTraining extends DialogFragment implements View.OnClickListener{
+public class DialogFinishTraining extends DialogFragment implements View.OnClickListener {
 
     private OnButtonClick mOnButtonClick;
 
@@ -26,6 +26,7 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         getDialog().setTitle("Удалось ли выполнить подходы?");
+        getDialog().setCanceledOnTouchOutside(false);
         View v = inflater.inflate(R.layout.dialog_finish_training, null);
         v.findViewById(R.id.positive_button).setOnClickListener(this);
         v.findViewById(R.id.negative_button).setOnClickListener(this);
@@ -35,7 +36,7 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.positive_button :
+            case R.id.positive_button:
                 mOnButtonClick.onPositiveButton();
                 break;
             case R.id.negative_button:
@@ -46,6 +47,7 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
 
     public interface OnButtonClick {
         void onPositiveButton();
+
         void onNegativeButton();
     }
 }

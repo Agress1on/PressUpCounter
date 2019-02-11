@@ -17,8 +17,8 @@ import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.finishtraining.view.FinishTrainingFragment;
-import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
+import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
 import com.example.alexa.pressupcounter.utils.DialogFinishTraining;
 import com.example.alexa.pressupcounter.utils.DialogTrainingRest;
@@ -66,7 +66,6 @@ public class TrainingFragment extends Fragment {
                 dg.dismiss();
             }
         });
-
         mTrainingViewModel.getDialogEventForRest().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {

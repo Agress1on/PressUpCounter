@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel" />
@@ -93,63 +95,30 @@
             app:setCurrent="@{viewModel.repetition == 5 ? true : false}" />
 
         <TextView
-            android:id="@+id/header_quantity_current_repition"
+            android:id="@+id/header_quantity_current_repetition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="@string/for_header_quantity_current_repition"
+            android:layout_marginBottom="10dp"
+            android:text="@{viewModel.textForTrainingOrRest}"
             android:textAlignment="center"
             android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/quantity_current_repition"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repetition_header" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/quantity_current_repition"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(safeUnbox(viewModel.quantityOfRepetition))}"
+            android:text="@{viewModel.quantityOfRepetitionOrRestTime}"
             android:textColor="@color/colorBlack"
             android:textSize="80sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/header_quantity_current_repition"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="33" />
-
-        <TextView
-            android:id="@+id/header_for_time_of_rest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_header_for_time_of_rest"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/quantity_current_repition"
-            app:layout_constraintStart_toStartOf="@id/quantity_current_repition"
-            app:layout_constraintTop_toBottomOf="@id/quantity_current_repition" />
-
-        <TextView
-            android:id="@+id/time_of_rest"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="@{viewModel.restTime}"
-            android:textColor="@color/colorBlack"
-            android:textSize="50sp"
-            app:layout_constraintEnd_toEndOf="@id/quantity_current_repition"
-            app:layout_constraintStart_toStartOf="@id/quantity_current_repition"
-            app:layout_constraintTop_toBottomOf="@id/header_for_time_of_rest" />
-
-        <Button
-            android:id="@+id/start_rest_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            app:setButtonState="@{viewModel.stateOfRestButton ? true : false}"
-            android:onClick="@{() -> viewModel.onClickRestButton()}"
-            android:text="@string/for_start_rest_button"
-            app:layout_constraintBottom_toTopOf="@id/go_to_next_repetition_button"
-            app:layout_constraintEnd_toEndOf="@id/go_to_next_repetition_button"
-            app:layout_constraintStart_toStartOf="@id/go_to_next_repetition_button" />
 
         <Button
             android:id="@+id/go_to_next_repetition_button"
@@ -159,7 +128,32 @@
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="5dp"
             android:onClick="@{() -> viewModel.onClickNextRepetitionButton()}"
-            android:text="@string/for_go_to_next_repetition_button"
+            android:text="перейти к следующему подходу"
+            app:layout_constraintBottom_toTopOf="@id/start_rest_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/start_rest_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:onClick="@{() -> viewModel.onClickRestButton()}"
+            android:text="@string/for_start_rest_button"
+            android:visibility="@{viewModel.repetition != 5 ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@id/finish_training"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:setButtonState="@{viewModel.stateOfRestButton ? true : false}" />
+
+        <Button
+            android:id="@+id/finish_training"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:onClick="@{() -> viewModel.onClickFinishTrainingButton()}"
+            android:text="Закончить занятие"
+            android:visibility="@{viewModel.repetition == 5 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

@@ -23,21 +23,27 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private Timer mTimer;
 
     private ObservableField<Integer> mRepetition;
-    private ObservableField<Integer> mQuantityOfRepetition;
-    private ObservableField<String> mRestTime;
+    private ObservableField<String> mQuantityOfRepetitionOrRestTime;
     private ObservableField<Boolean> mStateOfRestButton;
 
     private MutableLiveData<DialogEvent> mDialogEventForRest;
     private MutableLiveData<DialogEvent> mDialogEventForRestOff;
     private MutableLiveData<DialogEvent> mDialogEventFinishTraining;
 
+    private String mTextForTraining;
+    private String mTextForRest;
+    private ObservableField<String> mTextForTrainingOrRest;
+
     public TrainingViewModelImpl(PressUp pressUp, Timer timer) {
         mPressUp = pressUp;
         mTimer = timer;
 
+        mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
+        mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
+        mTextForTrainingOrRest = new ObservableField<>(mTextForTraining);
+
         mRepetition = new ObservableField<>(1);
-        mQuantityOfRepetition = new ObservableField<>(mPressUp.getFirstRepetition());
-        mRestTime = new ObservableField<>("0");
+        mQuantityOfRepetitionOrRestTime = new ObservableField<>(String.valueOf(mPressUp.getFirstRepetition()));
 
         mStateOfRestButton = new ObservableField<>(true);
 
@@ -52,13 +58,13 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public ObservableField<Integer> getQuantityOfRepetition() {
-        return mQuantityOfRepetition;
+    public ObservableField<String> getQuantityOfRepetitionOrRestTime() {
+        return mQuantityOfRepetitionOrRestTime;
     }
 
     @Override
-    public ObservableField<String> getRestTime() {
-        return mRestTime;
+    public ObservableField<String> getTextForTrainingOrRest() {
+        return mTextForTrainingOrRest;
     }
 
     @Override
@@ -99,35 +105,44 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickPositiveButtonDialog() {
+        mTextForTrainingOrRest.set(mTextForRest);
         Observer<Long> observer = new Observer<Long>() {
             @Override
             public void onSubscribe(Disposable d) {
-                mRestTime.set("Start");
+                mQuantityOfRepetitionOrRestTime.set("Start");
             }
 
             @Override
             public void onNext(Long aLong) {
-                mRestTime.set(String.valueOf(aLong));
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(aLong));
             }
 
             @Override
             public void onError(Throwable e) {
-                mRestTime.set("Error");
+                mQuantityOfRepetitionOrRestTime.set("Error");
             }
 
             @Override
             public void onComplete() {
-                mRestTime.set("Отдых закончен");
+                mQuantityOfRepetitionOrRestTime.set("Отдых закончен");
+                mTextForTrainingOrRest.set(mTextForTraining);
                 mStateOfRestButton.set(true);
+                /*
                 if (mRepetition.get() == 5) {
                     mDialogEventFinishTraining.postValue(new DialogEvent());
                     return;
                 }
+                */
                 mDialogEventForRestOff.postValue(new DialogEvent());
             }
         };
         Observable<Long> observable = mTimer.getLongObservable();
         observable.subscribe(observer);
+    }
+
+    @Override
+    public void onClickFinishTrainingButton() {
+        mDialogEventFinishTraining.postValue(new DialogEvent());
     }
 
     @Override
@@ -139,19 +154,19 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         }
         switch (mRepetition.get()) {
             case 1:
-                mQuantityOfRepetition.set(mPressUp.getFirstRepetition());
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
                 break;
             case 2:
-                mQuantityOfRepetition.set(mPressUp.getSecondRepetition());
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getSecondRepetition()));
                 break;
             case 3:
-                mQuantityOfRepetition.set(mPressUp.getThirdRepetition());
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getThirdRepetition()));
                 break;
             case 4:
-                mQuantityOfRepetition.set(mPressUp.getFourthRepetition());
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFourthRepetition()));
                 break;
             case 5:
-                mQuantityOfRepetition.set(mPressUp.getFifthRepetition());
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFifthRepetition()));
                 break;
         }
     }
