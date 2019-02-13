@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.utils;
 
 import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -44,6 +45,11 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
                 mOnButtonClick.onNegativeButton();
                 break;
         }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        mOnButtonClick.onNegativeButton();
     }
 
     public interface OnButtonClick {
