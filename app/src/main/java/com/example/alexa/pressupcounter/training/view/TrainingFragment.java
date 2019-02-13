@@ -52,17 +52,18 @@ public class TrainingFragment extends Fragment {
     }
 
     private void init() {
+        //show startRestDialog
         final DialogTrainingRest dg = new DialogTrainingRest();
         dg.initDialog(new DialogTrainingRest.OnButtonClick() {
             @Override
             public void onPositiveButton() {
-                mTrainingViewModel.onClickPositiveButtonDialog();
+                mTrainingViewModel.onClickPositiveButtonOfRestDialog();
                 dg.dismiss();
             }
 
             @Override
             public void onNegativeButton() {
-                mTrainingViewModel.onClickNegativeButtonDialog();
+                mTrainingViewModel.onClickNegativeButtonOfRestDialog();
                 dg.dismiss();
             }
         });
@@ -73,6 +74,7 @@ public class TrainingFragment extends Fragment {
             }
         });
 
+        //show training off dialog or choose additional time of rest
         final DialogTrainingRestOff dg2 = new DialogTrainingRestOff();
         dg2.initDialog(new DialogTrainingRestOff.OnButtonClick() {
             @Override
@@ -83,10 +85,10 @@ public class TrainingFragment extends Fragment {
 
             @Override
             public void onNegativeButton() {
+                mTrainingViewModel.onClickAdditionalTimeForRest();
                 dg2.dismiss();
             }
         });
-
         mTrainingViewModel.getDialogEventForRestOff().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
@@ -94,6 +96,7 @@ public class TrainingFragment extends Fragment {
             }
         });
 
+        //show finish training dialog
         final DialogFinishTraining dg3 = new DialogFinishTraining();
         dg3.init(new DialogFinishTraining.OnButtonClick() {
             @Override

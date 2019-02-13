@@ -88,11 +88,6 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public void onClickNegativeButtonDialog() {
-        mStateOfRestButton.set(true);
-    }
-
-    @Override
     public void onClickNextRepetitionButton() {
         goToNextRepetition();
     }
@@ -104,7 +99,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public void onClickPositiveButtonDialog() {
+    public void onClickPositiveButtonOfRestDialog() {
         mTextForTrainingOrRest.set(mTextForRest);
         Observer<Long> observer = new Observer<Long>() {
             @Override
@@ -119,7 +114,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
             @Override
             public void onError(Throwable e) {
-                mQuantityOfRepetitionOrRestTime.set("Error");
+                mQuantityOfRepetitionOrRestTime.set("Error" + e);
             }
 
             @Override
@@ -136,13 +131,42 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 mDialogEventForRestOff.postValue(new DialogEvent());
             }
         };
-        Observable<Long> observable = mTimer.getLongObservable();
+        Observable<Long> observable = mTimer.getMainTimer();
         observable.subscribe(observer);
     }
 
     @Override
-    public void onClickFinishTrainingButton() {
-        mDialogEventFinishTraining.postValue(new DialogEvent());
+    public void onClickNegativeButtonOfRestDialog() {
+        mStateOfRestButton.set(true);
+    }
+
+    @Override
+    public void onClickAdditionalTimeForRest() {
+        mTextForTrainingOrRest.set(mTextForRest);
+        Observer<Long> observer = new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                mQuantityOfRepetitionOrRestTime.set("Доп.время началось");
+            }
+
+            @Override
+            public void onNext(Long aLong) {
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(aLong));
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mQuantityOfRepetitionOrRestTime.set("Error" + e);
+            }
+
+            @Override
+            public void onComplete() {
+                if (mRepetition.get() == 5) return;
+                goToNextRepetition();
+            }
+        };
+        Observable<Long> observable = mTimer.getAdditionalTimer();
+        observable.subscribe(observer);
     }
 
     @Override
@@ -169,5 +193,10 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFifthRepetition()));
                 break;
         }
+    }
+
+    @Override
+    public void onClickFinishTrainingButton() {
+        mDialogEventFinishTraining.postValue(new DialogEvent());
     }
 }

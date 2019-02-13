@@ -18,4 +18,5 @@ public class Constants {
     public static final String TAG_FOR_DIALOG_TRAINING_FINISH = "TAG_FOR_DIALOG_TRAINING_FINISH";
 
     public static final int TIME_OF_MAIN_REST = 10;
+    public static final int TIME_OF_ADDITIONAL_REST = 5;
 }

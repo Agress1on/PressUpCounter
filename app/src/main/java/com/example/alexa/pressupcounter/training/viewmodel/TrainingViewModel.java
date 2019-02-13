@@ -28,9 +28,11 @@ public interface TrainingViewModel {
 
     void goToNextRepetition();
 
-    void onClickPositiveButtonDialog();
+    void onClickPositiveButtonOfRestDialog();
 
-    void onClickNegativeButtonDialog();
+    void onClickNegativeButtonOfRestDialog();
+
+    void onClickAdditionalTimeForRest();
 
     void onClickNextRepetitionButton();
 

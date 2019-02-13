@@ -15,10 +15,11 @@ import io.reactivex.functions.Predicate;
  */
 public class Timer {
 
-    private Observable<Long> mLongObservable;
+    private Observable<Long> mMainTimer;
+    private Observable<Long> mAdditionalTimer;
 
     public Timer() {
-        mLongObservable = Observable.interval(1, TimeUnit.SECONDS)
+        mMainTimer = Observable.interval(1, TimeUnit.SECONDS)
                 .map(new Function<Long, Long>() {
                     @Override
                     public Long apply(Long aLong) throws Exception {
@@ -30,9 +31,26 @@ public class Timer {
                         return aLong == 0;
                     }
                 });
+
+        mAdditionalTimer = Observable.interval(1, TimeUnit.SECONDS)
+                .map(new Function<Long, Long>() {
+                    @Override
+                    public Long apply(Long aLong) throws Exception {
+                        return Constants.TIME_OF_ADDITIONAL_REST - aLong;
+                    }
+                }).takeUntil(new Predicate<Long>() {
+                    @Override
+                    public boolean test(Long aLong) throws Exception {
+                        return aLong == 0;
+                    }
+                });
     }
 
-    public Observable<Long> getLongObservable() {
-        return mLongObservable;
+    public Observable<Long> getMainTimer() {
+        return mMainTimer;
+    }
+
+    public Observable<Long> getAdditionalTimer() {
+        return mAdditionalTimer;
     }
 }
