@@ -16,7 +16,7 @@ import com.example.alexa.pressupcounter.DialogEvent;
 import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
-import com.example.alexa.pressupcounter.finishtraining.view.FinishTrainingFragment;
+import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
@@ -103,13 +103,17 @@ public class TrainingFragment extends Fragment {
             public void onPositiveButton() {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, FinishTrainingFragment.newInstance())
+                        .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(true))
                         .commit();
                 dg3.dismiss();
             }
 
             @Override
             public void onNegativeButton() {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(false))
+                        .commit();
                 dg3.dismiss();
             }
         });

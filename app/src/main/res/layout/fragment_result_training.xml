@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.alexa.pressupcounter.finishtraining.viewmodel.FinishTrainingViewModel" />
+            type="com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

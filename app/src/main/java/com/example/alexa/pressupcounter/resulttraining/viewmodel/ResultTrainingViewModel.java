@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.finishtraining.viewmodel;
+package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
 import android.databinding.ObservableField;
 
@@ -7,7 +7,7 @@ import android.databinding.ObservableField;
  *
  * @author Alexandr Mikhalev
  */
-public interface FinishTrainingViewModel {
+public interface ResultTrainingViewModel {
     ObservableField<String> getHeaderText();
     ObservableField<String> getResultText();
 }

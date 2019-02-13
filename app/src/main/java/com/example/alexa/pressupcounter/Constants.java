@@ -19,4 +19,6 @@ public class Constants {
 
     public static final int TIME_OF_MAIN_REST = 10;
     public static final int TIME_OF_ADDITIONAL_REST = 5;
+
+    public static final String TAG_FOR_IS_SUCCESS_TRAINING = "TAG_FOR_IS_SUCCESS_TRAINING";
 }
