@@ -7,4 +7,5 @@
     <string name="for_fourth_repetition">4</string>
     <string name="for_fifth_repetition">5</string>
     <string name="for_start_rest_button">Начать отдых</string>
+    <string name="for_dialog_finish_training">Удалось ли выполнить все подходы, понять смысл жизни?</string>
 </resources>

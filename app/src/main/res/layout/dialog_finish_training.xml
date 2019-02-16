@@ -9,7 +9,7 @@
         android:id="@+id/question_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textColor="@color/colorBlack"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
