@@ -93,9 +93,4 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         mSummQuantity.set(0);
         mSummQuantity.set(mPressUp.get().getFirstRepetition() + mPressUp.get().getSecondRepetition() + mPressUp.get().getThirdRepetition() + mPressUp.get().getFourthRepetition() + mPressUp.get().getFifthRepetition());
     }
-
-
-    public interface OnTrainingListener {
-        void onClick();
-    }
 }
