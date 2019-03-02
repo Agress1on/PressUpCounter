@@ -105,7 +105,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         mPressUp2.mFourthRepetition = mPressUp.get().getFourthRepetition();
         mPressUp2.mFifthRepetition = mPressUp.get().getFifthRepetition();
 
-        mSetProgramModel.getPressUpDao(mPressUp2)
+        mSetProgramModel.insertInDataBase(mPressUp2)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {

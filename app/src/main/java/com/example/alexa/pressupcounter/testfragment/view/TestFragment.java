@@ -10,9 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.AppDatabase;
+import com.example.alexa.pressupcounter.PressUpDao;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTestBinding;
+import com.example.alexa.pressupcounter.testfragment.model.TestFragmentModel;
 import com.example.alexa.pressupcounter.testfragment.viewmodel.TestFragmentViewModel;
+import com.example.alexa.pressupcounter.testfragment.viewmodel.TestFragmentViewModelFactory;
 import com.example.alexa.pressupcounter.testfragment.viewmodel.TestFragmentViewModelImpl;
 
 /**
@@ -24,10 +29,19 @@ public class TestFragment extends Fragment {
 
     private TestFragmentViewModel mTestFragmentViewModel;
 
+    private AppDatabase db;
+    private PressUpDao pressUpDao;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTestFragmentViewModel = ViewModelProviders.of(this).get(TestFragmentViewModelImpl.class);
+
+        //DB
+        db = App.getInstance().getDatabase();
+        pressUpDao = db.pressUpDao();
+
+        TestFragmentModel testFragmentModel = new TestFragmentModel(db, pressUpDao);
+        mTestFragmentViewModel = ViewModelProviders.of(this, new TestFragmentViewModelFactory(testFragmentModel)).get(TestFragmentViewModelImpl.class);
     }
 
     @Nullable

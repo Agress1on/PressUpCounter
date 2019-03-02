@@ -22,9 +22,8 @@ public class SetProgramModel {
         mPressUpDao = pressUpDao;
     }
 
-    public Completable getPressUpDao(PressUp2 pressUp) {
+    public Completable insertInDataBase(PressUp2 pressUp) {
         //return mPressUpDao.insert(pressUp);
-        //return Completable.wrap(mPressUpDao.insert(pressUp));
-        return null;
+        return Completable.wrap(mPressUpDao.insert(pressUp));
     }
 }

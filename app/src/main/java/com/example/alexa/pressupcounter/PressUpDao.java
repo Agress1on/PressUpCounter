@@ -5,6 +5,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 
 import java.util.List;
 
@@ -20,10 +22,10 @@ public interface PressUpDao {
     List<PressUp2> getAll();
 
     @Query("SELECT * FROM pressup2 WHERE id = :id")
-    PressUp2 getById(long id);
+    Flowable<List<PressUp2>> getById(long id);
 
     @Insert
-    void insert(PressUp2 pressUp2);
+    Completable insert(PressUp2 pressUp2);
 
     @Update
     void update(PressUp2 pressUp2);
