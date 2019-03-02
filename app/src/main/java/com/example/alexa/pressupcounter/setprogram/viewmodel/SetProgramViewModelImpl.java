@@ -7,6 +7,15 @@ import android.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
+
+import io.reactivex.Completable;
+import io.reactivex.CompletableObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -15,11 +24,15 @@ import com.example.alexa.pressupcounter.PressUp;
  */
 public class SetProgramViewModelImpl extends ViewModel implements SetProgramViewModel {
 
+    private SetProgramModel mSetProgramModel;
+
     private ObservableField<PressUp> mPressUp;
     private ObservableField<Integer> mSummQuantity;
     private MutableLiveData<FragmentEvent> mLiveData;
 
-    public SetProgramViewModelImpl() {
+    public SetProgramViewModelImpl(SetProgramModel setProgramModel) {
+        mSetProgramModel = setProgramModel;
+
         mPressUp = new ObservableField<>(new PressUp(2,3,1,1,3));
         mSummQuantity = new ObservableField<>(10);
         mLiveData = new MutableLiveData<>();
@@ -86,7 +99,33 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public void onClickTrainingButton() {
-        mLiveData.postValue(new FragmentEvent());
+        PressUp2 mPressUp2 = new PressUp2();
+        mPressUp2.id = 1;
+        mPressUp2.mFirstRepetition = mPressUp.get().getFirstRepetition();
+        mPressUp2.mSecondRepetition = mPressUp.get().getSecondRepetition();
+        mPressUp2.mThirdRepetition = mPressUp.get().getThirdRepetition();
+        mPressUp2.mFourthRepetition = mPressUp.get().getFourthRepetition();
+        mPressUp2.mFifthRepetition = mPressUp.get().getFifthRepetition();
+
+        mSetProgramModel.getPressUpDao(mPressUp2)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                mLiveData.postValue(new FragmentEvent());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
     private void setFinalQuantity() {

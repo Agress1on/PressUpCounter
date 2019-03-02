@@ -18,12 +18,11 @@ import com.example.alexa.pressupcounter.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
+import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
+import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
 import com.example.alexa.pressupcounter.testfragment.view.TestFragment;
-
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -41,12 +40,16 @@ public class SetProgramFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSetProgramViewModel = ViewModelProviders.of(this).get(SetProgramViewModelImpl.class);
-        init();
+        //mSetProgramViewModel = ViewModelProviders.of(this).get(SetProgramViewModelImpl.class);
 
         //DB
         db = App.getInstance().getDatabase();
         pressUpDao = db.pressUpDao();
+
+
+        SetProgramModel setProgramModel = new SetProgramModel(db, pressUpDao);
+        mSetProgramViewModel = ViewModelProviders.of(this, new SetProgramViewModelFactory(setProgramModel)).get(SetProgramViewModelImpl.class);
+        init();
     }
 
     @Nullable

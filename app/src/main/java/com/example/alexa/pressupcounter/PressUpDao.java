@@ -8,6 +8,8 @@ import android.arch.persistence.room.Update;
 
 import java.util.List;
 
+import io.reactivex.Completable;
+
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.
  *

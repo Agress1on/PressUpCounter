@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.alexa.pressupcounter"
         minSdkVersion 15
@@ -43,4 +43,6 @@ dependencies {
     //Room
     implementation 'android.arch.persistence.room:runtime:1.1.1'
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+    //RoomRxJava
+    implementation "android.arch.persistence.room:rxjava2:1.1.1"
 }
