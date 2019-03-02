@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.DialogEvent;
 import com.example.alexa.pressupcounter.PressUp;

@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.main.viewmodel;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by Alexandr Mikhalev on 06.01.2019.

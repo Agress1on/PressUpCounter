@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter;
 
 import android.content.res.Resources;
-import android.databinding.BindingAdapter;
+import androidx.databinding.BindingAdapter;
 import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.TextView;

@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.app;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 
 import com.example.alexa.pressupcounter.AppDatabase;
 

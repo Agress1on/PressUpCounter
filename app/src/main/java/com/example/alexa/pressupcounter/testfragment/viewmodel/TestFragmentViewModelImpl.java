@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.testfragment.viewmodel;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.

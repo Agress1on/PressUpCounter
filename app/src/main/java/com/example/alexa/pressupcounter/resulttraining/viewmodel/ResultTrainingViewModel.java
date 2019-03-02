@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 /**
  * Created by Alexandr Mikhalev on 06.02.2019.

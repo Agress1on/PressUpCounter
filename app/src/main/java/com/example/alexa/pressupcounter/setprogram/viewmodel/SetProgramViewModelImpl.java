@@ -1,19 +1,17 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
-import android.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+import androidx.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.PressUp2;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 
-import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
