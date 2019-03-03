@@ -16,14 +16,12 @@ public class SetProgramModel {
     private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
 
-
     public SetProgramModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
         mAppDatabase = appDatabase;
         mPressUpDao = pressUpDao;
     }
 
     public Completable insertInDataBase(PressUp2 pressUp) {
-        //return mPressUpDao.insert(pressUp);
         return Completable.wrap(mPressUpDao.insert(pressUp));
     }
 }

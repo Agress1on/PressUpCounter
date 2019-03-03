@@ -13,9 +13,19 @@ import com.example.alexa.pressupcounter.PressUp;
  */
 public interface SetProgramViewModel {
 
-    ObservableField<Integer> getFinalQuantity();
+    ObservableField<Integer> getFirstRepetition();
 
-    ObservableField<PressUp> getPressUp();
+    ObservableField<Integer> getSecondRepetition();
+
+    ObservableField<Integer> getThirdRepetition();
+
+    ObservableField<Integer> getFourthRepetition();
+
+    ObservableField<Integer> getFifthRepetition();
+
+    ObservableField<Integer> getSumOfRepetitions();
+
+    ObservableField<String> getServiceInfo();
 
     LiveData<FragmentEvent> getFragmentEvent();
 
