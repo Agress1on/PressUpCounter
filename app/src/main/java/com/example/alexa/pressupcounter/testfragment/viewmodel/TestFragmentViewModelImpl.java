@@ -45,7 +45,7 @@ public class TestFragmentViewModelImpl extends ViewModel implements TestFragment
 
                     @Override
                     public void onNext(List<PressUp2> pressUp2s) {
-                        mTestTextView.set("New info" + pressUp2s.get(0).mSecondRepetition);
+                        mTestTextView.set("New info" + pressUp2s.get(0).getFirstRepetition() + " " + pressUp2s.get(0).getSecondRepetition());
                     }
 
                     @Override
@@ -58,8 +58,5 @@ public class TestFragmentViewModelImpl extends ViewModel implements TestFragment
 
                     }
                 });
-
-        //mTestTextView.set("New info" + pressUp2.mFirstRepetition + pressUp2.mSecondRepetition);
-        //s.request(Long.MAX_VALUE);
     }
 }
