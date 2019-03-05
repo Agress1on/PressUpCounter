@@ -1,25 +1,27 @@
 package com.example.alexa.pressupcounter.starttraining.view;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.AppDatabase;
 import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.PressUpDao;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
+import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelImpl;
-import com.example.alexa.pressupcounter.training.view.TrainingFragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by Alexandr Mikhalev on 01.02.2019.
@@ -30,11 +32,20 @@ public class StartTrainingFragment extends Fragment {
 
     private StartTrainingViewModel mStartTrainingViewModel;
 
+    //BD
+    private AppDatabase mAppDatabase;
+    private PressUpDao mPressUpDao;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PressUp pressUp = getArguments().getParcelable(Constants.KEY_FOR_PRESS_UP);
-        mStartTrainingViewModel = ViewModelProviders.of(this, new StartTrainingViewModelFactory(pressUp)).get(StartTrainingViewModelImpl.class);
+
+        //DB
+        mAppDatabase = App.getInstance().getDatabase();
+        mPressUpDao = mAppDatabase.pressUpDao();
+
+        StartTrainingModel startTrainingModel = new StartTrainingModel(mAppDatabase, mPressUpDao);
+        mStartTrainingViewModel = ViewModelProviders.of(this, new StartTrainingViewModelFactory(startTrainingModel)).get(StartTrainingViewModelImpl.class);
         init();
     }
 
@@ -53,16 +64,15 @@ public class StartTrainingFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, TrainingFragment.newInstance(mStartTrainingViewModel.getPressUpObservableField().get()))
+                        //.replace(R.id.fragment_container, TrainingFragment.newInstance(mStartTrainingViewModel.getPressUp().get()))
                         .commit();
                 fragmentEvent.setHappend(true);
             }
         });
     }
 
-    public static StartTrainingFragment newInstance(PressUp pressUp) {
+    public static StartTrainingFragment newInstance() {
         Bundle args = new Bundle();
-        args.putParcelable(Constants.KEY_FOR_PRESS_UP, pressUp);
         StartTrainingFragment fragment = new StartTrainingFragment();
         fragment.setArguments(args);
         return fragment;

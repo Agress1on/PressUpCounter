@@ -1,12 +1,15 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
+import com.example.alexa.pressupcounter.FragmentEvent;
+import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
+
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.databinding.ObservableField;
-
-import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 01.02.2019.
@@ -15,20 +18,29 @@ import com.example.alexa.pressupcounter.PressUp;
  */
 public class StartTrainingViewModelImpl extends ViewModel implements StartTrainingViewModel {
 
-    private PressUp mPressUp;
-    private ObservableField<PressUp> mPressUpObservableField;
+    private StartTrainingModel mStartTrainingModel;
+
+    private ObservableField<PressUp2> mPressUpObservableField;
     private MutableLiveData<FragmentEvent> mLiveData;
     private ObservableField<String> mFinalQuantityRepetition;
 
-    public StartTrainingViewModelImpl(PressUp pressUp) {
-        mPressUp = pressUp;
-        mPressUpObservableField = new ObservableField<>(mPressUp);
+    private PressUp2 mPressUp2;
+
+    public StartTrainingViewModelImpl(StartTrainingModel startTrainingModel) {
+        mStartTrainingModel = startTrainingModel;
+        mStartTrainingModel.getPressUpById(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(pressUp2s -> {
+                    mPressUp2 = pressUp2s.get(0);
+                    mPressUpObservableField = new ObservableField<>(mPressUp2);
+                    mFinalQuantityRepetition = new ObservableField<>(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
+                });
         mLiveData = new MutableLiveData<>();
-        mFinalQuantityRepetition = new ObservableField<>(String.valueOf(mPressUp.getFirstRepetition() + mPressUp.getSecondRepetition() + mPressUp.getThirdRepetition() + mPressUp.getFourthRepetition() + mPressUp.getFifthRepetition()));
     }
 
     @Override
-    public ObservableField<PressUp> getPressUpObservableField() {
+    public ObservableField<PressUp2> getPressUp() {
         return mPressUpObservableField;
     }
 

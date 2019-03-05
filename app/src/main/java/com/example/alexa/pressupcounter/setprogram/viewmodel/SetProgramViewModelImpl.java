@@ -129,16 +129,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     @Override
     public void onClickTrainingButton() {
         PressUp2 mPressUp2 = new PressUp2(1, mFirstRepetition.get(), mSecondRepetition.get(), mThirdRepetition.get(), mFourthRepetition.get(), mFifthRepetition.get());
-
-        /*
-        mPressUp2.id = 1;
-        mPressUp2.mFirstRepetition = mFirstRepetition.get();
-        mPressUp2.mSecondRepetition = mSecondRepetition.get();
-        mPressUp2.mThirdRepetition = mThirdRepetition.get();
-        mPressUp2.mFourthRepetition = mFourthRepetition.get();
-        mPressUp2.mFifthRepetition = mFifthRepetition.get();
-        */
-
         mSetProgramModel.insertInDataBase(mPressUp2)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -150,7 +140,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
                     @Override
                     public void onComplete() {
-                        mLiveData.postValue(new FragmentEvent());
+
                     }
 
                     @Override
@@ -158,6 +148,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
                         mServiceInfo.set("Возникла ошибка записи в БД");
                     }
                 });
+        mLiveData.postValue(new FragmentEvent());
     }
 
     private void setFinalQuantity() {

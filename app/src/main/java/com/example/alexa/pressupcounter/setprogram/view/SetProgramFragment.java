@@ -15,7 +15,7 @@ import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
-import com.example.alexa.pressupcounter.testfragment.view.TestFragment;
+import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,7 +66,8 @@ public class SetProgramFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         //.replace(R.id.fragment_container, StartTrainingFragment.newInstance(mSetProgramViewModel.getPressUp().get()))
-                        .replace(R.id.fragment_container, TestFragment.newInstance())
+                        //.replace(R.id.fragment_container, TestFragment.newInstance())
+                        .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappend(true);
             }
