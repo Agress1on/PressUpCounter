@@ -1,11 +1,10 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
+
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
-
-import com.example.alexa.pressupcounter.PressUp;
-import com.example.alexa.pressupcounter.utils.Timer;
 
 /**
  * Created by Alexandr Mikhalev on 29.01.2019.
@@ -14,18 +13,16 @@ import com.example.alexa.pressupcounter.utils.Timer;
  */
 public class TrainingViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final PressUp mPressUp;
-    private final Timer mTimer;
+    private final TrainingFragmentModel mTrainingFragmentModel;
 
-    public TrainingViewModelFactory(PressUp pressUp2, Timer timer) {
+    public TrainingViewModelFactory(TrainingFragmentModel trainingFragmentModel) {
         super();
-        mPressUp = pressUp2;
-        mTimer = timer;
+        mTrainingFragmentModel = trainingFragmentModel;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == TrainingViewModelImpl.class) {
-            return (T) new TrainingViewModelImpl(mPressUp, mTimer);
+            return (T) new TrainingViewModelImpl(mTrainingFragmentModel);
         }
         return null;
     }

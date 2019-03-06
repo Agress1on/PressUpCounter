@@ -1,29 +1,32 @@
 package com.example.alexa.pressupcounter.training.view;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.AppDatabase;
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.DialogEvent;
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.PressUpDao;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
+import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
 import com.example.alexa.pressupcounter.utils.DialogFinishTraining;
 import com.example.alexa.pressupcounter.utils.DialogTrainingRest;
 import com.example.alexa.pressupcounter.utils.DialogTrainingRestOff;
-import com.example.alexa.pressupcounter.utils.Timer;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -34,12 +37,22 @@ public class TrainingFragment extends Fragment {
 
     private TrainingViewModel mTrainingViewModel;
 
+    //BD
+    private AppDatabase mAppDatabase;
+    private PressUpDao mPressUpDao;
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PressUp pressUp2 = getArguments().getParcelable(Constants.KEY_FOR_PRESS_UP);
-        Timer timer = new Timer();
-        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(pressUp2, timer)).get(TrainingViewModelImpl.class);
+
+        //DB
+        mAppDatabase = App.getInstance().getDatabase();
+        mPressUpDao = mAppDatabase.pressUpDao();
+
+        TrainingFragmentModel trainingFragmentModel = new TrainingFragmentModel(mAppDatabase, mPressUpDao);
+
+        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(trainingFragmentModel)).get(TrainingViewModelImpl.class);
         init();
     }
 
@@ -131,9 +144,8 @@ public class TrainingFragment extends Fragment {
         });
     }
 
-    public static TrainingFragment newInstance(PressUp pressUp) {
+    public static TrainingFragment newInstance() {
         Bundle args = new Bundle();
-        args.putParcelable(Constants.KEY_FOR_PRESS_UP, pressUp);
         TrainingFragment fragment = new TrainingFragment();
         fragment.setArguments(args);
         return fragment;

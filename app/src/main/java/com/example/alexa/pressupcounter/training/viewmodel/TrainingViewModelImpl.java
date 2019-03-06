@@ -1,16 +1,22 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import com.example.alexa.pressupcounter.DialogEvent;
+import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
+
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import java.util.List;
+
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.databinding.ObservableField;
-
-import com.example.alexa.pressupcounter.DialogEvent;
-import com.example.alexa.pressupcounter.PressUp;
-import com.example.alexa.pressupcounter.utils.Timer;
-
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -19,8 +25,7 @@ import io.reactivex.disposables.Disposable;
  */
 public class TrainingViewModelImpl extends ViewModel implements TrainingViewModel {
 
-    private PressUp mPressUp;
-    private Timer mTimer;
+    private TrainingFragmentModel mTrainingFragmentModel;
 
     private ObservableField<Integer> mRepetition;
     private ObservableField<String> mQuantityOfRepetitionOrRestTime;
@@ -34,16 +39,43 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private String mTextForRest;
     private ObservableField<String> mTextForTrainingOrRest;
 
-    public TrainingViewModelImpl(PressUp pressUp, Timer timer) {
-        mPressUp = pressUp;
-        mTimer = timer;
+    private PressUp2 mPressUp;
+
+    public TrainingViewModelImpl(TrainingFragmentModel trainingFragmentModel) {
+        mTrainingFragmentModel = trainingFragmentModel;
+
+        mTrainingFragmentModel.getPressUpById(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<PressUp2>>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        s.request(Long.MAX_VALUE);
+                    }
+
+                    @Override
+                    public void onNext(List<PressUp2> pressUp2s) {
+                        mPressUp = pressUp2s.get(0);
+                        mQuantityOfRepetitionOrRestTime = new ObservableField<>(String.valueOf(mPressUp.getFirstRepetition()));
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
         mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
         mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
         mTextForTrainingOrRest = new ObservableField<>(mTextForTraining);
 
         mRepetition = new ObservableField<>(1);
-        mQuantityOfRepetitionOrRestTime = new ObservableField<>(String.valueOf(mPressUp.getFirstRepetition()));
+        //mQuantityOfRepetitionOrRestTime = new ObservableField<>(String.valueOf(mPressUp.getFirstRepetition()));
 
         mStateOfRestButton = new ObservableField<>(true);
 
@@ -131,7 +163,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 mDialogEventForRestOff.postValue(new DialogEvent());
             }
         };
-        Observable<Long> observable = mTimer.getMainTimer();
+        Observable<Long> observable = mTrainingFragmentModel.getMainTimer();
         observable.subscribe(observer);
     }
 
@@ -165,7 +197,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 goToNextRepetition();
             }
         };
-        Observable<Long> observable = mTimer.getAdditionalTimer();
+        Observable<Long> observable = mTrainingFragmentModel.getAdditionalTimer();
         observable.subscribe(observer);
     }
 
