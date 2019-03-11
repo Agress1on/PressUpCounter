@@ -24,11 +24,13 @@ public class StartTrainingModel {
         mPressUpDao = pressUpDao;
     }
 
+    public Single<List<PressUp2>> getPressUpById(long id) {
+        return mPressUpDao.getPressUpById(id);
+    }
+
+    /*
     public Flowable<List<PressUp2>> getPressUpById(long id) {
         return mPressUpDao.getById(id);
     }
-
-    public Single<List<PressUp2>> getPressUp2ById(long id) {
-        return mPressUpDao.getPressUpById(id);
-    }
+    */
 }

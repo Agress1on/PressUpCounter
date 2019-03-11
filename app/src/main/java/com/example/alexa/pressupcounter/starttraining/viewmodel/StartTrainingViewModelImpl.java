@@ -4,17 +4,13 @@ import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.PressUp2;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 
-import java.util.List;
-
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -51,7 +47,7 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
         //не нравится то, что выше
         mFinalQuantityRepetition = new ObservableField<>("0");
 
-        Disposable disposable = mStartTrainingModel.getPressUp2ById(1)
+        Disposable disposable = mStartTrainingModel.getPressUpById(1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pressUp2s -> {

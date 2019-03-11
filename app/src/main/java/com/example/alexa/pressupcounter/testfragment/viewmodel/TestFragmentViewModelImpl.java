@@ -11,6 +11,8 @@ import java.util.List;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -35,27 +37,12 @@ public class TestFragmentViewModelImpl extends ViewModel implements TestFragment
 
     @Override
     public void onPushButtonClick() {
-        mTestFragmentModel.getById(1).subscribeOn(Schedulers.io())
+        Disposable disposable = mTestFragmentModel.getById(1).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<PressUp2>>() {
+                .subscribe(new Consumer<List<PressUp2>>() {
                     @Override
-                    public void onSubscribe(Subscription s) {
-                        s.request(Long.MAX_VALUE);
-                    }
-
-                    @Override
-                    public void onNext(List<PressUp2> pressUp2s) {
+                    public void accept(List<PressUp2> pressUp2s) throws Exception {
                         mTestTextView.set("New info" + pressUp2s.get(0).getFirstRepetition() + " " + pressUp2s.get(0).getSecondRepetition());
-                    }
-
-                    @Override
-                    public void onError(Throwable t) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-
                     }
                 });
     }

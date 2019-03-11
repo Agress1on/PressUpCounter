@@ -7,6 +7,7 @@ import com.example.alexa.pressupcounter.PressUpDao;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 import static io.reactivex.Flowable.just;
 
@@ -25,7 +26,13 @@ public class TestFragmentModel {
         mPressUpDao = pressUpDao;
     }
 
+    public Single<List<PressUp2>> getById(long id) {
+        return mPressUpDao.getPressUpById(id);
+    }
+
+    /*
     public Flowable<List<PressUp2>> getById(long id) {
         return mPressUpDao.getById(id);
     }
+    */
 }

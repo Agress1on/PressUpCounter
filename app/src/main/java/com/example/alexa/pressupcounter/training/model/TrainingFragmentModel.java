@@ -32,10 +32,6 @@ public class TrainingFragmentModel {
         mPressUpDao = pressUpDao;
     }
 
-    public Flowable<List<PressUp2>> getPressUpById(long id) {
-        return mPressUpDao.getById(id);
-    }
-
     public Single<List<PressUp2>> getPressUp2ById(long id) {
         return mPressUpDao.getPressUpById(id);
     }
@@ -71,4 +67,10 @@ public class TrainingFragmentModel {
                 });
         return mAdditionalTimer;
     }
+
+    /*
+    public Flowable<List<PressUp2>> getPressUpById(long id) {
+        return mPressUpDao.getById(id);
+    }
+    */
 }

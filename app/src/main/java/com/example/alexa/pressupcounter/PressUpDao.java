@@ -22,10 +22,10 @@ public interface PressUpDao {
     @Query("SELECT * FROM pressup2")
     List<PressUp2> getAll();
 
-
+    /*
     @Query("SELECT * FROM pressup2 WHERE id = :id")
     Flowable<List<PressUp2>> getById(long id);
-
+    */
 
     @Query("SELECT * FROM pressup2 WHERE id = :id")
     Single<List<PressUp2>> getPressUpById(long id);
