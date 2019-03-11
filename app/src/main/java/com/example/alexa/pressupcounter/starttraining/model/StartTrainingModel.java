@@ -7,6 +7,7 @@ import com.example.alexa.pressupcounter.PressUpDao;
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 /**
  * Created by Alexandr Mikhalev on 03.03.2019.
@@ -25,5 +26,9 @@ public class StartTrainingModel {
 
     public Flowable<List<PressUp2>> getPressUpById(long id) {
         return mPressUpDao.getById(id);
+    }
+
+    public Single<List<PressUp2>> getPressUp2ById(long id) {
+        return mPressUpDao.getPressUpById(id);
     }
 }

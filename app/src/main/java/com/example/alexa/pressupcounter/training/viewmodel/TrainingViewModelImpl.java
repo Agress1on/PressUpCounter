@@ -15,7 +15,9 @@ import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -41,9 +43,14 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     private PressUp2 mPressUp;
 
+    CompositeDisposable mCompositeDisposable;
+
     public TrainingViewModelImpl(TrainingFragmentModel trainingFragmentModel) {
         mTrainingFragmentModel = trainingFragmentModel;
+        mCompositeDisposable = new CompositeDisposable();
 
+        mQuantityOfRepetitionOrRestTime = new ObservableField<>("0");
+        /*
         mTrainingFragmentModel.getPressUpById(1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -69,6 +76,15 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     }
                 });
+        */
+        Disposable disposable = mTrainingFragmentModel.getPressUp2ById(1)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(pressUp2s -> {
+                    mPressUp = pressUp2s.get(0);
+                    mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
+                });
+        mCompositeDisposable.add(disposable);
 
         mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
         mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";

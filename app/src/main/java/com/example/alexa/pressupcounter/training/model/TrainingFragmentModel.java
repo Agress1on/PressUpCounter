@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 
@@ -33,6 +34,10 @@ public class TrainingFragmentModel {
 
     public Flowable<List<PressUp2>> getPressUpById(long id) {
         return mPressUpDao.getById(id);
+    }
+
+    public Single<List<PressUp2>> getPressUp2ById(long id) {
+        return mPressUpDao.getPressUpById(id);
     }
 
     public Observable<Long> getMainTimer() {
