@@ -2,13 +2,12 @@ package com.example.alexa.pressupcounter.training.model;
 
 import com.example.alexa.pressupcounter.AppDatabase;
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.PressUpDao;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -32,7 +31,7 @@ public class TrainingFragmentModel {
         mPressUpDao = pressUpDao;
     }
 
-    public Single<List<PressUp2>> getPressUp2ById(long id) {
+    public Single<List<PressUp>> getPressUp2ById(long id) {
         return mPressUpDao.getPressUpById(id);
     }
 
@@ -69,7 +68,7 @@ public class TrainingFragmentModel {
     }
 
     /*
-    public Flowable<List<PressUp2>> getPressUpById(long id) {
+    public Flowable<List<PressUp>> getPressUpById(long id) {
         return mPressUpDao.getById(id);
     }
     */

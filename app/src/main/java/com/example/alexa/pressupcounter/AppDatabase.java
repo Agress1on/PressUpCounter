@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
  *
  * @author Alexandr Mikhalev
  */
-@Database(entities = {PressUp2.class}, version = 1)
+@Database(entities = {PressUp.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PressUpDao pressUpDao();
 }

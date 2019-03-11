@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData;
 import androidx.databinding.ObservableField;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.

@@ -1,13 +1,8 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
 import com.example.alexa.pressupcounter.DialogEvent;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
-
-import java.util.List;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
@@ -17,7 +12,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -41,7 +35,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private String mTextForRest;
     private ObservableField<String> mTextForTrainingOrRest;
 
-    private PressUp2 mPressUp;
+    private PressUp mPressUp;
 
     CompositeDisposable mCompositeDisposable;
 
@@ -54,14 +48,14 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         mTrainingFragmentModel.getPressUpById(1)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<List<PressUp2>>() {
+                .subscribe(new Subscriber<List<PressUp>>() {
                     @Override
                     public void onSubscribe(Subscription s) {
                         s.request(Long.MAX_VALUE);
                     }
 
                     @Override
-                    public void onNext(List<PressUp2> pressUp2s) {
+                    public void onNext(List<PressUp> pressUp2s) {
                         mPressUp = pressUp2s.get(0);
                         mQuantityOfRepetitionOrRestTime = new ObservableField<>(String.valueOf(mPressUp.getFirstRepetition()));
                     }

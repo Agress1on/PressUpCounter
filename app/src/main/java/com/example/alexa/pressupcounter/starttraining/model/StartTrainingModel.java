@@ -1,12 +1,11 @@
 package com.example.alexa.pressupcounter.starttraining.model;
 
 import com.example.alexa.pressupcounter.AppDatabase;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.PressUpDao;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
@@ -24,12 +23,12 @@ public class StartTrainingModel {
         mPressUpDao = pressUpDao;
     }
 
-    public Single<List<PressUp2>> getPressUpById(long id) {
+    public Single<List<PressUp>> getPressUpById(long id) {
         return mPressUpDao.getPressUpById(id);
     }
 
     /*
-    public Flowable<List<PressUp2>> getPressUpById(long id) {
+    public Flowable<List<PressUp>> getPressUpById(long id) {
         return mPressUpDao.getById(id);
     }
     */

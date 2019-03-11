@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
@@ -13,7 +13,7 @@ import androidx.lifecycle.LiveData;
  */
 public interface StartTrainingViewModel {
 
-    ObservableField<PressUp2> getPressUp();
+    ObservableField<PressUp> getPressUp();
 
     LiveData<FragmentEvent> getFragmentEvent();
 

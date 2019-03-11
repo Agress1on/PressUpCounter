@@ -1,10 +1,7 @@
 package com.example.alexa.pressupcounter.testfragment.viewmodel;
 
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.testfragment.model.TestFragmentModel;
-
-import org.reactivestreams.Subscriber;
-import org.reactivestreams.Subscription;
 
 import java.util.List;
 
@@ -39,9 +36,9 @@ public class TestFragmentViewModelImpl extends ViewModel implements TestFragment
     public void onPushButtonClick() {
         Disposable disposable = mTestFragmentModel.getById(1).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<PressUp2>>() {
+                .subscribe(new Consumer<List<PressUp>>() {
                     @Override
-                    public void accept(List<PressUp2> pressUp2s) throws Exception {
+                    public void accept(List<PressUp> pressUp2s) throws Exception {
                         mTestTextView.set("New info" + pressUp2s.get(0).getFirstRepetition() + " " + pressUp2s.get(0).getSecondRepetition());
                     }
                 });

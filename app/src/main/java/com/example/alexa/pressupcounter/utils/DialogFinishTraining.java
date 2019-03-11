@@ -49,11 +49,6 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
         }
     }
 
-    @Override
-    public void onCancel(DialogInterface dialog) {
-        mOnButtonClick.onNegativeButton();
-    }
-
     public interface OnButtonClick {
         void onPositiveButton();
 

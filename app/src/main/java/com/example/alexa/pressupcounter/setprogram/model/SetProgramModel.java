@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.model;
 
 import com.example.alexa.pressupcounter.AppDatabase;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.PressUpDao;
 
 import io.reactivex.Completable;
@@ -21,7 +21,7 @@ public class SetProgramModel {
         mPressUpDao = pressUpDao;
     }
 
-    public Completable insertInDataBase(PressUp2 pressUp) {
+    public Completable insertInDataBase(PressUp pressUp) {
         return Completable.wrap(mPressUpDao.insert(pressUp));
     }
 }

@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 
 import androidx.databinding.ObservableField;
@@ -22,11 +22,11 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
 
     private StartTrainingModel mStartTrainingModel;
 
-    private ObservableField<PressUp2> mPressUpObservableField;
+    private ObservableField<PressUp> mPressUpObservableField;
     private MutableLiveData<FragmentEvent> mLiveData;
     private ObservableField<String> mFinalQuantityRepetition;
 
-    private PressUp2 mPressUp2;
+    private PressUp mPressUp;
 
     CompositeDisposable mCompositeDisposable;
 
@@ -38,12 +38,12 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pressUp2s -> {
-                    mPressUp2 = pressUp2s.get(0);
-                    mPressUpObservableField = new ObservableField<>(mPressUp2);
+                    mPressUp = pressUp2s.get(0);
+                    mPressUpObservableField = new ObservableField<>(mPressUp);
                     mFinalQuantityRepetition = new ObservableField<>(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
                 });
         */
-        mPressUpObservableField = new ObservableField<>(new PressUp2(1, 0,0,0,0,0));
+        mPressUpObservableField = new ObservableField<>(new PressUp(1, 0,0,0,0,0));
         //не нравится то, что выше
         mFinalQuantityRepetition = new ObservableField<>("0");
 
@@ -51,12 +51,12 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pressUp2s -> {
-                    mPressUp2 = pressUp2s.get(0);
-                    mPressUpObservableField.set(mPressUp2);
+                    mPressUp = pressUp2s.get(0);
+                    mPressUpObservableField.set(mPressUp);
                     mFinalQuantityRepetition.set(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
                 });
         /*
-        mPressUpObservableField = new ObservableField<>(mPressUp2);
+        mPressUpObservableField = new ObservableField<>(mPressUp);
         mFinalQuantityRepetition = new ObservableField<>(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
         */
         mCompositeDisposable.add(disposable);
@@ -64,7 +64,7 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     }
 
     @Override
-    public ObservableField<PressUp2> getPressUp() {
+    public ObservableField<PressUp> getPressUp() {
         return mPressUpObservableField;
     }
 

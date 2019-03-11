@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp2;
+import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 
 import androidx.databinding.ObservableField;
@@ -128,8 +128,8 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public void onClickTrainingButton() {
-        PressUp2 mPressUp2 = new PressUp2(1, mFirstRepetition.get(), mSecondRepetition.get(), mThirdRepetition.get(), mFourthRepetition.get(), mFifthRepetition.get());
-        mSetProgramModel.insertInDataBase(mPressUp2)
+        PressUp mPressUp = new PressUp(1, mFirstRepetition.get(), mSecondRepetition.get(), mThirdRepetition.get(), mFourthRepetition.get(), mFifthRepetition.get());
+        mSetProgramModel.insertInDataBase(mPressUp)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new CompletableObserver() {
