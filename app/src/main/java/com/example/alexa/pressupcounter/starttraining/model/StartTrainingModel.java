@@ -23,9 +23,15 @@ public class StartTrainingModel {
         mPressUpDao = pressUpDao;
     }
 
+    public Single<List<PressUp>> getAll() {
+        return mPressUpDao.getAll();
+    }
+
+    /*
     public Single<List<PressUp>> getPressUpById(long id) {
         return mPressUpDao.getPressUpById(id);
     }
+    */
 
     /*
     public Flowable<List<PressUp>> getPressUpById(long id) {

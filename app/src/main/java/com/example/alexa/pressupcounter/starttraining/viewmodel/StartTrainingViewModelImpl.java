@@ -47,11 +47,11 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
         //не нравится то, что выше
         mFinalQuantityRepetition = new ObservableField<>("0");
 
-        Disposable disposable = mStartTrainingModel.getPressUpById(1)
+        Disposable disposable = mStartTrainingModel.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pressUp2s -> {
-                    mPressUp = pressUp2s.get(0);
+                    mPressUp = pressUp2s.get(pressUp2s.size() - 1);
                     mPressUpObservableField.set(mPressUp);
                     mFinalQuantityRepetition.set(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
                 });
