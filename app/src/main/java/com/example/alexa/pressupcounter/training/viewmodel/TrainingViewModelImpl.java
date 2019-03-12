@@ -4,6 +4,8 @@ import com.example.alexa.pressupcounter.DialogEvent;
 import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
 
+import java.util.List;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -12,6 +14,8 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -71,11 +75,11 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                     }
                 });
         */
-        Disposable disposable = mTrainingFragmentModel.getPressUp2ById(1)
+        Disposable disposable = mTrainingFragmentModel.getAllPressUps()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pressUp2s -> {
-                    mPressUp = pressUp2s.get(0);
+                    mPressUp = pressUp2s.get(pressUp2s.size() - 1);
                     mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
                 });
         mCompositeDisposable.add(disposable);
@@ -240,5 +244,20 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     @Override
     public void onClickFinishTrainingButton() {
         mDialogEventFinishTraining.postValue(new DialogEvent());
+    }
+
+    @Override
+    public void writeNewProgramInDB() {
+        PressUp pressUpNew;
+        if (mPressUp.getFirstRepetition() == mPressUp.getSecondRepetition()) {
+            pressUpNew = new PressUp(mPressUp.getId() + 1, mPressUp.getFirstRepetition(), mPressUp.getSecondRepetition() + 1, mPressUp.getThirdRepetition(), mPressUp.getFourthRepetition(), mPressUp.getFifthRepetition() + 1);
+        } else {
+            pressUpNew = new PressUp(mPressUp.getId(), mPressUp.getFirstRepetition() + 1, mPressUp.getSecondRepetition() + 1, mPressUp.getThirdRepetition() + 1, mPressUp.getFourthRepetition() + 1, mPressUp.getFifthRepetition());
+        }
+        Disposable disposable = mTrainingFragmentModel.insertInDB(pressUpNew)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
+        mCompositeDisposable.add(disposable);
     }
 }

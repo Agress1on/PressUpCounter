@@ -118,6 +118,7 @@ public class TrainingFragment extends Fragment {
         dg3.init(new DialogFinishTraining.OnButtonClick() {
             @Override
             public void onPositiveButton() {
+                mTrainingViewModel.writeNewProgramInDB();
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(true))

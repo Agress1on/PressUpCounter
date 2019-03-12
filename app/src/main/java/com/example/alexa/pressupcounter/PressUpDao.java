@@ -19,7 +19,7 @@ import java.util.List;
 public interface PressUpDao {
 
     @Query("SELECT * FROM PressUp")
-    List<PressUp> getAll();
+    Single<List<PressUp>> getAll();
 
     /*
     @Query("SELECT * FROM pressup2 WHERE id = :id")

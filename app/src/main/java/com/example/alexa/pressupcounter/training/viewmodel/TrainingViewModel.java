@@ -39,4 +39,6 @@ public interface TrainingViewModel {
     void onClickRestButton();
 
     void onClickFinishTrainingButton();
+
+    void writeNewProgramInDB();
 }

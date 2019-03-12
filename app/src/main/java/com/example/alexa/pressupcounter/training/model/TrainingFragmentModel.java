@@ -8,6 +8,7 @@ import com.example.alexa.pressupcounter.PressUpDao;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.functions.Function;
@@ -33,6 +34,14 @@ public class TrainingFragmentModel {
 
     public Single<List<PressUp>> getPressUp2ById(long id) {
         return mPressUpDao.getPressUpById(id);
+    }
+
+    public Completable insertInDB(PressUp pressUp) {
+        return mPressUpDao.insert(pressUp);
+    }
+
+    public Single<List<PressUp>> getAllPressUps() {
+        return mPressUpDao.getAll();
     }
 
     public Observable<Long> getMainTimer() {
