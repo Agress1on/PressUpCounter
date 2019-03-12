@@ -1,6 +1,9 @@
 package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
+import com.example.alexa.pressupcounter.FragmentEvent;
+
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by Alexandr Mikhalev on 06.02.2019.
@@ -10,4 +13,6 @@ import androidx.databinding.ObservableField;
 public interface ResultTrainingViewModel {
     ObservableField<String> getHeaderText();
     ObservableField<String> getResultText();
+    MutableLiveData<FragmentEvent> getFragmentEvent();
+    void goToStartTrainingFragment();
 }

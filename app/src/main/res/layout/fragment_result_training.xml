@@ -40,5 +40,16 @@
             app:layout_constraintTop_toBottomOf="@id/result_training_header_text_view"
             tools:text="CONGRATULATIONS" />
 
+        <Button
+            android:id="@+id/go_to_start_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="домой"
+            android:onClick="@{() -> viewModel.goToStartTrainingFragment()}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/result_training_text_view"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
