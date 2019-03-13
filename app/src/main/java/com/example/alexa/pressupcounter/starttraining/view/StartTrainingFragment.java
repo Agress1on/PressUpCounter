@@ -16,6 +16,7 @@ import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingVie
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelImpl;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
+import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,6 +67,18 @@ public class StartTrainingFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, TrainingFragment.newInstance())
+                        .commit();
+                fragmentEvent.setHappend(true);
+            }
+        });
+
+        mStartTrainingViewModel.getLiveDataForGoToList().observe(this, new Observer<FragmentEvent>() {
+            @Override
+            public void onChanged(FragmentEvent fragmentEvent) {
+                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, TrainingListFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappend(true);
             }

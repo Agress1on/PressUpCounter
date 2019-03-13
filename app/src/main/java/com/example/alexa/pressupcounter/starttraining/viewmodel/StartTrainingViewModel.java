@@ -5,6 +5,7 @@ import com.example.alexa.pressupcounter.PressUp;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by Alexandr Mikhalev on 01.02.2019.
@@ -17,7 +18,11 @@ public interface StartTrainingViewModel {
 
     LiveData<FragmentEvent> getFragmentEvent();
 
+    MutableLiveData<FragmentEvent> getLiveDataForGoToList();
+
     void onClickStartTrainingButton();
+
+    void onClickListButton();
 
     ObservableField<String> getFinalQuantityRepetition();
 }
