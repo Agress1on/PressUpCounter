@@ -11,12 +11,12 @@ import com.example.alexa.pressupcounter.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
+import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelImpl;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
-import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -78,7 +78,7 @@ public class StartTrainingFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, TrainingListFragment.newInstance())
+                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappend(true);
             }
