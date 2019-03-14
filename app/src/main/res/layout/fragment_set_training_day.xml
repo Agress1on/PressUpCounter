@@ -46,6 +46,8 @@
             android:id="@+id/monday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.sunday.get() || viewModel.tuesday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(1, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/monday_textview"
             app:layout_constraintStart_toEndOf="@id/monday_textview"
             app:layout_constraintTop_toTopOf="@id/monday_textview" />
@@ -65,6 +67,8 @@
             android:id="@+id/tuesday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.monday.get() || viewModel.wednesday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(2, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/tuesday_textview"
             app:layout_constraintStart_toEndOf="@id/tuesday_textview"
             app:layout_constraintTop_toTopOf="@id/tuesday_textview" />
@@ -84,6 +88,8 @@
             android:id="@+id/wednesday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.tuesday.get() || viewModel.thursday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(3, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/wednesday_textview"
             app:layout_constraintStart_toEndOf="@id/wednesday_textview"
             app:layout_constraintTop_toTopOf="@id/wednesday_textview" />
@@ -103,6 +109,8 @@
             android:id="@+id/thursday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.wednesday.get() || viewModel.friday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(4, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/thursday_textview"
             app:layout_constraintStart_toEndOf="@id/thursday_textview"
             app:layout_constraintTop_toTopOf="@id/thursday_textview" />
@@ -122,6 +130,8 @@
             android:id="@+id/friday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.thursday.get() || viewModel.saturday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(5, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/friday_textview"
             app:layout_constraintStart_toEndOf="@id/friday_textview"
             app:layout_constraintTop_toTopOf="@id/friday_textview" />
@@ -141,6 +151,8 @@
             android:id="@+id/saturday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.friday.get() || viewModel.sunday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(6, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/saturday_textview"
             app:layout_constraintStart_toEndOf="@id/saturday_textview"
             app:layout_constraintTop_toTopOf="@id/saturday_textview" />
@@ -160,6 +172,8 @@
             android:id="@+id/sunday_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:enabled="@{viewModel.saturday.get() || viewModel.monday.get() ? false : true}"
+            android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(7, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/sunday_textview"
             app:layout_constraintStart_toEndOf="@id/sunday_textview"
             app:layout_constraintTop_toTopOf="@id/sunday_textview" />
