@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.AppDatabase;
+import com.example.alexa.pressupcounter.PressUpDao;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
 import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
@@ -30,14 +33,24 @@ public class TrainingListFragment extends Fragment {
 
     private TrainingListViewModel mTrainingListViewModel;
 
+    private AppDatabase mAppDatabase;
+    private PressUpDao mPressUpDao;
+
+    /*
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mRecyclerAdapter;
+    */
+    RecyclerView mRecyclerView;
+    PressUpAdapter mPressUpAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TrainingListModel trainingListModel = new TrainingListModel();
+        mAppDatabase = App.getInstance().getDatabase();
+        mPressUpDao = mAppDatabase.pressUpDao();
+
+        TrainingListModel trainingListModel = new TrainingListModel(mAppDatabase, mPressUpDao);
         mTrainingListViewModel = ViewModelProviders.of(this, new TrainingListViewModelFactory(trainingListModel)).get(TrainingListViewModelImpl.class);
     }
 
@@ -46,17 +59,16 @@ public class TrainingListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentTrainingListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training_list, container, false);
 
+        binding.setViewModel(mTrainingListViewModel);
 
-        mRecyclerView = (RecyclerView) container.findViewById(R.id.training_list_recycler);
+        mRecyclerView = binding.trainingListRecycler;
 
-        FragmentActivity fragmentActivity = getActivity();
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(fragmentActivity);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mRecyclerAdapter = new RecyclerAdapter();
-        mRecyclerView.setAdapter(mRecyclerAdapter);
-
-        binding.setViewModel(mTrainingListViewModel);
+        mPressUpAdapter = new PressUpAdapter();
+        mPressUpAdapter.setData(mTrainingListViewModel.getPressUpList());
+        mRecyclerView.setAdapter(mPressUpAdapter);
         return binding.getRoot();
     }
 
