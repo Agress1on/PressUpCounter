@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTrainingDayBinding;
+import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
 import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModelFactory;
@@ -16,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 /**
@@ -33,6 +36,7 @@ public class SetTrainingDayFragment extends Fragment {
 
         SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
         mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(setTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
+        init();
     }
 
     @Nullable
@@ -41,6 +45,20 @@ public class SetTrainingDayFragment extends Fragment {
         FragmentSetTrainingDayBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_training_day, container, false);
         binding.setViewModel(mSetTrainingDayViewModel);
         return binding.getRoot();
+    }
+
+    private void init() {
+        mSetTrainingDayViewModel.getFragmentEventLiveData().observe(this, new Observer<FragmentEvent>() {
+            @Override
+            public void onChanged(FragmentEvent fragmentEvent) {
+                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, SetTimeFragment.newInstance())
+                        .commit();
+                fragmentEvent.setHappend(true);
+            }
+        });
     }
 
     public static SetTrainingDayFragment newInstance() {
