@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.TimePickerEvent;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactory;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+import com.example.alexa.pressupcounter.utils.TimePickerDialogFragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,6 +59,61 @@ public class SetTimeFragment extends Fragment {
                         .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappend(true);
+            }
+        });
+
+
+        //TP for first day
+        final TimePickerDialogFragment timePickerDialogForFirst = new TimePickerDialogFragment();
+        timePickerDialogForFirst.init(new TimePickerDialogFragment.SetTime() {
+            @Override
+            public void setTime(int hourOfDay, int minute) {
+                mSetTimeViewModel.setFirstDayTime(hourOfDay, minute);
+            }
+        });
+
+        mSetTimeViewModel.getTimePickerEventForFirstDay().observe(this, new Observer<TimePickerEvent>() {
+            @Override
+            public void onChanged(TimePickerEvent timePickerEvent) {
+                if (timePickerEvent == null || timePickerEvent.isHappened()) return;
+                timePickerDialogForFirst.show(getActivity().getSupportFragmentManager(), "TAAAG");
+                timePickerEvent.setHappened(true);
+            }
+        });
+
+        //TP for second day
+        final TimePickerDialogFragment timePickerDialogForSecond = new TimePickerDialogFragment();
+        timePickerDialogForSecond.init(new TimePickerDialogFragment.SetTime() {
+            @Override
+            public void setTime(int hourOfDay, int minute) {
+                mSetTimeViewModel.setSecondDayTime(hourOfDay, minute);
+            }
+        });
+
+        mSetTimeViewModel.getTimePickerEventForSecondDay().observe(this, new Observer<TimePickerEvent>() {
+            @Override
+            public void onChanged(TimePickerEvent timePickerEvent) {
+                if (timePickerEvent == null || timePickerEvent.isHappened()) return;
+                timePickerDialogForSecond.show(getActivity().getSupportFragmentManager(), "TAAAG");
+                timePickerEvent.setHappened(true);
+            }
+        });
+
+        //TP for third day
+        final TimePickerDialogFragment timePickerDialogForThird = new TimePickerDialogFragment();
+        timePickerDialogForThird.init(new TimePickerDialogFragment.SetTime() {
+            @Override
+            public void setTime(int hourOfDay, int minute) {
+                mSetTimeViewModel.setThirdDayTime(hourOfDay, minute);
+            }
+        });
+
+        mSetTimeViewModel.getTimePickerEventForThirdDay().observe(this, new Observer<TimePickerEvent>() {
+            @Override
+            public void onChanged(TimePickerEvent timePickerEvent) {
+                if (timePickerEvent == null || timePickerEvent.isHappened()) return;
+                timePickerDialogForThird.show(getActivity().getSupportFragmentManager(), "TAAAG");
+                timePickerEvent.setHappened(true);
             }
         });
     }
