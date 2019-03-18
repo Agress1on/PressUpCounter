@@ -26,6 +26,8 @@ public interface SetTrainingDayViewModel {
 
     ObservableField<Boolean> getSunday();
 
+    ObservableField<Boolean> getCheckButtonState();
+
     MutableLiveData<FragmentEvent> getFragmentEventLiveData();
 
     void onCheckedChanged(int i, boolean state);

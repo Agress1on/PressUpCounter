@@ -3,6 +3,9 @@ package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -24,6 +27,8 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     private ObservableField<Boolean> mSaturday;
     private ObservableField<Boolean> mSunday;
 
+    private ObservableField<Boolean> mButtonState;
+
     private MutableLiveData<FragmentEvent> mFragmentEventLiveData;
 
     public SetTrainingDayViewModelImpl(SetTrainingDayModel setTrainingDayModel) {
@@ -36,6 +41,8 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         mFriday = new ObservableField<>(false);
         mSaturday = new ObservableField<>(false);
         mSunday = new ObservableField<>(false);
+
+        mButtonState = new ObservableField<>(false);
 
         mFragmentEventLiveData = new MutableLiveData<>();
     }
@@ -81,6 +88,11 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     }
 
     @Override
+    public ObservableField<Boolean> getCheckButtonState() {
+        return mButtonState;
+    }
+
+    @Override
     public void onCheckedChanged(int i, boolean state) {
         switch (i) {
             case 1: mMonday.set(state); break;
@@ -91,10 +103,23 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
             case 6: mSaturday.set(state); break;
             case 7: mSunday.set(state); break;
         }
+        mButtonState.set(checkQuantityDays() == 3);
     }
 
     @Override
     public void onCheckButton() {
         mFragmentEventLiveData.postValue(new FragmentEvent());
+    }
+
+    private int checkQuantityDays() {
+        int count = 0;
+        if (mMonday.get().equals(true)) count++;
+        if (mTuesday.get().equals(true)) count++;
+        if (mWednesday.get().equals(true)) count++;
+        if (mThursday.get().equals(true)) count++;
+        if (mFriday.get().equals(true)) count++;
+        if (mSaturday.get().equals(true)) count++;
+        if (mSunday.get().equals(true)) count++;
+        return count;
     }
 }
