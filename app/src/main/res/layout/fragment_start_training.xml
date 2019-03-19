@@ -15,171 +15,169 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/repetition_header_text_view"
+            android:id="@+id/start_train_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Подход"
+            android:textAlignment="center"
             android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="30sp"
+            android:layout_marginBottom="20dp"
+            android:text="Текущая программа:"
+            app:layout_constraintStart_toStartOf="@id/tab_layout"
+            app:layout_constraintEnd_toEndOf="@id/tab_layout"
+            app:layout_constraintBottom_toTopOf="@id/tab_layout"/>
 
-        <View
-            android:id="@+id/horizontal_first_separator"
+        <TableLayout
+            android:id="@+id/tab_layout"
             android:layout_width="0dp"
-            android:layout_height="2dp"
-            android:background="@color/colorBlack"
-            app:layout_constraintEnd_toEndOf="@id/fifth_repetition_counter"
-            app:layout_constraintTop_toBottomOf="@id/repetition_header_text_view" />
-
-        <TextView
-            android:id="@+id/repetition_quantity_header_text_view"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Повторения"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repetition_header_text_view" />
-
-        <View
-            android:id="@+id/vertical_first_separator"
-            android:layout_width="2dp"
-            android:layout_height="0dp"
-            android:background="@color/colorBlack"
-            app:layout_constraintBottom_toBottomOf="@id/repetition_quantity_header_text_view"
-            app:layout_constraintStart_toEndOf="@id/repetition_quantity_header_text_view"
-            app:layout_constraintTop_toTopOf="@id/repetition_header_text_view" />
-
-        <TextView
-            android:id="@+id/first_repetition_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:stretchColumns="*"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="5dp"
-            android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().firstRepetition))}"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@id/repetition_quantity_header_text_view"
-            app:layout_constraintStart_toEndOf="@id/vertical_first_separator"
-            tools:ignore="RtlCompat"
-            tools:text="20" />
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/first_repetition_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_first_repetition"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
-            app:layout_constraintEnd_toEndOf="@id/first_repetition_counter"
-            app:layout_constraintStart_toStartOf="@id/first_repetition_counter" />
+            <TableRow>
 
-        <TextView
-            android:id="@+id/second_repetition_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().secondRepetition))}"
-            app:layout_constraintBottom_toBottomOf="@id/first_repetition_counter"
-            app:layout_constraintStart_toEndOf="@id/first_repetition_counter"
-            tools:ignore="RtlCompat"
-            tools:text="21" />
+                <TextView
+                    android:id="@+id/repetition_header_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Подход"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/second_repetition_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_second_repetition"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
-            app:layout_constraintEnd_toEndOf="@id/second_repetition_counter"
-            app:layout_constraintStart_toStartOf="@id/second_repetition_counter" />
+                <TextView
+                    android:id="@+id/first_repetition_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_first_repetition"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/third_repetition_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().thirdRepetition))}"
-            app:layout_constraintBottom_toBottomOf="@id/second_repetition_counter"
-            app:layout_constraintStart_toEndOf="@id/second_repetition_counter"
-            tools:ignore="RtlCompat"
-            tools:text="23" />
+                <TextView
+                    android:id="@+id/second_repetition_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_second_repetition"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/third_repetition_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_third_repetition"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
-            app:layout_constraintEnd_toEndOf="@id/third_repetition_counter"
-            app:layout_constraintStart_toStartOf="@id/third_repetition_counter" />
+                <TextView
+                    android:id="@+id/third_repetition_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_third_repetition"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/fourth_repetition_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fourthRepetition))}"
-            app:layout_constraintBottom_toBottomOf="@id/third_repetition_counter"
-            app:layout_constraintStart_toEndOf="@id/third_repetition_counter"
-            tools:ignore="RtlCompat"
-            tools:text="25" />
+                <TextView
+                    android:id="@+id/fourth_repetition_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_fourth_repetition"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/fourth_repetition_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_fourth_repetition"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
-            app:layout_constraintEnd_toEndOf="@id/fourth_repetition_counter"
-            app:layout_constraintStart_toStartOf="@id/fourth_repetition_counter" />
+                <TextView
+                    android:id="@+id/fifth_repetition_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/for_fifth_repetition"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
+            </TableRow>
 
-        <TextView
-            android:id="@+id/fifth_repetition_counter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fifthRepetition))}"
-            app:layout_constraintBottom_toBottomOf="@id/fourth_repetition_counter"
-            app:layout_constraintStart_toEndOf="@id/fourth_repetition_counter"
-            tools:ignore="RtlCompat"
-            tools:text="30" />
+            <TableRow>
 
-        <TextView
-            android:id="@+id/fifth_repetition_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/for_fifth_repetition"
-            android:textColor="@color/colorBlack"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toBottomOf="@id/horizontal_first_separator"
-            app:layout_constraintEnd_toEndOf="@id/fifth_repetition_counter"
-            app:layout_constraintStart_toStartOf="@id/fifth_repetition_counter" />
+                <TextView
+                    android:id="@+id/repetition_quantity_header_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Повторения"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/first_repetition_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().firstRepetition))}"
+                    android:textAlignment="center"
+                    android:layout_span="@id/first_repetition_header"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp"
+                    tools:ignore="RtlCompat"
+                    tools:text="20" />
+
+                <TextView
+                    android:id="@+id/second_repetition_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().secondRepetition))}"
+                    android:textAlignment="center"
+                    android:layout_span="@id/second_repetition_header"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp"
+                    tools:ignore="RtlCompat"
+                    tools:text="21" />
+
+                <TextView
+                    android:id="@+id/third_repetition_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().thirdRepetition))}"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp"
+                    tools:ignore="RtlCompat"
+                    tools:text="23" />
+
+                <TextView
+                    android:id="@+id/fourth_repetition_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fourthRepetition))}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp"
+                    tools:ignore="RtlCompat"
+                    tools:text="25" />
+
+                <TextView
+                    android:id="@+id/fifth_repetition_counter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fifthRepetition))}"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="25sp"
+                    tools:ignore="RtlCompat"
+                    tools:text="30" />
+            </TableRow>
+
+        </TableLayout>
 
         <TextView
             android:id="@+id/summ_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Всего отжиманий: "
+            android:layout_marginTop="20dp"
+            android:text="Сумма: "
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repetition_quantity_header_text_view" />
+            app:layout_constraintStart_toStartOf="@id/tab_layout"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
 
         <TextView
             android:id="@+id/summ_static"
@@ -189,7 +187,8 @@
             android:textSize="30sp"
             android:text="@{viewModel.finalQuantityRepetition}"
             app:layout_constraintBottom_toBottomOf="@id/summ_header"
-            app:layout_constraintStart_toEndOf="@id/summ_header" />
+            app:layout_constraintStart_toEndOf="@id/summ_header"
+            tools:text="20"/>
 
         <Button
             android:id="@+id/start_training_button"
