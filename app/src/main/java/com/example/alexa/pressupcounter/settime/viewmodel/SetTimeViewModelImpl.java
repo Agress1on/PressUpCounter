@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.settime.viewmodel;
 
+import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
@@ -34,9 +35,9 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
         mTimePickerEventForSecondDay = new MutableLiveData<>();
         mTimePickerEventForThirdDay = new MutableLiveData<>();
 
-        mFirstDayTime = new ObservableField<>("Hi");
-        mSecondDayTime = new ObservableField<>("Hi");
-        mThirdDayTime = new ObservableField<>("Hi");
+        mFirstDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
+        mSecondDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
+        mThirdDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
     }
 
     @Override
@@ -76,17 +77,17 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
 
     @Override
     public void setFirstDayTime(int hours, int minutes) {
-        mFirstDayTime.set("Hours: " + hours + " minutes: " + minutes);
+        mFirstDayTime.set(hours + ":" + minutes);
     }
 
     @Override
     public void setSecondDayTime(int hours, int minutes) {
-        mSecondDayTime.set("Hours: " + hours + " minutes: " + minutes);
+        mSecondDayTime.set(hours + ":" + minutes);
     }
 
     @Override
     public void setThirdDayTime(int hours, int minutes) {
-        mThirdDayTime.set("Hours: " + hours + " minutes: " + minutes);
+        mThirdDayTime.set(hours + ":" + minutes);
     }
 
     @Override

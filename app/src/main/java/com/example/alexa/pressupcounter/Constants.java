@@ -21,4 +21,6 @@ public class Constants {
     public static final int TIME_OF_ADDITIONAL_REST = 5;
 
     public static final String TAG_FOR_IS_SUCCESS_TRAINING = "TAG_FOR_IS_SUCCESS_TRAINING";
+
+    public static final String TEXT_FOR_SET_TIME_STRING = "SET TIME";
 }
