@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel" />
@@ -18,29 +17,29 @@
             android:id="@+id/start_train_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="Текущая программа:"
             android:textAlignment="center"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            android:layout_marginBottom="20dp"
-            android:text="Текущая программа:"
-            app:layout_constraintStart_toStartOf="@id/tab_layout"
+            app:layout_constraintBottom_toTopOf="@id/tab_layout"
             app:layout_constraintEnd_toEndOf="@id/tab_layout"
-            app:layout_constraintBottom_toTopOf="@id/tab_layout"/>
+            app:layout_constraintStart_toStartOf="@id/tab_layout" />
 
         <TableLayout
             android:id="@+id/tab_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:stretchColumns="*"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="5dp"
-            android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:stretchColumns="*"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TableRow>
 
@@ -112,9 +111,9 @@
                     android:id="@+id/first_repetition_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_span="@id/first_repetition_header"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().firstRepetition))}"
                     android:textAlignment="center"
-                    android:layout_span="@id/first_repetition_header"
                     android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
@@ -124,9 +123,9 @@
                     android:id="@+id/second_repetition_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_span="@id/second_repetition_header"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().secondRepetition))}"
                     android:textAlignment="center"
-                    android:layout_span="@id/second_repetition_header"
                     android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
@@ -147,8 +146,8 @@
                     android:id="@+id/fourth_repetition_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fourthRepetition))}"
+                    android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
@@ -158,8 +157,8 @@
                     android:id="@+id/fifth_repetition_counter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fifthRepetition))}"
+                    android:textAlignment="center"
                     android:textColor="@color/colorBlack"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
@@ -183,12 +182,12 @@
             android:id="@+id/summ_static"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.finalQuantityRepetition}"
             android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            android:text="@{viewModel.finalQuantityRepetition}"
             app:layout_constraintBottom_toBottomOf="@id/summ_header"
             app:layout_constraintStart_toEndOf="@id/summ_header"
-            tools:text="20"/>
+            tools:text="20" />
 
         <Button
             android:id="@+id/start_training_button"
@@ -205,11 +204,11 @@
             android:id="@+id/go_to_pressup_list_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="список"
             android:onClick="@{() -> viewModel.onClickListButton()}"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="список"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/start_training_button"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/start_training_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
