@@ -1,8 +1,12 @@
 package com.example.alexa.pressupcounter.firstlaunch.view;
 
+import android.content.Context;
 import android.content.Intent;
 import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
+
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramActivity;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -49,8 +53,18 @@ public class FirstLaunchActivity extends AppCompatActivity {
     }
 
     void startMainActivity() {
+
+        Intent intent = SetProgramActivity.getIntent(this);
+        startActivity(intent);
+        /*
         Intent intent = MainActivity.getIntent(this);
         startActivity(intent);
+        */
+
+    }
+
+    public static Intent getIntent(Context context) {
+        return new Intent(context, FirstLaunchActivity.class);
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {

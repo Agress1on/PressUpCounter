@@ -7,6 +7,10 @@ package com.example.alexa.pressupcounter;
  */
 public class Constants {
 
+    public static final String MY_SETTINGS = "MY_SETTINGS";
+
+    public static final String TAG_FOR_SPLASH_BOOLEAN = "TAG_FOR_SPLASH_BOOLEAN";
+
     public static final int PAGE_COUNT = 3;
 
     public static final String LOGGER = "LOGGER";
