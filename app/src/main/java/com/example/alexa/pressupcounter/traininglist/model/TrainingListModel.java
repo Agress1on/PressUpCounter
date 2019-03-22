@@ -5,6 +5,7 @@ import com.example.alexa.pressupcounter.PressUp;
 import com.example.alexa.pressupcounter.PressUpDao;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 
@@ -24,6 +25,6 @@ public class TrainingListModel {
     }
 
     public Single<List<PressUp>> getAllPressUps() {
-        return mPressUpDao.getAll();
+        return mPressUpDao.getAll().delay(3, TimeUnit.SECONDS);
     }
 }
