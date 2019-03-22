@@ -5,6 +5,8 @@ import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 
+import java.util.ArrayList;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,7 +29,13 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     private ObservableField<String> mSecondDayTime;
     private ObservableField<String> mThirdDayTime;
 
-    public SetTimeViewModelImpl(SetTimeModel setTimeModel) {
+    private ArrayList<Integer> mIndexList;
+    private int mFirstDayIndex;
+    private int mSecondDayIndex;
+    private int mThirdDayIndex;
+    private ObservableField<String> mInfoText;
+
+    public SetTimeViewModelImpl(SetTimeModel setTimeModel, ArrayList<Integer> indexList) {
         mSetTimeModel = setTimeModel;
         mFragmentEventLiveData = new MutableLiveData<>();
 
@@ -38,6 +46,12 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
         mFirstDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
         mSecondDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
         mThirdDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
+
+        mIndexList = indexList;
+        mFirstDayIndex = mIndexList.get(0);
+        mSecondDayIndex = mIndexList.get(1);
+        mThirdDayIndex = mIndexList.get(2);
+        mInfoText = new ObservableField<>(mFirstDayIndex + " " + mSecondDayIndex + " " + mThirdDayIndex);
     }
 
     @Override
@@ -73,6 +87,11 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     @Override
     public ObservableField<String> getThirdDayTime() {
         return mThirdDayTime;
+    }
+
+    @Override
+    public ObservableField<String> getTextInfo() {
+        return mInfoText;
     }
 
     @Override

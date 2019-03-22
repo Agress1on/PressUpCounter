@@ -27,6 +27,8 @@ public interface SetTimeViewModel {
 
     ObservableField<String> getThirdDayTime();
 
+    ObservableField<String> getTextInfo();
+
     void setFirstDayTime(int hours, int minutes);
 
     void setSecondDayTime(int hours, int minutes);

@@ -54,7 +54,7 @@ public class SetTrainingDayFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetTimeFragment.newInstance())
+                        .replace(R.id.fragment_container, SetTimeFragment.newInstance(mSetTrainingDayViewModel.getDaysIndexList()))
                         .commit();
                 fragmentEvent.setHappend(true);
             }

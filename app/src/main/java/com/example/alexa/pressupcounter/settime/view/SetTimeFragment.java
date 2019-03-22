@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.TimePickerEvent;
@@ -15,6 +16,9 @@ import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactor
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 import com.example.alexa.pressupcounter.utils.TimePickerDialogFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,13 +35,15 @@ import androidx.lifecycle.ViewModelProviders;
 public class SetTimeFragment extends Fragment {
 
     private SetTimeViewModel mSetTimeViewModel;
+    private ArrayList<Integer> mIndexList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mIndexList = getArguments().getIntegerArrayList(Constants.KEY_FOR_SET_TIME_BUNDLE);
         SetTimeModel setTimeModel = new SetTimeModel();
-        mSetTimeViewModel = ViewModelProviders.of(this, new SetTimeViewModelFactory(setTimeModel)).get(SetTimeViewModelImpl.class);
+        mSetTimeViewModel = ViewModelProviders.of(this, new SetTimeViewModelFactory(setTimeModel, mIndexList)).get(SetTimeViewModelImpl.class);
         init();
     }
 
@@ -118,8 +124,9 @@ public class SetTimeFragment extends Fragment {
         });
     }
 
-    public static SetTimeFragment newInstance() {
+    public static SetTimeFragment newInstance(ArrayList<Integer> indexList) {
         Bundle args = new Bundle();
+        args.putSerializable(Constants.KEY_FOR_SET_TIME_BUNDLE, indexList);
         SetTimeFragment fragment = new SetTimeFragment();
         fragment.setArguments(args);
         return fragment;

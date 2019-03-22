@@ -31,6 +31,8 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
     private MutableLiveData<FragmentEvent> mFragmentEventLiveData;
 
+    private ArrayList<Integer> mIndexList;
+
     public SetTrainingDayViewModelImpl(SetTrainingDayModel setTrainingDayModel) {
         mSetTrainingDayModel = setTrainingDayModel;
 
@@ -45,6 +47,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         mButtonState = new ObservableField<>(false);
 
         mFragmentEventLiveData = new MutableLiveData<>();
+        mIndexList = new ArrayList();
     }
 
     @Override
@@ -93,6 +96,11 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     }
 
     @Override
+    public ArrayList<Integer> getDaysIndexList() {
+        return mIndexList;
+    }
+
+    @Override
     public void onCheckedChanged(int i, boolean state) {
         switch (i) {
             case 1: mMonday.set(state); break;
@@ -108,6 +116,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
     @Override
     public void onCheckButton() {
+        writeIndexDayOfWeekInList();
         mFragmentEventLiveData.postValue(new FragmentEvent());
     }
 
@@ -121,5 +130,14 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         if (mSaturday.get().equals(true)) count++;
         if (mSunday.get().equals(true)) count++;
         return count;
+    }
+    private void writeIndexDayOfWeekInList() {
+        if (mMonday.get().equals(true)) mIndexList.add(1);
+        if (mTuesday.get().equals(true)) mIndexList.add(2);
+        if (mWednesday.get().equals(true)) mIndexList.add(3);
+        if (mThursday.get().equals(true)) mIndexList.add(4);
+        if (mFriday.get().equals(true)) mIndexList.add(5);
+        if (mSaturday.get().equals(true)) mIndexList.add(6);
+        if (mSunday.get().equals(true)) mIndexList.add(7);
     }
 }
