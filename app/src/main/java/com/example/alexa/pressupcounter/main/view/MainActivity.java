@@ -2,14 +2,15 @@ package com.example.alexa.pressupcounter.main.view;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
-import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
+import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, SetProgramFragment.newInstance())
+                    .add(R.id.fragment_container, StartTrainingFragment.newInstance())
                     .commit();
         }
 
