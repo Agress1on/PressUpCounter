@@ -6,6 +6,8 @@ import android.os.Bundle;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
+import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
+import com.example.alexa.pressupcounter.main.viewmodel.MainViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,10 +16,14 @@ import androidx.fragment.app.Fragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    private MainViewModel mMainViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mMainViewModel = new MainViewModelImpl();
+        binding.setViewModel(mMainViewModel);
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             getSupportFragmentManager().beginTransaction()

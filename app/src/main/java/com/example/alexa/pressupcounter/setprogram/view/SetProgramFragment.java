@@ -65,9 +65,6 @@ public class SetProgramFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappend()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        //.replace(R.id.fragment_container, StartTrainingFragment.newInstance(mSetProgramViewModel.getPressUp().get()))
-                        //.replace(R.id.fragment_container, TestFragment.newInstance())
-                        //.replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                         .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappend(true);

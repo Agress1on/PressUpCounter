@@ -1,5 +1,8 @@
 package com.example.alexa.pressupcounter.firstlaunch.viewmodel;
 
+import com.example.alexa.pressupcounter.events.ActivityEvent;
+
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -9,18 +12,19 @@ import androidx.lifecycle.ViewModel;
  */
 public class FirstLaunchViewModelImpl extends ViewModel implements FirstLaunchViewModel {
 
-    private OnStartMainActivityListener mOnStartMainActivityButton;
+    private MutableLiveData<ActivityEvent> mActivityEventMutableLiveData;
 
-    public FirstLaunchViewModelImpl(OnStartMainActivityListener onStartMainActivityButton) {
-        mOnStartMainActivityButton = onStartMainActivityButton;
+    public FirstLaunchViewModelImpl() {
+        mActivityEventMutableLiveData = new MutableLiveData<>();
     }
 
     @Override
-    public void onStartMainActivityButton() {
-        mOnStartMainActivityButton.onClick();
+    public MutableLiveData<ActivityEvent> getActivityEventMutableLiveData() {
+        return mActivityEventMutableLiveData;
     }
 
-    public interface OnStartMainActivityListener {
-        void onClick();
+    @Override
+    public void onClickMissButton() {
+        mActivityEventMutableLiveData.postValue(new ActivityEvent());
     }
 }
