@@ -5,7 +5,8 @@ package com.example.alexa.pressupcounter.events;
  *
  * @author Alexandr Mikhalev
  */
-public class FragmentEvent {
+public class FragmentEvent extends AbstractEvent {
+    /*
     private boolean happend = false;
 
     public boolean isHappend() {
@@ -15,4 +16,5 @@ public class FragmentEvent {
     public void setHappend(boolean happend) {
         this.happend = happend;
     }
+    */
 }

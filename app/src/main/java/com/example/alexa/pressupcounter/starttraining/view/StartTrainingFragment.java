@@ -63,25 +63,25 @@ public class StartTrainingFragment extends Fragment {
         mStartTrainingViewModel.getFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(@Nullable FragmentEvent fragmentEvent) {
-                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, TrainingFragment.newInstance())
                         .commit();
-                fragmentEvent.setHappend(true);
+                fragmentEvent.setHappened(true);
             }
         });
 
         mStartTrainingViewModel.getLiveDataForGoToList().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
-                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         //.replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .replace(R.id.fragment_container, TrainingListFragment.newInstance())
                         .commit();
-                fragmentEvent.setHappend(true);
+                fragmentEvent.setHappened(true);
             }
         });
     }

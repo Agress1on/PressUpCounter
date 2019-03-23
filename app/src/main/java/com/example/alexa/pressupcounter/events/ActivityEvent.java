@@ -5,7 +5,8 @@ package com.example.alexa.pressupcounter.events;
  *
  * @author Alexandr Mikhalev
  */
-public class ActivityEvent {
+public class ActivityEvent extends AbstractEvent {
+    /*
     private boolean happened = false;
 
     public boolean isHappened() {
@@ -15,4 +16,5 @@ public class ActivityEvent {
     public void setHappened(boolean happened) {
         this.happened = happened;
     }
+    */
 }

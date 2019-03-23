@@ -49,12 +49,12 @@ public class ResultTrainingFragment extends Fragment {
         mResultTrainingViewModel.getFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
-                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                         .commit();
-                fragmentEvent.setHappend(true);
+                fragmentEvent.setHappened(true);
             }
         });
     }

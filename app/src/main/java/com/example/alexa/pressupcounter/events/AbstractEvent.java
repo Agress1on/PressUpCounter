@@ -1,12 +1,11 @@
 package com.example.alexa.pressupcounter.events;
 
 /**
- * Created by Alexandr Mikhalev on 18.03.2019.
+ * Created by Alexandr Mikhalev on 23.03.2019.
  *
  * @author Alexandr Mikhalev
  */
-public class TimePickerEvent extends AbstractEvent {
-    /*
+public abstract class AbstractEvent {
     private boolean happened = false;
 
     public boolean isHappened() {
@@ -16,5 +15,4 @@ public class TimePickerEvent extends AbstractEvent {
     public void setHappened(boolean happened) {
         this.happened = happened;
     }
-    */
 }

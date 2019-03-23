@@ -62,12 +62,12 @@ public class SetProgramFragment extends Fragment {
         mSetProgramViewModel.getFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(@Nullable FragmentEvent fragmentEvent) {
-                if (fragmentEvent == null || fragmentEvent.isHappend()) return;
+                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .commit();
-                fragmentEvent.setHappend(true);
+                fragmentEvent.setHappened(true);
             }
         });
     }
