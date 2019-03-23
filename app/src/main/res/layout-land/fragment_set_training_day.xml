@@ -29,7 +29,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
+            app:layout_constraintGuide_percent="0.3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_center_guideline_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
 
         <TextView
             android:id="@+id/monday_textview"
@@ -123,8 +130,8 @@
             android:text="Friday"
             android:textColor="@color/colorBlack"
             android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@id/thursday_textview"
-            app:layout_constraintTop_toBottomOf="@id/thursday_textview" />
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintEnd_toStartOf="@id/vertical_center_guideline_second"/>
 
         <CheckBox
             android:id="@+id/friday_checkbox"
@@ -134,7 +141,7 @@
             android:onCheckedChanged="@{(i, checked) -> viewModel.onCheckedChanged(5, checked)}"
             app:layout_constraintBottom_toBottomOf="@id/friday_textview"
             app:layout_constraintStart_toEndOf="@id/friday_textview"
-            app:layout_constraintTop_toTopOf="@id/friday_textview" />
+            app:layout_constraintTop_toTopOf="@id/friday_textview"/>
 
         <TextView
             android:id="@+id/saturday_textview"
@@ -186,8 +193,11 @@
             android:text="Check days"
             android:enabled="@{viewModel.checkButtonState.get()}"
             android:onClick="@{() -> viewModel.onCheckButton()}"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
