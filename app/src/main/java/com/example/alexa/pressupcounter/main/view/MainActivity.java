@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, StartTrainingFragment.newInstance())
                     .commit();
         }
-
         // JSON example
         /*
         try {
