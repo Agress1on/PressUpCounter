@@ -1,10 +1,9 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
-import com.example.alexa.pressupcounter.FragmentEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;

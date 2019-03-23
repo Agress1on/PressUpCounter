@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.settime.viewmodel;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.TimePickerEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 
 import java.util.ArrayList;

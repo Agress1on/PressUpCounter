@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.FragmentEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTrainingDayBinding;
 import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;

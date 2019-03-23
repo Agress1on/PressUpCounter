@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.traininglist.viewmodel;
 
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
 
 import java.util.ArrayList;

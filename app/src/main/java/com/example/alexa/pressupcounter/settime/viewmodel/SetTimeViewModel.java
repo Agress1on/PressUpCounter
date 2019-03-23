@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.settime.viewmodel;
 
-import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.TimePickerEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.events.TimePickerEvent;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;

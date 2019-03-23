@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter;
+package com.example.alexa.pressupcounter.repository;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

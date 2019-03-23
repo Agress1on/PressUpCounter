@@ -1,8 +1,9 @@
-package com.example.alexa.pressupcounter.utils;
+package com.example.alexa.pressupcounter.dialogs;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,24 +12,24 @@ import android.view.ViewGroup;
 import com.example.alexa.pressupcounter.R;
 
 /**
- * Created by Alexandr Mikhalev on 05.02.2019.
+ * Created by Alexandr Mikhalev on 06.02.2019.
  *
  * @author Alexandr Mikhalev
  */
-public class DialogTrainingRest extends DialogFragment implements View.OnClickListener {
+public class DialogTrainingRestOff extends DialogFragment implements View.OnClickListener {
 
     private OnButtonClick mOnButtonClick;
 
     public void initDialog(OnButtonClick onButtonClick) {
-        this.mOnButtonClick = onButtonClick;
+        mOnButtonClick = onButtonClick;
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle("Начать отдых?");
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getDialog().setTitle("Удалось сделать подход?");
         getDialog().setCanceledOnTouchOutside(false);
-        View v = inflater.inflate(R.layout.dialog_training_rest, null);
+        View v = inflater.inflate(R.layout.dialog_training_rest_off, null);
         v.findViewById(R.id.positive_button).setOnClickListener(this);
         v.findViewById(R.id.negative_button).setOnClickListener(this);
         return v;

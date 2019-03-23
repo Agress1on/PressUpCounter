@@ -1,9 +1,9 @@
 package com.example.alexa.pressupcounter.training.model;
 
-import com.example.alexa.pressupcounter.AppDatabase;
+import com.example.alexa.pressupcounter.repository.AppDatabase;
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.PressUp;
-import com.example.alexa.pressupcounter.PressUpDao;
+import com.example.alexa.pressupcounter.repository.PressUp;
+import com.example.alexa.pressupcounter.repository.PressUpDao;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

@@ -53,14 +53,8 @@ public class FirstLaunchActivity extends AppCompatActivity {
     }
 
     void startMainActivity() {
-
         Intent intent = SetProgramActivity.getIntent(this);
         startActivity(intent);
-        /*
-        Intent intent = MainActivity.getIntent(this);
-        startActivity(intent);
-        */
-
     }
 
     public static Intent getIntent(Context context) {

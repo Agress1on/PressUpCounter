@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.AppDatabase;
-import com.example.alexa.pressupcounter.PressUpDao;
+import com.example.alexa.pressupcounter.repository.AppDatabase;
+import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTestBinding;

@@ -3,7 +3,7 @@ package com.example.alexa.pressupcounter.app;
 import android.app.Application;
 import androidx.room.Room;
 
-import com.example.alexa.pressupcounter.AppDatabase;
+import com.example.alexa.pressupcounter.repository.AppDatabase;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.

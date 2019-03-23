@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter;
+package com.example.alexa.pressupcounter.events;
 
 /**
  * Created by Alexandr Mikhalev on 22.01.2019.

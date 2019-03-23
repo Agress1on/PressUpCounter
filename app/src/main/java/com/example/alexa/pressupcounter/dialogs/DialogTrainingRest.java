@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.utils;
+package com.example.alexa.pressupcounter.dialogs;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
@@ -7,31 +7,28 @@ import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.alexa.pressupcounter.R;
 
 /**
- * Created by Alexandr Mikhalev on 06.02.2019.
+ * Created by Alexandr Mikhalev on 05.02.2019.
  *
  * @author Alexandr Mikhalev
  */
-public class DialogFinishTraining extends DialogFragment implements View.OnClickListener {
+public class DialogTrainingRest extends DialogFragment implements View.OnClickListener {
 
     private OnButtonClick mOnButtonClick;
 
-    public void init(OnButtonClick onButtonClick) {
-        mOnButtonClick = onButtonClick;
+    public void initDialog(OnButtonClick onButtonClick) {
+        this.mOnButtonClick = onButtonClick;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        getDialog().setTitle("Тренировка закончена");
+        getDialog().setTitle("Начать отдых?");
         getDialog().setCanceledOnTouchOutside(false);
-        View v = inflater.inflate(R.layout.dialog_finish_training, null);
-        TextView textView = (TextView) v.findViewById(R.id.question_text_view);
-        textView.setText(getResources().getString(R.string.for_dialog_finish_training));
+        View v = inflater.inflate(R.layout.dialog_training_rest, null);
         v.findViewById(R.id.positive_button).setOnClickListener(this);
         v.findViewById(R.id.negative_button).setOnClickListener(this);
         return v;
@@ -47,6 +44,11 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
                 mOnButtonClick.onNegativeButton();
                 break;
         }
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        mOnButtonClick.onNegativeButton();
     }
 
     public interface OnButtonClick {

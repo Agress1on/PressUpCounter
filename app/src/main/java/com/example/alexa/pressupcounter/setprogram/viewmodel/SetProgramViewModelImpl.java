@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
-import com.example.alexa.pressupcounter.FragmentEvent;
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 
 import androidx.databinding.ObservableField;

@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
-import com.example.alexa.pressupcounter.FragmentEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 
 import java.util.ArrayList;
 

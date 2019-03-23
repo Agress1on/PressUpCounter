@@ -1,4 +1,6 @@
-package com.example.alexa.pressupcounter;
+package com.example.alexa.pressupcounter.repository;
+
+import com.example.alexa.pressupcounter.repository.PressUp;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

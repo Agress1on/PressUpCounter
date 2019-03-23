@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
-import com.example.alexa.pressupcounter.DialogEvent;
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.events.DialogEvent;
+import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
 
 import androidx.databinding.ObservableField;

@@ -3,7 +3,7 @@ package com.example.alexa.pressupcounter.training.viewmodel;
 import androidx.lifecycle.MutableLiveData;
 import androidx.databinding.ObservableField;
 
-import com.example.alexa.pressupcounter.DialogEvent;
+import com.example.alexa.pressupcounter.events.DialogEvent;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.

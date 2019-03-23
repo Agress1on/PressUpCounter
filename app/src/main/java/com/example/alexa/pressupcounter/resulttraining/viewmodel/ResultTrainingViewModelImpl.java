@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
-import com.example.alexa.pressupcounter.FragmentEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

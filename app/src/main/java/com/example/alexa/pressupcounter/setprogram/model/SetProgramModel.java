@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.setprogram.model;
 
-import com.example.alexa.pressupcounter.AppDatabase;
-import com.example.alexa.pressupcounter.PressUp;
-import com.example.alexa.pressupcounter.PressUpDao;
+import com.example.alexa.pressupcounter.repository.AppDatabase;
+import com.example.alexa.pressupcounter.repository.PressUp;
+import com.example.alexa.pressupcounter.repository.PressUpDao;
 
 import io.reactivex.Completable;
 

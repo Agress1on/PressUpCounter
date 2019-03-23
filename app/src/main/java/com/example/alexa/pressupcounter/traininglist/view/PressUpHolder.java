@@ -1,11 +1,8 @@
 package com.example.alexa.pressupcounter.traininglist.view;
 
-import android.view.View;
-
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.databinding.RecyclerListItemBinding;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**

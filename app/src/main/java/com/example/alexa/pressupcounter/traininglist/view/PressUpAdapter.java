@@ -3,7 +3,7 @@ package com.example.alexa.pressupcounter.traininglist.view;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.PressUp;
+import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.RecyclerListItemBinding;
 
