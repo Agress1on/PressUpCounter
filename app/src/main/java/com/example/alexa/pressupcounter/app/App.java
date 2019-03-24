@@ -3,6 +3,8 @@ package com.example.alexa.pressupcounter.app;
 import android.app.Application;
 import androidx.room.Room;
 
+import com.example.alexa.pressupcounter.app.inject.AppComponent;
+import com.example.alexa.pressupcounter.app.inject.DaggerAppComponent;
 import com.example.alexa.pressupcounter.repository.AppDatabase;
 
 /**
@@ -13,12 +15,14 @@ import com.example.alexa.pressupcounter.repository.AppDatabase;
 public class App extends Application {
     public static App sInstance;
 
+    private static AppComponent sAppComponent;
     private AppDatabase mDatabase;
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
         mDatabase = Room.databaseBuilder(this, AppDatabase.class, "database").build();
+        sAppComponent = DaggerAppComponent.create();
     }
 
     public static App getInstance() {
@@ -30,4 +34,8 @@ public class App extends Application {
         return mDatabase;
     }
 
+    //dagger
+    public static AppComponent getAppComponent() {
+        return sAppComponent;
+    }
 }

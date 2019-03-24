@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTrainingDayBinding;
@@ -13,6 +14,8 @@ import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModelFactory;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModelImpl;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,12 +33,16 @@ public class SetTrainingDayFragment extends Fragment {
 
     private SetTrainingDayViewModel mSetTrainingDayViewModel;
 
+    @Inject
+    SetTrainingDayModel mSetTrainingDayModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getAppComponent().injectsSetTrainingDayFragment(this);
 
-        SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
-        mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(setTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
+        //SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
+        mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(mSetTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
         init();
     }
 
