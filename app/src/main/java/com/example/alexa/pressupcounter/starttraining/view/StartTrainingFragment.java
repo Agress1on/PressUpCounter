@@ -11,12 +11,15 @@ import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
+import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelImpl;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,19 +38,27 @@ public class StartTrainingFragment extends Fragment {
     private StartTrainingViewModel mStartTrainingViewModel;
 
     //BD
+    /*
     private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
+    */
+
+    @Inject
+    StartTrainingModel mStartTrainingModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //DB
+        /*
         mAppDatabase = App.getInstance().getDatabase();
         mPressUpDao = mAppDatabase.pressUpDao();
+        */
 
-        StartTrainingModel startTrainingModel = new StartTrainingModel(mAppDatabase, mPressUpDao);
-        mStartTrainingViewModel = ViewModelProviders.of(this, new StartTrainingViewModelFactory(startTrainingModel)).get(StartTrainingViewModelImpl.class);
+        App.getAppComponent().createStartTrainingModelComponent(new StartTrainingModelModule()).inject(this);
+        //StartTrainingModel startTrainingModel = new StartTrainingModel(mAppDatabase, mPressUpDao);
+        mStartTrainingViewModel = ViewModelProviders.of(this, new StartTrainingViewModelFactory(mStartTrainingModel)).get(StartTrainingViewModelImpl.class);
         init();
     }
 
