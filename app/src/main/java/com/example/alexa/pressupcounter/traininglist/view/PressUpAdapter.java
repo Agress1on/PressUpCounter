@@ -24,8 +24,9 @@ public class PressUpAdapter extends RecyclerView.Adapter<PressUpHolder> {
     private List<PressUp> items = new ArrayList<>();
 
     public void setData(List<PressUp> data) {
-        items.clear();
+        //items.clear();
         items.addAll(data);
+        notifyDataSetChanged();
     }
 
     @NonNull

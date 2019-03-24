@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.repository.AppDatabase;
+import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
@@ -14,6 +15,8 @@ import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelFactory;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelImpl;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,8 +42,8 @@ public class TrainingListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerAdapter mRecyclerAdapter;
     */
-    RecyclerView mRecyclerView;
-    PressUpAdapter mPressUpAdapter;
+    private RecyclerView mRecyclerView;
+    private PressUpAdapter mPressUpAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,17 +60,16 @@ public class TrainingListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentTrainingListBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training_list, container, false);
-
         binding.setViewModel(mTrainingListViewModel);
 
         mRecyclerView = binding.trainingListRecycler;
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
 
         mPressUpAdapter = new PressUpAdapter();
-        mPressUpAdapter.setData(mTrainingListViewModel.getPressUpList());
+
         mRecyclerView.setAdapter(mPressUpAdapter);
+        mPressUpAdapter.setData(mTrainingListViewModel.getPressUpList());
         return binding.getRoot();
     }
 
