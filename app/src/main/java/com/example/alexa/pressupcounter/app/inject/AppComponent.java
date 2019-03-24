@@ -1,11 +1,7 @@
 package com.example.alexa.pressupcounter.app.inject;
 
-import com.example.alexa.pressupcounter.repository.AppDatabase;
-import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
-import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
-import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 
 import dagger.Component;
 
@@ -19,7 +15,7 @@ import dagger.Component;
 public interface AppComponent {
         SetProgramModelComponent createSetProgramModelComponent(SetProgramModelModule setProgramModelModule);
 
-        PressUpDao pressUpDao();
+        //PressUpDao pressUpDao();
 
-        AppDatabase appDatabase();
+        //AppDatabase appDatabase();
 }

@@ -1,15 +1,14 @@
 package com.example.alexa.pressupcounter.app;
 
 import android.app.Application;
-import android.content.Context;
-
-import androidx.room.Room;
 
 import com.example.alexa.pressupcounter.app.inject.AppComponent;
 import com.example.alexa.pressupcounter.app.inject.AppModule;
 import com.example.alexa.pressupcounter.app.inject.DaggerAppComponent;
 import com.example.alexa.pressupcounter.app.inject.RoomModule;
 import com.example.alexa.pressupcounter.repository.AppDatabase;
+
+import androidx.room.Room;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.
