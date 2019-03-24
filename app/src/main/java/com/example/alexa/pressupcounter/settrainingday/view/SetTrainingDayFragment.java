@@ -33,16 +33,18 @@ public class SetTrainingDayFragment extends Fragment {
 
     private SetTrainingDayViewModel mSetTrainingDayViewModel;
 
+    /*
     @Inject
     SetTrainingDayModel mSetTrainingDayModel;
+    */
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().injectsSetTrainingDayFragment(this);
+        //App.getAppComponent().injectsSetTrainingDayFragment(this);
 
-        //SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
-        mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(mSetTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
+        SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
+        mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(setTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
         init();
     }
 

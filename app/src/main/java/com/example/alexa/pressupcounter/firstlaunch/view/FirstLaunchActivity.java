@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,7 +39,7 @@ public class FirstLaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Logger.d(Constants.LOGGER, "Main");
         ActivityFirstLaunchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_first_launch);
-        mViewModel = new FirstLaunchViewModelImpl();
+        mViewModel = ViewModelProviders.of(this).get(FirstLaunchViewModelImpl.class);
         binding.setViewModel(mViewModel);
         init();
         /*

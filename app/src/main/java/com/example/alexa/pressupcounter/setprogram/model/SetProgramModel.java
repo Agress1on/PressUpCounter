@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.model;
 
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.repository.AppDatabase;
 import com.example.alexa.pressupcounter.repository.PressUp;
 import com.example.alexa.pressupcounter.repository.PressUpDao;
@@ -18,7 +19,9 @@ public class SetProgramModel {
 
     public SetProgramModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
         mAppDatabase = appDatabase;
+        mAppDatabase = App.getInstance().getDatabase();
         mPressUpDao = pressUpDao;
+        mPressUpDao = mAppDatabase.pressUpDao();
     }
 
     public Completable insertInDataBase(PressUp pressUp) {

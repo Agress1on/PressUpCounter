@@ -1,6 +1,10 @@
 package com.example.alexa.pressupcounter.app.inject;
 
-import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelModule;
+import com.example.alexa.pressupcounter.repository.AppDatabase;
+import com.example.alexa.pressupcounter.repository.PressUpDao;
+import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
+import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 
 import dagger.Component;
@@ -11,7 +15,11 @@ import dagger.Component;
  * @author Alexandr Mikhalev
  */
 @AppScope
-@Component(modules = {SetTrainingDayModelModule.class})
+@Component(modules = {AppModule.class, RoomModule.class})
 public interface AppComponent {
-        void injectsSetTrainingDayFragment(SetTrainingDayFragment setTrainingDayFragment);
+        SetProgramModelComponent createSetProgramModelComponent(SetProgramModelModule setProgramModelModule);
+
+        PressUpDao pressUpDao();
+
+        AppDatabase appDatabase();
 }

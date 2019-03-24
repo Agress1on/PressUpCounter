@@ -11,11 +11,14 @@ import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
+import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,19 +37,32 @@ public class SetProgramFragment extends Fragment {
     private SetProgramViewModel mSetProgramViewModel;
 
     //BD
+    /*
     private AppDatabase mAppDatabase;
     private PressUpDao pressUpDao;
+    */
+    @Inject
+    SetProgramModel mSetProgramModel;
+
+    @Inject
+    AppDatabase mAppDatabase;
+
+    @Inject
+    PressUpDao mPressUpDao;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //DB
-        mAppDatabase = App.getInstance().getDatabase();
-        pressUpDao = mAppDatabase.pressUpDao();
+        //mAppDatabase = App.getInstance().getDatabase();
+        //pressUpDao = mAppDatabase.pressUpDao();
+        //SetProgramModel setProgramModel = new SetProgramModel(mAppDatabase, pressUpDao);
+        //App.getAppComponent().injectSetProgramFragment(this);
 
-        SetProgramModel setProgramModel = new SetProgramModel(mAppDatabase, pressUpDao);
-        mSetProgramViewModel = ViewModelProviders.of(this, new SetProgramViewModelFactory(setProgramModel)).get(SetProgramViewModelImpl.class);
+        App.getAppComponent().createSetProgramModelComponent(new SetProgramModelModule()).inject(this);
+
+        mSetProgramViewModel = ViewModelProviders.of(this, new SetProgramViewModelFactory(mSetProgramModel)).get(SetProgramViewModelImpl.class);
         init();
     }
 
