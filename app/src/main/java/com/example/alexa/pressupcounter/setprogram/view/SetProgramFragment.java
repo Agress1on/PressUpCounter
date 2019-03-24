@@ -44,11 +44,13 @@ public class SetProgramFragment extends Fragment {
     @Inject
     SetProgramModel mSetProgramModel;
 
+    /*
     @Inject
     AppDatabase mAppDatabase;
 
     @Inject
     PressUpDao mPressUpDao;
+    */
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

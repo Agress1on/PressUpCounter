@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.inject;
 
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.repository.AppDatabase;
 import com.example.alexa.pressupcounter.repository.AppDatabase_Impl;
 import com.example.alexa.pressupcounter.repository.PressUpDao;
@@ -21,7 +22,8 @@ public class SetProgramModelModule {
     private PressUpDao mPressUpDao;
 
     public SetProgramModelModule() {
-
+        mAppDatabase = App.getInstance().getDatabase();
+        mPressUpDao = mAppDatabase.pressUpDao();
     }
 
     @SetProgramModelScope

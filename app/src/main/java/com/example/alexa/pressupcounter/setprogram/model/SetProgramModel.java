@@ -19,9 +19,9 @@ public class SetProgramModel {
 
     public SetProgramModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
         mAppDatabase = appDatabase;
-        mAppDatabase = App.getInstance().getDatabase();
+
         mPressUpDao = pressUpDao;
-        mPressUpDao = mAppDatabase.pressUpDao();
+
     }
 
     public Completable insertInDataBase(PressUp pressUp) {
