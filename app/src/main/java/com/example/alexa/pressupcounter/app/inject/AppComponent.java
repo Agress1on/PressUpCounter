@@ -4,6 +4,8 @@ import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelCompone
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelComponent;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
+import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelComponent;
+import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelModule;
 
 import dagger.Component;
 
@@ -18,6 +20,8 @@ public interface AppComponent {
         SetProgramModelComponent createSetProgramModelComponent(SetProgramModelModule setProgramModelModule);
 
         StartTrainingModelComponent createStartTrainingModelComponent(StartTrainingModelModule startTrainingModelModule);
+
+        TrainingFragmentModelComponent createTrainingFragmentModelComponent(TrainingFragmentModelModule trainingFragmentModelModule);
 
         //PressUpDao pressUpDao();
 

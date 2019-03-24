@@ -13,6 +13,7 @@ import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
+import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelModule;
 import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
@@ -20,6 +21,8 @@ import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl
 import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,8 +41,13 @@ public class TrainingFragment extends Fragment {
     private TrainingViewModel mTrainingViewModel;
 
     //BD
+    /*
     private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
+    */
+
+    @Inject
+    TrainingFragmentModel mTrainingFragmentModel;
 
 
     @Override
@@ -47,12 +55,15 @@ public class TrainingFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //DB
+        /*
         mAppDatabase = App.getInstance().getDatabase();
         mPressUpDao = mAppDatabase.pressUpDao();
+        */
 
-        TrainingFragmentModel trainingFragmentModel = new TrainingFragmentModel(mAppDatabase, mPressUpDao);
+        //TrainingFragmentModel trainingFragmentModel = new TrainingFragmentModel(mAppDatabase, mPressUpDao);
+        App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModelModule()).inject(this);
 
-        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(trainingFragmentModel)).get(TrainingViewModelImpl.class);
+        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(mTrainingFragmentModel)).get(TrainingViewModelImpl.class);
         init();
     }
 

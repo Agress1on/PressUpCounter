@@ -1,6 +1,5 @@
 package com.example.alexa.pressupcounter.starttraining.inject;
 
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.repository.AppDatabase;
 import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
@@ -16,17 +15,9 @@ import dagger.Provides;
 @Module
 public class StartTrainingModelModule {
 
-    private AppDatabase mAppDatabase;
-    private PressUpDao mPressUpDao;
-
-    public StartTrainingModelModule() {
-        mAppDatabase = App.getInstance().getDatabase();
-        mPressUpDao = mAppDatabase.pressUpDao();
-    }
-
     @StartTrainingModelScope
     @Provides
-    StartTrainingModel provideStartTrainingModel() {
-        return new StartTrainingModel(mAppDatabase, mPressUpDao);
+    StartTrainingModel provideStartTrainingModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
+        return new StartTrainingModel(appDatabase, pressUpDao);
     }
 }
