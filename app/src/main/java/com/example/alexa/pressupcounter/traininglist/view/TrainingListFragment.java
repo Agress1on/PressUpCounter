@@ -11,12 +11,15 @@ import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelModule;
 import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelFactory;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelImpl;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,8 +38,10 @@ public class TrainingListFragment extends Fragment {
 
     private TrainingListViewModel mTrainingListViewModel;
 
+    /*
     private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
+    */
 
     /*
     private RecyclerView mRecyclerView;
@@ -45,15 +50,21 @@ public class TrainingListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private PressUpAdapter mPressUpAdapter;
 
+    @Inject
+    TrainingListModel mTrainingListModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        /*
         mAppDatabase = App.getInstance().getDatabase();
         mPressUpDao = mAppDatabase.pressUpDao();
+        */
 
-        TrainingListModel trainingListModel = new TrainingListModel(mAppDatabase, mPressUpDao);
-        mTrainingListViewModel = ViewModelProviders.of(this, new TrainingListViewModelFactory(trainingListModel)).get(TrainingListViewModelImpl.class);
+        //TrainingListModel trainingListModel = new TrainingListModel(mAppDatabase, mPressUpDao);
+        App.getAppComponent().createTrainingListModelComponent(new TrainingListModelModule()).inject(this);
+        mTrainingListViewModel = ViewModelProviders.of(this, new TrainingListViewModelFactory(mTrainingListModel)).get(TrainingListViewModelImpl.class);
     }
 
     @Nullable

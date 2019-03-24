@@ -6,6 +6,8 @@ import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelC
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelComponent;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelModule;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelComponent;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelModule;
 
 import dagger.Component;
 
@@ -22,6 +24,8 @@ public interface AppComponent {
         StartTrainingModelComponent createStartTrainingModelComponent(StartTrainingModelModule startTrainingModelModule);
 
         TrainingFragmentModelComponent createTrainingFragmentModelComponent(TrainingFragmentModelModule trainingFragmentModelModule);
+
+        TrainingListModelComponent createTrainingListModelComponent(TrainingListModelModule trainingListModelModule);
 
         //PressUpDao pressUpDao();
 
