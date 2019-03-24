@@ -3,12 +3,13 @@ package com.example.alexa.pressupcounter.dialogs;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by Alexandr Mikhalev on 05.02.2019.

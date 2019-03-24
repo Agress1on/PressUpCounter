@@ -45,7 +45,7 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
                     mFinalQuantityRepetition = new ObservableField<>(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
                 });
         */
-        mPressUpObservableField = new ObservableField<>(new PressUp(1, 0,0,0,0,0));
+        mPressUpObservableField = new ObservableField<>(new PressUp(1, 0, 0, 0, 0, 0));
         //не нравится то, что выше
         mFinalQuantityRepetition = new ObservableField<>("0");
 

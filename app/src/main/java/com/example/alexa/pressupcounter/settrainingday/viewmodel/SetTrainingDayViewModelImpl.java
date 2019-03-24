@@ -37,7 +37,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
         mMonday = new ObservableField<>(false);
         mTuesday = new ObservableField<>(false);
-        mWednesday= new ObservableField<>(false);
+        mWednesday = new ObservableField<>(false);
         mThursday = new ObservableField<>(false);
         mFriday = new ObservableField<>(false);
         mSaturday = new ObservableField<>(false);
@@ -102,13 +102,27 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     @Override
     public void onCheckedChanged(int i, boolean state) {
         switch (i) {
-            case 1: mMonday.set(state); break;
-            case 2: mTuesday.set(state) ;break;
-            case 3: mWednesday.set(state); break;
-            case 4: mThursday.set(state); break;
-            case 5: mFriday.set(state); break;
-            case 6: mSaturday.set(state); break;
-            case 7: mSunday.set(state); break;
+            case 1:
+                mMonday.set(state);
+                break;
+            case 2:
+                mTuesday.set(state);
+                break;
+            case 3:
+                mWednesday.set(state);
+                break;
+            case 4:
+                mThursday.set(state);
+                break;
+            case 5:
+                mFriday.set(state);
+                break;
+            case 6:
+                mSaturday.set(state);
+                break;
+            case 7:
+                mSunday.set(state);
+                break;
         }
         mButtonState.set(checkQuantityDays() == 3);
     }
@@ -130,6 +144,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         if (mSunday.get().equals(true)) count++;
         return count;
     }
+
     private void writeIndexDayOfWeekInList() {
         if (mMonday.get().equals(true)) mIndexList.add(1);
         if (mTuesday.get().equals(true)) mIndexList.add(2);

@@ -14,6 +14,7 @@ import dagger.Provides;
  */
 @Module
 public class TrainingFragmentModelModule {
+
     @TrainingFragmentModelScope
     @Provides
     TrainingFragmentModel provideTrainingFragmentModel(AppDatabase appDatabase, PressUpDao pressUpDao) {

@@ -6,4 +6,5 @@ package com.example.alexa.pressupcounter.settime.model;
  * @author Alexandr Mikhalev
  */
 public class SetTimeModel {
+
 }

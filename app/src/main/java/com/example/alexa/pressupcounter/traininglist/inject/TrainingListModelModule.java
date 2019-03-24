@@ -14,6 +14,7 @@ import dagger.Provides;
  */
 @Module
 public class TrainingListModelModule {
+
     @TrainingListModelScope
     @Provides
     TrainingListModel provideTrainingListModel(AppDatabase appDatabase, PressUpDao pressUpDao) {

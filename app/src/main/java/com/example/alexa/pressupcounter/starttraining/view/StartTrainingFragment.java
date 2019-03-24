@@ -5,12 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.repository.AppDatabase;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
-import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;

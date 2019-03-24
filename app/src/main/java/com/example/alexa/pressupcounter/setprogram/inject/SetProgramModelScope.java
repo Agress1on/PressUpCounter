@@ -13,4 +13,5 @@ import javax.inject.Scope;
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SetProgramModelScope {
+
 }

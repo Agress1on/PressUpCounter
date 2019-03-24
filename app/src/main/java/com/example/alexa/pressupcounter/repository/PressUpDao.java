@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.repository;
 
-import com.example.alexa.pressupcounter.repository.PressUp;
+import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -9,8 +9,6 @@ import androidx.room.Query;
 import androidx.room.Update;
 import io.reactivex.Completable;
 import io.reactivex.Single;
-
-import java.util.List;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +16,7 @@ import androidx.fragment.app.Fragment;
  * @author Alexandr Mikhalev
  */
 public class SetProgramActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

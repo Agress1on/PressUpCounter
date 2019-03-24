@@ -12,5 +12,6 @@ import dagger.Subcomponent;
 @TrainingFragmentModelScope
 @Subcomponent(modules = TrainingFragmentModelModule.class)
 public interface TrainingFragmentModelComponent {
+
     void inject(TrainingFragment trainingFragment);
 }

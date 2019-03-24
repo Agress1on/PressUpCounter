@@ -1,7 +1,5 @@
 package com.example.alexa.pressupcounter.splash;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +8,8 @@ import android.os.Bundle;
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchActivity;
 import com.example.alexa.pressupcounter.main.view.MainActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -1,24 +1,25 @@
 package com.example.alexa.pressupcounter.resulttraining.view;
 
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.databinding.DataBindingUtil;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentResultTrainingBinding;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModel;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by Alexandr Mikhalev on 06.02.2019.

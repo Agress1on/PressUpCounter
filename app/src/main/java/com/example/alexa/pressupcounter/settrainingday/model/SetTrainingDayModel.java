@@ -6,4 +6,5 @@ package com.example.alexa.pressupcounter.settrainingday.model;
  * @author Alexandr Mikhalev
  */
 public class SetTrainingDayModel {
+
 }

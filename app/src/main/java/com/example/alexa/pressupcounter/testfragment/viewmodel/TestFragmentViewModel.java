@@ -8,6 +8,8 @@ import androidx.databinding.ObservableField;
  * @author Alexandr Mikhalev
  */
 public interface TestFragmentViewModel {
+
     ObservableField<String> getTestTextView();
+
     void onPushButtonClick();
 }

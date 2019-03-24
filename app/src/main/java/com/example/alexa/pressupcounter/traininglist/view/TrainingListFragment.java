@@ -5,9 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.repository.AppDatabase;
-import com.example.alexa.pressupcounter.repository.PressUp;
-import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
@@ -16,8 +13,6 @@ import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelFactory;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelImpl;
-
-import java.util.List;
 
 import javax.inject.Inject;
 

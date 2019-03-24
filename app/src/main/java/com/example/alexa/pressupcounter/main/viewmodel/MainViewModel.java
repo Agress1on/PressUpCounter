@@ -6,4 +6,5 @@ package com.example.alexa.pressupcounter.main.viewmodel;
  * @author Alexandr Mikhalev
  */
 public interface MainViewModel {
+
 }

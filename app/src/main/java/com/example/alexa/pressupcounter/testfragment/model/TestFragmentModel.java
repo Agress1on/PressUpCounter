@@ -8,8 +8,6 @@ import java.util.List;
 
 import io.reactivex.Single;
 
-import static io.reactivex.Flowable.just;
-
 /**
  * Created by Alexandr Mikhalev on 02.03.2019.
  *

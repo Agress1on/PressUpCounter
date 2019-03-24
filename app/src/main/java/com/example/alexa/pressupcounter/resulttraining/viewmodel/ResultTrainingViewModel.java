@@ -11,8 +11,12 @@ import androidx.lifecycle.MutableLiveData;
  * @author Alexandr Mikhalev
  */
 public interface ResultTrainingViewModel {
+
     ObservableField<String> getHeaderText();
+
     ObservableField<String> getResultText();
+
     MutableLiveData<FragmentEvent> getFragmentEvent();
+
     void goToStartTrainingFragment();
 }

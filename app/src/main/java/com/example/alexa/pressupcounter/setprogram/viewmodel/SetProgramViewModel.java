@@ -1,9 +1,9 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
-import androidx.lifecycle.LiveData;
-import androidx.databinding.ObservableField;
-
 import com.example.alexa.pressupcounter.events.FragmentEvent;
+
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.

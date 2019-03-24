@@ -6,9 +6,6 @@ import com.example.alexa.pressupcounter.app.inject.AppComponent;
 import com.example.alexa.pressupcounter.app.inject.AppModule;
 import com.example.alexa.pressupcounter.app.inject.DaggerAppComponent;
 import com.example.alexa.pressupcounter.app.inject.RoomModule;
-import com.example.alexa.pressupcounter.repository.AppDatabase;
-
-import androidx.room.Room;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.
@@ -19,13 +16,13 @@ public class App extends Application {
     public static App sInstance;
 
     private static AppComponent sAppComponent;
-    private AppDatabase mDatabase;
+    //private AppDatabase mDatabase;
 
     @Override
     public void onCreate() {
         super.onCreate();
         sInstance = this;
-        mDatabase = Room.databaseBuilder(this, AppDatabase.class, "database").build();
+        //mDatabase = Room.databaseBuilder(this, AppDatabase.class, "database").build();
         sAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .roomModule(new RoomModule(this))
@@ -36,10 +33,11 @@ public class App extends Application {
         return sInstance;
     }
 
-
+    /*
     public AppDatabase getDatabase() {
         return mDatabase;
     }
+    */
 
     //dagger
     public static AppComponent getAppComponent() {

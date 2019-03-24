@@ -12,5 +12,6 @@ import dagger.Subcomponent;
 @SetProgramModelScope
 @Subcomponent(modules = SetProgramModelModule.class)
 public interface SetProgramModelComponent {
+
     void inject(SetProgramFragment setProgramFragment);
 }

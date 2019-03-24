@@ -8,4 +8,5 @@ import androidx.lifecycle.ViewModel;
  * @author Alexandr Mikhalev
  */
 public class MainViewModelImpl extends ViewModel implements MainViewModel {
+
 }

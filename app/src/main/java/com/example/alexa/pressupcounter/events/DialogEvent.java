@@ -6,15 +6,5 @@ package com.example.alexa.pressupcounter.events;
  * @author Alexandr Mikhalev
  */
 public class DialogEvent extends AbstractEvent {
-    /*
-    private boolean happened = false;
 
-    public boolean isHappened() {
-        return happened;
-    }
-
-    public void setHappened(boolean happened) {
-        this.happened = happened;
-    }
-    */
 }

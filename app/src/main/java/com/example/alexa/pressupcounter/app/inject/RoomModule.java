@@ -1,6 +1,5 @@
 package com.example.alexa.pressupcounter.app.inject;
 
-import android.app.Application;
 import android.content.Context;
 
 import com.example.alexa.pressupcounter.repository.AppDatabase;
@@ -33,6 +32,6 @@ public class RoomModule {
     @AppScope
     @Provides
     PressUpDao providePressUpDao(AppDatabase appDatabase) {
-        return mAppDatabase.pressUpDao();
+        return appDatabase.pressUpDao();
     }
 }

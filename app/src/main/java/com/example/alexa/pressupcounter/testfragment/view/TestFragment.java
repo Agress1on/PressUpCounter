@@ -37,8 +37,10 @@ public class TestFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //DB
+        /*
         db = App.getInstance().getDatabase();
         pressUpDao = db.pressUpDao();
+        */
 
         TestFragmentModel testFragmentModel = new TestFragmentModel(db, pressUpDao);
         mTestFragmentViewModel = ViewModelProviders.of(this, new TestFragmentViewModelFactory(testFragmentModel)).get(TestFragmentViewModelImpl.class);

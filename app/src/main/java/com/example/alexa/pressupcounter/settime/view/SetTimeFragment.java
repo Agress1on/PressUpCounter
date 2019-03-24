@@ -6,16 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
+import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactory;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
-import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
 
 import java.util.ArrayList;
 

@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.annotation.NonNull;
 
 /**
  * Created by Alexandr Mikhalev on 13.02.2019.
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
  * @author Alexandr Mikhalev
  */
 public class ResultTrainingViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+
     private boolean isSuccess;
 
     public ResultTrainingViewModelFactory(boolean isSuccess) {

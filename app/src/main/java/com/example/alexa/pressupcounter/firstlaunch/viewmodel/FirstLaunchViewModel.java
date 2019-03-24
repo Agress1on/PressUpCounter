@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
  * @author Alexandr Mikhalev
  */
 public interface FirstLaunchViewModel {
+
     MutableLiveData<ActivityEvent> getActivityEventMutableLiveData();
 
     void onClickMissButton();

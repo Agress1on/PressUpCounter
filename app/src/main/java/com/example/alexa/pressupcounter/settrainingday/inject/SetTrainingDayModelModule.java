@@ -12,6 +12,8 @@ import dagger.Provides;
  */
 @Module
 public class SetTrainingDayModelModule {
+
+    @SetTrainingDayModelScope
     @Provides
     SetTrainingDayModel provideSetTrainingDayModelModule() {
         return new SetTrainingDayModel();

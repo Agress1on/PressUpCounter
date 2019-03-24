@@ -5,22 +5,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.repository.AppDatabase;
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.events.DialogEvent;
-import com.example.alexa.pressupcounter.repository.PressUpDao;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
+import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
+import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
+import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
+import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelModule;
 import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelImpl;
-import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
-import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
-import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
 
 import javax.inject.Inject;
 
