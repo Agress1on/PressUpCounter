@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/CustomTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".splash.SplashActivity">
             <intent-filter>
@@ -19,9 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".setprogram.view.SetProgramActivity"></activity>
-        <activity android:name=".main.view.MainActivity"></activity>
-        <activity android:name=".firstlaunch.view.FirstLaunchActivity">
+        <activity android:name=".setprogram.view.SetProgramActivity" >
+
+        </activity>
+        <activity android:name=".main.view.MainActivity" >
+
+        </activity>
+        <activity android:name=".firstlaunch.view.FirstLaunchActivity" >
 
         </activity>
     </application>

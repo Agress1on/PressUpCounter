@@ -16,10 +16,12 @@ public class BindingAdapters {
     @BindingAdapter("app:setCurrent")
     public static void setCurrent(TextView view, Boolean isCurrent) {
         Resources res = view.getResources();
-        int color = isCurrent ? res.getColor(R.color.colorRed) : res.getColor(R.color.colorWhite);
+        int backgroundColor = isCurrent ? res.getColor(R.color.colorRed) : res.getColor(R.color.colorWhite);
+        int textColor = isCurrent ? res.getColor(R.color.colorWhite) : res.getColor(R.color.colorBlack);
         float size = isCurrent ? res.getDimension(R.dimen.big_size_of_repetition_text_view) : res.getDimension(R.dimen.small_size_of_repetition_text_view);
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
-        view.setBackgroundColor(color);
+        view.setBackgroundColor(backgroundColor);
+        view.setTextColor(textColor);
     }
 
     @BindingAdapter("app:setButtonState")

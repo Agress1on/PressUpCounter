@@ -170,7 +170,6 @@
 
         </TableLayout>
 
-
         <TextView
             android:id="@+id/summ_static"
             android:layout_width="wrap_content"
@@ -198,31 +197,39 @@
             app:layout_constraintBottom_toBottomOf="@id/summ_static"
             app:layout_constraintEnd_toStartOf="@id/summ_static" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_center_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
         <Button
             android:id="@+id/start_training_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="5dp"
             android:background="@color/colorForestGreen"
             android:onClick="@{() -> viewModel.onClickStartTrainingButton()}"
             android:text="start"
             android:textColor="@color/colorWhite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/summ_header" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vertical_center_guideline" />
 
         <Button
             android:id="@+id/go_to_pressup_list_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
             android:background="@color/colorLightBlack"
             android:onClick="@{() -> viewModel.onClickListButton()}"
             android:text="список"
             android:textColor="@color/colorWhite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/start_training_button" />
+            app:layout_constraintBottom_toBottomOf="@id/start_training_button"
+            app:layout_constraintEnd_toStartOf="@id/vertical_center_guideline" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

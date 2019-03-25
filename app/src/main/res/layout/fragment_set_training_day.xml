@@ -7,6 +7,7 @@
         <variable
             name="viewModel"
             type="com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel" />
+        <import type="com.example.alexa.pressupcounter.R"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,10 +16,14 @@
 
         <TextView
             android:id="@+id/header"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:background="@color/colorLightBlack"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:text="Выберите 3 дня недели:"
             android:textAlignment="center"
+            android:textColor="@color/colorWhite"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -182,12 +187,14 @@
             android:id="@+id/set_days_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Check days"
+            android:layout_marginBottom="10dp"
             android:enabled="@{viewModel.checkButtonState.get()}"
             android:onClick="@{() -> viewModel.onCheckButton()}"
+            android:text="Выбрать дни"
+            android:textColor="@{viewModel.checkButtonState.get() ? R.color.colorWhite : R.color.colorBlack}"
+            android:background="@{viewModel.checkButtonState.get() ? R.color.colorForestGreen : R.color.colorFireBrick}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
