@@ -8,6 +8,8 @@ import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingComp
 import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingModule;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
+import com.example.alexa.pressupcounter.settime.inject.SetTimeComponent;
+import com.example.alexa.pressupcounter.settime.inject.SetTimeModule;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelComponent;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelModule;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelComponent;
@@ -30,6 +32,8 @@ import dagger.Component;
 public interface AppComponent {
 
     FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
+
+    SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
 
     SetProgramModelComponent createSetProgramModelComponent(SetProgramModelModule setProgramModelModule);
 
