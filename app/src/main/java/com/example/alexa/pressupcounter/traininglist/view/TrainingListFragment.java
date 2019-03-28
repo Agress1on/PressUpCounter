@@ -31,7 +31,8 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public class TrainingListFragment extends Fragment {
 
-    private TrainingListViewModel mTrainingListViewModel;
+    @Inject
+    TrainingListViewModel mTrainingListViewModel;
 
     /*
     private AppDatabase mAppDatabase;
@@ -45,8 +46,10 @@ public class TrainingListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private PressUpAdapter mPressUpAdapter;
 
+    /*
     @Inject
     TrainingListModel mTrainingListModel;
+    */
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,8 +61,8 @@ public class TrainingListFragment extends Fragment {
         */
 
         //TrainingListModel trainingListModel = new TrainingListModel(mAppDatabase, mPressUpDao);
-        App.getAppComponent().createTrainingListModelComponent(new TrainingListModelModule()).inject(this);
-        mTrainingListViewModel = ViewModelProviders.of(this, new TrainingListViewModelFactory(mTrainingListModel)).get(TrainingListViewModelImpl.class);
+        App.getAppComponent().createTrainingListModelComponent(new TrainingListModelModule(this)).inject(this);
+        //mTrainingListViewModel = ViewModelProviders.of(this, new TrainingListViewModelFactory(mTrainingListModel)).get(TrainingListViewModelImpl.class);
     }
 
     @Nullable
