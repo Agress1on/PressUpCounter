@@ -11,6 +11,7 @@ import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
 import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactory;
@@ -61,7 +62,7 @@ public class SetTimeFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
+                        .replace(R.id.fragment_container, SetProgramFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappened(true);
             }
