@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.inject;
 
-import com.example.alexa.pressupcounter.repository.PressUpDao;
+import com.example.alexa.pressupcounter.data.PressUpDao;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;

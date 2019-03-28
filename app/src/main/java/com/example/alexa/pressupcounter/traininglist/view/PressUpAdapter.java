@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.RecyclerListItemBinding;
-import com.example.alexa.pressupcounter.repository.PressUp;
+import com.example.alexa.pressupcounter.data.PressUp;
 
 import java.util.ArrayList;
 import java.util.List;

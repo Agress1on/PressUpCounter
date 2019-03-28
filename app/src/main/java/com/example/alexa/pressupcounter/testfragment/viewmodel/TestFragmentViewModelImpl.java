@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.testfragment.viewmodel;
 
-import com.example.alexa.pressupcounter.repository.PressUp;
+import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.testfragment.model.TestFragmentModel;
 
 import java.util.List;

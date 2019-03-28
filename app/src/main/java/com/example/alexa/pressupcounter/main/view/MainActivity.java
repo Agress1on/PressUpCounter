@@ -6,10 +6,9 @@ import android.os.Bundle;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
-import com.example.alexa.pressupcounter.firstlaunch.view.ContainerForTabs;
+import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
 import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
 import com.example.alexa.pressupcounter.main.viewmodel.MainViewModelImpl;
-import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, ContainerForTabs.newInstance())
+                    .add(R.id.fragment_container, FirstLaunchFragment.newInstance())
                     .commit();
         }
         // JSON example

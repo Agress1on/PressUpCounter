@@ -2,8 +2,8 @@ package com.example.alexa.pressupcounter.app.inject;
 
 import android.content.Context;
 
-import com.example.alexa.pressupcounter.repository.AppDatabase;
-import com.example.alexa.pressupcounter.repository.PressUpDao;
+import com.example.alexa.pressupcounter.data.AppDatabase;
+import com.example.alexa.pressupcounter.data.PressUpDao;
 
 import androidx.room.Room;
 import dagger.Module;

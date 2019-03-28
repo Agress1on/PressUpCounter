@@ -7,13 +7,15 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBinding;
 import com.example.alexa.pressupcounter.events.ActivityEvent;
+import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
-import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModelImpl;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
-import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.google.android.material.tabs.TabLayout;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +24,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -31,9 +32,10 @@ import androidx.viewpager.widget.ViewPager;
  *
  * @author Alexandr Mikhalev
  */
-public class ContainerForTabs extends Fragment {
+public class FirstLaunchFragment extends Fragment {
 
-    private FirstLaunchViewModel mFirstLaunchViewModel;
+    @Inject
+    FirstLaunchViewModel mFirstLaunchViewModel;
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
@@ -43,7 +45,7 @@ public class ContainerForTabs extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFirstLaunchViewModel = ViewModelProviders.of(this).get(FirstLaunchViewModelImpl.class);
+        App.getAppComponent().createFirstLaunchComponent(new FirstLaunchModule(this)).inject(this);
         init();
     }
 
@@ -52,14 +54,13 @@ public class ContainerForTabs extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentContainerForTabsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container_for_tabs, container, false);
         binding.setViewModel(mFirstLaunchViewModel);
-        //
+
         mPager = binding.pager;
         mPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         mTabLayout = binding.tabLayout;
         mTabLayout.setupWithViewPager(mPager, true);
-
         return binding.getRoot();
     }
 
@@ -77,9 +78,9 @@ public class ContainerForTabs extends Fragment {
         });
     }
 
-    public static ContainerForTabs newInstance() {
+    public static FirstLaunchFragment newInstance() {
         Bundle args = new Bundle();
-        ContainerForTabs fragment = new ContainerForTabs();
+        FirstLaunchFragment fragment = new FirstLaunchFragment();
         fragment.setArguments(args);
         return fragment;
     }

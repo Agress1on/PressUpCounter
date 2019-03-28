@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.starttraining.inject;
 
-import com.example.alexa.pressupcounter.repository.AppDatabase;
-import com.example.alexa.pressupcounter.repository.PressUpDao;
+import com.example.alexa.pressupcounter.data.AppDatabase;
+import com.example.alexa.pressupcounter.data.PressUpDao;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 
 import dagger.Module;

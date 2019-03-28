@@ -2,6 +2,8 @@ package com.example.alexa.pressupcounter.app.inject;
 
 import android.content.Context;
 
+import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchComponent;
+import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelComponent;
@@ -24,6 +26,8 @@ import dagger.Component;
 @AppScope
 @Component(modules = {AppModule.class, RoomModule.class})
 public interface AppComponent {
+
+    FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
 
     SetProgramModelComponent createSetProgramModelComponent(SetProgramModelModule setProgramModelModule);
 

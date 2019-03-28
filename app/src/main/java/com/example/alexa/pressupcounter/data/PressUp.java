@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.repository;
+package com.example.alexa.pressupcounter.data;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
