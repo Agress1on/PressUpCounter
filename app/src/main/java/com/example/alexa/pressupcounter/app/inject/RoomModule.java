@@ -17,16 +17,12 @@ import dagger.Provides;
 @Module
 public class RoomModule {
 
-    private AppDatabase mAppDatabase;
-
-    public RoomModule(Context context) {
-        mAppDatabase = Room.databaseBuilder(context, AppDatabase.class, "database").build();
-    }
+    private static final String DATABASE = "database";
 
     @AppScope
     @Provides
-    AppDatabase provideAppDatabase() {
-        return mAppDatabase;
+    AppDatabase provideAppDatabase(Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, DATABASE).build();
     }
 
     @AppScope

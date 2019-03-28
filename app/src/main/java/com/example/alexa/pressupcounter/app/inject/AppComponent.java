@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.app.inject;
 
+import android.content.Context;
+
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelComponent;
@@ -11,6 +13,7 @@ import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelMod
 import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelComponent;
 import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelModule;
 
+import dagger.BindsInstance;
 import dagger.Component;
 
 /**
@@ -31,4 +34,12 @@ public interface AppComponent {
     TrainingListModelComponent createTrainingListModelComponent(TrainingListModelModule trainingListModelModule);
 
     SetTrainingDayModelComponent createSetTrainingDayModelComponent(SetTrainingDayModelModule setTrainingDayModelModule);
+
+    @Component.Builder
+    interface Builder {
+        @BindsInstance
+        Builder context(Context context);
+
+        AppComponent build();
+    }
 }

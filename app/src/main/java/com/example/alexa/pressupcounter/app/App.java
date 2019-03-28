@@ -23,9 +23,14 @@ public class App extends Application {
         super.onCreate();
         sInstance = this;
         //mDatabase = Room.databaseBuilder(this, AppDatabase.class, "database").build();
+        /*
         sAppComponent = DaggerAppComponent.builder()
                 .appModule(new AppModule(this))
                 .roomModule(new RoomModule(this))
+                .build();
+        */
+        sAppComponent = DaggerAppComponent.builder()
+                .context(this)
                 .build();
     }
 
