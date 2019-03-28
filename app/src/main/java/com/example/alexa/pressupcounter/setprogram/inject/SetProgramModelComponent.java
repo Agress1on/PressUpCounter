@@ -14,4 +14,5 @@ import dagger.Subcomponent;
 public interface SetProgramModelComponent {
 
     void inject(SetProgramFragment setProgramFragment);
+
 }

@@ -13,11 +13,9 @@ import io.reactivex.Completable;
  */
 public class SetProgramModel {
 
-    private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
 
-    public SetProgramModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
-        mAppDatabase = appDatabase;
+    public SetProgramModel(PressUpDao pressUpDao) {
         mPressUpDao = pressUpDao;
     }
 

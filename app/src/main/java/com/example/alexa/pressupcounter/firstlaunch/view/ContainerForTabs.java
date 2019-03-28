@@ -11,6 +11,7 @@ import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBind
 import com.example.alexa.pressupcounter.events.ActivityEvent;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModelImpl;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.google.android.material.tabs.TabLayout;
 
@@ -69,7 +70,7 @@ public class ContainerForTabs extends Fragment {
                 if (activityEvent == null || activityEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
+                        .replace(R.id.fragment_container, SetProgramFragment.newInstance())
                         .commit();
                 activityEvent.setHappened(true);
             }

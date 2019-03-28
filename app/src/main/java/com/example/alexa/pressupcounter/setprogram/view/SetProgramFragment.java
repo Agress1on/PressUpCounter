@@ -25,6 +25,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import dagger.android.AndroidInjection;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -33,15 +34,20 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class SetProgramFragment extends Fragment {
 
-    private SetProgramViewModel mSetProgramViewModel;
+    //private SetProgramViewModel mSetProgramViewModel;
 
     //BD
     /*
     private AppDatabase mAppDatabase;
     private PressUpDao pressUpDao;
     */
+    /*
     @Inject
     SetProgramModel mSetProgramModel;
+    */
+
+    @Inject
+    SetProgramViewModel mSetProgramViewModel;
 
     /*
     @Inject
@@ -61,9 +67,9 @@ public class SetProgramFragment extends Fragment {
         //SetProgramModel setProgramModel = new SetProgramModel(mAppDatabase, pressUpDao);
         //App.getAppComponent().injectSetProgramFragment(this);
 
-        App.getAppComponent().createSetProgramModelComponent(new SetProgramModelModule()).inject(this);
+        App.getAppComponent().createSetProgramModelComponent(new SetProgramModelModule(this)).inject(this);
 
-        mSetProgramViewModel = ViewModelProviders.of(this, new SetProgramViewModelFactory(mSetProgramModel)).get(SetProgramViewModelImpl.class);
+        //mSetProgramViewModel = ViewModelProviders.of(this, new SetProgramViewModelFactory(mSetProgramModel)).get(SetProgramViewModelImpl.class);
         init();
     }
 
@@ -82,7 +88,7 @@ public class SetProgramFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
+                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappened(true);
             }

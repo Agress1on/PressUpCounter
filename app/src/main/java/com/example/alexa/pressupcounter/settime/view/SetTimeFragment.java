@@ -62,7 +62,7 @@ public class SetTimeFragment extends Fragment {
                 if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetProgramFragment.newInstance())
+                        .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                         .commit();
                 fragmentEvent.setHappened(true);
             }
