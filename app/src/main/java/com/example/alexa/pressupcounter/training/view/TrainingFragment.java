@@ -36,7 +36,8 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class TrainingFragment extends Fragment {
 
-    private TrainingViewModel mTrainingViewModel;
+    @Inject
+    TrainingViewModel mTrainingViewModel;
 
     //BD
     /*
@@ -44,8 +45,10 @@ public class TrainingFragment extends Fragment {
     private PressUpDao mPressUpDao;
     */
 
+    /*
     @Inject
     TrainingFragmentModel mTrainingFragmentModel;
+    */
 
 
     @Override
@@ -59,9 +62,9 @@ public class TrainingFragment extends Fragment {
         */
 
         //TrainingFragmentModel trainingFragmentModel = new TrainingFragmentModel(mAppDatabase, mPressUpDao);
-        App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModelModule()).inject(this);
+        App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModelModule(this)).inject(this);
 
-        mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(mTrainingFragmentModel)).get(TrainingViewModelImpl.class);
+        //mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(mTrainingFragmentModel)).get(TrainingViewModelImpl.class);
         init();
     }
 
