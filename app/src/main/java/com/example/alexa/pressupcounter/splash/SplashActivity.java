@@ -1,12 +1,8 @@
 package com.example.alexa.pressupcounter.splash;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchActivity;
 import com.example.alexa.pressupcounter.main.view.MainActivity;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class SplashActivity extends AppCompatActivity {
 
 
-    private SharedPreferences mSharedPreferences;
+    //private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = MainActivity.getIntent(this);
+        startActivity(intent);
+        /*
         mSharedPreferences = getSharedPreferences(Constants.MY_SETTINGS, Context.MODE_PRIVATE);
 
         boolean hasVisited = mSharedPreferences.getBoolean(Constants.TAG_FOR_SPLASH_BOOLEAN, false);
@@ -34,7 +33,8 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = MainActivity.getIntent(this);
             startActivity(intent);
 
-        }
+        }*/
+
         finish();
     }
 }

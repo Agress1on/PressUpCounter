@@ -1,20 +1,21 @@
 package com.example.alexa.pressupcounter.firstlaunch.view;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.databinding.ActivityFirstLaunchBinding;
+import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBinding;
 import com.example.alexa.pressupcounter.events.ActivityEvent;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModelImpl;
-import com.example.alexa.pressupcounter.setprogram.view.SetProgramActivity;
+import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.google.android.material.tabs.TabLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,56 +25,62 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-public class FirstLaunchActivity extends AppCompatActivity {
+/**
+ * Created by Alexandr Mikhalev on 28.03.2019.
+ *
+ * @author Alexandr Mikhalev
+ */
+public class ContainerForTabs extends Fragment {
 
-    private FirstLaunchViewModel mViewModel;
+    private FirstLaunchViewModel mFirstLaunchViewModel;
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private TabLayout mTabLayout;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Logger.d(Constants.LOGGER, "Main");
-        ActivityFirstLaunchBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_first_launch);
-        mViewModel = ViewModelProviders.of(this).get(FirstLaunchViewModelImpl.class);
-        binding.setViewModel(mViewModel);
-        init();
-        /*
-        mPager = (ViewPager) findViewById(R.id.pager);
-        mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
 
-        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        mTabLayout.setupWithViewPager(mPager, true);
-        */
+        mFirstLaunchViewModel = ViewModelProviders.of(this).get(FirstLaunchViewModelImpl.class);
+        init();
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        FragmentContainerForTabsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container_for_tabs, container, false);
+        binding.setViewModel(mFirstLaunchViewModel);
+        //
         mPager = binding.pager;
-        mPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         mTabLayout = binding.tabLayout;
         mTabLayout.setupWithViewPager(mPager, true);
-    }
 
-    private void startSetProgramActivity() {
-        Intent intent = SetProgramActivity.getIntent(this);
-        startActivity(intent);
+        return binding.getRoot();
     }
 
     private void init() {
-        mViewModel.getActivityEventMutableLiveData().observe(this, new Observer<ActivityEvent>() {
+        mFirstLaunchViewModel.getActivityEventMutableLiveData().observe(this, new Observer<ActivityEvent>() {
             @Override
             public void onChanged(ActivityEvent activityEvent) {
                 if (activityEvent == null || activityEvent.isHappened()) return;
-                startSetProgramActivity();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
+                        .commit();
                 activityEvent.setHappened(true);
             }
         });
     }
 
-    public static Intent getIntent(Context context) {
-        return new Intent(context, FirstLaunchActivity.class);
+    public static ContainerForTabs newInstance() {
+        Bundle args = new Bundle();
+        ContainerForTabs fragment = new ContainerForTabs();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
