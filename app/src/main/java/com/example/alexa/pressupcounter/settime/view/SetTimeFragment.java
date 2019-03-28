@@ -40,17 +40,12 @@ public class SetTimeFragment extends Fragment {
 
     @Inject
     SetTimeViewModel mSetTimeViewModel;
-
-    //private SetTimeViewModel mSetTimeViewModel;
     private ArrayList<Integer> mIndexList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mIndexList = getArguments().getIntegerArrayList(Constants.KEY_FOR_SET_TIME_BUNDLE);
-        //SetTimeModel setTimeModel = new SetTimeModel();
-        //mSetTimeViewModel = ViewModelProviders.of(this, new SetTimeViewModelFactory(setTimeModel, mIndexList)).get(SetTimeViewModelImpl.class);
         App.getAppComponent().createSetTimeComponent(new SetTimeModule(this, mIndexList)).inject(this);
         init();
     }

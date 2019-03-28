@@ -34,35 +34,13 @@ public class TrainingListFragment extends Fragment {
     @Inject
     TrainingListViewModel mTrainingListViewModel;
 
-    /*
-    private AppDatabase mAppDatabase;
-    private PressUpDao mPressUpDao;
-    */
-
-    /*
-    private RecyclerView mRecyclerView;
-    private RecyclerAdapter mRecyclerAdapter;
-    */
     private RecyclerView mRecyclerView;
     private PressUpAdapter mPressUpAdapter;
-
-    /*
-    @Inject
-    TrainingListModel mTrainingListModel;
-    */
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /*
-        mAppDatabase = App.getInstance().getDatabase();
-        mPressUpDao = mAppDatabase.pressUpDao();
-        */
-
-        //TrainingListModel trainingListModel = new TrainingListModel(mAppDatabase, mPressUpDao);
         App.getAppComponent().createTrainingListModelComponent(new TrainingListModelModule(this)).inject(this);
-        //mTrainingListViewModel = ViewModelProviders.of(this, new TrainingListViewModelFactory(mTrainingListModel)).get(TrainingListViewModelImpl.class);
     }
 
     @Nullable

@@ -39,32 +39,10 @@ public class TrainingFragment extends Fragment {
     @Inject
     TrainingViewModel mTrainingViewModel;
 
-    //BD
-    /*
-    private AppDatabase mAppDatabase;
-    private PressUpDao mPressUpDao;
-    */
-
-    /*
-    @Inject
-    TrainingFragmentModel mTrainingFragmentModel;
-    */
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //DB
-        /*
-        mAppDatabase = App.getInstance().getDatabase();
-        mPressUpDao = mAppDatabase.pressUpDao();
-        */
-
-        //TrainingFragmentModel trainingFragmentModel = new TrainingFragmentModel(mAppDatabase, mPressUpDao);
         App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModelModule(this)).inject(this);
-
-        //mTrainingViewModel = ViewModelProviders.of(this, new TrainingViewModelFactory(mTrainingFragmentModel)).get(TrainingViewModelImpl.class);
         init();
     }
 

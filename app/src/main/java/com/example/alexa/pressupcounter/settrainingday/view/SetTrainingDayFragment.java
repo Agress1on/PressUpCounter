@@ -28,29 +28,13 @@ import androidx.lifecycle.Observer;
  */
 public class SetTrainingDayFragment extends Fragment {
 
-    //private SetTrainingDayViewModel mSetTrainingDayViewModel;
-
-    /*
-    @Inject
-    SetTrainingDayModel mSetTrainingDayModel;
-    */
-
     @Inject
     SetTrainingDayViewModel mSetTrainingDayViewModel;
-
-    /*
-    @Inject
-    SetTrainingDayModel mSetTrainingDayModel;
-    */
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //App.getAppComponent().injectsSetTrainingDayFragment(this);
-
         App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModelModule(this)).inject(this);
-        //SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
-        //mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(mSetTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
         init();
     }
 

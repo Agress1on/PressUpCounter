@@ -32,8 +32,6 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class ResultTrainingFragment extends Fragment {
 
-    //private ResultTrainingViewModel mResultTrainingViewModel;
-
     @Inject
     ResultTrainingViewModel mResultTrainingViewModel;
 
@@ -41,7 +39,6 @@ public class ResultTrainingFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean isSuccess = getArguments().getBoolean(Constants.TAG_FOR_IS_SUCCESS_TRAINING);
-        //mResultTrainingViewModel = ViewModelProviders.of(this, new ResultTrainingViewModelFactory(isSuccess)).get(ResultTrainingViewModelImpl.class);
         App.getAppComponent().createResultTrainingComponent(new ResultTrainingModule(this, isSuccess)).inject(this);
         init();
     }
