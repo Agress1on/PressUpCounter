@@ -11,10 +11,7 @@ import com.example.alexa.pressupcounter.databinding.FragmentSetTrainingDayBindin
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelModule;
-import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel;
-import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModelFactory;
-import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModelImpl;
 
 import javax.inject.Inject;
 
@@ -23,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by Alexandr Mikhalev on 13.03.2019.
@@ -32,7 +28,7 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class SetTrainingDayFragment extends Fragment {
 
-    private SetTrainingDayViewModel mSetTrainingDayViewModel;
+    //private SetTrainingDayViewModel mSetTrainingDayViewModel;
 
     /*
     @Inject
@@ -40,16 +36,21 @@ public class SetTrainingDayFragment extends Fragment {
     */
 
     @Inject
+    SetTrainingDayViewModel mSetTrainingDayViewModel;
+
+    /*
+    @Inject
     SetTrainingDayModel mSetTrainingDayModel;
+    */
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //App.getAppComponent().injectsSetTrainingDayFragment(this);
 
-        App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModelModule()).inject(this);
+        App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModelModule(this)).inject(this);
         //SetTrainingDayModel setTrainingDayModel = new SetTrainingDayModel();
-        mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(mSetTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
+        //mSetTrainingDayViewModel = ViewModelProviders.of(this, new SetTrainingDayViewModelFactory(mSetTrainingDayModel)).get(SetTrainingDayViewModelImpl.class);
         init();
     }
 
