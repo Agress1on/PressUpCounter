@@ -7,12 +7,16 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentResultTrainingBinding;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingModule;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModel;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+
+import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,13 +32,17 @@ import androidx.lifecycle.ViewModelProviders;
  */
 public class ResultTrainingFragment extends Fragment {
 
-    private ResultTrainingViewModel mResultTrainingViewModel;
+    //private ResultTrainingViewModel mResultTrainingViewModel;
+
+    @Inject
+    ResultTrainingViewModel mResultTrainingViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         boolean isSuccess = getArguments().getBoolean(Constants.TAG_FOR_IS_SUCCESS_TRAINING);
-        mResultTrainingViewModel = ViewModelProviders.of(this, new ResultTrainingViewModelFactory(isSuccess)).get(ResultTrainingViewModelImpl.class);
+        //mResultTrainingViewModel = ViewModelProviders.of(this, new ResultTrainingViewModelFactory(isSuccess)).get(ResultTrainingViewModelImpl.class);
+        App.getAppComponent().createResultTrainingComponent(new ResultTrainingModule(this, isSuccess)).inject(this);
         init();
     }
 

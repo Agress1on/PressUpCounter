@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchComponent;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
+import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingComponent;
+import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingModule;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelComponent;
@@ -38,6 +40,8 @@ public interface AppComponent {
     TrainingListModelComponent createTrainingListModelComponent(TrainingListModelModule trainingListModelModule);
 
     SetTrainingDayModelComponent createSetTrainingDayModelComponent(SetTrainingDayModelModule setTrainingDayModelModule);
+
+    ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
 
     @Component.Builder
     interface Builder {
