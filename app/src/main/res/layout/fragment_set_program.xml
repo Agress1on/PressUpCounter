@@ -14,14 +14,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlack">
 
         <TextView
             android:id="@+id/introduction_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:background="@color/colorLightBlack"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             android:text="Выберите программу для первого занятия:"
@@ -32,6 +31,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/choice_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ic_choice"
+            app:layout_constraintBottom_toTopOf="@id/tab_layout"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/introduction_text" />
 
         <TableLayout
             android:id="@+id/tab_layout"
@@ -44,7 +55,9 @@
             android:layout_marginRight="5dp"
             android:background="@drawable/shape_for_table"
             android:paddingStart="10dp"
+            android:paddingTop="10dp"
             android:paddingEnd="10dp"
+            android:paddingBottom="10dp"
             android:stretchColumns="*"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -216,7 +229,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:background="@color/colorLightBlack"
+            android:background="@color/colorSlateGrey"
             android:onClick="@{() -> viewModel.onClickTrainingButton()}"
             android:text="выбрать программу"
             android:textColor="@color/colorWhite"

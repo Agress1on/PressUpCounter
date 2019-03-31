@@ -12,6 +12,7 @@
         <item name="colorPrimary">@color/colorLightBlack</item>
         <item name="colorPrimaryDark">@color/colorBlack</item>
         <item name="colorAccent">@color/colorForestGreen</item>
+        <item name="android:statusBarColor">@color/colorLightBlack</item>
     </style>
 
 </resources>

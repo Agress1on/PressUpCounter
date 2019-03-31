@@ -11,5 +11,6 @@
     <color name="colorLightBlack">#424242</color>
     <color name="colorForestGreen">#228B22</color>
     <color name="colorFireBrick">#B22222</color>
+    <color name="colorSlateGrey">#708090</color>
     <color name="colorForTextInTable">#D6C8C8</color>
 </resources>
