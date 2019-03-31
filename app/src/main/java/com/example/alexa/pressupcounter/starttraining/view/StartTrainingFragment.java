@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
@@ -73,6 +74,15 @@ public class StartTrainingFragment extends Fragment {
                         //.replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .replace(R.id.fragment_container, TrainingListFragment.newInstance())
                         .commit();
+                fragmentEvent.setHappened(true);
+            }
+        });
+
+        mStartTrainingViewModel.getLiveDataForGoToSettings().observe(this, new Observer<FragmentEvent>() {
+            @Override
+            public void onChanged(FragmentEvent fragmentEvent) {
+                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
+                Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
                 fragmentEvent.setHappened(true);
             }
         });

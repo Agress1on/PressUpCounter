@@ -27,6 +27,7 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
 
     private MutableLiveData<FragmentEvent> mLiveData;
     private MutableLiveData<FragmentEvent> mLiveDataForGoToList;
+    private MutableLiveData<FragmentEvent> mLiveDataForGoToSettings;
 
     private PressUp mPressUp;
 
@@ -64,6 +65,7 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
         mCompositeDisposable.add(disposable);
         mLiveData = new MutableLiveData<>();
         mLiveDataForGoToList = new MutableLiveData<>();
+        mLiveDataForGoToSettings = new MutableLiveData<>();
     }
 
     @Override
@@ -82,6 +84,11 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     }
 
     @Override
+    public LiveData<FragmentEvent> getLiveDataForGoToSettings() {
+        return mLiveDataForGoToSettings;
+    }
+
+    @Override
     public ObservableField<String> getFinalQuantityRepetition() {
         return mFinalQuantityRepetition;
     }
@@ -94,5 +101,10 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     @Override
     public void onClickListButton() {
         mLiveDataForGoToList.postValue(new FragmentEvent());
+    }
+
+    @Override
+    public void onClickSettingsButton() {
+        mLiveDataForGoToSettings.postValue(new FragmentEvent());
     }
 }

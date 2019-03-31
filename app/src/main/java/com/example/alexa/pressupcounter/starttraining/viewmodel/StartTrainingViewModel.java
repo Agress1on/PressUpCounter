@@ -20,9 +20,13 @@ public interface StartTrainingViewModel {
 
     MutableLiveData<FragmentEvent> getLiveDataForGoToList();
 
+    LiveData<FragmentEvent> getLiveDataForGoToSettings();
+
     void onClickStartTrainingButton();
 
     void onClickListButton();
+
+    void onClickSettingsButton();
 
     ObservableField<String> getFinalQuantityRepetition();
 }
