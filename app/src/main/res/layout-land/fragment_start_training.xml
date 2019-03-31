@@ -51,6 +51,9 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
+            android:background="@drawable/shape_for_table"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
             android:stretchColumns="*"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Подход"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
                 <TextView
@@ -73,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/for_first_repetition"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
                 <TextView
@@ -82,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/for_second_repetition"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
                 <TextView
@@ -91,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/for_third_repetition"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
                 <TextView
@@ -100,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/for_fourth_repetition"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
                 <TextView
@@ -109,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/for_fifth_repetition"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
             </TableRow>
 
@@ -120,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Повторения"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
                 <TextView
@@ -130,7 +133,7 @@
                     android:layout_span="@id/first_repetition_header"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().firstRepetition))}"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
                     tools:text="20" />
@@ -142,7 +145,7 @@
                     android:layout_span="@id/second_repetition_header"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().secondRepetition))}"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
                     tools:text="21" />
@@ -153,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().thirdRepetition))}"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
                     tools:text="23" />
@@ -164,7 +167,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fourthRepetition))}"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
                     tools:text="25" />
@@ -175,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:text="@{String.valueOf(safeUnbox(viewModel.pressUp.get().fifthRepetition))}"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp"
                     tools:ignore="RtlCompat"
                     tools:text="30" />
