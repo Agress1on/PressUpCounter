@@ -12,13 +12,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlack">
 
         <TextView
             android:id="@+id/start_train_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorLightBlack"
             android:gravity="start"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
@@ -41,6 +41,16 @@
             app:layout_constraintBottom_toBottomOf="@id/start_train_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/start_train_header" />
+
+        <ImageView
+            android:id="@+id/logo_press_up"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_press_up_3"
+            app:layout_constraintTop_toBottomOf="@id/start_train_header"
+            app:layout_constraintBottom_toTopOf="@id/tab_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TableLayout
             android:id="@+id/tab_layout"

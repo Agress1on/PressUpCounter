@@ -33,4 +33,6 @@ public interface SetProgramViewModel {
     void onDecrementButton();
 
     void onClickTrainingButton();
+
+    void onClickChoiceView();
 }

@@ -1,16 +1,15 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.CompletableObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -132,6 +131,18 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         mSetProgramModel.insertInDataBase(mPressUp)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableCompletableObserver() {
+                    @Override
+                    public void onComplete() {
+                        mLiveData.postValue(new FragmentEvent());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+                /*
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -148,6 +159,12 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
                         mServiceInfo.set("Возникла ошибка записи в БД");
                     }
                 });
+        */
+
+    }
+
+    @Override
+    public void onClickChoiceView() {
         mLiveData.postValue(new FragmentEvent());
     }
 
