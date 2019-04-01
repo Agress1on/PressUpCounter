@@ -4,18 +4,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
 import com.example.alexa.pressupcounter.dialogs.ExclamationDialog;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
-import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
-import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelFactory;
-import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelImpl;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
 
@@ -26,7 +23,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by Alexandr Mikhalev on 01.02.2019.
@@ -87,7 +83,10 @@ public class StartTrainingFragment extends Fragment {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
                 if (fragmentEvent == null || fragmentEvent.isHappened()) return;
-                Toast.makeText(getContext(), "Settings", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
+                        .commit();
                 fragmentEvent.setHappened(true);
             }
         });
