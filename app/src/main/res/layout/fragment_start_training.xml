@@ -19,6 +19,8 @@
             android:id="@+id/start_train_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
             android:gravity="start"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"

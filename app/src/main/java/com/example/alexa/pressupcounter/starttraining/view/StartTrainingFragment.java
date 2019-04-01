@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
+import com.example.alexa.pressupcounter.dialogs.ExclamationDialog;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
@@ -49,6 +50,10 @@ public class StartTrainingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentStartTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start_training, container, false);
         binding.setViewModel(mStartTrainingViewModel);
+
+        ExclamationDialog exclamationDialog = new ExclamationDialog();
+        exclamationDialog.show(getFragmentManager(), "TAG");
+
         return binding.getRoot();
     }
 
