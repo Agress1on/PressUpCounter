@@ -36,7 +36,7 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setWindow();
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_training_rest, container, false);
         mPositiveButton = (TextView) view.findViewById(R.id.positive_button);
         mNegativeButton = (TextView) view.findViewById(R.id.negative_button);
@@ -51,23 +51,7 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
-        int width = WindowManager.LayoutParams.MATCH_PARENT;
-        int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        Window window = getDialog().getWindow();
-        window.setLayout(width, height);
-    }
-
-    private void setWindow() {
-        getDialog().setCanceledOnTouchOutside(false);
-        /*
-        int width = WindowManager.LayoutParams.MATCH_PARENT;
-        int height = WindowManager.LayoutParams.MATCH_PARENT;
-        */
-
-        Window window = getDialog().getWindow();
-        window.requestFeature(Window.FEATURE_NO_TITLE);
-        //window.setLayout(width, height);
-        window.setGravity(Gravity.CENTER);
+        setWindow();
     }
 
     @Override
@@ -85,6 +69,15 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     @Override
     public void onCancel(DialogInterface dialog) {
         mOnButtonClick.onCancel();
+    }
+
+    private void setWindow() {
+        getDialog().setCanceledOnTouchOutside(false);
+        int width = WindowManager.LayoutParams.MATCH_PARENT;
+        int height = WindowManager.LayoutParams.WRAP_CONTENT;
+        Window window = getDialog().getWindow();
+        window.setLayout(width, height);
+        window.setGravity(Gravity.CENTER);
     }
 
     public interface OnButtonClick {

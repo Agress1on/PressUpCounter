@@ -156,7 +156,7 @@ public class TrainingFragment extends Fragment {
         mTrainingViewModel.getDialogEventFinishTraining().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
-                dg3.show(getActivity().getFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
+                dg3.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
             }
         });
     }

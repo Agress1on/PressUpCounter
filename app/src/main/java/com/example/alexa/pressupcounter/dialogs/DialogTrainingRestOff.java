@@ -35,11 +35,11 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setWindow();
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_training_rest_off, container, false);
-        mPositiveButton= (TextView) view.findViewById(R.id.positive_button);
+        mPositiveButton = (TextView) view.findViewById(R.id.positive_button);
         mNegativeButton = (TextView) view.findViewById(R.id.negative_button);
-        mQuestion = (TextView)view.findViewById(R.id.question_header);
+        mQuestion = (TextView) view.findViewById(R.id.question_header);
 
         mQuestion.setText("Удалось сделать подход?");
         mPositiveButton.setOnClickListener(this);
@@ -50,19 +50,14 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
     @Override
     public void onResume() {
         super.onResume();
-        int width = WindowManager.LayoutParams.MATCH_PARENT;
-        int height = WindowManager.LayoutParams.WRAP_CONTENT;
-        Window window = getDialog().getWindow();
-        window.setLayout(width, height);
+        setWindow();
     }
 
     private void setWindow() {
         getDialog().setCanceledOnTouchOutside(false);
         int width = WindowManager.LayoutParams.MATCH_PARENT;
-        int height = WindowManager.LayoutParams.MATCH_PARENT;
-
+        int height = WindowManager.LayoutParams.WRAP_CONTENT;
         Window window = getDialog().getWindow();
-        window.requestFeature(Window.FEATURE_NO_TITLE);
         window.setLayout(width, height);
         window.setGravity(Gravity.CENTER);
     }

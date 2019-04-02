@@ -31,14 +31,19 @@ public class ExclamationDialog extends DialogFragment implements View.OnClickLis
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        setWindow();
-
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_exclamation, container, false);
         mMessageTextView = (TextView) view.findViewById(R.id.message);
         mCancel = (ImageView) view.findViewById(R.id.cancel);
         mMessageTextView.setText("Установите уведомления");
         mCancel.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setWindow();
     }
 
     @Override
@@ -56,7 +61,6 @@ public class ExclamationDialog extends DialogFragment implements View.OnClickLis
         params.x = +90;
 
         Window window = getDialog().getWindow();
-        window.requestFeature(Window.FEATURE_NO_TITLE);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setLayout(width, height);
         window.setGravity(Gravity.TOP | Gravity.RIGHT);
