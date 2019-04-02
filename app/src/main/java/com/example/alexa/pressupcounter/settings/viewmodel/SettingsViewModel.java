@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.testfragment.viewmodel;
+package com.example.alexa.pressupcounter.settings.viewmodel;
 
 import androidx.databinding.ObservableField;
 
@@ -7,7 +7,7 @@ import androidx.databinding.ObservableField;
  *
  * @author Alexandr Mikhalev
  */
-public interface TestFragmentViewModel {
+public interface SettingsViewModel {
 
     ObservableField<String> getTestTextView();
 

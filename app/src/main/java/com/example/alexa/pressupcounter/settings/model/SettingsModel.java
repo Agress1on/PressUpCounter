@@ -1,6 +1,5 @@
-package com.example.alexa.pressupcounter.testfragment.model;
+package com.example.alexa.pressupcounter.settings.model;
 
-import com.example.alexa.pressupcounter.data.AppDatabase;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.data.PressUpDao;
 
@@ -13,13 +12,11 @@ import io.reactivex.Single;
  *
  * @author Alexandr Mikhalev
  */
-public class TestFragmentModel {
+public class SettingsModel {
 
-    private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
 
-    public TestFragmentModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
-        mAppDatabase = appDatabase;
+    public SettingsModel(PressUpDao pressUpDao) {
         mPressUpDao = pressUpDao;
     }
 

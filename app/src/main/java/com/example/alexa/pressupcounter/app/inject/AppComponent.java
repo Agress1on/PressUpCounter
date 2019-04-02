@@ -10,6 +10,8 @@ import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelCompone
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
 import com.example.alexa.pressupcounter.settime.inject.SetTimeComponent;
 import com.example.alexa.pressupcounter.settime.inject.SetTimeModule;
+import com.example.alexa.pressupcounter.settings.inject.SettingsComponent;
+import com.example.alexa.pressupcounter.settings.inject.SettingsModule;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelComponent;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelModule;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelComponent;
@@ -46,6 +48,8 @@ public interface AppComponent {
     SetTrainingDayModelComponent createSetTrainingDayModelComponent(SetTrainingDayModelModule setTrainingDayModelModule);
 
     ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
+
+    SettingsComponent createSettingsComponent(SettingsModule settingsModule);
 
     @Component.Builder
     interface Builder {

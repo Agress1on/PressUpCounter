@@ -10,6 +10,7 @@ import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
 import com.example.alexa.pressupcounter.dialogs.ExclamationDialog;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
@@ -80,7 +81,7 @@ public class StartTrainingFragment extends Fragment {
             public void onChanged(FragmentEvent fragmentEvent) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
+                        .replace(R.id.fragment_container, SettingsFragment.newInstance())
                         .commit();
             }
         });

@@ -1,7 +1,7 @@
-package com.example.alexa.pressupcounter.testfragment.viewmodel;
+package com.example.alexa.pressupcounter.settings.viewmodel;
 
 import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.testfragment.model.TestFragmentModel;
+import com.example.alexa.pressupcounter.settings.model.SettingsModel;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ import io.reactivex.schedulers.Schedulers;
  *
  * @author Alexandr Mikhalev
  */
-public class TestFragmentViewModelImpl extends ViewModel implements TestFragmentViewModel {
+public class SettingsViewModelImpl extends ViewModel implements SettingsViewModel {
 
-    private TestFragmentModel mTestFragmentModel;
+    private SettingsModel mSettingsModel;
 
     private ObservableField<String> mTestTextView;
 
-    public TestFragmentViewModelImpl(TestFragmentModel testFragmentModel) {
-        mTestFragmentModel = testFragmentModel;
+    public SettingsViewModelImpl(SettingsModel settingsModel) {
+        mSettingsModel = settingsModel;
         mTestTextView = new ObservableField<>("Hi, I am Test. I am from Constructor");
     }
 
@@ -34,7 +34,7 @@ public class TestFragmentViewModelImpl extends ViewModel implements TestFragment
 
     @Override
     public void onPushButtonClick() {
-        Disposable disposable = mTestFragmentModel.getById(1).subscribeOn(Schedulers.io())
+        Disposable disposable = mSettingsModel.getById(1).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<PressUp>>() {
                     @Override
