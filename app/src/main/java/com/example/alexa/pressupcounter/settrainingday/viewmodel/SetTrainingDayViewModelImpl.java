@@ -1,12 +1,13 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
 
 import java.util.ArrayList;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -28,7 +29,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
     private ObservableField<Boolean> mButtonState;
 
-    private MutableLiveData<FragmentEvent> mFragmentEventLiveData;
+    private LiveData<FragmentEvent> mFragmentEventLiveData;
 
     private ArrayList<Integer> mIndexList;
 
@@ -45,7 +46,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
         mButtonState = new ObservableField<>(false);
 
-        mFragmentEventLiveData = new MutableLiveData<>();
+        mFragmentEventLiveData = new SingleLiveEvent<>();
         mIndexList = new ArrayList();
     }
 
@@ -85,7 +86,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     }
 
     @Override
-    public MutableLiveData<FragmentEvent> getFragmentEventLiveData() {
+    public LiveData<FragmentEvent> getFragmentEventLiveData() {
         return mFragmentEventLiveData;
     }
 
@@ -130,7 +131,8 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     @Override
     public void onCheckButton() {
         writeIndexDayOfWeekInList();
-        mFragmentEventLiveData.postValue(new FragmentEvent());
+        //mFragmentEventLiveData.postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
     }
 
     private int checkQuantityDays() {

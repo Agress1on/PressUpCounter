@@ -50,12 +50,10 @@ public class SetTrainingDayFragment extends Fragment {
         mSetTrainingDayViewModel.getFragmentEventLiveData().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
-                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, SetTimeFragment.newInstance(mSetTrainingDayViewModel.getDaysIndexList()))
                         .commit();
-                fragmentEvent.setHappened(true);
             }
         });
     }

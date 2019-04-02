@@ -5,6 +5,7 @@ import com.example.alexa.pressupcounter.events.FragmentEvent;
 import java.util.ArrayList;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 /**
@@ -32,7 +33,7 @@ public interface SetTrainingDayViewModel {
 
     ArrayList<Integer> getDaysIndexList();
 
-    MutableLiveData<FragmentEvent> getFragmentEventLiveData();
+    LiveData<FragmentEvent> getFragmentEventLiveData();
 
     void onCheckedChanged(int i, boolean state);
 
