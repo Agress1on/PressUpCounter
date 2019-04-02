@@ -4,6 +4,7 @@ import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 /**
@@ -13,13 +14,13 @@ import androidx.lifecycle.MutableLiveData;
  */
 public interface SetTimeViewModel {
 
-    MutableLiveData<FragmentEvent> getFragmentEventLiveData();
+    LiveData<FragmentEvent> getFragmentEventLiveData();
 
-    MutableLiveData<TimePickerEvent> getTimePickerEventForFirstDay();
+    LiveData<TimePickerEvent> getTimePickerEventForFirstDay();
 
-    MutableLiveData<TimePickerEvent> getTimePickerEventForSecondDay();
+    LiveData<TimePickerEvent> getTimePickerEventForSecondDay();
 
-    MutableLiveData<TimePickerEvent> getTimePickerEventForThirdDay();
+    LiveData<TimePickerEvent> getTimePickerEventForThirdDay();
 
     ObservableField<String> getFirstDayTime();
 

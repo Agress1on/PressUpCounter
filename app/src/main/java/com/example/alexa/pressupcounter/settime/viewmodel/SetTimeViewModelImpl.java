@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.settime.viewmodel;
 
 import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
@@ -8,6 +9,7 @@ import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 import java.util.ArrayList;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -19,11 +21,11 @@ import androidx.lifecycle.ViewModel;
 public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel {
 
     private SetTimeModel mSetTimeModel;
-    private MutableLiveData<FragmentEvent> mFragmentEventLiveData;
+    private LiveData<FragmentEvent> mFragmentEventLiveData;
 
-    private MutableLiveData<TimePickerEvent> mTimePickerEventForFirstDay;
-    private MutableLiveData<TimePickerEvent> mTimePickerEventForSecondDay;
-    private MutableLiveData<TimePickerEvent> mTimePickerEventForThirdDay;
+    private LiveData<TimePickerEvent> mTimePickerEventForFirstDay;
+    private LiveData<TimePickerEvent> mTimePickerEventForSecondDay;
+    private LiveData<TimePickerEvent> mTimePickerEventForThirdDay;
 
     private ObservableField<String> mFirstDayTime;
     private ObservableField<String> mSecondDayTime;
@@ -37,11 +39,11 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
 
     public SetTimeViewModelImpl(SetTimeModel setTimeModel, ArrayList<Integer> indexList) {
         mSetTimeModel = setTimeModel;
-        mFragmentEventLiveData = new MutableLiveData<>();
+        mFragmentEventLiveData = new SingleLiveEvent<>();
 
-        mTimePickerEventForFirstDay = new MutableLiveData<>();
-        mTimePickerEventForSecondDay = new MutableLiveData<>();
-        mTimePickerEventForThirdDay = new MutableLiveData<>();
+        mTimePickerEventForFirstDay = new SingleLiveEvent<>();
+        mTimePickerEventForSecondDay = new SingleLiveEvent<>();
+        mTimePickerEventForThirdDay = new SingleLiveEvent<>();
 
         mFirstDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
         mSecondDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
@@ -55,22 +57,22 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     }
 
     @Override
-    public MutableLiveData<FragmentEvent> getFragmentEventLiveData() {
+    public LiveData<FragmentEvent> getFragmentEventLiveData() {
         return mFragmentEventLiveData;
     }
 
     @Override
-    public MutableLiveData<TimePickerEvent> getTimePickerEventForFirstDay() {
+    public LiveData<TimePickerEvent> getTimePickerEventForFirstDay() {
         return mTimePickerEventForFirstDay;
     }
 
     @Override
-    public MutableLiveData<TimePickerEvent> getTimePickerEventForSecondDay() {
+    public LiveData<TimePickerEvent> getTimePickerEventForSecondDay() {
         return mTimePickerEventForSecondDay;
     }
 
     @Override
-    public MutableLiveData<TimePickerEvent> getTimePickerEventForThirdDay() {
+    public LiveData<TimePickerEvent> getTimePickerEventForThirdDay() {
         return mTimePickerEventForThirdDay;
     }
 
@@ -111,21 +113,25 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
 
     @Override
     public void onClickSetFirstDayTime() {
-        mTimePickerEventForFirstDay.postValue(new TimePickerEvent());
+        //mTimePickerEventForFirstDay.postValue(new TimePickerEvent());
+        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForFirstDay).postValue(new TimePickerEvent());
     }
 
     @Override
     public void onClickSetSecondDayTime() {
-        mTimePickerEventForSecondDay.postValue(new TimePickerEvent());
+        //mTimePickerEventForSecondDay.postValue(new TimePickerEvent());
+        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForSecondDay).postValue(new TimePickerEvent());
     }
 
     @Override
     public void onClickSetThirdDayTime() {
-        mTimePickerEventForThirdDay.postValue(new TimePickerEvent());
+        //mTimePickerEventForThirdDay.postValue(new TimePickerEvent());
+        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForThirdDay).postValue(new TimePickerEvent());
     }
 
     @Override
     public void onClickSetTimeButton() {
-        mFragmentEventLiveData.postValue(new FragmentEvent());
+        //mFragmentEventLiveData.postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
     }
 }

@@ -62,12 +62,10 @@ public class SetTimeFragment extends Fragment {
         mSetTimeViewModel.getFragmentEventLiveData().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
-                if (fragmentEvent == null || fragmentEvent.isHappened()) return;
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                         .commit();
-                fragmentEvent.setHappened(true);
             }
         });
 
@@ -84,9 +82,7 @@ public class SetTimeFragment extends Fragment {
         mSetTimeViewModel.getTimePickerEventForFirstDay().observe(this, new Observer<TimePickerEvent>() {
             @Override
             public void onChanged(TimePickerEvent timePickerEvent) {
-                if (timePickerEvent == null || timePickerEvent.isHappened()) return;
                 timePickerDialogForFirst.show(getActivity().getSupportFragmentManager(), "TAAAG");
-                timePickerEvent.setHappened(true);
             }
         });
 
@@ -102,9 +98,7 @@ public class SetTimeFragment extends Fragment {
         mSetTimeViewModel.getTimePickerEventForSecondDay().observe(this, new Observer<TimePickerEvent>() {
             @Override
             public void onChanged(TimePickerEvent timePickerEvent) {
-                if (timePickerEvent == null || timePickerEvent.isHappened()) return;
                 timePickerDialogForSecond.show(getActivity().getSupportFragmentManager(), "TAAAG");
-                timePickerEvent.setHappened(true);
             }
         });
 
@@ -120,9 +114,7 @@ public class SetTimeFragment extends Fragment {
         mSetTimeViewModel.getTimePickerEventForThirdDay().observe(this, new Observer<TimePickerEvent>() {
             @Override
             public void onChanged(TimePickerEvent timePickerEvent) {
-                if (timePickerEvent == null || timePickerEvent.isHappened()) return;
                 timePickerDialogForThird.show(getActivity().getSupportFragmentManager(), "TAAAG");
-                timePickerEvent.setHappened(true);
             }
         });
     }
