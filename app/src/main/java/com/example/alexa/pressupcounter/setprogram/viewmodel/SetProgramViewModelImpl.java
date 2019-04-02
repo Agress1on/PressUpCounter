@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
@@ -31,7 +32,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     private ObservableField<String> mServiceInfo;
 
-    private MutableLiveData<FragmentEvent> mLiveData;
+    private LiveData<FragmentEvent> mLiveData;
 
     public SetProgramViewModelImpl(SetProgramModel setProgramModel) {
         mSetProgramModel = setProgramModel;
@@ -43,7 +44,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         mFifthRepetition = new ObservableField<>(3);
 
         mSumOfRepetitions = new ObservableField<>(10);
-        mLiveData = new MutableLiveData<>();
 
         mServiceInfo = new ObservableField<>();
     }
@@ -80,6 +80,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public LiveData<FragmentEvent> getFragmentEvent() {
+        mLiveData = new SingleLiveEvent<>();
         return mLiveData;
     }
 
@@ -134,7 +135,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
                 .subscribe(new DisposableCompletableObserver() {
                     @Override
                     public void onComplete() {
-                        mLiveData.postValue(new FragmentEvent());
+                        ((SingleLiveEvent<FragmentEvent>) mLiveData).postValue(new FragmentEvent());
                     }
 
                     @Override
@@ -165,7 +166,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public void onClickChoiceView() {
-        mLiveData.postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mLiveData).postValue(new FragmentEvent());
     }
 
     private void setFinalQuantity() {
