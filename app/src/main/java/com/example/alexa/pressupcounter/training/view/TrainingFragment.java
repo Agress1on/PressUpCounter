@@ -127,7 +127,7 @@ public class TrainingFragment extends Fragment {
         mTrainingViewModel.getDialogEventForRestOff().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
-                dg2.show(getActivity().getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
+                dg2.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
             }
         });
 

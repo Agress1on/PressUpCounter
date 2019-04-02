@@ -59,12 +59,14 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
 
     private void setWindow() {
         getDialog().setCanceledOnTouchOutside(false);
+        /*
         int width = WindowManager.LayoutParams.MATCH_PARENT;
         int height = WindowManager.LayoutParams.MATCH_PARENT;
+        */
 
         Window window = getDialog().getWindow();
         window.requestFeature(Window.FEATURE_NO_TITLE);
-        window.setLayout(width, height);
+        //window.setLayout(width, height);
         window.setGravity(Gravity.CENTER);
     }
 
