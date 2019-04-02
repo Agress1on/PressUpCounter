@@ -31,7 +31,7 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
         getDialog().setTitle("Тренировка закончена");
         getDialog().setCanceledOnTouchOutside(false);
         View v = inflater.inflate(R.layout.dialog_finish_training, null);
-        TextView textView = (TextView) v.findViewById(R.id.question_text_view);
+        TextView textView = (TextView) v.findViewById(R.id.question_header);
         textView.setText(getResources().getString(R.string.for_dialog_finish_training));
         v.findViewById(R.id.positive_button).setOnClickListener(this);
         v.findViewById(R.id.negative_button).setOnClickListener(this);

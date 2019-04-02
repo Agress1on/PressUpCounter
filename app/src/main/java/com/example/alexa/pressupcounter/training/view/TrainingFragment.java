@@ -68,6 +68,11 @@ public class TrainingFragment extends Fragment {
                 mTrainingViewModel.onClickNegativeButtonOfRestDialog();
                 dialogTrainingRestNew.dismiss();
             }
+
+            @Override
+            public void onCancel() {
+                mTrainingViewModel.onCancelOfRestDialog();
+            }
         });
         mTrainingViewModel.getDialogEventForRest().observe(this, new Observer<DialogEvent>() {
             @Override

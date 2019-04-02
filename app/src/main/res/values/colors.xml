@@ -14,4 +14,6 @@
     <color name="colorSlateGrey">#708090</color>
     <color name="colorForTextInTable">#FFFFFF</color>
     <color name="colorForDialogBackground">#20000000</color>
+
+    <color name="colorCrimson">#DC143C</color>
 </resources>

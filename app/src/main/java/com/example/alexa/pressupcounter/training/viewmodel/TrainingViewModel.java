@@ -33,6 +33,8 @@ public interface TrainingViewModel {
 
     void onClickNegativeButtonOfRestDialog();
 
+    void onCancelOfRestDialog();
+
     void onClickAdditionalTimeForRest();
 
     void onClickNextRepetitionButton();

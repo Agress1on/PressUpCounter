@@ -187,6 +187,11 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
+    public void onCancelOfRestDialog() {
+        mStateOfRestButton.set(true);
+    }
+
+    @Override
     public void onClickAdditionalTimeForRest() {
         mTextForTrainingOrRest.set(mTextForRest);
         Observer<Long> observer = new Observer<Long>() {
