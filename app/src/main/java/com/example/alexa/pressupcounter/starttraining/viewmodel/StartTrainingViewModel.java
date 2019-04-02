@@ -16,9 +16,11 @@ public interface StartTrainingViewModel {
 
     ObservableField<PressUp> getPressUp();
 
+    ObservableField<String> getFinalQuantityRepetition();
+
     LiveData<FragmentEvent> getFragmentEvent();
 
-    MutableLiveData<FragmentEvent> getLiveDataForGoToList();
+    LiveData<FragmentEvent> getLiveDataForGoToList();
 
     LiveData<FragmentEvent> getLiveDataForGoToSettings();
 
@@ -27,6 +29,4 @@ public interface StartTrainingViewModel {
     void onClickListButton();
 
     void onClickSettingsButton();
-
-    ObservableField<String> getFinalQuantityRepetition();
 }

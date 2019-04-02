@@ -46,6 +46,8 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         mSumOfRepetitions = new ObservableField<>(10);
 
         mServiceInfo = new ObservableField<>();
+
+        mLiveData = new SingleLiveEvent<>();
     }
 
     public ObservableField<Integer> getFirstRepetition() {
@@ -80,7 +82,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public LiveData<FragmentEvent> getFragmentEvent() {
-        mLiveData = new SingleLiveEvent<>();
         return mLiveData;
     }
 

@@ -16,12 +16,11 @@ public class FirstLaunchViewModelImpl extends ViewModel implements FirstLaunchVi
     private LiveData<FragmentEvent> mActivityEventMutableLiveData;
 
     public FirstLaunchViewModelImpl() {
-
+        mActivityEventMutableLiveData = new SingleLiveEvent<>();
     }
 
     @Override
     public LiveData<FragmentEvent> getActivityEventMutableLiveData() {
-        mActivityEventMutableLiveData = new SingleLiveEvent<>();
         return mActivityEventMutableLiveData;
     }
 

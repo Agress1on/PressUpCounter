@@ -1,7 +1,8 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
-import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.starttraining.model.StartTrainingModel;
 
 import androidx.databinding.ObservableField;
@@ -25,9 +26,9 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     private ObservableField<PressUp> mPressUpObservableField;
     private ObservableField<String> mFinalQuantityRepetition;
 
-    private MutableLiveData<FragmentEvent> mLiveData;
-    private MutableLiveData<FragmentEvent> mLiveDataForGoToList;
-    private MutableLiveData<FragmentEvent> mLiveDataForGoToSettings;
+    private LiveData<FragmentEvent> mLiveData;
+    private LiveData<FragmentEvent> mLiveDataForGoToList;
+    private LiveData<FragmentEvent> mLiveDataForGoToSettings;
 
     private PressUp mPressUp;
 
@@ -63,9 +64,11 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
         mFinalQuantityRepetition = new ObservableField<>(String.valueOf(mPressUpObservableField.get().getFirstRepetition() + mPressUpObservableField.get().getSecondRepetition() + mPressUpObservableField.get().getThirdRepetition() + mPressUpObservableField.get().getFourthRepetition() + mPressUpObservableField.get().getFifthRepetition()));
         */
         mCompositeDisposable.add(disposable);
-        mLiveData = new MutableLiveData<>();
-        mLiveDataForGoToList = new MutableLiveData<>();
-        mLiveDataForGoToSettings = new MutableLiveData<>();
+
+        mLiveData = new SingleLiveEvent<>();
+        mLiveDataForGoToList = new SingleLiveEvent<>();
+        mLiveDataForGoToSettings = new SingleLiveEvent<>();
+
     }
 
     @Override
@@ -74,12 +77,17 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     }
 
     @Override
+    public ObservableField<String> getFinalQuantityRepetition() {
+        return mFinalQuantityRepetition;
+    }
+
+    @Override
     public LiveData<FragmentEvent> getFragmentEvent() {
         return mLiveData;
     }
 
     @Override
-    public MutableLiveData<FragmentEvent> getLiveDataForGoToList() {
+    public LiveData<FragmentEvent> getLiveDataForGoToList() {
         return mLiveDataForGoToList;
     }
 
@@ -89,22 +97,20 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     }
 
     @Override
-    public ObservableField<String> getFinalQuantityRepetition() {
-        return mFinalQuantityRepetition;
-    }
-
-    @Override
     public void onClickStartTrainingButton() {
-        mLiveData.postValue(new FragmentEvent());
+        //mLiveData.postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mLiveData).postValue(new FragmentEvent());
     }
 
     @Override
     public void onClickListButton() {
-        mLiveDataForGoToList.postValue(new FragmentEvent());
+        //mLiveDataForGoToList.postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mLiveDataForGoToList).postValue(new FragmentEvent());
     }
 
     @Override
     public void onClickSettingsButton() {
-        mLiveDataForGoToSettings.postValue(new FragmentEvent());
+        //mLiveDataForGoToSettings.postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mLiveDataForGoToSettings).postValue(new FragmentEvent());
     }
 }
