@@ -1,10 +1,12 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observable;
@@ -27,9 +29,9 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private ObservableField<String> mQuantityOfRepetitionOrRestTime;
     private ObservableField<Boolean> mStateOfRestButton;
 
-    private MutableLiveData<DialogEvent> mDialogEventForRest;
-    private MutableLiveData<DialogEvent> mDialogEventForRestOff;
-    private MutableLiveData<DialogEvent> mDialogEventFinishTraining;
+    private LiveData<DialogEvent> mDialogEventForRest;
+    private LiveData<DialogEvent> mDialogEventForRestOff;
+    private LiveData<DialogEvent> mDialogEventFinishTraining;
 
     private String mTextForTraining;
     private String mTextForRest;
@@ -89,9 +91,9 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
         mStateOfRestButton = new ObservableField<>(true);
 
-        mDialogEventForRest = new MutableLiveData<>();
-        mDialogEventForRestOff = new MutableLiveData<>();
-        mDialogEventFinishTraining = new MutableLiveData<>();
+        mDialogEventForRest = new SingleLiveEvent<>();
+        mDialogEventForRestOff = new SingleLiveEvent<>();
+        mDialogEventFinishTraining = new SingleLiveEvent<>();
     }
 
     @Override
@@ -115,17 +117,17 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public MutableLiveData<DialogEvent> getDialogEventForRest() {
+    public LiveData<DialogEvent> getDialogEventForRest() {
         return mDialogEventForRest;
     }
 
     @Override
-    public MutableLiveData<DialogEvent> getDialogEventForRestOff() {
+    public LiveData<DialogEvent> getDialogEventForRestOff() {
         return mDialogEventForRestOff;
     }
 
     @Override
-    public MutableLiveData<DialogEvent> getDialogEventFinishTraining() {
+    public LiveData<DialogEvent> getDialogEventFinishTraining() {
         return mDialogEventFinishTraining;
     }
 
@@ -136,7 +138,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickRestButton() {
-        mDialogEventForRest.postValue(new DialogEvent());
+        //mDialogEventForRest.postValue(new DialogEvent());
+        ((SingleLiveEvent<DialogEvent>) mDialogEventForRest).postValue(new DialogEvent());
         mStateOfRestButton.set(false);
     }
 
@@ -170,7 +173,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                     return;
                 }
                 */
-                mDialogEventForRestOff.postValue(new DialogEvent());
+                //mDialogEventForRestOff.postValue(new DialogEvent());
+                ((SingleLiveEvent<DialogEvent>) mDialogEventForRestOff).postValue(new DialogEvent());
             }
         };
         Observable<Long> observable = mTrainingFragmentModel.getMainTimer();
@@ -239,7 +243,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickFinishTrainingButton() {
-        mDialogEventFinishTraining.postValue(new DialogEvent());
+        //mDialogEventFinishTraining.postValue(new DialogEvent());
+        ((SingleLiveEvent<DialogEvent>) mDialogEventFinishTraining).postValue(new DialogEvent());
     }
 
     @Override

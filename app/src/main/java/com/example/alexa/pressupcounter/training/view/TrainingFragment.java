@@ -72,10 +72,8 @@ public class TrainingFragment extends Fragment {
         mTrainingViewModel.getDialogEventForRest().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
-                if (dialogEvent.isHappened()) return;
                 //dg.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST);
                 dialogTrainingRestNew.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST);
-                dialogEvent.setHappened(true);
             }
         });
 
@@ -124,9 +122,7 @@ public class TrainingFragment extends Fragment {
         mTrainingViewModel.getDialogEventForRestOff().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
-                if (dialogEvent.isHappened()) return;
                 dg2.show(getActivity().getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
-                dialogEvent.setHappened(true);
             }
         });
 
@@ -155,9 +151,7 @@ public class TrainingFragment extends Fragment {
         mTrainingViewModel.getDialogEventFinishTraining().observe(this, new Observer<DialogEvent>() {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
-                if (dialogEvent.isHappened()) return;
                 dg3.show(getActivity().getFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
-                dialogEvent.setHappened(true);
             }
         });
     }

@@ -3,6 +3,7 @@ package com.example.alexa.pressupcounter.training.viewmodel;
 import com.example.alexa.pressupcounter.events.DialogEvent;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 /**
@@ -20,11 +21,11 @@ public interface TrainingViewModel {
 
     ObservableField<Boolean> getStateOfRestButton();
 
-    MutableLiveData<DialogEvent> getDialogEventForRest();
+    LiveData<DialogEvent> getDialogEventForRest();
 
-    MutableLiveData<DialogEvent> getDialogEventForRestOff();
+    LiveData<DialogEvent> getDialogEventForRestOff();
 
-    MutableLiveData<DialogEvent> getDialogEventFinishTraining();
+    LiveData<DialogEvent> getDialogEventFinishTraining();
 
     void goToNextRepetition();
 
