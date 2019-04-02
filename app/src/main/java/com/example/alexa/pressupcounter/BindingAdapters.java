@@ -13,7 +13,7 @@ import android.widget.TextView;
  */
 public class BindingAdapters {
 
-    @BindingAdapter("app:setCurrent")
+    @BindingAdapter("setCurrent")
     public static void setCurrent(TextView view, Boolean isCurrent) {
         Resources res = view.getResources();
         int backgroundColor = isCurrent ? res.getColor(R.color.colorRed) : res.getColor(R.color.colorWhite);
@@ -22,10 +22,5 @@ public class BindingAdapters {
         view.setTextSize(TypedValue.COMPLEX_UNIT_SP, size);
         view.setBackgroundColor(backgroundColor);
         view.setTextColor(textColor);
-    }
-
-    @BindingAdapter("app:setButtonState")
-    public static void setButtonState(Button button, Boolean isEnabled) {
-        button.setEnabled(isEnabled);
     }
 }

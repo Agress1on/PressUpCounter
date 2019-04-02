@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.firstlaunch.viewmodel;
 
-import com.example.alexa.pressupcounter.events.ActivityEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 
 /**
  * Created by Alexandr Mikhalev on 12.01.2019.
@@ -11,7 +11,7 @@ import androidx.lifecycle.MutableLiveData;
  */
 public interface FirstLaunchViewModel {
 
-    MutableLiveData<ActivityEvent> getActivityEventMutableLiveData();
+    LiveData<FragmentEvent> getActivityEventMutableLiveData();
 
     void onClickMissButton();
 }

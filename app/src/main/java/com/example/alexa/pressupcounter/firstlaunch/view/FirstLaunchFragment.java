@@ -9,7 +9,7 @@ import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBinding;
-import com.example.alexa.pressupcounter.events.ActivityEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
@@ -65,15 +65,13 @@ public class FirstLaunchFragment extends Fragment {
     }
 
     private void init() {
-        mFirstLaunchViewModel.getActivityEventMutableLiveData().observe(this, new Observer<ActivityEvent>() {
+        mFirstLaunchViewModel.getActivityEventMutableLiveData().observe(this, new Observer<FragmentEvent>() {
             @Override
-            public void onChanged(ActivityEvent activityEvent) {
-                if (activityEvent == null || activityEvent.isHappened()) return;
+            public void onChanged(FragmentEvent fragmentEvent) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, SetProgramFragment.newInstance())
                         .commit();
-                activityEvent.setHappened(true);
             }
         });
     }

@@ -144,7 +144,9 @@
             app:layout_constraintBottom_toTopOf="@id/finish_training"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:setButtonState="@{viewModel.stateOfRestButton ? true : false}" />
+
+            android:enabled="@{viewModel.stateOfRestButton ? true : false}"
+            />
 
         <Button
             android:id="@+id/finish_training"

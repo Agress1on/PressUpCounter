@@ -1,8 +1,9 @@
 package com.example.alexa.pressupcounter.firstlaunch.viewmodel;
 
-import com.example.alexa.pressupcounter.events.ActivityEvent;
+import com.example.alexa.pressupcounter.SingleLiveEvent;
+import com.example.alexa.pressupcounter.events.FragmentEvent;
 
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -12,19 +13,20 @@ import androidx.lifecycle.ViewModel;
  */
 public class FirstLaunchViewModelImpl extends ViewModel implements FirstLaunchViewModel {
 
-    private MutableLiveData<ActivityEvent> mActivityEventMutableLiveData;
+    private LiveData<FragmentEvent> mActivityEventMutableLiveData;
 
     public FirstLaunchViewModelImpl() {
-        mActivityEventMutableLiveData = new MutableLiveData<>();
+
     }
 
     @Override
-    public MutableLiveData<ActivityEvent> getActivityEventMutableLiveData() {
+    public LiveData<FragmentEvent> getActivityEventMutableLiveData() {
+        mActivityEventMutableLiveData = new SingleLiveEvent<>();
         return mActivityEventMutableLiveData;
     }
 
     @Override
     public void onClickMissButton() {
-        mActivityEventMutableLiveData.postValue(new ActivityEvent());
+        ((SingleLiveEvent<FragmentEvent>) mActivityEventMutableLiveData).postValue(new FragmentEvent());
     }
 }

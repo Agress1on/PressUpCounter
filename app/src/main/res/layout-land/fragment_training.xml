@@ -159,7 +159,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/quantity_current_repition"
             app:layout_constraintStart_toEndOf="@id/tab_layout"
-            app:setButtonState="@{viewModel.stateOfRestButton ? true : false}" />
+            android:enabled="@{viewModel.stateOfRestButton ? true : false}"
+            />
 
         <Button
             android:id="@+id/finish_training"

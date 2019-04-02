@@ -32,6 +32,10 @@ import androidx.lifecycle.Observer;
  */
 public class TrainingFragment extends Fragment {
 
+    public static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
+    public static final String TAG_FOR_DIALOG_TRAINING_REST_OFF = "TAG_FOR_DIALOG_TRAINING_REST_OFF";
+    public static final String TAG_FOR_DIALOG_TRAINING_FINISH = "TAG_FOR_DIALOG_TRAINING_FINISH";
+
     @Inject
     TrainingViewModel mTrainingViewModel;
 
@@ -70,7 +74,7 @@ public class TrainingFragment extends Fragment {
             public void onChanged(@Nullable DialogEvent dialogEvent) {
                 if (dialogEvent.isHappened()) return;
                 //dg.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST);
-                dialogTrainingRestNew.show(getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST);
+                dialogTrainingRestNew.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST);
                 dialogEvent.setHappened(true);
             }
         });
@@ -121,7 +125,7 @@ public class TrainingFragment extends Fragment {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
                 if (dialogEvent.isHappened()) return;
-                dg2.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_REST_OFF);
+                dg2.show(getActivity().getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
                 dialogEvent.setHappened(true);
             }
         });
@@ -152,7 +156,7 @@ public class TrainingFragment extends Fragment {
             @Override
             public void onChanged(@Nullable DialogEvent dialogEvent) {
                 if (dialogEvent.isHappened()) return;
-                dg3.show(getActivity().getFragmentManager(), Constants.TAG_FOR_DIALOG_TRAINING_FINISH);
+                dg3.show(getActivity().getFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
                 dialogEvent.setHappened(true);
             }
         });
