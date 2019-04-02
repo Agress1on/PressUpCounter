@@ -31,11 +31,7 @@ public class ExclamationDialog extends DialogFragment implements View.OnClickLis
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Window window = getDialog().getWindow();
-        window.requestFeature(Window.FEATURE_NO_TITLE);
-        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        getDialog().setCanceledOnTouchOutside(false);
-
+        setWindow();
 
         View view = inflater.inflate(R.layout.dialog_exclamation, container, false);
         mMessageTextView = (TextView) view.findViewById(R.id.message);
@@ -46,8 +42,12 @@ public class ExclamationDialog extends DialogFragment implements View.OnClickLis
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onClick(View view) {
+        dismiss();
+    }
+
+    private void setWindow() {
+        getDialog().setCanceledOnTouchOutside(false);
         int width = WindowManager.LayoutParams.WRAP_CONTENT;
         int height = WindowManager.LayoutParams.WRAP_CONTENT;
 
@@ -56,13 +56,10 @@ public class ExclamationDialog extends DialogFragment implements View.OnClickLis
         params.x = +90;
 
         Window window = getDialog().getWindow();
+        window.requestFeature(Window.FEATURE_NO_TITLE);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         window.setLayout(width, height);
         window.setGravity(Gravity.TOP | Gravity.RIGHT);
         window.setAttributes(params);
-    }
-
-    @Override
-    public void onClick(View view) {
-        dismiss();
     }
 }
