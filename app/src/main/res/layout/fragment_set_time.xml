@@ -12,13 +12,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlack">
 
         <TextView
             android:id="@+id/info_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorLightBlack"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:text="Выберите время уведомления \n для каждого дня:"
@@ -36,85 +36,56 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
-        <Button
-            android:id="@+id/set_time_for_first_day_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:onClick="@{() -> viewModel.onClickSetFirstDayTime()}"
-            android:text="Первый день:"
-            app:layout_constraintEnd_toEndOf="@id/guideline_vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/info_text_view" />
-
         <TextView
             android:id="@+id/set_time_for_first_day_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.getFirstDayTime()}"
-            android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@id/set_time_for_first_day_button"
+            app:customTextColor="@{viewModel.getFirstDayTime()}"
+            android:layout_marginTop="10dp"
+            android:onClick="@{() -> viewModel.onClickSetFirstDayTime()}"
+            app:layout_constraintTop_toBottomOf="@id/info_text_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_vertical"
-            app:layout_constraintTop_toTopOf="@id/set_time_for_first_day_button"
-            tools:text="22:48" />
-
-        <Button
-            android:id="@+id/set_time_for_second_day_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:onClick="@{() -> viewModel.onClickSetSecondDayTime()}"
-            android:text="Второй день"
-            app:layout_constraintEnd_toEndOf="@id/guideline_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/set_time_for_first_day_text_view" />
+            tools:text="22:48" />
 
         <TextView
             android:id="@+id/set_time_for_second_day_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.secondDayTime}"
-            android:textColor="@color/colorBlack"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@id/set_time_for_second_day_button"
+            android:layout_marginTop="10dp"
+            app:customTextColor="@{viewModel.secondDayTime}"
+            android:onClick="@{() -> viewModel.onClickSetSecondDayTime()}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_vertical"
-            app:layout_constraintTop_toTopOf="@id/set_time_for_second_day_button"
-            tools:text="20:00" />
-
-        <Button
-            android:id="@+id/set_time_for_third_day_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:onClick="@{() -> viewModel.onClickSetThirdDayTime()}"
-            android:text="Третий день"
-            app:layout_constraintEnd_toEndOf="@id/guideline_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/set_time_for_second_day_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/set_time_for_first_day_text_view"
+            tools:text="20:00" />
 
         <TextView
             android:id="@+id/set_time_for_third_day_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{viewModel.thirdDayTime}"
-            android:textColor="@color/colorBlack"
+            android:onClick="@{() -> viewModel.onClickSetThirdDayTime()}"
             android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@id/set_time_for_third_day_button"
+            app:customTextColor="@{viewModel.thirdDayTime}"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_vertical"
-            app:layout_constraintTop_toTopOf="@id/set_time_for_third_day_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/set_time_for_second_day_text_view"
             tools:text="21:53" />
 
         <Button
             android:id="@+id/set_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorLightBlack"
             android:onClick="@{() -> viewModel.onClickSetTimeButton()}"
             android:text="Установить время"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorSlateGrey"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

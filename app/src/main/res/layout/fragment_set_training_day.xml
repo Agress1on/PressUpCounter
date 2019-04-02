@@ -12,13 +12,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorLightBlack">
 
         <TextView
             android:id="@+id/header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorLightBlack"
+
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:text="Выберите 3 дня недели:"
@@ -42,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Monday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/vertical_center_guideline"
             app:layout_constraintTop_toBottomOf="@id/header" />
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Tuesday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/monday_textview"
             app:layout_constraintTop_toBottomOf="@id/monday_textview" />
@@ -84,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Wednesday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/tuesday_textview"
             app:layout_constraintTop_toBottomOf="@id/tuesday_textview" />
@@ -105,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Thursday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/wednesday_textview"
             app:layout_constraintTop_toBottomOf="@id/wednesday_textview" />
@@ -126,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Friday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/thursday_textview"
             app:layout_constraintTop_toBottomOf="@id/thursday_textview" />
@@ -147,7 +148,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Saturday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/friday_textview"
             app:layout_constraintTop_toBottomOf="@id/friday_textview" />
@@ -168,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Sunday"
-            android:textColor="@color/colorBlack"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@id/saturday_textview"
             app:layout_constraintTop_toBottomOf="@id/saturday_textview" />

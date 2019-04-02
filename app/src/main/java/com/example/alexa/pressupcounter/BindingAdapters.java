@@ -23,4 +23,11 @@ public class BindingAdapters {
         view.setBackgroundColor(backgroundColor);
         view.setTextColor(textColor);
     }
+
+    @BindingAdapter("customTextColor")
+    public static void customTextColor(TextView textView, String text) {
+        Resources res = textView.getResources();
+        int color = text.equals(Constants.TEXT_FOR_SET_TIME_STRING) ? res.getColor(R.color.colorFireBrick) : res.getColor(R.color.colorForestGreen);
+        textView.setTextColor(color);
+    }
 }
