@@ -11,7 +11,6 @@ import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding
 import com.example.alexa.pressupcounter.dialogs.ExclamationDialog;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
-import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
@@ -40,6 +39,7 @@ public class StartTrainingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         App.getAppComponent().createStartTrainingModelComponent(new StartTrainingModelModule(this)).inject(this);
         init();
+
     }
 
     @Nullable
@@ -47,7 +47,7 @@ public class StartTrainingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentStartTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start_training, container, false);
         binding.setViewModel(mStartTrainingViewModel);
-
+        mStartTrainingViewModel.onCreateView();
         ExclamationDialog exclamationDialog = new ExclamationDialog();
         exclamationDialog.show(getFragmentManager(), "TAG");
 
@@ -55,7 +55,7 @@ public class StartTrainingFragment extends Fragment {
     }
 
     private void init() {
-        mStartTrainingViewModel.getFragmentEvent().observe(this, new Observer<FragmentEvent>() {
+        mStartTrainingViewModel.getGoToTrainingFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(@Nullable FragmentEvent fragmentEvent) {
                 getActivity().getSupportFragmentManager().beginTransaction()
@@ -65,18 +65,17 @@ public class StartTrainingFragment extends Fragment {
             }
         });
 
-        mStartTrainingViewModel.getLiveDataForGoToList().observe(this, new Observer<FragmentEvent>() {
+        mStartTrainingViewModel.getGoToListFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
                 getActivity().getSupportFragmentManager().beginTransaction()
                         .addToBackStack(null)
-                        //.replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                         .replace(R.id.fragment_container, TrainingListFragment.newInstance())
                         .commit();
             }
         });
 
-        mStartTrainingViewModel.getLiveDataForGoToSettings().observe(this, new Observer<FragmentEvent>() {
+        mStartTrainingViewModel.getForGoToSettingsFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(FragmentEvent fragmentEvent) {
                 getActivity().getSupportFragmentManager().beginTransaction()

@@ -79,7 +79,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public LiveData<FragmentEvent> getFragmentEvent() {
+    public LiveData<FragmentEvent> getGoToStartFragmentEvent() {
         return mFragmentEventLiveData;
     }
 

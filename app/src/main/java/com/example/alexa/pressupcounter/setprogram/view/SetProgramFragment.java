@@ -48,7 +48,7 @@ public class SetProgramFragment extends Fragment {
     }
 
     private void init() {
-        mSetProgramViewModel.getFragmentEvent().observe(this, new Observer<FragmentEvent>() {
+        mSetProgramViewModel.getGoToStartFragmentEvent().observe(this, new Observer<FragmentEvent>() {
             @Override
             public void onChanged(@Nullable FragmentEvent fragmentEvent) {
                 getActivity().getSupportFragmentManager().beginTransaction()

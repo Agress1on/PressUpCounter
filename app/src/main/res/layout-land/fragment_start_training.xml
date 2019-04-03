@@ -198,32 +198,30 @@
 
         </TableLayout>
 
+        <ImageView
+            android:id="@+id/sum_image_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_sum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
         <TextView
             android:id="@+id/summ_static"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:background="@color/colorLightBlack"
-            android:text="@{viewModel.finalQuantityRepetition}"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="@{String.valueOf(safeUnbox(viewModel.finalQuantityRepetition))}"
             android:textColor="@color/colorWhite"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="@id/tab_layout"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout"
+            app:layout_constraintBottom_toBottomOf="@id/sum_image_view"
+            app:layout_constraintStart_toEndOf="@id/sum_image_view"
+            app:layout_constraintTop_toTopOf="@id/sum_image_view"
             tools:text="20" />
-
-        <TextView
-            android:id="@+id/summ_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@color/colorLightBlack"
-            android:text="Сумма: "
-            android:textColor="@color/colorWhite"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@id/summ_static"
-            app:layout_constraintEnd_toStartOf="@id/summ_static" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/vertical_center_guideline"
@@ -252,7 +250,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="5dp"
             android:layout_marginRight="5dp"
-            android:background="@color/colorLightBlack"
+            android:background="@color/colorSlateGrey"
             android:onClick="@{() -> viewModel.onClickListButton()}"
             android:text="список"
             android:textColor="@color/colorWhite"

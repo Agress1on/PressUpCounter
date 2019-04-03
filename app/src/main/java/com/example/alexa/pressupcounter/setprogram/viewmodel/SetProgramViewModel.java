@@ -22,7 +22,7 @@ public interface SetProgramViewModel {
 
     ObservableField<String> getServiceInfo();
 
-    LiveData<FragmentEvent> getFragmentEvent();
+    LiveData<FragmentEvent> getGoToStartFragmentEvent();
 
     void onIncrementButton();
 
