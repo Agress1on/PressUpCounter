@@ -196,6 +196,17 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
 
+        <ImageView
+            android:id="@+id/sum_image_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_sum"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
         <TextView
             android:id="@+id/sum_of_repetition"
             android:layout_width="wrap_content"
