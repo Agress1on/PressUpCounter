@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.inject;
 
 import com.example.alexa.pressupcounter.data.PressUpDao;
-import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
+import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
@@ -27,8 +27,8 @@ public class SetProgramModelModule {
 
     @SetProgramModelScope
     @Provides
-    SetProgramModel provideSetProgramModel(PressUpDao pressUpDao) {
-        return new SetProgramModel(pressUpDao);
+    SetProgramInteractor provideSetProgramModel(PressUpDao pressUpDao) {
+        return new SetProgramInteractor(pressUpDao);
     }
 
     @SetProgramModelScope
@@ -39,7 +39,7 @@ public class SetProgramModelModule {
 
     @SetProgramModelScope
     @Provides
-    SetProgramViewModelFactory provideSetTrainingDayViewModelFactory(SetProgramModel setProgramModel) {
-        return new SetProgramViewModelFactory(setProgramModel);
+    SetProgramViewModelFactory provideSetTrainingDayViewModelFactory(SetProgramInteractor setProgramInteractor) {
+        return new SetProgramViewModelFactory(setProgramInteractor);
     }
 }

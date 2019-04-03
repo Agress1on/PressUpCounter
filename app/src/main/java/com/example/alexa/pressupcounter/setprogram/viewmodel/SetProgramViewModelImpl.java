@@ -3,13 +3,17 @@ package com.example.alexa.pressupcounter.setprogram.viewmodel;
 import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
-import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
+import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -20,54 +24,48 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SetProgramViewModelImpl extends ViewModel implements SetProgramViewModel {
 
-    private SetProgramModel mSetProgramModel;
+    private SetProgramInteractor mSetProgramInteractor;
 
-    private ObservableField<Integer> mFirstRepetition;
-    private ObservableField<Integer> mSecondRepetition;
-    private ObservableField<Integer> mThirdRepetition;
-    private ObservableField<Integer> mFourthRepetition;
-    private ObservableField<Integer> mFifthRepetition;
-
+    private ObservableField<List<ObservableField<Integer>>> mListOfRepetitions;
     private ObservableField<Integer> mSumOfRepetitions;
 
     private ObservableField<String> mServiceInfo;
 
-    private LiveData<FragmentEvent> mLiveData;
+    private LiveData<FragmentEvent> mFragmentEventLiveData;
 
-    public SetProgramViewModelImpl(SetProgramModel setProgramModel) {
-        mSetProgramModel = setProgramModel;
+    CompositeDisposable mCompositeDisposable;
 
-        mFirstRepetition = new ObservableField<>(2);
-        mSecondRepetition = new ObservableField<>(3);
-        mThirdRepetition = new ObservableField<>(1);
-        mFourthRepetition = new ObservableField<>(1);
-        mFifthRepetition = new ObservableField<>(3);
-
-        mSumOfRepetitions = new ObservableField<>(10);
-
+    public SetProgramViewModelImpl(SetProgramInteractor setProgramInteractor) {
+        mSetProgramInteractor = setProgramInteractor;
+        mListOfRepetitions = new ObservableField<>();
+        //
+        List<ObservableField<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            list.add(new ObservableField<>(0));
+        }
+        mListOfRepetitions.set(list);
+        //
+        mSumOfRepetitions = new ObservableField<>(0);
         mServiceInfo = new ObservableField<>();
-
-        mLiveData = new SingleLiveEvent<>();
+        mFragmentEventLiveData = new SingleLiveEvent<>();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
-    public ObservableField<Integer> getFirstRepetition() {
-        return mFirstRepetition;
+    @Override
+    public void onCreateView() {
+        Disposable disposable = mSetProgramInteractor.getInitialRepetitionList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observableFields -> {
+                    mListOfRepetitions.set(observableFields);
+                    setFinalQuantity();
+                });
+        mCompositeDisposable.add(disposable);
     }
 
-    public ObservableField<Integer> getSecondRepetition() {
-        return mSecondRepetition;
-    }
-
-    public ObservableField<Integer> getThirdRepetition() {
-        return mThirdRepetition;
-    }
-
-    public ObservableField<Integer> getFourthRepetition() {
-        return mFourthRepetition;
-    }
-
-    public ObservableField<Integer> getFifthRepetition() {
-        return mFifthRepetition;
+    @Override
+    public ObservableField<List<ObservableField<Integer>>> getListOfRepetitions() {
+        return mListOfRepetitions;
     }
 
     @Override
@@ -82,11 +80,21 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public LiveData<FragmentEvent> getFragmentEvent() {
-        return mLiveData;
+        return mFragmentEventLiveData;
     }
 
     @Override
     public void onIncrementButton() {
+        if (mListOfRepetitions.get().get(0).get().equals(mListOfRepetitions.get().get(1).get())) {
+            mListOfRepetitions.get().get(1).set(mListOfRepetitions.get().get(1).get() + 1);
+            mListOfRepetitions.get().get(4).set(mListOfRepetitions.get().get(4).get() + 1);
+        } else {
+            mListOfRepetitions.get().get(0).set(mListOfRepetitions.get().get(0).get() + 1);
+            mListOfRepetitions.get().get(2).set(mListOfRepetitions.get().get(2).get() + 1);
+            mListOfRepetitions.get().get(3).set(mListOfRepetitions.get().get(3).get() + 1);
+        }
+        setFinalQuantity();
+        /*
         if (mFirstRepetition.get().equals(mSecondRepetition.get())) {
             mSecondRepetition.set(mSecondRepetition.get() + 1);
             mFifthRepetition.set(mFifthRepetition.get() + 1);
@@ -96,18 +104,21 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
             mFourthRepetition.set(mFourthRepetition.get() + 1);
         }
         setFinalQuantity();
-        /*
-        if (mPressUp.get().getFirstRepetition() == mPressUp.get().getSecondRepetition()) {
-            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), mPressUp.get().getSecondRepetition() + 1, mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), mPressUp.get().getFifthRepetition() + 1));
-        } else {
-            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition() + 1, mPressUp.get().getSecondRepetition(), mPressUp.get().getThirdRepetition() + 1, mPressUp.get().getFourthRepetition() + 1, mPressUp.get().getFifthRepetition()));
-        }
-        setFinalQuantity();
         */
     }
 
     @Override
     public void onDecrementButton() {
+        if (mListOfRepetitions.get().get(0).get().equals(mListOfRepetitions.get().get(1).get())) {
+            mListOfRepetitions.get().get(0).set(mListOfRepetitions.get().get(0).get() - 1);
+            mListOfRepetitions.get().get(2).set(mListOfRepetitions.get().get(2).get() - 1);
+            mListOfRepetitions.get().get(3).set(mListOfRepetitions.get().get(3).get() - 1);
+        } else {
+            mListOfRepetitions.get().get(1).set(mListOfRepetitions.get().get(1).get() - 1);
+            mListOfRepetitions.get().get(4).set(mListOfRepetitions.get().get(4).get() - 1);
+        }
+        setFinalQuantity();
+        /*
         if (mFirstRepetition.get().equals(mSecondRepetition.get())) {
             mFirstRepetition.set(mFirstRepetition.get() - 1);
             mThirdRepetition.set(mThirdRepetition.get() - 1);
@@ -117,26 +128,18 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
             mFifthRepetition.set(mFifthRepetition.get() - 1);
         }
         setFinalQuantity();
-        /*
-        if (mPressUp.get().getFirstRepetition() == mPressUp.get().getSecondRepetition()) {
-            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition() - 1, mPressUp.get().getSecondRepetition(), mPressUp.get().getThirdRepetition() - 1, mPressUp.get().getFourthRepetition() - 1, mPressUp.get().getFifthRepetition()));
-        } else {
-            mPressUp.set(new PressUp(mPressUp.get().getFirstRepetition(), mPressUp.get().getSecondRepetition() - 1, mPressUp.get().getThirdRepetition(), mPressUp.get().getFourthRepetition(), mPressUp.get().getFifthRepetition() - 1));
-        }
-        setFinalQuantity();
         */
     }
 
     @Override
     public void onClickTrainingButton() {
-        PressUp mPressUp = new PressUp(1, mFirstRepetition.get(), mSecondRepetition.get(), mThirdRepetition.get(), mFourthRepetition.get(), mFifthRepetition.get());
-        mSetProgramModel.insertInDataBase(mPressUp)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        PressUp pressUp = new PressUp(1, mListOfRepetitions.get().get(0).get(), mListOfRepetitions.get().get(1).get(),
+                mListOfRepetitions.get().get(2).get(), mListOfRepetitions.get().get(3).get(), mListOfRepetitions.get().get(4).get());
+        mSetProgramInteractor.insertInDataBase(pressUp)
                 .subscribe(new DisposableCompletableObserver() {
                     @Override
                     public void onComplete() {
-                        ((SingleLiveEvent<FragmentEvent>) mLiveData).postValue(new FragmentEvent());
+                        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
                     }
 
                     @Override
@@ -144,34 +147,17 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
                     }
                 });
-                /*
-                .subscribe(new CompletableObserver() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        mServiceInfo.set("Началась запись в БД");
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mServiceInfo.set("Возникла ошибка записи в БД");
-                    }
-                });
-        */
-
     }
 
     @Override
     public void onClickChoiceView() {
-        ((SingleLiveEvent<FragmentEvent>) mLiveData).postValue(new FragmentEvent());
+        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
     }
 
     private void setFinalQuantity() {
         mSumOfRepetitions.set(0);
-        mSumOfRepetitions.set(mFirstRepetition.get() + mSecondRepetition.get() + mThirdRepetition.get() + mFourthRepetition.get() + mFifthRepetition.get());
+        for (ObservableField<Integer> item : mListOfRepetitions.get()) {
+            mSumOfRepetitions.set(mSumOfRepetitions.get() + item.get());
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
-import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
+import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -13,16 +13,16 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class SetProgramViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final SetProgramModel mSetProgramModel;
+    private final SetProgramInteractor mSetProgramInteractor;
 
-    public SetProgramViewModelFactory(SetProgramModel setProgramModel) {
+    public SetProgramViewModelFactory(SetProgramInteractor setProgramInteractor) {
         super();
-        mSetProgramModel = setProgramModel;
+        mSetProgramInteractor = setProgramInteractor;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == SetProgramViewModelImpl.class) {
-            return (T) new SetProgramViewModelImpl(mSetProgramModel);
+            return (T) new SetProgramViewModelImpl(mSetProgramInteractor);
         }
         return null;
     }

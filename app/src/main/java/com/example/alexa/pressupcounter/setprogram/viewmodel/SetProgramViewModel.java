@@ -2,6 +2,8 @@ package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 
+import java.util.List;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
 
@@ -12,15 +14,9 @@ import androidx.lifecycle.LiveData;
  */
 public interface SetProgramViewModel {
 
-    ObservableField<Integer> getFirstRepetition();
+    void onCreateView();
 
-    ObservableField<Integer> getSecondRepetition();
-
-    ObservableField<Integer> getThirdRepetition();
-
-    ObservableField<Integer> getFourthRepetition();
-
-    ObservableField<Integer> getFifthRepetition();
+    ObservableField<List<ObservableField<Integer>>> getListOfRepetitions();
 
     ObservableField<Integer> getSumOfRepetitions();
 

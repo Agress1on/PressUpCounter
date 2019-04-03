@@ -10,11 +10,7 @@ import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
-import com.example.alexa.pressupcounter.setprogram.model.SetProgramModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
-import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
-import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
-import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import javax.inject.Inject;
@@ -24,8 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-import dagger.android.AndroidInjection;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -49,6 +43,7 @@ public class SetProgramFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetProgramBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_program, container, false);
         binding.setViewModel(mSetProgramViewModel);
+        mSetProgramViewModel.onCreateView();
         return binding.getRoot();
     }
 
