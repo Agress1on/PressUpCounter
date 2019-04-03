@@ -7,6 +7,7 @@ import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
@@ -27,14 +28,10 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     private LiveData<TimePickerEvent> mTimePickerEventForSecondDay;
     private LiveData<TimePickerEvent> mTimePickerEventForThirdDay;
 
-    private ObservableField<String> mFirstDayTime;
-    private ObservableField<String> mSecondDayTime;
-    private ObservableField<String> mThirdDayTime;
+    private ObservableField<List<ObservableField<String>>> mListTime;
 
     private ArrayList<Integer> mIndexList;
-    private int mFirstDayIndex;
-    private int mSecondDayIndex;
-    private int mThirdDayIndex;
+
     private ObservableField<String> mInfoText;
 
     public SetTimeViewModelImpl(SetTimeModel setTimeModel, ArrayList<Integer> indexList) {
@@ -45,50 +42,19 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
         mTimePickerEventForSecondDay = new SingleLiveEvent<>();
         mTimePickerEventForThirdDay = new SingleLiveEvent<>();
 
-        mFirstDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
-        mSecondDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
-        mThirdDayTime = new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING);
+        List<ObservableField<String>> list = new ArrayList<>();
+        for (int i = 0; i < 3; i++ ) {
+            list.add(new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING));
+        }
+        mListTime = new ObservableField<>(list);
 
         mIndexList = indexList;
-        mFirstDayIndex = mIndexList.get(0);
-        mSecondDayIndex = mIndexList.get(1);
-        mThirdDayIndex = mIndexList.get(2);
-        mInfoText = new ObservableField<>(mFirstDayIndex + " " + mSecondDayIndex + " " + mThirdDayIndex);
+        mInfoText = new ObservableField<>(mIndexList.get(0) + " " + mIndexList.get(1) + " " + mIndexList.get(2));
     }
 
     @Override
-    public LiveData<FragmentEvent> getFragmentEventLiveData() {
-        return mFragmentEventLiveData;
-    }
-
-    @Override
-    public LiveData<TimePickerEvent> getTimePickerEventForFirstDay() {
-        return mTimePickerEventForFirstDay;
-    }
-
-    @Override
-    public LiveData<TimePickerEvent> getTimePickerEventForSecondDay() {
-        return mTimePickerEventForSecondDay;
-    }
-
-    @Override
-    public LiveData<TimePickerEvent> getTimePickerEventForThirdDay() {
-        return mTimePickerEventForThirdDay;
-    }
-
-    @Override
-    public ObservableField<String> getFirstDayTime() {
-        return mFirstDayTime;
-    }
-
-    @Override
-    public ObservableField<String> getSecondDayTime() {
-        return mSecondDayTime;
-    }
-
-    @Override
-    public ObservableField<String> getThirdDayTime() {
-        return mThirdDayTime;
+    public ObservableField<List<ObservableField<String>>> getListTime() {
+        return mListTime;
     }
 
     @Override
@@ -97,18 +63,41 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     }
 
     @Override
+    public LiveData<TimePickerEvent> getFirstDayTimePickerEvent() {
+        return mTimePickerEventForFirstDay;
+    }
+
+    @Override
+    public LiveData<TimePickerEvent> getSecondDayTimePickerEvent() {
+        return mTimePickerEventForSecondDay;
+    }
+
+    @Override
+    public LiveData<TimePickerEvent> getThirdDayTimePickerEvent() {
+        return mTimePickerEventForThirdDay;
+    }
+
+    @Override
+    public LiveData<FragmentEvent> getFragmentEventLiveData() {
+        return mFragmentEventLiveData;
+    }
+
+    @Override
     public void setFirstDayTime(int hours, int minutes) {
-        mFirstDayTime.set(hours + ":" + minutes);
+        //mFirstDayTime.set(hours + ":" + minutes);
+        mListTime.get().get(0).set(hours + ":" + minutes);
     }
 
     @Override
     public void setSecondDayTime(int hours, int minutes) {
-        mSecondDayTime.set(hours + ":" + minutes);
+        //mSecondDayTime.set(hours + ":" + minutes);
+        mListTime.get().get(1).set(hours + ":" + minutes);
     }
 
     @Override
     public void setThirdDayTime(int hours, int minutes) {
-        mThirdDayTime.set(hours + ":" + minutes);
+        //mThirdDayTime.set(hours + ":" + minutes);
+        mListTime.get().get(2).set(hours + ":" + minutes);
     }
 
     @Override

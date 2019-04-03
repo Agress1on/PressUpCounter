@@ -12,12 +12,8 @@ import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
 import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
-import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.settime.inject.SetTimeModule;
-import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
-import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactory;
-import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import java.util.ArrayList;
@@ -30,7 +26,6 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 /**
  * Created by Alexandr Mikhalev on 17.03.2019.
@@ -80,7 +75,7 @@ public class SetTimeFragment extends Fragment {
             }
         });
 
-        mSetTimeViewModel.getTimePickerEventForFirstDay().observe(this, new Observer<TimePickerEvent>() {
+        mSetTimeViewModel.getFirstDayTimePickerEvent().observe(this, new Observer<TimePickerEvent>() {
             @Override
             public void onChanged(TimePickerEvent timePickerEvent) {
                 timePickerDialogForFirst.show(getActivity().getSupportFragmentManager(), "TAAAG");
@@ -96,7 +91,7 @@ public class SetTimeFragment extends Fragment {
             }
         });
 
-        mSetTimeViewModel.getTimePickerEventForSecondDay().observe(this, new Observer<TimePickerEvent>() {
+        mSetTimeViewModel.getSecondDayTimePickerEvent().observe(this, new Observer<TimePickerEvent>() {
             @Override
             public void onChanged(TimePickerEvent timePickerEvent) {
                 timePickerDialogForSecond.show(getActivity().getSupportFragmentManager(), "TAAAG");
@@ -112,7 +107,7 @@ public class SetTimeFragment extends Fragment {
             }
         });
 
-        mSetTimeViewModel.getTimePickerEventForThirdDay().observe(this, new Observer<TimePickerEvent>() {
+        mSetTimeViewModel.getThirdDayTimePickerEvent().observe(this, new Observer<TimePickerEvent>() {
             @Override
             public void onChanged(TimePickerEvent timePickerEvent) {
                 timePickerDialogForThird.show(getActivity().getSupportFragmentManager(), "TAAAG");
