@@ -21,6 +21,7 @@ import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -119,9 +120,10 @@ public class SetTimeFragment extends Fragment {
         });
     }
 
-    public static SetTimeFragment newInstance(ArrayList<Integer> indexList) {
+    public static SetTimeFragment newInstance(List<Integer> indexList) {
+        ArrayList<Integer> list = (ArrayList<Integer>) indexList;
         Bundle args = new Bundle();
-        args.putSerializable(Constants.KEY_FOR_SET_TIME_BUNDLE, indexList);
+        args.putSerializable(Constants.KEY_FOR_SET_TIME_BUNDLE, list);
         SetTimeFragment fragment = new SetTimeFragment();
         fragment.setArguments(args);
         return fragment;

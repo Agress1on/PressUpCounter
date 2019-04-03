@@ -3,6 +3,8 @@ package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
@@ -15,23 +17,11 @@ import androidx.lifecycle.MutableLiveData;
  */
 public interface SetTrainingDayViewModel {
 
-    ObservableField<Boolean> getMonday();
-
-    ObservableField<Boolean> getTuesday();
-
-    ObservableField<Boolean> getWednesday();
-
-    ObservableField<Boolean> getThursday();
-
-    ObservableField<Boolean> getFriday();
-
-    ObservableField<Boolean> getSaturday();
-
-    ObservableField<Boolean> getSunday();
+    ObservableField<List<ObservableField<Boolean>>> getDayOfWeekState();
 
     ObservableField<Boolean> getCheckButtonState();
 
-    ArrayList<Integer> getDaysIndexList();
+    List<Integer> getDaysIndexList();
 
     LiveData<FragmentEvent> getFragmentEventLiveData();
 
