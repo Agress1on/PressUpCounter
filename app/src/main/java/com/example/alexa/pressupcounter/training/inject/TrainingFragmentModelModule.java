@@ -1,8 +1,7 @@
 package com.example.alexa.pressupcounter.training.inject;
 
-import com.example.alexa.pressupcounter.data.AppDatabase;
 import com.example.alexa.pressupcounter.data.PressUpDao;
-import com.example.alexa.pressupcounter.training.model.TrainingFragmentModel;
+import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModelFactory;
@@ -28,8 +27,8 @@ public class TrainingFragmentModelModule {
 
     @TrainingFragmentModelScope
     @Provides
-    TrainingFragmentModel provideTrainingFragmentModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
-        return new TrainingFragmentModel(appDatabase, pressUpDao);
+    TrainingInteractor provideTrainingFragmentModel(PressUpDao pressUpDao) {
+        return new TrainingInteractor(pressUpDao);
     }
 
     @TrainingFragmentModelScope
@@ -40,7 +39,7 @@ public class TrainingFragmentModelModule {
 
     @TrainingFragmentModelScope
     @Provides
-    TrainingViewModelFactory provideTrainingViewModelFactory(TrainingFragmentModel model) {
+    TrainingViewModelFactory provideTrainingViewModelFactory(TrainingInteractor model) {
         return new TrainingViewModelFactory(model);
     }
 }

@@ -13,6 +13,8 @@ import androidx.lifecycle.MutableLiveData;
  */
 public interface TrainingViewModel {
 
+    void onCreateView();
+
     ObservableField<Integer> getRepetition();
 
     ObservableField<String> getQuantityOfRepetitionOrRestTime();
@@ -21,27 +23,30 @@ public interface TrainingViewModel {
 
     ObservableField<Boolean> getStateOfRestButton();
 
-    LiveData<DialogEvent> getDialogEventForRest();
+    LiveData<DialogEvent> getRestDialogEvent();
 
-    LiveData<DialogEvent> getDialogEventForRestOff();
+    LiveData<DialogEvent> getRestOffDialogEvent();
 
-    LiveData<DialogEvent> getDialogEventFinishTraining();
+    LiveData<DialogEvent> getFinishTrainingDialogEvent();
 
     void goToNextRepetition();
 
+    void onClickRestButton();
+
+    void onClickFinishTrainingButton();
+
+    void onClickNextRepetitionButton();
+
+    //RestDialog
     void onClickPositiveButtonOfRestDialog();
 
     void onClickNegativeButtonOfRestDialog();
 
     void onCancelOfRestDialog();
 
+    //RestOffDialog
     void onClickAdditionalTimeForRest();
 
-    void onClickNextRepetitionButton();
-
-    void onClickRestButton();
-
-    void onClickFinishTrainingButton();
-
-    void writeNewProgramInDB();
+    //FinishTrainingDialog
+    void onClickPositiveButtonFinishDialog();
 }
