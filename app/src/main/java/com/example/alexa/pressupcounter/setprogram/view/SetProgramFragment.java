@@ -9,7 +9,7 @@ import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
-import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
+import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModule;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
@@ -34,7 +34,7 @@ public class SetProgramFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createSetProgramModelComponent(new SetProgramModelModule(this)).inject(this);
+        App.getAppComponent().createSetProgramModelComponent(new SetProgramModule(this)).inject(this);
         init();
     }
 

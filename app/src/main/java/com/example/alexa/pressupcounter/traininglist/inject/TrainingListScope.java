@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.settrainingday.inject;
+package com.example.alexa.pressupcounter.traininglist.inject;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,5 +12,6 @@ import javax.inject.Scope;
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SetTrainingDayModelScope {
+public @interface TrainingListScope {
+
 }

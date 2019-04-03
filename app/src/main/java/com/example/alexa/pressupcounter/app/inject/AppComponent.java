@@ -6,20 +6,20 @@ import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchComponent;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
 import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingComponent;
 import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingModule;
-import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelComponent;
-import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModelModule;
+import com.example.alexa.pressupcounter.setprogram.inject.SetProgramComponent;
+import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModule;
 import com.example.alexa.pressupcounter.settime.inject.SetTimeComponent;
 import com.example.alexa.pressupcounter.settime.inject.SetTimeModule;
 import com.example.alexa.pressupcounter.settings.inject.SettingsComponent;
 import com.example.alexa.pressupcounter.settings.inject.SettingsModule;
-import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelComponent;
-import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelModule;
-import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelComponent;
-import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
-import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelComponent;
-import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelModule;
-import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelComponent;
-import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelModule;
+import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayComponent;
+import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModule;
+import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingComponent;
+import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModule;
+import com.example.alexa.pressupcounter.training.inject.TrainingFragmentComponent;
+import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListComponent;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModule;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -37,15 +37,15 @@ public interface AppComponent {
 
     SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
 
-    SetProgramModelComponent createSetProgramModelComponent(SetProgramModelModule setProgramModelModule);
+    SetProgramComponent createSetProgramModelComponent(SetProgramModule setProgramModule);
 
-    StartTrainingModelComponent createStartTrainingModelComponent(StartTrainingModelModule startTrainingModelModule);
+    StartTrainingComponent createStartTrainingModelComponent(StartTrainingModule startTrainingModule);
 
-    TrainingFragmentModelComponent createTrainingFragmentModelComponent(TrainingFragmentModelModule trainingFragmentModelModule);
+    TrainingFragmentComponent createTrainingFragmentModelComponent(TrainingFragmentModule trainingFragmentModule);
 
-    TrainingListModelComponent createTrainingListModelComponent(TrainingListModelModule trainingListModelModule);
+    TrainingListComponent createTrainingListModelComponent(TrainingListModule trainingListModule);
 
-    SetTrainingDayModelComponent createSetTrainingDayModelComponent(SetTrainingDayModelModule setTrainingDayModelModule);
+    SetTrainingDayComponent createSetTrainingDayModelComponent(SetTrainingDayModule setTrainingDayModule);
 
     ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
 

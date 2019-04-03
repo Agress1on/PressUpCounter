@@ -9,9 +9,9 @@ import dagger.Subcomponent;
  *
  * @author Alexandr Mikhalev
  */
-@SetTrainingDayModelScope
-@Subcomponent(modules = SetTrainingDayModelModule.class)
-public interface SetTrainingDayModelComponent {
+@SetTrainingDayScope
+@Subcomponent(modules = SetTrainingDayModule.class)
+public interface SetTrainingDayComponent {
 
     void inject(SetTrainingDayFragment setTrainingDayFragment);
 }

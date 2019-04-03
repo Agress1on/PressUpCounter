@@ -8,11 +8,8 @@ import android.view.ViewGroup;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
-import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModelModule;
-import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModule;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
-import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelFactory;
-import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModelImpl;
 
 import javax.inject.Inject;
 
@@ -20,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +36,7 @@ public class TrainingListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createTrainingListModelComponent(new TrainingListModelModule(this)).inject(this);
+        App.getAppComponent().createTrainingListModelComponent(new TrainingListModule(this)).inject(this);
     }
 
     @Nullable

@@ -17,29 +17,29 @@ import dagger.Provides;
  * @author Alexandr Mikhalev
  */
 @Module
-public class SetProgramModelModule {
+public class SetProgramModule {
 
     private SetProgramFragment mFragment;
 
-    public SetProgramModelModule(SetProgramFragment fragment) {
+    public SetProgramModule(SetProgramFragment fragment) {
         mFragment = fragment;
     }
 
-    @SetProgramModelScope
+    @SetProgramScope
     @Provides
     SetProgramInteractor provideSetProgramModel(PressUpDao pressUpDao) {
         return new SetProgramInteractor(pressUpDao);
     }
 
-    @SetProgramModelScope
+    @SetProgramScope
     @Provides
     SetProgramViewModel provideSetTrainingDayViewModel(SetProgramViewModelFactory factory) {
         return ViewModelProviders.of(mFragment, factory).get(SetProgramViewModelImpl.class);
     }
 
-    @SetProgramModelScope
+    @SetProgramScope
     @Provides
-    SetProgramViewModelFactory provideSetTrainingDayViewModelFactory(SetProgramInteractor setProgramInteractor) {
+    SetProgramViewModelFactory provideFactory(SetProgramInteractor setProgramInteractor) {
         return new SetProgramViewModelFactory(setProgramInteractor);
     }
 }

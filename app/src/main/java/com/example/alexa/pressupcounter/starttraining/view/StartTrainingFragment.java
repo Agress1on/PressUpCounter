@@ -11,7 +11,7 @@ import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding
 import com.example.alexa.pressupcounter.dialogs.ExclamationDialog;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
-import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModelModule;
+import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModule;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
@@ -37,7 +37,7 @@ public class StartTrainingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createStartTrainingModelComponent(new StartTrainingModelModule(this)).inject(this);
+        App.getAppComponent().createStartTrainingModelComponent(new StartTrainingModule(this)).inject(this);
         init();
 
     }

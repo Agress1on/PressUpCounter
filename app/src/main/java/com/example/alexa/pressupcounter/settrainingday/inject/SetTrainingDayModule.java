@@ -16,27 +16,27 @@ import dagger.Provides;
  * @author Alexandr Mikhalev
  */
 @Module
-public class SetTrainingDayModelModule {
+public class SetTrainingDayModule {
 
     private SetTrainingDayFragment mFragment;
 
-    public SetTrainingDayModelModule(SetTrainingDayFragment fragment) {
+    public SetTrainingDayModule(SetTrainingDayFragment fragment) {
         mFragment = fragment;
     }
 
-    @SetTrainingDayModelScope
+    @SetTrainingDayScope
     @Provides
     SetTrainingDayModel provideSetTrainingDayModelModule() {
         return new SetTrainingDayModel();
     }
 
-    @SetTrainingDayModelScope
+    @SetTrainingDayScope
     @Provides
     SetTrainingDayViewModelFactory provideFactory(SetTrainingDayModel setTrainingDayModel) {
         return new SetTrainingDayViewModelFactory(setTrainingDayModel);
     }
 
-    @SetTrainingDayModelScope
+    @SetTrainingDayScope
     @Provides
     SetTrainingDayViewModel provideSetTrainingDayViewModel(SetTrainingDayViewModelFactory factory) {
         return ViewModelProviders.of(mFragment, factory).get(SetTrainingDayViewModelImpl.class);

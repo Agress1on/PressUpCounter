@@ -10,7 +10,7 @@ import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTrainingDayBinding;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
-import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModelModule;
+import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModule;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel;
 
 import javax.inject.Inject;
@@ -34,7 +34,7 @@ public class SetTrainingDayFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModelModule(this)).inject(this);
+        App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModule(this)).inject(this);
         init();
     }
 

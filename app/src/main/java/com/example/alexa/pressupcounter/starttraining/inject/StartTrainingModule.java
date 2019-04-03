@@ -17,29 +17,29 @@ import dagger.Provides;
  * @author Alexandr Mikhalev
  */
 @Module
-public class StartTrainingModelModule {
+public class StartTrainingModule {
 
     private StartTrainingFragment mFragment;
 
-    public StartTrainingModelModule(StartTrainingFragment fragment) {
+    public StartTrainingModule(StartTrainingFragment fragment) {
         mFragment = fragment;
     }
 
-    @StartTrainingModelScope
+    @StartTrainingScope
     @Provides
     StartTrainingInteractor provideStartTrainingModel(PressUpDao pressUpDao) {
         return new StartTrainingInteractor(pressUpDao);
     }
 
-    @StartTrainingModelScope
+    @StartTrainingScope
     @Provides
     StartTrainingViewModel provideStartTrainingViewModel(StartTrainingViewModelFactory factory) {
         return ViewModelProviders.of(mFragment, factory).get(StartTrainingViewModelImpl.class);
     }
 
-    @StartTrainingModelScope
+    @StartTrainingScope
     @Provides
-    StartTrainingViewModelFactory provideStartTrainingViewModelFactory(StartTrainingInteractor model) {
+    StartTrainingViewModelFactory provideFactory(StartTrainingInteractor model) {
         return new StartTrainingViewModelFactory(model);
     }
 }

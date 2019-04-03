@@ -9,9 +9,9 @@ import dagger.Subcomponent;
  *
  * @author Alexandr Mikhalev
  */
-@TrainingListModelScope
-@Subcomponent(modules = TrainingListModelModule.class)
-public interface TrainingListModelComponent {
+@TrainingListScope
+@Subcomponent(modules = TrainingListModule.class)
+public interface TrainingListComponent {
 
     void inject(TrainingListFragment trainingListFragment);
 }

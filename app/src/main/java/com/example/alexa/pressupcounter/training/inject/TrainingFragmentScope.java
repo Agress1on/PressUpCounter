@@ -12,6 +12,6 @@ import javax.inject.Scope;
  */
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface TrainingFragmentModelScope {
+public @interface TrainingFragmentScope {
 
 }

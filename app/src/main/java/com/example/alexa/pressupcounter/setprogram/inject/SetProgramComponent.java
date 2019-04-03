@@ -9,9 +9,9 @@ import dagger.Subcomponent;
  *
  * @author Alexandr Mikhalev
  */
-@SetProgramModelScope
-@Subcomponent(modules = SetProgramModelModule.class)
-public interface SetProgramModelComponent {
+@SetProgramScope
+@Subcomponent(modules = SetProgramModule.class)
+public interface SetProgramComponent {
 
     void inject(SetProgramFragment setProgramFragment);
 

@@ -13,7 +13,7 @@ import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
 import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
-import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModelModule;
+import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 
 import javax.inject.Inject;
@@ -41,7 +41,7 @@ public class TrainingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModelModule(this)).inject(this);
+        App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModule(this)).inject(this);
         init();
     }
 

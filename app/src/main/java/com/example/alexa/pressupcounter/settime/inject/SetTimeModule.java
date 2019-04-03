@@ -38,7 +38,7 @@ public class SetTimeModule {
 
     @SetTimeScope
     @Provides
-    SetTimeViewModelFactory provideSetTimeFactory(SetTimeModel model) {
+    SetTimeViewModelFactory provideFactory(SetTimeModel model) {
         return new SetTimeViewModelFactory(model, mIndexList);
     }
 

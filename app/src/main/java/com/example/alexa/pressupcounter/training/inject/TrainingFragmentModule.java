@@ -17,27 +17,27 @@ import dagger.Provides;
  * @author Alexandr Mikhalev
  */
 @Module
-public class TrainingFragmentModelModule {
+public class TrainingFragmentModule {
 
     private TrainingFragment mFragment;
 
-    public TrainingFragmentModelModule(TrainingFragment fragment) {
+    public TrainingFragmentModule(TrainingFragment fragment) {
         mFragment = fragment;
     }
 
-    @TrainingFragmentModelScope
+    @TrainingFragmentScope
     @Provides
     TrainingInteractor provideTrainingFragmentModel(PressUpDao pressUpDao) {
         return new TrainingInteractor(pressUpDao);
     }
 
-    @TrainingFragmentModelScope
+    @TrainingFragmentScope
     @Provides
     TrainingViewModel provideTrainingViewModel(TrainingViewModelFactory factory) {
         return ViewModelProviders.of(mFragment, factory).get(TrainingViewModelImpl.class);
     }
 
-    @TrainingFragmentModelScope
+    @TrainingFragmentScope
     @Provides
     TrainingViewModelFactory provideTrainingViewModelFactory(TrainingInteractor model) {
         return new TrainingViewModelFactory(model);
