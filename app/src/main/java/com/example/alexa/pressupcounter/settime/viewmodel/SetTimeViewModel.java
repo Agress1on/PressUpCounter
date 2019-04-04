@@ -27,17 +27,9 @@ public interface SetTimeViewModel {
 
     LiveData<TimePickerEvent> getThirdDayTimePickerEvent();
 
-    void setFirstDayTime(int hours, int minutes);
+    void setDayTime(TimePickerEvent.DayNotification dayNotification, int hours, int minutes);
 
-    void setSecondDayTime(int hours, int minutes);
-
-    void setThirdDayTime(int hours, int minutes);
-
-    void onClickSetFirstDayTime();
-
-    void onClickSetSecondDayTime();
-
-    void onClickSetThirdDayTime();
+    void onClickSetTime(TimePickerEvent.DayNotification dayNotification);
 
     void onClickSetTimeButton();
 }

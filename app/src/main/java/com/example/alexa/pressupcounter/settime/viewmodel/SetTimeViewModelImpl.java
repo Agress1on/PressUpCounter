@@ -11,7 +11,6 @@ import java.util.List;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -43,7 +42,7 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
         mTimePickerEventForThirdDay = new SingleLiveEvent<>();
 
         List<ObservableField<String>> list = new ArrayList<>();
-        for (int i = 0; i < 3; i++ ) {
+        for (int i = 0; i < 3; i++) {
             list.add(new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING));
         }
         mListTime = new ObservableField<>(list);
@@ -83,39 +82,33 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     }
 
     @Override
-    public void setFirstDayTime(int hours, int minutes) {
-        //mFirstDayTime.set(hours + ":" + minutes);
-        mListTime.get().get(0).set(hours + ":" + minutes);
+    public void setDayTime(TimePickerEvent.DayNotification dayNotification, int hours, int minutes) {
+        switch (dayNotification) {
+            case FIRST_DAY:
+                mListTime.get().get(0).set(hours + ":" + minutes);
+                break;
+            case SECOND_DAY:
+                mListTime.get().get(1).set(hours + ":" + minutes);
+                break;
+            case THIRD_DAY:
+                mListTime.get().get(2).set(hours + ":" + minutes);
+                break;
+        }
     }
 
     @Override
-    public void setSecondDayTime(int hours, int minutes) {
-        //mSecondDayTime.set(hours + ":" + minutes);
-        mListTime.get().get(1).set(hours + ":" + minutes);
-    }
-
-    @Override
-    public void setThirdDayTime(int hours, int minutes) {
-        //mThirdDayTime.set(hours + ":" + minutes);
-        mListTime.get().get(2).set(hours + ":" + minutes);
-    }
-
-    @Override
-    public void onClickSetFirstDayTime() {
-        //mTimePickerEventForFirstDay.postValue(new TimePickerEvent());
-        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForFirstDay).postValue(new TimePickerEvent());
-    }
-
-    @Override
-    public void onClickSetSecondDayTime() {
-        //mTimePickerEventForSecondDay.postValue(new TimePickerEvent());
-        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForSecondDay).postValue(new TimePickerEvent());
-    }
-
-    @Override
-    public void onClickSetThirdDayTime() {
-        //mTimePickerEventForThirdDay.postValue(new TimePickerEvent());
-        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForThirdDay).postValue(new TimePickerEvent());
+    public void onClickSetTime(TimePickerEvent.DayNotification dayNotification) {
+        switch (dayNotification) {
+            case FIRST_DAY:
+                ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForFirstDay).postValue(new TimePickerEvent(TimePickerEvent.DayNotification.FIRST_DAY));
+                break;
+            case SECOND_DAY:
+                ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForSecondDay).postValue(new TimePickerEvent(TimePickerEvent.DayNotification.SECOND_DAY));
+                break;
+            case THIRD_DAY:
+                ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForThirdDay).postValue(new TimePickerEvent(TimePickerEvent.DayNotification.THIRD_DAY));
+                break;
+        }
     }
 
     @Override

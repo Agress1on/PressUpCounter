@@ -8,6 +8,7 @@
         <variable
             name="viewModel"
             type="com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel" />
+        <import type="com.example.alexa.pressupcounter.events.TimePickerEvent.DayNotification" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:onClick="@{() -> viewModel.onClickSetFirstDayTime()}"
+            android:onClick="@{() -> viewModel.onClickSetTime(DayNotification.FIRST_DAY)}"
             android:text="@{viewModel.listTime.get().get(0)}"
             android:textSize="30sp"
             app:customTextColor="@{viewModel.listTime.get().get(0)}"
@@ -55,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:onClick="@{() -> viewModel.onClickSetSecondDayTime()}"
+            android:onClick="@{() -> viewModel.onClickSetTime(DayNotification.SECOND_DAY)}"
             android:text="@{viewModel.listTime.get().get(1)}"
             android:textSize="30sp"
             app:customTextColor="@{viewModel.listTime.get().get(1)}"
@@ -69,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:onClick="@{() -> viewModel.onClickSetThirdDayTime()}"
+            android:onClick="@{() -> viewModel.onClickSetTime(DayNotification.THIRD_DAY)}"
             android:text="@{viewModel.listTime.get().get(2)}"
             android:textSize="30sp"
             app:customTextColor="@{viewModel.listTime.get().get(2)}"

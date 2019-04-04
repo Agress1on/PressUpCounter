@@ -71,7 +71,8 @@ public class SetTimeFragment extends Fragment {
         timePickerDialogForFirst.init(new TimePickerDialogFragment.SetTime() {
             @Override
             public void setTime(int hourOfDay, int minute) {
-                mSetTimeViewModel.setFirstDayTime(hourOfDay, minute);
+                //mSetTimeViewModel.setFirstDayTime(hourOfDay, minute);
+                mSetTimeViewModel.setDayTime(TimePickerEvent.DayNotification.FIRST_DAY, hourOfDay, minute);
             }
         });
 
@@ -87,7 +88,8 @@ public class SetTimeFragment extends Fragment {
         timePickerDialogForSecond.init(new TimePickerDialogFragment.SetTime() {
             @Override
             public void setTime(int hourOfDay, int minute) {
-                mSetTimeViewModel.setSecondDayTime(hourOfDay, minute);
+                //mSetTimeViewModel.setSecondDayTime(hourOfDay, minute);
+                mSetTimeViewModel.setDayTime(TimePickerEvent.DayNotification.SECOND_DAY, hourOfDay, minute);
             }
         });
 
@@ -103,7 +105,8 @@ public class SetTimeFragment extends Fragment {
         timePickerDialogForThird.init(new TimePickerDialogFragment.SetTime() {
             @Override
             public void setTime(int hourOfDay, int minute) {
-                mSetTimeViewModel.setThirdDayTime(hourOfDay, minute);
+                //mSetTimeViewModel.setThirdDayTime(hourOfDay, minute);
+                mSetTimeViewModel.setDayTime(TimePickerEvent.DayNotification.THIRD_DAY, hourOfDay, minute);
             }
         });
 
