@@ -1,12 +1,16 @@
 package com.example.alexa.pressupcounter.traininglist.viewmodel;
 
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.events.EventForUpdateList;
 import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.ObservableField;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -20,6 +24,7 @@ import io.reactivex.schedulers.Schedulers;
  * @author Alexandr Mikhalev
  */
 public class TrainingListViewModelImpl extends ViewModel implements TrainingListViewModel {
+
     private TrainingListModel mTrainingListModel;
 
     private List<PressUp> mPressUpList;
@@ -27,20 +32,27 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
 
     private ObservableField<Boolean> mProgressBarState;
 
+    private LiveData<EventForUpdateList> mEventForUpdateList;
+
     public TrainingListViewModelImpl(TrainingListModel trainingListModel) {
         mTrainingListModel = trainingListModel;
         mCompositeDisposable = new CompositeDisposable();
         mPressUpList = new ArrayList<>();
         mProgressBarState = new ObservableField<>(true);
 
+        mEventForUpdateList = new SingleLiveEvent<>();
+    }
+
+    @Override
+    public void onCreateView() {
         Disposable disposable = mTrainingListModel.getAllPressUps()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<PressUp>>() {
                     @Override
                     public void accept(List<PressUp> pressUps) throws Exception {
-
                         mPressUpList = pressUps;
+                        ((SingleLiveEvent) mEventForUpdateList).postValue(new EventForUpdateList());
                         mProgressBarState.set(false);
                     }
                 });
@@ -55,5 +67,10 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
     @Override
     public ObservableField<Boolean> getProgressBarState() {
         return mProgressBarState;
+    }
+
+    @Override
+    public LiveData<EventForUpdateList> getEventForUpdateList() {
+        return mEventForUpdateList;
     }
 }

@@ -7,9 +7,14 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
+import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
+import com.example.alexa.pressupcounter.events.EventForUpdateList;
 import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModule;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
+import com.example.alexa.pressupcounter.utils.DiffUtilTrainingList;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,6 +22,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,6 +44,7 @@ public class TrainingListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().createTrainingListModelComponent(new TrainingListModule(this)).inject(this);
+        init();
     }
 
     @Nullable
@@ -53,7 +61,20 @@ public class TrainingListFragment extends Fragment {
 
         mRecyclerView.setAdapter(mPressUpAdapter);
         mPressUpAdapter.setData(mTrainingListViewModel.getPressUpList());
+        mTrainingListViewModel.onCreateView();
         return binding.getRoot();
+    }
+
+    private void init() {
+        mTrainingListViewModel.getEventForUpdateList()
+                .observe(this, eventForUpdateList -> updateAdapter(mTrainingListViewModel.getPressUpList()));
+    }
+
+    private void updateAdapter(List<PressUp> newList) {
+        DiffUtilTrainingList diffUtilTrainingList = new DiffUtilTrainingList(mPressUpAdapter.getData(), newList);
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilTrainingList);
+        mPressUpAdapter.setData(newList);
+        diffResult.dispatchUpdatesTo(mPressUpAdapter);
     }
 
     public static TrainingListFragment newInstance() {
