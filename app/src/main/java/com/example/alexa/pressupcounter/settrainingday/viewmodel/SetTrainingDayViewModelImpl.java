@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
-import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
+import com.example.alexa.pressupcounter.settrainingday.interactor.SetTrainingDayInteractor;
 import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModel;
  */
 public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainingDayViewModel {
 
-    private SetTrainingDayModel mSetTrainingDayModel;
+    private SetTrainingDayInteractor mSetTrainingDayInteractor;
     private SetTrainingDayRouter mSetTrainingDayRouter;
 
     private ObservableField<List<ObservableField<Boolean>>> mDayOfWeekStatesObservableField;
@@ -24,8 +24,8 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
     private List<Integer> mIndexList;
 
-    public SetTrainingDayViewModelImpl(SetTrainingDayModel setTrainingDayModel, SetTrainingDayRouter setTrainingDayRouter) {
-        mSetTrainingDayModel = setTrainingDayModel;
+    public SetTrainingDayViewModelImpl(SetTrainingDayInteractor setTrainingDayInteractor, SetTrainingDayRouter setTrainingDayRouter) {
+        mSetTrainingDayInteractor = setTrainingDayInteractor;
         mSetTrainingDayRouter = setTrainingDayRouter;
 
         List<ObservableField<Boolean>> states = new ArrayList<>();

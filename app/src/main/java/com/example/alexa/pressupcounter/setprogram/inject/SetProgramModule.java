@@ -29,7 +29,7 @@ public class SetProgramModule {
 
     @SetProgramScope
     @Provides
-    SetProgramInteractor provideSetProgramModel(PressUpDao pressUpDao) {
+    SetProgramInteractor provideSetProgramInteractor(PressUpDao pressUpDao) {
         return new SetProgramInteractor(pressUpDao);
     }
 

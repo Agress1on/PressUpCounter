@@ -29,7 +29,7 @@ public class StartTrainingModule {
 
     @StartTrainingScope
     @Provides
-    StartTrainingInteractor provideStartTrainingModel(PressUpDao pressUpDao) {
+    StartTrainingInteractor provideStartTrainingInteractor(PressUpDao pressUpDao) {
         return new StartTrainingInteractor(pressUpDao);
     }
 
@@ -41,8 +41,8 @@ public class StartTrainingModule {
 
     @StartTrainingScope
     @Provides
-    StartTrainingViewModelFactory provideFactory(StartTrainingInteractor model, StartTrainingRouter startTrainingRouter) {
-        return new StartTrainingViewModelFactory(model, startTrainingRouter);
+    StartTrainingViewModelFactory provideFactory(StartTrainingInteractor interactor, StartTrainingRouter startTrainingRouter) {
+        return new StartTrainingViewModelFactory(interactor, startTrainingRouter);
     }
 
     @StartTrainingScope

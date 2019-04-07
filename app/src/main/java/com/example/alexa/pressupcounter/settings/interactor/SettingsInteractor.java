@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.settings.model;
+package com.example.alexa.pressupcounter.settings.interactor;
 
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.data.PressUpDao;
@@ -12,11 +12,11 @@ import io.reactivex.Single;
  *
  * @author Alexandr Mikhalev
  */
-public class SettingsModel {
+public class SettingsInteractor {
 
     private PressUpDao mPressUpDao;
 
-    public SettingsModel(PressUpDao pressUpDao) {
+    public SettingsInteractor(PressUpDao pressUpDao) {
         mPressUpDao = pressUpDao;
     }
 

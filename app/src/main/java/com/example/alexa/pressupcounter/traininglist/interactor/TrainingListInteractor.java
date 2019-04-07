@@ -1,4 +1,4 @@
-package com.example.alexa.pressupcounter.traininglist.model;
+package com.example.alexa.pressupcounter.traininglist.interactor;
 
 import com.example.alexa.pressupcounter.data.AppDatabase;
 import com.example.alexa.pressupcounter.data.PressUp;
@@ -14,12 +14,12 @@ import io.reactivex.Single;
  *
  * @author Alexandr Mikhalev
  */
-public class TrainingListModel {
+public class TrainingListInteractor {
 
     private AppDatabase mAppDatabase;
     private PressUpDao mPressUpDao;
 
-    public TrainingListModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
+    public TrainingListInteractor(AppDatabase appDatabase, PressUpDao pressUpDao) {
         mAppDatabase = appDatabase;
         mPressUpDao = pressUpDao;
     }

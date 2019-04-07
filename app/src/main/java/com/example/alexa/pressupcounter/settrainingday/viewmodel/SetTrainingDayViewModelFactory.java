@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
-import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
+import com.example.alexa.pressupcounter.settrainingday.interactor.SetTrainingDayInteractor;
 import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
 
 import androidx.annotation.NonNull;
@@ -14,18 +14,18 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class SetTrainingDayViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final SetTrainingDayModel mSetTrainingDayModel;
+    private final SetTrainingDayInteractor mSetTrainingDayInteractor;
     private final SetTrainingDayRouter mSetTrainingDayRouter;
 
-    public SetTrainingDayViewModelFactory(SetTrainingDayModel setTrainingDayModel, SetTrainingDayRouter router) {
+    public SetTrainingDayViewModelFactory(SetTrainingDayInteractor setTrainingDayInteractor, SetTrainingDayRouter router) {
         super();
-        mSetTrainingDayModel = setTrainingDayModel;
+        mSetTrainingDayInteractor = setTrainingDayInteractor;
         mSetTrainingDayRouter = router;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == SetTrainingDayViewModelImpl.class) {
-            return (T) new SetTrainingDayViewModelImpl(mSetTrainingDayModel, mSetTrainingDayRouter);
+            return (T) new SetTrainingDayViewModelImpl(mSetTrainingDayInteractor, mSetTrainingDayRouter);
         }
         return null;
     }

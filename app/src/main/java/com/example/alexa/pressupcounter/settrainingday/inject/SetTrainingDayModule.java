@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settrainingday.inject;
 
-import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
+import com.example.alexa.pressupcounter.settrainingday.interactor.SetTrainingDayInteractor;
 import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
 import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouterImpl;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
@@ -28,8 +28,8 @@ public class SetTrainingDayModule {
 
     @SetTrainingDayScope
     @Provides
-    SetTrainingDayModel provideSetTrainingDayModelModule() {
-        return new SetTrainingDayModel();
+    SetTrainingDayInteractor provideSetTrainingDayInteractor() {
+        return new SetTrainingDayInteractor();
     }
 
     @SetTrainingDayScope
@@ -40,8 +40,8 @@ public class SetTrainingDayModule {
 
     @SetTrainingDayScope
     @Provides
-    SetTrainingDayViewModelFactory provideFactory(SetTrainingDayModel setTrainingDayModel, SetTrainingDayRouter router) {
-        return new SetTrainingDayViewModelFactory(setTrainingDayModel, router);
+    SetTrainingDayViewModelFactory provideFactory(SetTrainingDayInteractor setTrainingDayInteractor, SetTrainingDayRouter router) {
+        return new SetTrainingDayViewModelFactory(setTrainingDayInteractor, router);
     }
 
     @SetTrainingDayScope

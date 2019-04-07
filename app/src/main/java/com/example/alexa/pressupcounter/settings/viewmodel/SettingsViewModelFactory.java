@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settings.viewmodel;
 
-import com.example.alexa.pressupcounter.settings.model.SettingsModel;
+import com.example.alexa.pressupcounter.settings.interactor.SettingsInteractor;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 
 import androidx.annotation.NonNull;
@@ -14,18 +14,18 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class SettingsViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final SettingsModel mSettingsModel;
+    private final SettingsInteractor mSettingsInteractor;
     private final SettingsRouter mSettingsRouter;
 
-    public SettingsViewModelFactory(SettingsModel settingsModel, SettingsRouter router) {
+    public SettingsViewModelFactory(SettingsInteractor settingsInteractor, SettingsRouter router) {
         super();
-        mSettingsModel = settingsModel;
+        mSettingsInteractor = settingsInteractor;
         mSettingsRouter = router;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == SettingsViewModelImpl.class) {
-            return (T) new SettingsViewModelImpl(mSettingsModel, mSettingsRouter);
+            return (T) new SettingsViewModelImpl(mSettingsInteractor, mSettingsRouter);
         }
         return null;
     }

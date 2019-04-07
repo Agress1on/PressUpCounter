@@ -2,7 +2,7 @@ package com.example.alexa.pressupcounter.settime.viewmodel;
 
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
-import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
+import com.example.alexa.pressupcounter.settime.interactor.SetTimeInteractor;
 import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModel;
  */
 public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel {
 
-    private SetTimeModel mSetTimeModel;
+    private SetTimeInteractor mSetTimeInteractor;
     private SetTimeRouter mSetTimeRouter;
 
     private ObservableField<List<ObservableField<String>>> mListTime;
@@ -27,8 +27,8 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
 
     private ObservableField<String> mInfoText;
 
-    public SetTimeViewModelImpl(SetTimeModel setTimeModel, SetTimeRouter setTimeRouter, ArrayList<Integer> indexList) {
-        mSetTimeModel = setTimeModel;
+    public SetTimeViewModelImpl(SetTimeInteractor setTimeInteractor, SetTimeRouter setTimeRouter, ArrayList<Integer> indexList) {
+        mSetTimeInteractor = setTimeInteractor;
         mSetTimeRouter = setTimeRouter;
 
         List<ObservableField<String>> list = new ArrayList<>();

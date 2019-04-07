@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settings.viewmodel;
 
-import com.example.alexa.pressupcounter.settings.model.SettingsModel;
+import com.example.alexa.pressupcounter.settings.interactor.SettingsInteractor;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 
 import androidx.lifecycle.ViewModel;
@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModel;
  */
 public class SettingsViewModelImpl extends ViewModel implements SettingsViewModel {
 
-    private SettingsModel mSettingsModel;
+    private SettingsInteractor mSettingsInteractor;
     private SettingsRouter mSettingsRouter;
 
-    public SettingsViewModelImpl(SettingsModel settingsModel, SettingsRouter router) {
-        mSettingsModel = settingsModel;
+    public SettingsViewModelImpl(SettingsInteractor settingsInteractor, SettingsRouter router) {
+        mSettingsInteractor = settingsInteractor;
         mSettingsRouter = router;
     }
 

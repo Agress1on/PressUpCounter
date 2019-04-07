@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.traininglist.viewmodel;
 
-import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
+import com.example.alexa.pressupcounter.traininglist.interactor.TrainingListInteractor;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -13,16 +13,16 @@ import androidx.lifecycle.ViewModelProvider;
  */
 public class TrainingListViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
-    private final TrainingListModel mTrainingListModel;
+    private final TrainingListInteractor mTrainingListInteractor;
 
-    public TrainingListViewModelFactory(TrainingListModel trainingListModel) {
+    public TrainingListViewModelFactory(TrainingListInteractor trainingListInteractor) {
         super();
-        mTrainingListModel = trainingListModel;
+        mTrainingListInteractor = trainingListInteractor;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == TrainingListViewModelImpl.class) {
-            return (T) new TrainingListViewModelImpl(mTrainingListModel);
+            return (T) new TrainingListViewModelImpl(mTrainingListInteractor);
         }
         return null;
     }

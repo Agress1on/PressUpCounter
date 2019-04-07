@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.settings.inject;
 
 import com.example.alexa.pressupcounter.data.PressUpDao;
-import com.example.alexa.pressupcounter.settings.model.SettingsModel;
+import com.example.alexa.pressupcounter.settings.interactor.SettingsInteractor;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouterImpl;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
@@ -29,8 +29,8 @@ public class SettingsModule {
 
     @SettingsScope
     @Provides
-    SettingsModel provideSettingsModule(PressUpDao pressUpDao) {
-        return new SettingsModel(pressUpDao);
+    SettingsInteractor provideSettingsInteractor(PressUpDao pressUpDao) {
+        return new SettingsInteractor(pressUpDao);
     }
 
     @SettingsScope
@@ -41,8 +41,8 @@ public class SettingsModule {
 
     @SettingsScope
     @Provides
-    SettingsViewModelFactory provideFactory(SettingsModel settingsModel, SettingsRouter router) {
-        return new SettingsViewModelFactory(settingsModel, router);
+    SettingsViewModelFactory provideFactory(SettingsInteractor settingsInteractor, SettingsRouter router) {
+        return new SettingsViewModelFactory(settingsInteractor, router);
     }
 
     @SettingsScope

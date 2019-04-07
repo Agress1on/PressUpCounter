@@ -3,14 +3,13 @@ package com.example.alexa.pressupcounter.traininglist.viewmodel;
 import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.events.EventForUpdateList;
-import com.example.alexa.pressupcounter.traininglist.model.TrainingListModel;
+import com.example.alexa.pressupcounter.traininglist.interactor.TrainingListInteractor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TrainingListViewModelImpl extends ViewModel implements TrainingListViewModel {
 
-    private TrainingListModel mTrainingListModel;
+    private TrainingListInteractor mTrainingListInteractor;
 
     private List<PressUp> mPressUpList;
     private CompositeDisposable mCompositeDisposable;
@@ -34,8 +33,8 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
 
     private LiveData<EventForUpdateList> mEventForUpdateList;
 
-    public TrainingListViewModelImpl(TrainingListModel trainingListModel) {
-        mTrainingListModel = trainingListModel;
+    public TrainingListViewModelImpl(TrainingListInteractor trainingListInteractor) {
+        mTrainingListInteractor = trainingListInteractor;
         mCompositeDisposable = new CompositeDisposable();
         mPressUpList = new ArrayList<>();
         mProgressBarState = new ObservableField<>(true);
@@ -45,7 +44,7 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
 
     @Override
     public void onCreateView() {
-        Disposable disposable = mTrainingListModel.getAllPressUps()
+        Disposable disposable = mTrainingListInteractor.getAllPressUps()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<PressUp>>() {
