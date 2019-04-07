@@ -3,9 +3,10 @@ package com.example.alexa.pressupcounter.settings.interactor;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.data.PressUpDao;
 
-import java.util.List;
-
+import io.reactivex.Completable;
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 02.03.2019.
@@ -20,13 +21,16 @@ public class SettingsInteractor {
         mPressUpDao = pressUpDao;
     }
 
-    public Single<List<PressUp>> getById(long id) {
-        return mPressUpDao.getPressUpById(id);
+    public Single<PressUp> getLastPressUp() {
+        return mPressUpDao.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(pressUps -> pressUps.get(pressUps.size() - 1));
     }
 
-    /*
-    public Flowable<List<PressUp>> getById(long id) {
-        return mPressUpDao.getById(id);
+    public Completable deleteLastProgram(PressUp pressUp) {
+        return mPressUpDao.delete(pressUp)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
-    */
 }

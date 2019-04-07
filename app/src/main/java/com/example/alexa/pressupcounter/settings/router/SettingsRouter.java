@@ -8,4 +8,6 @@ package com.example.alexa.pressupcounter.settings.router;
 public interface SettingsRouter {
 
     void goToSetTrainingDay();
+
+    void showToast();
 }

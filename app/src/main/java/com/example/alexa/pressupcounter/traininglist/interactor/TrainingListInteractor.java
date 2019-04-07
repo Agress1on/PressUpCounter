@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 12.03.2019.
@@ -25,6 +27,9 @@ public class TrainingListInteractor {
     }
 
     public Single<List<PressUp>> getAllPressUps() {
-        return mPressUpDao.getAll().delay(3, TimeUnit.SECONDS);
+        return mPressUpDao.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .delay(3, TimeUnit.SECONDS);
     }
 }

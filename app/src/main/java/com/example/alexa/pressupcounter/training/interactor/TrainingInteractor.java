@@ -40,6 +40,8 @@ public class TrainingInteractor {
 
     public Single<PressUp> getPressUpForTraining() {
         return mPressUpDao.getAll()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> pressUps.get(pressUps.size() - 1));
     }
 

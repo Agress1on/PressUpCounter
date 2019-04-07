@@ -8,4 +8,6 @@ package com.example.alexa.pressupcounter.settings.viewmodel;
 public interface SettingsViewModel {
 
     void onSetNotificationsClick();
+
+    void onClickDeleteLastProgram();
 }

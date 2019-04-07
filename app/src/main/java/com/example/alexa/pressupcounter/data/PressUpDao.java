@@ -36,5 +36,5 @@ public interface PressUpDao {
     void update(PressUp pressUp);
 
     @Delete
-    void delete(PressUp pressUp);
+    Completable delete(PressUp pressUp);
 }

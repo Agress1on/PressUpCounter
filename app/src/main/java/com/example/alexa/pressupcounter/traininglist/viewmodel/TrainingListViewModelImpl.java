@@ -45,15 +45,10 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
     @Override
     public void onCreateView() {
         Disposable disposable = mTrainingListInteractor.getAllPressUps()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<List<PressUp>>() {
-                    @Override
-                    public void accept(List<PressUp> pressUps) throws Exception {
-                        mPressUpList = pressUps;
-                        ((SingleLiveEvent) mEventForUpdateList).postValue(new EventForUpdateList());
-                        mProgressBarState.set(false);
-                    }
+                .subscribe(pressUps -> {
+                    mPressUpList = pressUps;
+                    ((SingleLiveEvent<EventForUpdateList>) mEventForUpdateList).postValue(new EventForUpdateList());
+                    mProgressBarState.set(false);
                 });
         mCompositeDisposable.add(disposable);
     }

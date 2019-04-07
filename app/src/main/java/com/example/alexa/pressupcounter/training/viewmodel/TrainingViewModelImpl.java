@@ -54,8 +54,6 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     @Override
     public void onCreateView() {
         Disposable disposable = mTrainingInteractor.getPressUpForTraining()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(pressUp -> {
                     mPressUp = pressUp;
                     mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
