@@ -1,6 +1,8 @@
 package com.example.alexa.pressupcounter.settrainingday.inject;
 
 import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
+import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
+import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouterImpl;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModelFactory;
@@ -32,13 +34,19 @@ public class SetTrainingDayModule {
 
     @SetTrainingDayScope
     @Provides
-    SetTrainingDayViewModelFactory provideFactory(SetTrainingDayModel setTrainingDayModel) {
-        return new SetTrainingDayViewModelFactory(setTrainingDayModel);
+    SetTrainingDayViewModel provideSetTrainingDayViewModel(SetTrainingDayViewModelFactory factory) {
+        return ViewModelProviders.of(mFragment, factory).get(SetTrainingDayViewModelImpl.class);
     }
 
     @SetTrainingDayScope
     @Provides
-    SetTrainingDayViewModel provideSetTrainingDayViewModel(SetTrainingDayViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(SetTrainingDayViewModelImpl.class);
+    SetTrainingDayViewModelFactory provideFactory(SetTrainingDayModel setTrainingDayModel, SetTrainingDayRouter router) {
+        return new SetTrainingDayViewModelFactory(setTrainingDayModel, router);
+    }
+
+    @SetTrainingDayScope
+    @Provides
+    SetTrainingDayRouter provideRouter() {
+        return new SetTrainingDayRouterImpl(mFragment);
     }
 }

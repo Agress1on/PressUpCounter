@@ -35,7 +35,6 @@ public class SetTrainingDayFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModule(this)).inject(this);
-        init();
     }
 
     @Nullable
@@ -46,16 +45,11 @@ public class SetTrainingDayFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void init() {
-        mSetTrainingDayViewModel.getFragmentEventLiveData().observe(this, new Observer<FragmentEvent>() {
-            @Override
-            public void onChanged(FragmentEvent fragmentEvent) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetTimeFragment.newInstance(mSetTrainingDayViewModel.getDaysIndexList()))
-                        .commit();
-            }
-        });
+    public void goToSetTime() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, SetTimeFragment.newInstance(mSetTrainingDayViewModel.getDaysIndexList()))
+                .commit();
     }
 
     public static SetTrainingDayFragment newInstance() {

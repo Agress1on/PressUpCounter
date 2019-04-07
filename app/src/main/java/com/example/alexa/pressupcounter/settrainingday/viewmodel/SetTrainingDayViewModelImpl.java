@@ -1,14 +1,12 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
-import com.example.alexa.pressupcounter.SingleLiveEvent;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settrainingday.model.SetTrainingDayModel;
+import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -19,16 +17,16 @@ import androidx.lifecycle.ViewModel;
 public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainingDayViewModel {
 
     private SetTrainingDayModel mSetTrainingDayModel;
+    private SetTrainingDayRouter mSetTrainingDayRouter;
 
     private ObservableField<List<ObservableField<Boolean>>> mDayOfWeekStatesObservableField;
     private ObservableField<Boolean> mButtonState;
 
-    private LiveData<FragmentEvent> mFragmentEventLiveData;
-
     private List<Integer> mIndexList;
 
-    public SetTrainingDayViewModelImpl(SetTrainingDayModel setTrainingDayModel) {
+    public SetTrainingDayViewModelImpl(SetTrainingDayModel setTrainingDayModel, SetTrainingDayRouter setTrainingDayRouter) {
         mSetTrainingDayModel = setTrainingDayModel;
+        mSetTrainingDayRouter = setTrainingDayRouter;
 
         List<ObservableField<Boolean>> states = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
@@ -37,18 +35,12 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         mDayOfWeekStatesObservableField = new ObservableField<>(states);
 
         mButtonState = new ObservableField<>(false);
-        mFragmentEventLiveData = new SingleLiveEvent<>();
         mIndexList = new ArrayList();
     }
 
     @Override
     public ObservableField<List<ObservableField<Boolean>>> getDayOfWeekState() {
         return mDayOfWeekStatesObservableField;
-    }
-
-    @Override
-    public LiveData<FragmentEvent> getFragmentEventLiveData() {
-        return mFragmentEventLiveData;
     }
 
     @Override
@@ -70,8 +62,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     @Override
     public void onCheckButton() {
         writeIndexDayOfWeekInList();
-        //mFragmentEventLiveData.postValue(new FragmentEvent());
-        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
+        mSetTrainingDayRouter.goToSetTime();
     }
 
     private int checkQuantityDays() {
