@@ -1,6 +1,9 @@
 package com.example.alexa.pressupcounter.firstlaunch.inject;
 
+import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
+import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouterImpl;
 import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
+import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchFactory;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModelImpl;
 
@@ -24,7 +27,19 @@ public class FirstLaunchModule {
 
     @FirstLaunchScope
     @Provides
-    FirstLaunchViewModel provideFirstLaunchViewModel() {
-        return ViewModelProviders.of(mFragment).get(FirstLaunchViewModelImpl.class);
+    FirstLaunchViewModel provideFirstLaunchViewModel(FirstLaunchFactory factory) {
+        return ViewModelProviders.of(mFragment, factory).get(FirstLaunchViewModelImpl.class);
+    }
+
+    @FirstLaunchScope
+    @Provides
+    FirstLaunchFactory provideFactory(FirstLaunchRouter router) {
+        return new FirstLaunchFactory(router);
+    }
+
+    @FirstLaunchScope
+    @Provides
+    FirstLaunchRouter provideRouter() {
+        return new FirstLaunchRouterImpl(mFragment);
     }
 }

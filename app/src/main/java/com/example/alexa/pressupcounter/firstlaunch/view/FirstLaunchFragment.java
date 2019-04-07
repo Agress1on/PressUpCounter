@@ -9,7 +9,6 @@ import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBinding;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
@@ -23,7 +22,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.Observer;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -44,9 +42,7 @@ public class FirstLaunchFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         App.getAppComponent().createFirstLaunchComponent(new FirstLaunchModule(this)).inject(this);
-        init();
     }
 
     @Nullable
@@ -64,16 +60,11 @@ public class FirstLaunchFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void init() {
-        mFirstLaunchViewModel.getActivityEventMutableLiveData().observe(this, new Observer<FragmentEvent>() {
-            @Override
-            public void onChanged(FragmentEvent fragmentEvent) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetProgramFragment.newInstance())
-                        .commit();
-            }
-        });
+    public void goToSetProgram() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, SetProgramFragment.newInstance())
+                .commit();
     }
 
     public static FirstLaunchFragment newInstance() {

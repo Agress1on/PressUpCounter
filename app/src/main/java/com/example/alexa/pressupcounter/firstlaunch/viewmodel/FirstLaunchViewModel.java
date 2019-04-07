@@ -11,7 +11,5 @@ import androidx.lifecycle.LiveData;
  */
 public interface FirstLaunchViewModel {
 
-    LiveData<FragmentEvent> getActivityEventMutableLiveData();
-
     void onClickMissButton();
 }

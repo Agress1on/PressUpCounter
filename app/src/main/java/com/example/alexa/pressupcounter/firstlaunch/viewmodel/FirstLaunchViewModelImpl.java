@@ -1,9 +1,7 @@
 package com.example.alexa.pressupcounter.firstlaunch.viewmodel;
 
-import com.example.alexa.pressupcounter.SingleLiveEvent;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
+import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -13,19 +11,14 @@ import androidx.lifecycle.ViewModel;
  */
 public class FirstLaunchViewModelImpl extends ViewModel implements FirstLaunchViewModel {
 
-    private LiveData<FragmentEvent> mActivityEventMutableLiveData;
+    private FirstLaunchRouter mFirstLaunchRouter;
 
-    public FirstLaunchViewModelImpl() {
-        mActivityEventMutableLiveData = new SingleLiveEvent<>();
-    }
-
-    @Override
-    public LiveData<FragmentEvent> getActivityEventMutableLiveData() {
-        return mActivityEventMutableLiveData;
+    public FirstLaunchViewModelImpl(FirstLaunchRouter firstLaunchRouter) {
+        mFirstLaunchRouter = firstLaunchRouter;
     }
 
     @Override
     public void onClickMissButton() {
-        ((SingleLiveEvent<FragmentEvent>) mActivityEventMutableLiveData).postValue(new FragmentEvent());
+        mFirstLaunchRouter.goToSetProgram();
     }
 }
