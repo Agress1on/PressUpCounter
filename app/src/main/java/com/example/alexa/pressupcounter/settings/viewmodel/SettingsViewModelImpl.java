@@ -50,6 +50,7 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
                     @Override
                     public void onComplete() {
                         mSettingsRouter.showToast();
+                        if (mLastPressUp.getId() == 1) mSettingsRouter.goToSetProgram();
                     }
 
                     @Override
