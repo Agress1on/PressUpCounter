@@ -1,10 +1,6 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
-import com.example.alexa.pressupcounter.events.DialogEvent;
-
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -22,12 +18,6 @@ public interface TrainingViewModel {
     ObservableField<String> getTextForTrainingOrRest();
 
     ObservableField<Boolean> getStateOfRestButton();
-
-    LiveData<DialogEvent> getRestDialogEvent();
-
-    LiveData<DialogEvent> getRestOffDialogEvent();
-
-    LiveData<DialogEvent> getFinishTrainingDialogEvent();
 
     void goToNextRepetition();
 

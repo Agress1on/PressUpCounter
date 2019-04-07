@@ -1,12 +1,10 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
-import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
+import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -22,14 +20,11 @@ import io.reactivex.schedulers.Schedulers;
 public class TrainingViewModelImpl extends ViewModel implements TrainingViewModel {
 
     private TrainingInteractor mTrainingInteractor;
+    private TrainingRouter mTrainingRouter;
 
     private ObservableField<Integer> mRepetition;
     private ObservableField<String> mQuantityOfRepetitionOrRestTime;
     private ObservableField<Boolean> mStateOfRestButton;
-
-    private LiveData<DialogEvent> mDialogEventForRest;
-    private LiveData<DialogEvent> mDialogEventForRestOff;
-    private LiveData<DialogEvent> mDialogEventFinishTraining;
 
     private String mTextForTraining;
     private String mTextForRest;
@@ -39,13 +34,12 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     private CompositeDisposable mCompositeDisposable;
 
-    public TrainingViewModelImpl(TrainingInteractor trainingInteractor) {
+    public TrainingViewModelImpl(TrainingInteractor trainingInteractor, TrainingRouter trainingRouter) {
         mTrainingInteractor = trainingInteractor;
-        mCompositeDisposable = new CompositeDisposable();
+        mTrainingRouter = trainingRouter;
 
         mPressUp = new PressUp(0, 0, 0, 0, 0, 0);
         mQuantityOfRepetitionOrRestTime = new ObservableField<>("0");
-
 
         mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
         mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
@@ -54,10 +48,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         mRepetition = new ObservableField<>(1);
 
         mStateOfRestButton = new ObservableField<>(true);
-
-        mDialogEventForRest = new SingleLiveEvent<>();
-        mDialogEventForRestOff = new SingleLiveEvent<>();
-        mDialogEventFinishTraining = new SingleLiveEvent<>();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -93,29 +84,13 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public LiveData<DialogEvent> getRestDialogEvent() {
-        return mDialogEventForRest;
-    }
-
-    @Override
-    public LiveData<DialogEvent> getRestOffDialogEvent() {
-        return mDialogEventForRestOff;
-    }
-
-    @Override
-    public LiveData<DialogEvent> getFinishTrainingDialogEvent() {
-        return mDialogEventFinishTraining;
-    }
-
-    @Override
     public void onClickNextRepetitionButton() {
         goToNextRepetition();
     }
 
     @Override
     public void onClickRestButton() {
-        //mDialogEventForRest.postValue(new DialogEvent());
-        ((SingleLiveEvent<DialogEvent>) mDialogEventForRest).postValue(new DialogEvent());
+        mTrainingRouter.showDialogTrainingRest();
         mStateOfRestButton.set(false);
     }
 
@@ -141,10 +116,9 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onComplete() {
-                        //mQuantityOfRepetitionOrRestTime.set("Отдых закончен");
                         mTextForTrainingOrRest.set(mTextForTraining);
                         mStateOfRestButton.set(true);
-                        ((SingleLiveEvent<DialogEvent>) mDialogEventForRestOff).postValue(new DialogEvent());
+                        mTrainingRouter.showDialogTrainingRestOff();
                     }
                 });
     }
@@ -215,8 +189,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickFinishTrainingButton() {
-        //mDialogEventFinishTraining.postValue(new DialogEvent());
-        ((SingleLiveEvent<DialogEvent>) mDialogEventFinishTraining).postValue(new DialogEvent());
+        mTrainingRouter.showDialogFinishTraining();
     }
 
     @Override

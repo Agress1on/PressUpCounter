@@ -11,7 +11,6 @@ import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
-import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
@@ -22,7 +21,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -37,6 +35,10 @@ public class TrainingFragment extends Fragment {
 
     @Inject
     TrainingViewModel mTrainingViewModel;
+
+    private DialogTrainingRest mDialogTrainingRest;
+    private DialogTrainingRestOff mDialogTrainingRestOff;
+    private DialogFinishTraining mDialogFinishTraining;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,18 +57,18 @@ public class TrainingFragment extends Fragment {
     }
 
     private void init() {
-        DialogTrainingRest trainingRest = new DialogTrainingRest();
-        trainingRest.initDialog(new DialogTrainingRest.OnButtonClick() {
+        mDialogTrainingRest = new DialogTrainingRest();
+        mDialogTrainingRest.initDialog(new DialogTrainingRest.OnButtonClick() {
             @Override
             public void onPositiveButton() {
                 mTrainingViewModel.onClickPositiveButtonOfRestDialog();
-                trainingRest.dismiss();
+                mDialogTrainingRest.dismiss();
             }
 
             @Override
             public void onNegativeButton() {
                 mTrainingViewModel.onClickNegativeButtonOfRestDialog();
-                trainingRest.dismiss();
+                mDialogTrainingRest.dismiss();
             }
 
             @Override
@@ -74,38 +76,24 @@ public class TrainingFragment extends Fragment {
                 mTrainingViewModel.onCancelOfRestDialog();
             }
         });
-        mTrainingViewModel.getRestDialogEvent().observe(this, new Observer<DialogEvent>() {
-            @Override
-            public void onChanged(@Nullable DialogEvent dialogEvent) {
-                trainingRest.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST);
-            }
-        });
 
-        //show training off dialog or choose additional time of rest
-        final DialogTrainingRestOff trainingRestOff = new DialogTrainingRestOff();
-        trainingRestOff.initDialog(new DialogTrainingRestOff.OnButtonClick() {
+        mDialogTrainingRestOff = new DialogTrainingRestOff();
+        mDialogTrainingRestOff.initDialog(new DialogTrainingRestOff.OnButtonClick() {
             @Override
             public void onPositiveButton() {
                 mTrainingViewModel.goToNextRepetition();
-                trainingRestOff.dismiss();
+                mDialogTrainingRestOff.dismiss();
             }
 
             @Override
             public void onNegativeButton() {
                 mTrainingViewModel.onClickAdditionalTimeForRest();
-                trainingRestOff.dismiss();
-            }
-        });
-        mTrainingViewModel.getRestOffDialogEvent().observe(this, new Observer<DialogEvent>() {
-            @Override
-            public void onChanged(@Nullable DialogEvent dialogEvent) {
-                trainingRestOff.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
+                mDialogTrainingRestOff.dismiss();
             }
         });
 
-        //show finish training dialog
-        final DialogFinishTraining finishTraining = new DialogFinishTraining();
-        finishTraining.init(new DialogFinishTraining.OnButtonClick() {
+        mDialogFinishTraining = new DialogFinishTraining();
+        mDialogFinishTraining.init(new DialogFinishTraining.OnButtonClick() {
             @Override
             public void onPositiveButton() {
                 mTrainingViewModel.onClickPositiveButtonFinishDialog();
@@ -113,7 +101,7 @@ public class TrainingFragment extends Fragment {
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(true))
                         .commit();
-                finishTraining.dismiss();
+                mDialogFinishTraining.dismiss();
             }
 
             @Override
@@ -122,15 +110,21 @@ public class TrainingFragment extends Fragment {
                         .addToBackStack(null)
                         .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(false))
                         .commit();
-                finishTraining.dismiss();
+                mDialogFinishTraining.dismiss();
             }
         });
-        mTrainingViewModel.getFinishTrainingDialogEvent().observe(this, new Observer<DialogEvent>() {
-            @Override
-            public void onChanged(@Nullable DialogEvent dialogEvent) {
-                finishTraining.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
-            }
-        });
+    }
+
+    public void showDialogTrainingRest() {
+        mDialogTrainingRest.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST);
+    }
+
+    public void showDialogTrainingRestOff() {
+        mDialogTrainingRestOff.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
+    }
+
+    public void showDialogFinishTraining() {
+        mDialogFinishTraining.show(getFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
     }
 
     public static TrainingFragment newInstance() {
