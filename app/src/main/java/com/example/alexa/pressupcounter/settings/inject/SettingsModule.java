@@ -2,6 +2,8 @@ package com.example.alexa.pressupcounter.settings.inject;
 
 import com.example.alexa.pressupcounter.data.PressUpDao;
 import com.example.alexa.pressupcounter.settings.model.SettingsModel;
+import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
+import com.example.alexa.pressupcounter.settings.router.SettingsRouterImpl;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
 import com.example.alexa.pressupcounter.settings.viewmodel.SettingsViewModel;
 import com.example.alexa.pressupcounter.settings.viewmodel.SettingsViewModelFactory;
@@ -18,6 +20,7 @@ import dagger.Provides;
  */
 @Module
 public class SettingsModule {
+
     private SettingsFragment mFragment;
 
     public SettingsModule(SettingsFragment fragment) {
@@ -38,7 +41,13 @@ public class SettingsModule {
 
     @SettingsScope
     @Provides
-    SettingsViewModelFactory provideFactory(SettingsModel settingsModel) {
-        return new SettingsViewModelFactory(settingsModel);
+    SettingsViewModelFactory provideFactory(SettingsModel settingsModel, SettingsRouter router) {
+        return new SettingsViewModelFactory(settingsModel, router);
+    }
+
+    @SettingsScope
+    @Provides
+    SettingsRouter provideRouter() {
+        return new SettingsRouterImpl(mFragment);
     }
 }

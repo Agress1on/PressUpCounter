@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSettingsBinding;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settings.inject.SettingsModule;
 import com.example.alexa.pressupcounter.settings.viewmodel.SettingsViewModel;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
@@ -19,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.
@@ -35,7 +33,6 @@ public class SettingsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().createSettingsComponent(new SettingsModule(this)).inject(this);
-        init();
     }
 
     @Nullable
@@ -46,16 +43,11 @@ public class SettingsFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void init() {
-        mSettingsViewModel.getLiveDataForSetNotifications().observe(this, new Observer<FragmentEvent>() {
-            @Override
-            public void onChanged(FragmentEvent fragmentEvent) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
-                        .commit();
-            }
-        });
+    public void goToSetTrainingDay() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
+                .commit();
     }
 
     public static SettingsFragment newInstance() {

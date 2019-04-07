@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.settings.viewmodel;
 
 import com.example.alexa.pressupcounter.settings.model.SettingsModel;
+import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -14,15 +15,17 @@ import androidx.lifecycle.ViewModelProvider;
 public class SettingsViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final SettingsModel mSettingsModel;
+    private final SettingsRouter mSettingsRouter;
 
-    public SettingsViewModelFactory(SettingsModel settingsModel) {
+    public SettingsViewModelFactory(SettingsModel settingsModel, SettingsRouter router) {
         super();
         mSettingsModel = settingsModel;
+        mSettingsRouter = router;
     }
 
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (modelClass == SettingsViewModelImpl.class) {
-            return (T) new SettingsViewModelImpl(mSettingsModel);
+            return (T) new SettingsViewModelImpl(mSettingsModel, mSettingsRouter);
         }
         return null;
     }
