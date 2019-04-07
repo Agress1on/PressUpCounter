@@ -2,6 +2,8 @@ package com.example.alexa.pressupcounter.starttraining.inject;
 
 import com.example.alexa.pressupcounter.data.PressUpDao;
 import com.example.alexa.pressupcounter.starttraining.interactor.StartTrainingInteractor;
+import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
+import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouterImpl;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModelFactory;
@@ -39,7 +41,13 @@ public class StartTrainingModule {
 
     @StartTrainingScope
     @Provides
-    StartTrainingViewModelFactory provideFactory(StartTrainingInteractor model) {
-        return new StartTrainingViewModelFactory(model);
+    StartTrainingViewModelFactory provideFactory(StartTrainingInteractor model, StartTrainingRouter startTrainingRouter) {
+        return new StartTrainingViewModelFactory(model, startTrainingRouter);
+    }
+
+    @StartTrainingScope
+    @Provides
+    StartTrainingRouter provideRouter() {
+        return new StartTrainingRouterImpl(mFragment);
     }
 }

@@ -1,12 +1,10 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
-import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.starttraining.interactor.StartTrainingInteractor;
+import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -23,22 +21,18 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     private ObservableField<PressUp> mPressUpObservableField;
     private ObservableField<Integer> mFinalQuantityRepetition;
 
-    private LiveData<FragmentEvent> mGoToTrainingLiveData;
-    private LiveData<FragmentEvent> mGoToListLiveData;
-    private LiveData<FragmentEvent> mGoToSettingsLiveData;
-
     private CompositeDisposable mCompositeDisposable;
 
-    public StartTrainingViewModelImpl(StartTrainingInteractor startTrainingInteractor) {
+    private StartTrainingRouter mStartTrainingRouter;
+
+    public StartTrainingViewModelImpl(StartTrainingInteractor startTrainingInteractor, StartTrainingRouter startTrainingRouter) {
         mStartTrainingInteractor = startTrainingInteractor;
-        mCompositeDisposable = new CompositeDisposable();
+        mStartTrainingRouter = startTrainingRouter;
 
         mPressUpObservableField = new ObservableField<>(new PressUp(1, 0, 0, 0, 0, 0));
         mFinalQuantityRepetition = new ObservableField<>(0);
 
-        mGoToTrainingLiveData = new SingleLiveEvent<>();
-        mGoToListLiveData = new SingleLiveEvent<>();
-        mGoToSettingsLiveData = new SingleLiveEvent<>();
+        mCompositeDisposable = new CompositeDisposable();
     }
 
     @Override
@@ -63,35 +57,17 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     }
 
     @Override
-    public LiveData<FragmentEvent> getGoToTrainingFragmentEvent() {
-        return mGoToTrainingLiveData;
-    }
-
-    @Override
-    public LiveData<FragmentEvent> getGoToListFragmentEvent() {
-        return mGoToListLiveData;
-    }
-
-    @Override
-    public LiveData<FragmentEvent> getForGoToSettingsFragmentEvent() {
-        return mGoToSettingsLiveData;
-    }
-
-    @Override
     public void onClickStartTrainingButton() {
-        //mGoToTrainingLiveData.postValue(new FragmentEvent());
-        ((SingleLiveEvent<FragmentEvent>) mGoToTrainingLiveData).postValue(new FragmentEvent());
+        mStartTrainingRouter.goToTraining();
     }
 
     @Override
     public void onClickListButton() {
-        //mGoToListLiveData.postValue(new FragmentEvent());
-        ((SingleLiveEvent<FragmentEvent>) mGoToListLiveData).postValue(new FragmentEvent());
+        mStartTrainingRouter.goToTrainingList();
     }
 
     @Override
     public void onClickSettingsButton() {
-        //mGoToSettingsLiveData.postValue(new FragmentEvent());
-        ((SingleLiveEvent<FragmentEvent>) mGoToSettingsLiveData).postValue(new FragmentEvent());
+        mStartTrainingRouter.goToSettings();
     }
 }
