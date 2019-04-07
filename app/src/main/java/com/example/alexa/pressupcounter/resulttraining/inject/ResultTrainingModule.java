@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.resulttraining.inject;
 
+import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouter;
+import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouterImpl;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModel;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelFactory;
@@ -34,8 +36,14 @@ public class ResultTrainingModule {
 
     @ResultTrainingScope
     @Provides
-    ResultTrainingViewModelFactory provideFactory() {
-        return new ResultTrainingViewModelFactory(mResult);
+    ResultTrainingViewModelFactory provideFactory(ResultTrainingRouter router) {
+        return new ResultTrainingViewModelFactory(router, mResult);
+    }
+
+    @ResultTrainingScope
+    @Provides
+    ResultTrainingRouter provideRouter() {
+        return new ResultTrainingRouterImpl(mFragment);
     }
 
     @ResultTrainingScope
