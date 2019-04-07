@@ -1,6 +1,8 @@
 package com.example.alexa.pressupcounter.settime.inject;
 
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
+import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
+import com.example.alexa.pressupcounter.settime.router.SetTimeRouterImpl;
 import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactory;
@@ -38,14 +40,20 @@ public class SetTimeModule {
 
     @SetTimeScope
     @Provides
-    SetTimeViewModelFactory provideFactory(SetTimeModel model) {
-        return new SetTimeViewModelFactory(model, mIndexList);
+    SetTimeViewModelFactory provideFactory(SetTimeModel model, SetTimeRouter router) {
+        return new SetTimeViewModelFactory(model, router, mIndexList);
     }
 
     @SetTimeScope
     @Provides
     SetTimeModel provideSetTimeModel() {
         return new SetTimeModel();
+    }
+
+    @SetTimeScope
+    @Provides
+    SetTimeRouter provideRouter() {
+        return new SetTimeRouterImpl(mFragment);
     }
 
     @SetTimeScope

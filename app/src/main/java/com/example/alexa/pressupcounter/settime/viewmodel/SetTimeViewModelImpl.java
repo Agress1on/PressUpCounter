@@ -1,16 +1,14 @@
 package com.example.alexa.pressupcounter.settime.viewmodel;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.SingleLiveEvent;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.model.SetTimeModel;
+import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 /**
@@ -21,11 +19,7 @@ import androidx.lifecycle.ViewModel;
 public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel {
 
     private SetTimeModel mSetTimeModel;
-    private LiveData<FragmentEvent> mFragmentEventLiveData;
-
-    private LiveData<TimePickerEvent> mTimePickerEventForFirstDay;
-    private LiveData<TimePickerEvent> mTimePickerEventForSecondDay;
-    private LiveData<TimePickerEvent> mTimePickerEventForThirdDay;
+    private SetTimeRouter mSetTimeRouter;
 
     private ObservableField<List<ObservableField<String>>> mListTime;
 
@@ -33,13 +27,9 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
 
     private ObservableField<String> mInfoText;
 
-    public SetTimeViewModelImpl(SetTimeModel setTimeModel, ArrayList<Integer> indexList) {
+    public SetTimeViewModelImpl(SetTimeModel setTimeModel, SetTimeRouter setTimeRouter, ArrayList<Integer> indexList) {
         mSetTimeModel = setTimeModel;
-        mFragmentEventLiveData = new SingleLiveEvent<>();
-
-        mTimePickerEventForFirstDay = new SingleLiveEvent<>();
-        mTimePickerEventForSecondDay = new SingleLiveEvent<>();
-        mTimePickerEventForThirdDay = new SingleLiveEvent<>();
+        mSetTimeRouter = setTimeRouter;
 
         List<ObservableField<String>> list = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
@@ -62,26 +52,6 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     }
 
     @Override
-    public LiveData<TimePickerEvent> getFirstDayTimePickerEvent() {
-        return mTimePickerEventForFirstDay;
-    }
-
-    @Override
-    public LiveData<TimePickerEvent> getSecondDayTimePickerEvent() {
-        return mTimePickerEventForSecondDay;
-    }
-
-    @Override
-    public LiveData<TimePickerEvent> getThirdDayTimePickerEvent() {
-        return mTimePickerEventForThirdDay;
-    }
-
-    @Override
-    public LiveData<FragmentEvent> getFragmentEventLiveData() {
-        return mFragmentEventLiveData;
-    }
-
-    @Override
     public void setDayTime(TimePickerEvent.DayNotification dayNotification, int hours, int minutes) {
         switch (dayNotification) {
             case FIRST_DAY:
@@ -100,20 +70,19 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     public void onClickSetTime(TimePickerEvent.DayNotification dayNotification) {
         switch (dayNotification) {
             case FIRST_DAY:
-                ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForFirstDay).postValue(new TimePickerEvent(TimePickerEvent.DayNotification.FIRST_DAY));
+                mSetTimeRouter.showTimePickerForFirstDay();
                 break;
             case SECOND_DAY:
-                ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForSecondDay).postValue(new TimePickerEvent(TimePickerEvent.DayNotification.SECOND_DAY));
+                mSetTimeRouter.showTimePickerForSecondDay();
                 break;
             case THIRD_DAY:
-                ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForThirdDay).postValue(new TimePickerEvent(TimePickerEvent.DayNotification.THIRD_DAY));
+                mSetTimeRouter.showTimePickerForThirdDay();
                 break;
         }
     }
 
     @Override
     public void onClickSetTimeButton() {
-        //mFragmentEventLiveData.postValue(new FragmentEvent());
-        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
+        mSetTimeRouter.goStartTraining();
     }
 }
