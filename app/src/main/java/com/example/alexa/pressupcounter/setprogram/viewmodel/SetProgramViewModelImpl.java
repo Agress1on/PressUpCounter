@@ -1,15 +1,13 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
-import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
+import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -25,18 +23,18 @@ import io.reactivex.schedulers.Schedulers;
 public class SetProgramViewModelImpl extends ViewModel implements SetProgramViewModel {
 
     private SetProgramInteractor mSetProgramInteractor;
+    private SetProgramRouter mSetProgramRouter;
 
     private ObservableField<List<ObservableField<Integer>>> mListOfRepetitions;
     private ObservableField<Integer> mSumOfRepetitions;
-
     private ObservableField<String> mServiceInfo;
 
-    private LiveData<FragmentEvent> mFragmentEventLiveData;
+    private CompositeDisposable mCompositeDisposable;
 
-    CompositeDisposable mCompositeDisposable;
-
-    public SetProgramViewModelImpl(SetProgramInteractor setProgramInteractor) {
+    public SetProgramViewModelImpl(SetProgramInteractor setProgramInteractor, SetProgramRouter setProgramRouter) {
         mSetProgramInteractor = setProgramInteractor;
+        mSetProgramRouter = setProgramRouter;
+
         mListOfRepetitions = new ObservableField<>();
         //
         List<ObservableField<Integer>> list = new ArrayList<>();
@@ -47,7 +45,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         //
         mSumOfRepetitions = new ObservableField<>(0);
         mServiceInfo = new ObservableField<>();
-        mFragmentEventLiveData = new SingleLiveEvent<>();
         mCompositeDisposable = new CompositeDisposable();
     }
 
@@ -76,11 +73,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     @Override
     public ObservableField<String> getServiceInfo() {
         return mServiceInfo;
-    }
-
-    @Override
-    public LiveData<FragmentEvent> getGoToStartFragmentEvent() {
-        return mFragmentEventLiveData;
     }
 
     @Override
@@ -139,7 +131,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
                 .subscribe(new DisposableCompletableObserver() {
                     @Override
                     public void onComplete() {
-                        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
+                        mSetProgramRouter.goToStartTraining();
                     }
 
                     @Override
@@ -151,7 +143,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public void onClickChoiceView() {
-        ((SingleLiveEvent<FragmentEvent>) mFragmentEventLiveData).postValue(new FragmentEvent());
+        mSetProgramRouter.goToStartTraining();
     }
 
     private void setFinalQuantity() {

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModule;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
@@ -19,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -35,7 +33,6 @@ public class SetProgramFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().createSetProgramModelComponent(new SetProgramModule(this)).inject(this);
-        init();
     }
 
     @Nullable
@@ -47,16 +44,11 @@ public class SetProgramFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void init() {
-        mSetProgramViewModel.getGoToStartFragmentEvent().observe(this, new Observer<FragmentEvent>() {
-            @Override
-            public void onChanged(@Nullable FragmentEvent fragmentEvent) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
-                        .commit();
-            }
-        });
+    public void goToStartFragment() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
+                .commit();
     }
 
     public static SetProgramFragment newInstance() {

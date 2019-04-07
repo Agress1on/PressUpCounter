@@ -2,6 +2,8 @@ package com.example.alexa.pressupcounter.setprogram.inject;
 
 import com.example.alexa.pressupcounter.data.PressUpDao;
 import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
+import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
+import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouterImpl;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
@@ -39,7 +41,13 @@ public class SetProgramModule {
 
     @SetProgramScope
     @Provides
-    SetProgramViewModelFactory provideFactory(SetProgramInteractor setProgramInteractor) {
-        return new SetProgramViewModelFactory(setProgramInteractor);
+    SetProgramViewModelFactory provideFactory(SetProgramInteractor setProgramInteractor, SetProgramRouter router) {
+        return new SetProgramViewModelFactory(setProgramInteractor, router);
+    }
+
+    @SetProgramScope
+    @Provides
+    SetProgramRouter provideRouter() {
+        return new SetProgramRouterImpl(mFragment);
     }
 }
