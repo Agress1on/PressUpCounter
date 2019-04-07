@@ -10,4 +10,6 @@ public interface SettingsViewModel {
     void onSetNotificationsClick();
 
     void onClickDeleteLastProgram();
+
+    void onClickResetAllProgress();
 }

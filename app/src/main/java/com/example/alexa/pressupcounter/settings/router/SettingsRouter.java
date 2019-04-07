@@ -10,4 +10,6 @@ public interface SettingsRouter {
     void goToSetTrainingDay();
 
     void showToast();
+
+    void goToSetProgram();
 }

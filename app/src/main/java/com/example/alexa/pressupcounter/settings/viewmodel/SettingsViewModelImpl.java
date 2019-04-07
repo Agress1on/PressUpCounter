@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel;
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 
 /**
  * Created by Alexandr Mikhalev on 21.02.2019.
@@ -23,6 +21,7 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
 
     private PressUp mLastPressUp;
     private CompositeDisposable mCompositeDisposable;
+
     public SettingsViewModelImpl(SettingsInteractor settingsInteractor, SettingsRouter router) {
         mSettingsInteractor = settingsInteractor;
         mSettingsRouter = router;
@@ -50,7 +49,28 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
 
                     @Override
                     public void onComplete() {
-                    mSettingsRouter.showToast();
+                        mSettingsRouter.showToast();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
+    }
+
+    @Override
+    public void onClickResetAllProgress() {
+        mSettingsInteractor.deleteAllProgress()
+                .subscribe(new CompletableObserver() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        mSettingsRouter.goToSetProgram();
                     }
 
                     @Override

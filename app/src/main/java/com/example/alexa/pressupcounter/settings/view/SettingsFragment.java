@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSettingsBinding;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.settings.inject.SettingsModule;
 import com.example.alexa.pressupcounter.settings.viewmodel.SettingsViewModel;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
@@ -53,6 +54,13 @@ public class SettingsFragment extends Fragment {
 
     public void showToast() {
         Toast.makeText(getContext(), "Последняя программа удалена", Toast.LENGTH_SHORT).show();
+    }
+
+    public void goToSetProgram() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, SetProgramFragment.newInstance())
+                .commit();
     }
 
     public static SettingsFragment newInstance() {

@@ -37,4 +37,7 @@ public interface PressUpDao {
 
     @Delete
     Completable delete(PressUp pressUp);
+
+    @Query("DELETE FROM PressUp")
+    Completable deleteAll();
 }

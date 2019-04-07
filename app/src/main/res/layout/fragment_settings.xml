@@ -32,8 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:drawableTop="@drawable/ic_delete_last"
-            android:text="Удалить последнюю программу"
             android:onClick="@{() -> viewModel.onClickDeleteLastProgram()}"
+            android:text="Удалить последнюю программу"
             app:layout_constraintEnd_toEndOf="@id/go_to_set_notifications"
             app:layout_constraintStart_toStartOf="@id/go_to_set_notifications"
             app:layout_constraintTop_toBottomOf="@id/go_to_set_notifications" />
@@ -43,7 +43,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:drawableTop="@drawable/ic_delete"
-            android:text="сбросить настройки"
+            android:onClick="@{() -> viewModel.onClickResetAllProgress()}"
+            android:text="сбросить весь прогресс"
             app:layout_constraintEnd_toEndOf="@id/go_to_set_notifications"
             app:layout_constraintStart_toStartOf="@id/go_to_set_notifications"
             app:layout_constraintTop_toBottomOf="@id/delete_last_program" />
