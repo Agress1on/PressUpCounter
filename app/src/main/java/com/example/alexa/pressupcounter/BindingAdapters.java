@@ -2,6 +2,8 @@ package com.example.alexa.pressupcounter;
 
 import android.content.res.Resources;
 import androidx.databinding.BindingAdapter;
+
+import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.TextView;
@@ -29,5 +31,13 @@ public class BindingAdapters {
         Resources res = textView.getResources();
         int color = text.equals(Constants.TEXT_FOR_SET_TIME_STRING) ? res.getColor(R.color.colorFireBrick) : res.getColor(R.color.colorForestGreen);
         textView.setTextColor(color);
+    }
+
+    @BindingAdapter("buttonStyle")
+    public static void buttonStyle(Button button, boolean state) {
+        Resources res = button.getResources();
+        Drawable drawable = state ? res.getDrawable(R.drawable.ic_checked) : res.getDrawable(R.drawable.ic_unchecked);
+        button.setCompoundDrawablesWithIntrinsicBounds(null, null, drawable, null);
+        button.setEnabled(state);
     }
 }
