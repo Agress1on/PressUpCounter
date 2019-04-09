@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.starttraining.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 01.02.2019.
@@ -33,9 +35,9 @@ public class StartTrainingFragment extends Fragment {
     StartTrainingViewModel mStartTrainingViewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        App.getAppComponent().createStartTrainingModelComponent(new StartTrainingModule(this)).inject(this);
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable

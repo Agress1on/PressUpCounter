@@ -18,6 +18,9 @@ import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModule;
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayScope;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
+import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModule;
+import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingScope;
+import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentScope;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
@@ -60,4 +63,8 @@ public interface AppModule {
     @ContributesAndroidInjector(modules = SetTrainingDayModule.class)
     @SetTrainingDayScope
     SetTrainingDayFragment contributeSetTrainingDayFragment();
+
+    @ContributesAndroidInjector(modules = StartTrainingModule.class)
+    @StartTrainingScope
+    StartTrainingFragment contributeStartTrainingFragment();
 }

@@ -39,7 +39,7 @@ public interface AppComponent {
 
     //SetProgramComponent createSetProgramModelComponent(SetProgramModule setProgramModule);
 
-    StartTrainingComponent createStartTrainingModelComponent(StartTrainingModule startTrainingModule);
+    //StartTrainingComponent createStartTrainingModelComponent(StartTrainingModule startTrainingModule);
 
     //TrainingFragmentComponent createTrainingFragmentModelComponent(TrainingFragmentModule trainingFragmentModule);
 
