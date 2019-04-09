@@ -21,12 +21,6 @@ import dagger.Provides;
 @Module
 public class SetProgramModule {
 
-    private SetProgramFragment mFragment;
-
-    public SetProgramModule(SetProgramFragment fragment) {
-        mFragment = fragment;
-    }
-
     @SetProgramScope
     @Provides
     SetProgramInteractor provideSetProgramInteractor(PressUpDao pressUpDao) {
@@ -35,8 +29,8 @@ public class SetProgramModule {
 
     @SetProgramScope
     @Provides
-    SetProgramViewModel provideSetTrainingDayViewModel(SetProgramViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(SetProgramViewModelImpl.class);
+    SetProgramViewModel provideSetTrainingDayViewModel(SetProgramFragment fragment, SetProgramViewModelFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(SetProgramViewModelImpl.class);
     }
 
     @SetProgramScope
@@ -47,7 +41,7 @@ public class SetProgramModule {
 
     @SetProgramScope
     @Provides
-    SetProgramRouter provideRouter() {
-        return new SetProgramRouterImpl(mFragment);
+    SetProgramRouter provideRouter(SetProgramFragment fragment) {
+        return new SetProgramRouterImpl(fragment);
     }
 }

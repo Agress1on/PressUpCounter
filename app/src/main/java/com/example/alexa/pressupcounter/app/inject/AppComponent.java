@@ -37,7 +37,7 @@ public interface AppComponent {
 
     SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
 
-    SetProgramComponent createSetProgramModelComponent(SetProgramModule setProgramModule);
+    //SetProgramComponent createSetProgramModelComponent(SetProgramModule setProgramModule);
 
     StartTrainingComponent createStartTrainingModelComponent(StartTrainingModule startTrainingModule);
 

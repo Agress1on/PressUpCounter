@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -30,9 +32,9 @@ public class SetProgramFragment extends Fragment {
     SetProgramViewModel mSetProgramViewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        App.getAppComponent().createSetProgramModelComponent(new SetProgramModule(this)).inject(this);
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable
