@@ -49,7 +49,7 @@ public interface AppComponent {
 
     //ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
 
-    SettingsComponent createSettingsComponent(SettingsModule settingsModule);
+    //SettingsComponent createSettingsComponent(SettingsModule settingsModule);
 
     void inject(App app);
 

@@ -21,12 +21,6 @@ import dagger.Provides;
 @Module
 public class SettingsModule {
 
-    private SettingsFragment mFragment;
-
-    public SettingsModule(SettingsFragment fragment) {
-        mFragment = fragment;
-    }
-
     @SettingsScope
     @Provides
     SettingsInteractor provideSettingsInteractor(PressUpDao pressUpDao) {
@@ -35,8 +29,8 @@ public class SettingsModule {
 
     @SettingsScope
     @Provides
-    SettingsViewModel provideSettingsViewModel(SettingsViewModelFactory settingsViewModelFactory) {
-        return ViewModelProviders.of(mFragment, settingsViewModelFactory).get(SettingsViewModelImpl.class);
+    SettingsViewModel provideSettingsViewModel(SettingsFragment fragment, SettingsViewModelFactory settingsViewModelFactory) {
+        return ViewModelProviders.of(fragment, settingsViewModelFactory).get(SettingsViewModelImpl.class);
     }
 
     @SettingsScope
@@ -47,7 +41,7 @@ public class SettingsModule {
 
     @SettingsScope
     @Provides
-    SettingsRouter provideRouter() {
-        return new SettingsRouterImpl(mFragment);
+    SettingsRouter provideRouter(SettingsFragment fragment) {
+        return new SettingsRouterImpl(fragment);
     }
 }
