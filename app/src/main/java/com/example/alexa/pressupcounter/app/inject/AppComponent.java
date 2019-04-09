@@ -2,6 +2,7 @@ package com.example.alexa.pressupcounter.app.inject;
 
 import android.content.Context;
 
+import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchComponent;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
 import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingComponent;
@@ -16,13 +17,12 @@ import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayComp
 import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModule;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingComponent;
 import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModule;
-import com.example.alexa.pressupcounter.training.inject.TrainingFragmentComponent;
-import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.traininglist.inject.TrainingListComponent;
 import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModule;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
  * Created by Alexandr Mikhalev on 24.03.2019.
@@ -30,7 +30,7 @@ import dagger.Component;
  * @author Alexandr Mikhalev
  */
 @AppScope
-@Component(modules = {AppModule.class, RoomModule.class})
+@Component(modules = {AppModule.class, RoomModule.class, AndroidSupportInjectionModule.class})
 public interface AppComponent {
 
     FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
@@ -41,7 +41,7 @@ public interface AppComponent {
 
     StartTrainingComponent createStartTrainingModelComponent(StartTrainingModule startTrainingModule);
 
-    TrainingFragmentComponent createTrainingFragmentModelComponent(TrainingFragmentModule trainingFragmentModule);
+    //TrainingFragmentComponent createTrainingFragmentModelComponent(TrainingFragmentModule trainingFragmentModule);
 
     TrainingListComponent createTrainingListModelComponent(TrainingListModule trainingListModule);
 
@@ -50,6 +50,8 @@ public interface AppComponent {
     ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
 
     SettingsComponent createSettingsComponent(SettingsModule settingsModule);
+
+    void inject(App app);
 
     @Component.Builder
     interface Builder {

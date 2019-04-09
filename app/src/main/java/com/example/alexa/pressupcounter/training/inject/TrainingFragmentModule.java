@@ -21,12 +21,6 @@ import dagger.Provides;
 @Module
 public class TrainingFragmentModule {
 
-    private TrainingFragment mFragment;
-
-    public TrainingFragmentModule(TrainingFragment fragment) {
-        mFragment = fragment;
-    }
-
     @TrainingFragmentScope
     @Provides
     TrainingInteractor provideTrainingInteractor(PressUpDao pressUpDao) {
@@ -35,8 +29,8 @@ public class TrainingFragmentModule {
 
     @TrainingFragmentScope
     @Provides
-    TrainingViewModel provideTrainingViewModel(TrainingViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(TrainingViewModelImpl.class);
+    TrainingViewModel provideTrainingViewModel(TrainingFragment fragment, TrainingViewModelFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(TrainingViewModelImpl.class);
     }
 
     @TrainingFragmentScope
@@ -47,7 +41,7 @@ public class TrainingFragmentModule {
 
     @TrainingFragmentScope
     @Provides
-    TrainingRouter provideRouter() {
-        return new TrainingRouterImpl(mFragment);
+    TrainingRouter provideRouter(TrainingFragment fragment) {
+        return new TrainingRouterImpl(fragment);
     }
 }

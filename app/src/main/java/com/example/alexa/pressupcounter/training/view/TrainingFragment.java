@@ -1,18 +1,17 @@
 package com.example.alexa.pressupcounter.training.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
 import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
-import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 
 import javax.inject.Inject;
@@ -21,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -41,9 +41,15 @@ public class TrainingFragment extends Fragment {
     private DialogFinishTraining mDialogFinishTraining;
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModule(this)).inject(this);
+        //App.getAppComponent().createTrainingFragmentModelComponent(new TrainingFragmentModule(this)).inject(this);
         init();
     }
 
