@@ -24,6 +24,9 @@ import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentScope;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModule;
+import com.example.alexa.pressupcounter.traininglist.inject.TrainingListScope;
+import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -67,4 +70,8 @@ public interface AppModule {
     @ContributesAndroidInjector(modules = StartTrainingModule.class)
     @StartTrainingScope
     StartTrainingFragment contributeStartTrainingFragment();
+
+    @ContributesAndroidInjector(modules = TrainingListModule.class)
+    @TrainingListScope
+    TrainingListFragment contributeTrainingListFragment();
 }

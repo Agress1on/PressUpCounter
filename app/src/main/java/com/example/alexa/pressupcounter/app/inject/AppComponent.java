@@ -35,22 +35,6 @@ public interface AppComponent {
 
     //FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
 
-    //SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
-
-    //SetProgramComponent createSetProgramModelComponent(SetProgramModule setProgramModule);
-
-    //StartTrainingComponent createStartTrainingModelComponent(StartTrainingModule startTrainingModule);
-
-    //TrainingFragmentComponent createTrainingFragmentModelComponent(TrainingFragmentModule trainingFragmentModule);
-
-    TrainingListComponent createTrainingListModelComponent(TrainingListModule trainingListModule);
-
-    //SetTrainingDayComponent createSetTrainingDayModelComponent(SetTrainingDayModule setTrainingDayModule);
-
-    //ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
-
-    //SettingsComponent createSettingsComponent(SettingsModule settingsModule);
-
     void inject(App app);
 
     @Component.Builder

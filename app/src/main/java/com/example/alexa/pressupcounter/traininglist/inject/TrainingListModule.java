@@ -20,12 +20,6 @@ import dagger.Provides;
 @Module
 public class TrainingListModule {
 
-    private TrainingListFragment mFragment;
-
-    public TrainingListModule(TrainingListFragment fragment) {
-        mFragment = fragment;
-    }
-
     @TrainingListScope
     @Provides
     TrainingListInteractor provideTrainingListModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
@@ -34,8 +28,8 @@ public class TrainingListModule {
 
     @TrainingListScope
     @Provides
-    TrainingListViewModel provideTrainingListViewModel(TrainingListViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(TrainingListViewModelImpl.class);
+    TrainingListViewModel provideTrainingListViewModel(TrainingListFragment fragment, TrainingListViewModelFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(TrainingListViewModelImpl.class);
     }
 
     @TrainingListScope

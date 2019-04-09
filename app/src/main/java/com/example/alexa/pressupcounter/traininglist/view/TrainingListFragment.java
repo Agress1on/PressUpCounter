@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.traininglist.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 12.03.2019.
@@ -41,9 +43,14 @@ public class TrainingListFragment extends Fragment {
     private PressUpAdapter mPressUpAdapter;
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.getAppComponent().createTrainingListModelComponent(new TrainingListModule(this)).inject(this);
         init();
     }
 
