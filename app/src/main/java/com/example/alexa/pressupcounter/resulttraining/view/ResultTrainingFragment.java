@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.resulttraining.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 06.02.2019.
@@ -31,10 +33,9 @@ public class ResultTrainingFragment extends Fragment {
     ResultTrainingViewModel mResultTrainingViewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        boolean isSuccess = getArguments().getBoolean(Constants.TAG_FOR_IS_SUCCESS_TRAINING);
-        App.getAppComponent().createResultTrainingComponent(new ResultTrainingModule(this, isSuccess)).inject(this);
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable

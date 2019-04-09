@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.resulttraining.inject;
 
+import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouter;
 import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouterImpl;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
@@ -20,36 +21,23 @@ import dagger.Provides;
  */
 @Module
 public class ResultTrainingModule {
-    private ResultTrainingFragment mFragment;
-    private boolean mResult;
 
-    public ResultTrainingModule(ResultTrainingFragment fragment, boolean result) {
-        mFragment = fragment;
-        mResult = result;
+    @ResultTrainingScope
+    @Provides
+    ResultTrainingViewModel provideResultTrainingViewModel(ResultTrainingFragment fragment, ResultTrainingViewModelFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(ResultTrainingViewModelImpl.class);
     }
 
     @ResultTrainingScope
     @Provides
-    ResultTrainingViewModel provideResultTrainingViewModel(ResultTrainingViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(ResultTrainingViewModelImpl.class);
+    ResultTrainingViewModelFactory provideFactory(ResultTrainingRouter router, ResultTrainingFragment fragment) {
+        boolean isSuccess = fragment.getArguments().getBoolean(Constants.TAG_FOR_IS_SUCCESS_TRAINING);
+        return new ResultTrainingViewModelFactory(router, isSuccess);
     }
 
     @ResultTrainingScope
     @Provides
-    ResultTrainingViewModelFactory provideFactory(ResultTrainingRouter router) {
-        return new ResultTrainingViewModelFactory(router, mResult);
-    }
-
-    @ResultTrainingScope
-    @Provides
-    ResultTrainingRouter provideRouter() {
-        return new ResultTrainingRouterImpl(mFragment);
-    }
-
-    @ResultTrainingScope
-    @Provides
-    @Named("key")
-    boolean provideResult() {
-        return mResult;
+    ResultTrainingRouter provideRouter(ResultTrainingFragment fragment) {
+        return new ResultTrainingRouterImpl(fragment);
     }
 }
