@@ -1,5 +1,8 @@
 package com.example.alexa.pressupcounter.app.inject;
 
+import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
+import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchScope;
+import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentScope;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
@@ -14,6 +17,10 @@ import dagger.android.ContributesAndroidInjector;
  */
 @Module
 public interface AppModule {
+
+    @ContributesAndroidInjector(modules = FirstLaunchModule.class)
+    @FirstLaunchScope
+    FirstLaunchFragment contributeFirstLaunchFragment();
 
     @ContributesAndroidInjector(modules = TrainingFragmentModule.class)
     @TrainingFragmentScope

@@ -33,7 +33,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {AppModule.class, RoomModule.class, AndroidSupportInjectionModule.class})
 public interface AppComponent {
 
-    FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
+    //FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
 
     SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
 

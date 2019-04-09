@@ -19,16 +19,10 @@ import dagger.Provides;
 @Module
 public class FirstLaunchModule {
 
-    private FirstLaunchFragment mFragment;
-
-    public FirstLaunchModule(FirstLaunchFragment fragment) {
-        mFragment = fragment;
-    }
-
     @FirstLaunchScope
     @Provides
-    FirstLaunchViewModel provideFirstLaunchViewModel(FirstLaunchFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(FirstLaunchViewModelImpl.class);
+    FirstLaunchViewModel provideFirstLaunchViewModel(FirstLaunchFragment fragment, FirstLaunchFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(FirstLaunchViewModelImpl.class);
     }
 
     @FirstLaunchScope
@@ -39,7 +33,7 @@ public class FirstLaunchModule {
 
     @FirstLaunchScope
     @Provides
-    FirstLaunchRouter provideRouter() {
-        return new FirstLaunchRouterImpl(mFragment);
+    FirstLaunchRouter provideRouter(FirstLaunchFragment fragment) {
+        return new FirstLaunchRouterImpl(fragment);
     }
 }
