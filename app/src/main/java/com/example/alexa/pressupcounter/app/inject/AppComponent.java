@@ -35,7 +35,7 @@ public interface AppComponent {
 
     //FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
 
-    SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
+    //SetTimeComponent createSetTimeComponent(SetTimeModule setTimeModule);
 
     //SetProgramComponent createSetProgramModelComponent(SetProgramModule setProgramModule);
 

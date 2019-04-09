@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.settime.inject;
 
+import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.settime.interactor.SetTimeInteractor;
 import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
 import com.example.alexa.pressupcounter.settime.router.SetTimeRouterImpl;
@@ -9,8 +10,6 @@ import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelFactor
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModelImpl;
 
 import java.util.ArrayList;
-
-import javax.inject.Named;
 
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Module;
@@ -24,24 +23,17 @@ import dagger.Provides;
 @Module
 public class SetTimeModule {
 
-    private SetTimeFragment mFragment;
-    private ArrayList<Integer> mIndexList;
-
-    public SetTimeModule(SetTimeFragment fragment, ArrayList<Integer> indexList) {
-        mFragment = fragment;
-        mIndexList = indexList;
+    @SetTimeScope
+    @Provides
+    SetTimeViewModel provideSetTimeViewModel(SetTimeFragment fragment, SetTimeViewModelFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(SetTimeViewModelImpl.class);
     }
 
     @SetTimeScope
     @Provides
-    SetTimeViewModel provideSetTimeViewModel(SetTimeViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(SetTimeViewModelImpl.class);
-    }
-
-    @SetTimeScope
-    @Provides
-    SetTimeViewModelFactory provideFactory(SetTimeInteractor interactor, SetTimeRouter router) {
-        return new SetTimeViewModelFactory(interactor, router, mIndexList);
+    SetTimeViewModelFactory provideFactory(SetTimeFragment fragment, SetTimeInteractor interactor, SetTimeRouter router) {
+        ArrayList<Integer> list = fragment.getArguments().getIntegerArrayList(Constants.KEY_FOR_SET_TIME_BUNDLE);
+        return new SetTimeViewModelFactory(interactor, router, list);
     }
 
     @SetTimeScope
@@ -52,14 +44,7 @@ public class SetTimeModule {
 
     @SetTimeScope
     @Provides
-    SetTimeRouter provideRouter() {
-        return new SetTimeRouterImpl(mFragment);
-    }
-
-    @SetTimeScope
-    @Provides
-    @Named("indexList")
-    ArrayList<Integer> provideList() {
-        return mIndexList;
+    SetTimeRouter provideRouter(SetTimeFragment fragment) {
+        return new SetTimeRouterImpl(fragment);
     }
 }

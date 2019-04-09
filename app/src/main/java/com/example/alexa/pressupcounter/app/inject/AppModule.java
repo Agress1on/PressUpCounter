@@ -9,6 +9,9 @@ import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragme
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramModule;
 import com.example.alexa.pressupcounter.setprogram.inject.SetProgramScope;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
+import com.example.alexa.pressupcounter.settime.inject.SetTimeModule;
+import com.example.alexa.pressupcounter.settime.inject.SetTimeScope;
+import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentModule;
 import com.example.alexa.pressupcounter.training.inject.TrainingFragmentScope;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
@@ -39,4 +42,8 @@ public interface AppModule {
     @ContributesAndroidInjector(modules = SetProgramModule.class)
     @SetProgramScope
     SetProgramFragment contributeSetProgramFragment();
+
+    @ContributesAndroidInjector(modules = SetTimeModule.class)
+    @SetTimeScope
+    SetTimeFragment contributeSetTimeFragment();
 }

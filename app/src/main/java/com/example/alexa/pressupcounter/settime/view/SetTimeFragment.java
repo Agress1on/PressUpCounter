@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.settime.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 17.03.2019.
@@ -40,12 +42,15 @@ public class SetTimeFragment extends Fragment {
     private TimePickerDialogFragment mSecondDayTimePickerEvent;
     private TimePickerDialogFragment mThirdDayTimePickerEvent;
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIndexList = getArguments().getIntegerArrayList(Constants.KEY_FOR_SET_TIME_BUNDLE);
-        App.getAppComponent().createSetTimeComponent(new SetTimeModule(this, mIndexList)).inject(this);
         init();
     }
 
