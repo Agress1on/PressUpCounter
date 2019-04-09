@@ -1,5 +1,6 @@
 package com.example.alexa.pressupcounter.settrainingday.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * Created by Alexandr Mikhalev on 13.03.2019.
@@ -32,9 +34,9 @@ public class SetTrainingDayFragment extends Fragment {
     SetTrainingDayViewModel mSetTrainingDayViewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        App.getAppComponent().createSetTrainingDayModelComponent(new SetTrainingDayModule(this)).inject(this);
+    public void onAttach(@NonNull Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Nullable

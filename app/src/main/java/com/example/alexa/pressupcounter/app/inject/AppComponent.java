@@ -45,7 +45,7 @@ public interface AppComponent {
 
     TrainingListComponent createTrainingListModelComponent(TrainingListModule trainingListModule);
 
-    SetTrainingDayComponent createSetTrainingDayModelComponent(SetTrainingDayModule setTrainingDayModule);
+    //SetTrainingDayComponent createSetTrainingDayModelComponent(SetTrainingDayModule setTrainingDayModule);
 
     //ResultTrainingComponent createResultTrainingComponent(ResultTrainingModule resultTrainingModule);
 

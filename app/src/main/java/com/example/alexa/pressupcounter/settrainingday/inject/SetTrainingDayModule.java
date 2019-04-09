@@ -20,12 +20,6 @@ import dagger.Provides;
 @Module
 public class SetTrainingDayModule {
 
-    private SetTrainingDayFragment mFragment;
-
-    public SetTrainingDayModule(SetTrainingDayFragment fragment) {
-        mFragment = fragment;
-    }
-
     @SetTrainingDayScope
     @Provides
     SetTrainingDayInteractor provideSetTrainingDayInteractor() {
@@ -34,8 +28,8 @@ public class SetTrainingDayModule {
 
     @SetTrainingDayScope
     @Provides
-    SetTrainingDayViewModel provideSetTrainingDayViewModel(SetTrainingDayViewModelFactory factory) {
-        return ViewModelProviders.of(mFragment, factory).get(SetTrainingDayViewModelImpl.class);
+    SetTrainingDayViewModel provideSetTrainingDayViewModel(SetTrainingDayFragment fragment, SetTrainingDayViewModelFactory factory) {
+        return ViewModelProviders.of(fragment, factory).get(SetTrainingDayViewModelImpl.class);
     }
 
     @SetTrainingDayScope
@@ -46,7 +40,7 @@ public class SetTrainingDayModule {
 
     @SetTrainingDayScope
     @Provides
-    SetTrainingDayRouter provideRouter() {
-        return new SetTrainingDayRouterImpl(mFragment);
+    SetTrainingDayRouter provideRouter(SetTrainingDayFragment fragment) {
+        return new SetTrainingDayRouterImpl(fragment);
     }
 }
