@@ -18,10 +18,8 @@ import dagger.android.support.HasSupportFragmentInjector;
  * @author Alexandr Mikhalev
  */
 public class App extends Application implements HasSupportFragmentInjector {
-    public static App sInstance;
 
-    private static AppComponent sAppComponent;
-    //private AppDatabase mDatabase;
+    private AppComponent sAppComponent;
 
     @Inject
     DispatchingAndroidInjector<Fragment> mDispatchingAndroidInjector;
@@ -29,37 +27,11 @@ public class App extends Application implements HasSupportFragmentInjector {
     @Override
     public void onCreate() {
         super.onCreate();
-        sInstance = this;
-        //mDatabase = Room.databaseBuilder(this, AppDatabase.class, "database").build();
-        /*
-        sAppComponent = DaggerAppComponent.builder()
-                .appModule(new AppModule(this))
-                .roomModule(new RoomModule(this))
-                .build();
-        */
-
-
         sAppComponent = DaggerAppComponent.builder()
                 .context(this)
                 .build();
         sAppComponent.inject(this);
     }
-
-    public static App getInstance() {
-        return sInstance;
-    }
-
-    /*
-    public AppDatabase getDatabase() {
-        return mDatabase;
-    }
-    */
-
-    //dagger
-    public static AppComponent getAppComponent() {
-        return sAppComponent;
-    }
-
 
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
