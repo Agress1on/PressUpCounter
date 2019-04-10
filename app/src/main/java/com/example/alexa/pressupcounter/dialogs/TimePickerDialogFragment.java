@@ -18,13 +18,10 @@ import androidx.fragment.app.DialogFragment;
  */
 public class TimePickerDialogFragment extends DialogFragment implements android.app.TimePickerDialog.OnTimeSetListener {
 
-    SetTime mSetTime;
+    private SetTimeListener mSetTimeListener;
 
-    public void init(SetTime setTime) {
-        mSetTime = setTime;
-    }
-
-    public TimePickerDialogFragment() {
+    public void setSetTimeListener(SetTimeListener setTimeListener) {
+        mSetTimeListener = setTimeListener;
     }
 
     @NonNull
@@ -38,10 +35,10 @@ public class TimePickerDialogFragment extends DialogFragment implements android.
 
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-            mSetTime.setTime(i, i1);
+        mSetTimeListener.setTime(i, i1);
     }
 
-    public interface SetTime {
+    public interface SetTimeListener {
         void setTime(int hourOfDay, int minute);
     }
 }

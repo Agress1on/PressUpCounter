@@ -5,8 +5,6 @@ import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
 
-import androidx.lifecycle.LiveData;
-
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
  *
@@ -14,46 +12,50 @@ import androidx.lifecycle.LiveData;
  */
 public class SetTimeRouterImpl implements SetTimeRouter {
 
-    private LiveData<FragmentEvent> mGoToStartTrainingEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToStartTrainingEvent;
 
-    private LiveData<TimePickerEvent> mTimePickerEventForFirstDay;
-    private LiveData<TimePickerEvent> mTimePickerEventForSecondDay;
-    private LiveData<TimePickerEvent> mTimePickerEventForThirdDay;
+    private SingleLiveEvent<TimePickerEvent> mTimePickerEventForFirstDay;
+    private SingleLiveEvent<TimePickerEvent> mTimePickerEventForSecondDay;
+    private SingleLiveEvent<TimePickerEvent> mTimePickerEventForThirdDay;
 
     public SetTimeRouterImpl(SetTimeFragment fragment) {
         mGoToStartTrainingEvent = new SingleLiveEvent<>();
-        mGoToStartTrainingEvent.observe(fragment, fragmentEvent -> fragment.goToStartTraining());
+        mGoToStartTrainingEvent.observe(fragment, fragmentEvent
+                -> fragment.goToStartTraining());
 
         mTimePickerEventForFirstDay = new SingleLiveEvent<>();
-        mTimePickerEventForFirstDay.observe(fragment, timePickerEvent -> fragment.showTimePickerForFirstDay());
+        mTimePickerEventForFirstDay.observe(fragment, timePickerEvent
+                -> fragment.showTimePickerDialog(TimePickerEvent.DayNotification.FIRST_DAY));
 
         mTimePickerEventForSecondDay = new SingleLiveEvent<>();
-        mTimePickerEventForSecondDay.observe(fragment, timePickerEvent -> fragment.showTimePickerForSecondDay());
+        mTimePickerEventForSecondDay.observe(fragment, timePickerEvent
+                -> fragment.showTimePickerDialog(TimePickerEvent.DayNotification.SECOND_DAY));
 
         mTimePickerEventForThirdDay = new SingleLiveEvent<>();
-        mTimePickerEventForThirdDay.observe(fragment, timePickerEvent -> fragment.showTimePickerForThirdDay());
+        mTimePickerEventForThirdDay.observe(fragment, timePickerEvent
+                -> fragment.showTimePickerDialog(TimePickerEvent.DayNotification.THIRD_DAY));
     }
 
     @Override
     public void goStartTraining() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToStartTrainingEvent).postValue(new FragmentEvent());
+        mGoToStartTrainingEvent.postValue(new FragmentEvent());
     }
 
     @Override
     public void showTimePickerForFirstDay() {
-        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForFirstDay)
+        mTimePickerEventForFirstDay
                 .postValue(new TimePickerEvent(TimePickerEvent.DayNotification.FIRST_DAY));
     }
 
     @Override
     public void showTimePickerForSecondDay() {
-        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForSecondDay)
+        mTimePickerEventForSecondDay
                 .postValue(new TimePickerEvent(TimePickerEvent.DayNotification.SECOND_DAY));
     }
 
     @Override
     public void showTimePickerForThirdDay() {
-        ((SingleLiveEvent<TimePickerEvent>) mTimePickerEventForThirdDay)
+        mTimePickerEventForThirdDay
                 .postValue(new TimePickerEvent(TimePickerEvent.DayNotification.THIRD_DAY));
     }
 }

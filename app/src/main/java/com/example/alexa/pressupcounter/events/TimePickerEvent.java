@@ -17,7 +17,7 @@ public class TimePickerEvent extends AbstractEvent {
         return mDayNotification;
     }
 
-    public enum  DayNotification {
+    public enum DayNotification {
         FIRST_DAY,
         SECOND_DAY,
         THIRD_DAY

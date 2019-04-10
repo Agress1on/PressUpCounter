@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
 import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
-import com.example.alexa.pressupcounter.settime.inject.SetTimeModule;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
@@ -37,21 +35,10 @@ public class SetTimeFragment extends Fragment {
     @Inject
     SetTimeViewModel mSetTimeViewModel;
 
-    private ArrayList<Integer> mIndexList;
-    private TimePickerDialogFragment mFirstDayTimePickerEvent;
-    private TimePickerDialogFragment mSecondDayTimePickerEvent;
-    private TimePickerDialogFragment mThirdDayTimePickerEvent;
-
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
         super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        init();
     }
 
     @Nullable
@@ -62,36 +49,11 @@ public class SetTimeFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void init() {
-        //TP for first day
-        mFirstDayTimePickerEvent = new TimePickerDialogFragment();
-        mFirstDayTimePickerEvent.init(new TimePickerDialogFragment.SetTime() {
-            @Override
-            public void setTime(int hourOfDay, int minute) {
-                //mSetTimeViewModel.setFirstDayTime(hourOfDay, minute);
-                mSetTimeViewModel.setDayTime(TimePickerEvent.DayNotification.FIRST_DAY, hourOfDay, minute);
-            }
-        });
-
-        //TP for second day
-        mSecondDayTimePickerEvent = new TimePickerDialogFragment();
-        mSecondDayTimePickerEvent.init(new TimePickerDialogFragment.SetTime() {
-            @Override
-            public void setTime(int hourOfDay, int minute) {
-                //mSetTimeViewModel.setSecondDayTime(hourOfDay, minute);
-                mSetTimeViewModel.setDayTime(TimePickerEvent.DayNotification.SECOND_DAY, hourOfDay, minute);
-            }
-        });
-
-        //TP for third day
-        mThirdDayTimePickerEvent = new TimePickerDialogFragment();
-        mThirdDayTimePickerEvent.init(new TimePickerDialogFragment.SetTime() {
-            @Override
-            public void setTime(int hourOfDay, int minute) {
-                //mSetTimeViewModel.setThirdDayTime(hourOfDay, minute);
-                mSetTimeViewModel.setDayTime(TimePickerEvent.DayNotification.THIRD_DAY, hourOfDay, minute);
-            }
-        });
+    public void showTimePickerDialog(TimePickerEvent.DayNotification dayNotification) {
+        TimePickerDialogFragment timePickerDialogFragment = new TimePickerDialogFragment();
+        timePickerDialogFragment.setSetTimeListener((hourOfDay, minute)
+                -> mSetTimeViewModel.setDayTime(dayNotification, hourOfDay, minute));
+        timePickerDialogFragment.show(getChildFragmentManager(), "TAG");
     }
 
     public void goToStartTraining() {
@@ -99,18 +61,6 @@ public class SetTimeFragment extends Fragment {
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                 .commit();
-    }
-
-    public void showTimePickerForFirstDay() {
-        mFirstDayTimePickerEvent.show(getActivity().getSupportFragmentManager(), "TAAAG");
-    }
-
-    public void showTimePickerForSecondDay() {
-        mSecondDayTimePickerEvent.show(getActivity().getSupportFragmentManager(), "TAAAG");
-    }
-
-    public void showTimePickerForThirdDay() {
-        mThirdDayTimePickerEvent.show(getActivity().getSupportFragmentManager(), "TAAAG");
     }
 
     public static SetTimeFragment newInstance(List<Integer> indexList) {
