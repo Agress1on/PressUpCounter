@@ -7,10 +7,8 @@ import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 23.01.2019.
@@ -49,6 +47,12 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
         mStateOfRestButton = new ObservableField<>(true);
         mCompositeDisposable = new CompositeDisposable();
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mCompositeDisposable.clear();
     }
 
     @Override

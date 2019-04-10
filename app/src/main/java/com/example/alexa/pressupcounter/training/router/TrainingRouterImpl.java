@@ -4,8 +4,6 @@ import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 
-import androidx.lifecycle.LiveData;
-
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
  *
@@ -13,9 +11,9 @@ import androidx.lifecycle.LiveData;
  */
 public class TrainingRouterImpl implements TrainingRouter {
 
-    private LiveData<DialogEvent> mDialogEventForRest;
-    private LiveData<DialogEvent> mDialogEventForRestOff;
-    private LiveData<DialogEvent> mDialogEventFinishTraining;
+    private SingleLiveEvent<DialogEvent> mDialogEventForRest;
+    private SingleLiveEvent<DialogEvent> mDialogEventForRestOff;
+    private SingleLiveEvent<DialogEvent> mDialogEventFinishTraining;
 
     public TrainingRouterImpl(TrainingFragment fragment) {
         mDialogEventForRest = new SingleLiveEvent<>();
@@ -30,16 +28,16 @@ public class TrainingRouterImpl implements TrainingRouter {
 
     @Override
     public void showDialogTrainingRest() {
-        ((SingleLiveEvent<DialogEvent>) mDialogEventForRest).postValue(new DialogEvent());
+        mDialogEventForRest.postValue(new DialogEvent());
     }
 
     @Override
     public void showDialogTrainingRestOff() {
-        ((SingleLiveEvent<DialogEvent>) mDialogEventForRestOff).postValue(new DialogEvent());
+        mDialogEventForRestOff.postValue(new DialogEvent());
     }
 
     @Override
     public void showDialogFinishTraining() {
-        ((SingleLiveEvent<DialogEvent>) mDialogEventFinishTraining).postValue(new DialogEvent());
+        mDialogEventFinishTraining.postValue(new DialogEvent());
     }
 }

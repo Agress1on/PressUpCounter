@@ -23,14 +23,22 @@ import androidx.fragment.app.DialogFragment;
  */
 public class DialogTrainingRest extends DialogFragment implements View.OnClickListener {
 
-    private OnButtonClick mOnButtonClick;
+    private OnButtonDialogRestClickListener mOnButtonDialogRestClickListener;
 
     private TextView mPositiveButton;
     private TextView mNegativeButton;
     private TextView mMessage;
 
-    public void initDialog(OnButtonClick onButtonClick) {
-        this.mOnButtonClick = onButtonClick;
+    /*
+    public void initDialog(OnButtonDialogRestClickListener onButtonClickListener) {
+        this.mOnButtonDialogRestClickListener = onButtonClickListener;
+    }
+    */
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mOnButtonDialogRestClickListener = (OnButtonDialogRestClickListener) getParentFragment();
     }
 
     @Nullable
@@ -58,17 +66,17 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.positive_button:
-                mOnButtonClick.onPositiveButton();
+                mOnButtonDialogRestClickListener.onPositiveButtonTrainingRestDialog(this);
                 break;
             case R.id.negative_button:
-                mOnButtonClick.onNegativeButton();
+                mOnButtonDialogRestClickListener.onNegativeButtonTrainingRestDialog(this);
                 break;
         }
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        mOnButtonClick.onCancel();
+        mOnButtonDialogRestClickListener.onCancelTrainingRestDialog(this);
     }
 
     private void setWindow() {
@@ -80,11 +88,11 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
         window.setGravity(Gravity.CENTER);
     }
 
-    public interface OnButtonClick {
-        void onPositiveButton();
+    public interface OnButtonDialogRestClickListener {
+        void onPositiveButtonTrainingRestDialog(DialogTrainingRest dialogTrainingRest);
 
-        void onNegativeButton();
+        void onNegativeButtonTrainingRestDialog(DialogTrainingRest dialogTrainingRest);
 
-        void onCancel();
+        void onCancelTrainingRestDialog(DialogTrainingRest dialogTrainingRest);
     }
 }

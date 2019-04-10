@@ -23,13 +23,16 @@ import androidx.fragment.app.DialogFragment;
  */
 public class DialogTrainingRestOff extends DialogFragment implements View.OnClickListener {
 
-    private OnButtonClick mOnButtonClick;
+    private OnButtonDialogRestOffClickListener mOnButtonDialogRestOffClickListener;
     private TextView mPositiveButton;
     private TextView mNegativeButton;
     private TextView mQuestion;
 
-    public void initDialog(OnButtonClick onButtonClick) {
-        mOnButtonClick = onButtonClick;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mOnButtonDialogRestOffClickListener = (OnButtonDialogRestOffClickListener) getParentFragment();
     }
 
     @Nullable
@@ -66,22 +69,22 @@ public class DialogTrainingRestOff extends DialogFragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.positive_button:
-                mOnButtonClick.onPositiveButton();
+                mOnButtonDialogRestOffClickListener.onPositiveButtonTrainingRestOfDialog(this);
                 break;
             case R.id.negative_button:
-                mOnButtonClick.onNegativeButton();
+                mOnButtonDialogRestOffClickListener.onNegativeButtonTrainingRestOfDialog(this);
                 break;
         }
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        mOnButtonClick.onNegativeButton();
+        mOnButtonDialogRestOffClickListener.onNegativeButtonTrainingRestOfDialog(this);
     }
 
-    public interface OnButtonClick {
-        void onPositiveButton();
+    public interface OnButtonDialogRestOffClickListener {
+        void onPositiveButtonTrainingRestOfDialog(DialogTrainingRestOff dialogTrainingRestOff);
 
-        void onNegativeButton();
+        void onNegativeButtonTrainingRestOfDialog(DialogTrainingRestOff dialogTrainingRestOff);
     }
 }

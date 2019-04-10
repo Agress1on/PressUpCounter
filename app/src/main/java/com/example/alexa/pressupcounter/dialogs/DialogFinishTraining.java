@@ -22,22 +22,24 @@ import androidx.fragment.app.DialogFragment;
  */
 public class DialogFinishTraining extends DialogFragment implements View.OnClickListener {
 
-    private OnButtonClick mOnButtonClick;
+    private OnButtonClickDialogFinishTraining mOnButtonClickDialogFinishTraining;
     private TextView mPositiveButton;
     private TextView mNegativeButton;
     private TextView mQuestion;
 
-    public void init(OnButtonClick onButtonClick) {
-        mOnButtonClick = onButtonClick;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mOnButtonClickDialogFinishTraining = (OnButtonClickDialogFinishTraining) getParentFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        View view = inflater.inflate(R.layout.dialog_finish_training,container, false);
-        mPositiveButton = (TextView)view.findViewById(R.id.positive_button);
-        mNegativeButton = (TextView)view.findViewById(R.id.negative_button);
+        View view = inflater.inflate(R.layout.dialog_finish_training, container, false);
+        mPositiveButton = (TextView) view.findViewById(R.id.positive_button);
+        mNegativeButton = (TextView) view.findViewById(R.id.negative_button);
         mQuestion = (TextView) view.findViewById(R.id.question_header);
 
         mPositiveButton.setOnClickListener(this);
@@ -65,22 +67,22 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.positive_button:
-                mOnButtonClick.onPositiveButton();
+                mOnButtonClickDialogFinishTraining.onPositiveButtonDialogFinishTraining(this);
                 break;
             case R.id.negative_button:
-                mOnButtonClick.onNegativeButton();
+                mOnButtonClickDialogFinishTraining.onNegativeButtonDialogFinishTraining(this);
                 break;
         }
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        mOnButtonClick.onNegativeButton();
+        mOnButtonClickDialogFinishTraining.onNegativeButtonDialogFinishTraining(this);
     }
 
-    public interface OnButtonClick {
-        void onPositiveButton();
+    public interface OnButtonClickDialogFinishTraining {
+        void onPositiveButtonDialogFinishTraining(DialogFinishTraining dialogFinishTraining);
 
-        void onNegativeButton();
+        void onNegativeButtonDialogFinishTraining(DialogFinishTraining dialogFinishTraining);
     }
 }
