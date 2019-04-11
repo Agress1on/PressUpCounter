@@ -5,7 +5,7 @@ package com.example.alexa.pressupcounter.events;
  *
  * @author Alexandr Mikhalev
  */
-public class TimePickerEvent extends AbstractEvent {
+public class TimePickerEvent {
 
     private DayNotification mDayNotification;
 

@@ -5,6 +5,6 @@ package com.example.alexa.pressupcounter.events;
  *
  * @author Alexandr Mikhalev
  */
-public class FragmentEvent extends AbstractEvent {
+public class FragmentEvent {
 
 }
