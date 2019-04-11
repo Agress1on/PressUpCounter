@@ -19,7 +19,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     private SetTrainingDayInteractor mSetTrainingDayInteractor;
     private SetTrainingDayRouter mSetTrainingDayRouter;
 
-    private ObservableField<List<ObservableField<Boolean>>> mDayOfWeekStatesObservableField;
+    private List<ObservableField<Boolean>> mDayOfWeekStatesObservableField;
     private ObservableField<Boolean> mButtonState;
 
     private List<Integer> mIndexList;
@@ -28,18 +28,17 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         mSetTrainingDayInteractor = setTrainingDayInteractor;
         mSetTrainingDayRouter = setTrainingDayRouter;
 
-        List<ObservableField<Boolean>> states = new ArrayList<>();
+        mDayOfWeekStatesObservableField = new ArrayList<>();
         for (int i = 0; i < 7; i++) {
-            states.add(new ObservableField<>(false));
+            mDayOfWeekStatesObservableField.add(new ObservableField<>(false));
         }
-        mDayOfWeekStatesObservableField = new ObservableField<>(states);
 
         mButtonState = new ObservableField<>(false);
         mIndexList = new ArrayList();
     }
 
     @Override
-    public ObservableField<List<ObservableField<Boolean>>> getDayOfWeekState() {
+    public List<ObservableField<Boolean>> getDayOfWeekState() {
         return mDayOfWeekStatesObservableField;
     }
 
@@ -55,7 +54,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
     @Override
     public void onCheckedChanged(int i, boolean state) {
-        mDayOfWeekStatesObservableField.get().get(i).set(state);
+        mDayOfWeekStatesObservableField.get(i).set(state);
         mButtonState.set(checkQuantityDays() == 3);
     }
 
@@ -67,15 +66,15 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
 
     private int checkQuantityDays() {
         int count = 0;
-        for (ObservableField<Boolean> item : mDayOfWeekStatesObservableField.get()) {
+        for (ObservableField<Boolean> item : mDayOfWeekStatesObservableField) {
             if (item.get().equals(true)) count++;
         }
         return count;
     }
 
     private void writeIndexDayOfWeekInList() {
-        for (int i = 0; i < mDayOfWeekStatesObservableField.get().size(); i++) {
-            if (mDayOfWeekStatesObservableField.get().get(i).get().equals(true)) mIndexList.add(i);
+        for (int i = 0; i < mDayOfWeekStatesObservableField.size(); i++) {
+            if (mDayOfWeekStatesObservableField.get(i).get().equals(true)) mIndexList.add(i);
         }
     }
 }

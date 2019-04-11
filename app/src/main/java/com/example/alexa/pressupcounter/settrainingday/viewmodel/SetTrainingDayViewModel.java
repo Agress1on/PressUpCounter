@@ -11,7 +11,7 @@ import androidx.databinding.ObservableField;
  */
 public interface SetTrainingDayViewModel {
 
-    ObservableField<List<ObservableField<Boolean>>> getDayOfWeekState();
+    List<ObservableField<Boolean>> getDayOfWeekState();
 
     ObservableField<Boolean> getCheckButtonState();
 
