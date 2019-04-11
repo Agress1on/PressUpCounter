@@ -11,9 +11,7 @@ import androidx.databinding.ObservableField;
  */
 public interface SetProgramViewModel {
 
-    void onCreateView();
-
-    ObservableField<List<ObservableField<Integer>>> getListOfRepetitions();
+    List<ObservableField<Integer>> getListOfRepetitions();
 
     ObservableField<Integer> getSumOfRepetitions();
 

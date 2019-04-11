@@ -1,11 +1,26 @@
 package com.example.alexa.pressupcounter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Alexandr Mikhalev on 18.01.2019.
  *
  * @author Alexandr Mikhalev
  */
 public class Constants {
+
+    public static List<Integer> initList;
+
+    static {
+        initList = new ArrayList<>();
+        initList.add(2); //FirstRepetition
+        initList.add(3); //SecondRepetition
+        initList.add(1); //ThirdRepetition
+        initList.add(1); //FourthRepetition
+        initList.add(3); //FifthRepetition
+    }
+
     //Settings
     public static final int PAGE_COUNT = 3;
 
