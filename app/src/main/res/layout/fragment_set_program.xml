@@ -246,7 +246,7 @@
             android:onClick="@{() -> viewModel.onDecrementButton()}"
             android:text="-"
             android:textColor="@color/colorWhite"
-            android:visibility="@{viewModel.sumOfRepetitions.get() > 10 ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > 10 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toEndOf="@id/vertical_center_guideline"
             app:layout_constraintTop_toTopOf="@id/increment_button" />
 
