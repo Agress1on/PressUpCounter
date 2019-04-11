@@ -21,7 +21,7 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     private SetTimeInteractor mSetTimeInteractor;
     private SetTimeRouter mSetTimeRouter;
 
-    private ObservableField<List<ObservableField<String>>> mListTime;
+    private List<ObservableField<String>> mListTime;
 
     private ArrayList<Integer> mIndexList;
 
@@ -31,18 +31,17 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
         mSetTimeInteractor = setTimeInteractor;
         mSetTimeRouter = setTimeRouter;
 
-        List<ObservableField<String>> list = new ArrayList<>();
+        mListTime = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
-            list.add(new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING));
+            mListTime.add(new ObservableField<>(Constants.TEXT_FOR_SET_TIME_STRING));
         }
-        mListTime = new ObservableField<>(list);
 
         mIndexList = indexList;
         mInfoText = new ObservableField<>(mIndexList.get(0) + " " + mIndexList.get(1) + " " + mIndexList.get(2));
     }
 
     @Override
-    public ObservableField<List<ObservableField<String>>> getListTime() {
+    public List<ObservableField<String>> getListTime() {
         return mListTime;
     }
 
@@ -55,13 +54,13 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     public void setDayTime(TimePickerEvent.DayNotification dayNotification, int hours, int minutes) {
         switch (dayNotification) {
             case FIRST_DAY:
-                mListTime.get().get(0).set(hours + ":" + minutes);
+                mListTime.get(0).set(hours + ":" + minutes);
                 break;
             case SECOND_DAY:
-                mListTime.get().get(1).set(hours + ":" + minutes);
+                mListTime.get(1).set(hours + ":" + minutes);
                 break;
             case THIRD_DAY:
-                mListTime.get().get(2).set(hours + ":" + minutes);
+                mListTime.get(2).set(hours + ":" + minutes);
                 break;
         }
     }

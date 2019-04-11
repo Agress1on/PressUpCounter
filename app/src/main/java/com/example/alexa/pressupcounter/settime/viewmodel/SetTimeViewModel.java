@@ -13,7 +13,7 @@ import androidx.databinding.ObservableField;
  */
 public interface SetTimeViewModel {
 
-    ObservableField<List<ObservableField<String>>> getListTime();
+    List<ObservableField<String>> getListTime();
 
     ObservableField<String> getTextInfo();
 
