@@ -1,10 +1,14 @@
 package com.example.alexa.pressupcounter.firstlaunch.router;
 
+import android.util.Log;
+
+import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
@@ -13,15 +17,26 @@ import androidx.lifecycle.LiveData;
  */
 public class FirstLaunchRouterImpl implements FirstLaunchRouter {
 
-    private LiveData<FragmentEvent> mGoToSetProgramEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToSetProgramEvent;
 
     public FirstLaunchRouterImpl(FirstLaunchFragment fragment) {
         mGoToSetProgramEvent = new SingleLiveEvent<>();
-        mGoToSetProgramEvent.observe(fragment, fragmentEvent -> fragment.goToSetProgram());
+        mGoToSetProgramEvent.observe(fragment, fragmentEvent -> {
+            Logger.d("FirstLaunchRouterImpl", "Event");
+            fragment.goToSetProgram();
+        });
+        Logger.d("FirstLaunchRouterImpl", "constructor");
+    }
+
+    @Override
+    public void setSubscription() {
+
     }
 
     @Override
     public void goToSetProgram() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToSetProgramEvent).postValue(new FragmentEvent());
+        //mGoToSetProgramEvent.postValue(new FragmentEvent());
+        mGoToSetProgramEvent.postValue(new FragmentEvent());
+        Logger.d("FirstLaunchRouterImpl", "goToSetProgram");
     }
 }

@@ -7,10 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBinding;
 import com.example.alexa.pressupcounter.firstlaunch.inject.FirstLaunchModule;
+import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
 import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -36,6 +38,8 @@ public class FirstLaunchFragment extends Fragment {
 
     @Inject
     FirstLaunchViewModel mFirstLaunchViewModel;
+    @Inject
+    FirstLaunchRouter mFirstLaunchRouter;
 
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
@@ -52,13 +56,14 @@ public class FirstLaunchFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentContainerForTabsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container_for_tabs, container, false);
         binding.setViewModel(mFirstLaunchViewModel);
-
+        Logger.d("FirstLaunchFragment", mFirstLaunchViewModel.toString());
         mPager = binding.pager;
         mPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
 
         mTabLayout = binding.tabLayout;
         mTabLayout.setupWithViewPager(mPager, true);
+        mFirstLaunchViewModel.setNewRouter(mFirstLaunchRouter);
         return binding.getRoot();
     }
 

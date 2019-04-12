@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
 import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, FirstLaunchFragment.newInstance())
                     .commit();
         }
+        Logger.d("MainActivity", "onCreate");
         // JSON example
         /*
         try {

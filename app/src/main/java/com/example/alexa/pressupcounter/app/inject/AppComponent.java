@@ -1,11 +1,12 @@
 package com.example.alexa.pressupcounter.app.inject;
 
-import android.content.Context;
+import android.app.Application;
 
 import com.example.alexa.pressupcounter.app.App;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 /**
@@ -14,8 +15,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
  * @author Alexandr Mikhalev
  */
 @AppScope
-@Component(modules = {AppModule.class, RoomModule.class, AndroidSupportInjectionModule.class})
-public interface AppComponent {
+@Component(modules = {FragmentBuilder.class, RoomModule.class, AppModule.class, AndroidSupportInjectionModule.class})
+public interface AppComponent extends AndroidInjector<App> {
 
     //FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);
 
@@ -23,8 +24,9 @@ public interface AppComponent {
 
     @Component.Builder
     interface Builder {
+
         @BindsInstance
-        Builder context(Context context);
+        Builder application(Application application);
 
         AppComponent build();
     }

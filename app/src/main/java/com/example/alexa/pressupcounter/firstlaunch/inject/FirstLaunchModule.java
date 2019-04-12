@@ -31,7 +31,6 @@ public class FirstLaunchModule {
         return new FirstLaunchFactory(router);
     }
 
-    @FirstLaunchScope
     @Provides
     FirstLaunchRouter provideRouter(FirstLaunchFragment fragment) {
         return new FirstLaunchRouterImpl(fragment);

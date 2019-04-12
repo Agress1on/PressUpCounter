@@ -19,18 +19,18 @@ import dagger.android.support.HasSupportFragmentInjector;
  */
 public class App extends Application implements HasSupportFragmentInjector {
 
-    private AppComponent sAppComponent;
-
+    AppComponent mAppComponent;
     @Inject
     DispatchingAndroidInjector<Fragment> mDispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        sAppComponent = DaggerAppComponent.builder()
-                .context(this)
+        mAppComponent = DaggerAppComponent
+                .builder()
+                .application(this)
                 .build();
-        sAppComponent.inject(this);
+        mAppComponent.inject(this);
     }
 
     @Override
