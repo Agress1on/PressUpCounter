@@ -5,8 +5,6 @@ import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.ShowToastEvent;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
 
-import androidx.lifecycle.LiveData;
-
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
  *
@@ -14,9 +12,9 @@ import androidx.lifecycle.LiveData;
  */
 public class SettingsRouterImpl implements SettingsRouter {
 
-    private LiveData<FragmentEvent> mGoToSetNotificationsEvent;
-    private LiveData<ShowToastEvent> mShowToastEvent;
-    private LiveData<FragmentEvent> mGoToSetProgram;
+    private SingleLiveEvent<FragmentEvent> mGoToSetNotificationsEvent;
+    private SingleLiveEvent<ShowToastEvent> mShowToastEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToSetProgram;
 
     public SettingsRouterImpl(SettingsFragment fragment) {
         mGoToSetNotificationsEvent = new SingleLiveEvent<>();
@@ -31,16 +29,16 @@ public class SettingsRouterImpl implements SettingsRouter {
 
     @Override
     public void goToSetTrainingDay() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToSetNotificationsEvent).postValue(new FragmentEvent());
+        mGoToSetNotificationsEvent.postValue(new FragmentEvent());
     }
 
     @Override
     public void showToast() {
-        ((SingleLiveEvent<ShowToastEvent>) mShowToastEvent).postValue(new ShowToastEvent());
+        mShowToastEvent.postValue(new ShowToastEvent());
     }
 
     @Override
     public void goToSetProgram() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToSetProgram).postValue(new FragmentEvent());
+        mGoToSetProgram.postValue(new FragmentEvent());
     }
 }

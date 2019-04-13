@@ -34,6 +34,11 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
     }
 
     @Override
+    public void setRouter(SettingsRouter settingsRouter) {
+        mSettingsRouter = settingsRouter;
+    }
+
+    @Override
     public void onSetNotificationsClick() {
         mSettingsRouter.goToSetTrainingDay();
     }

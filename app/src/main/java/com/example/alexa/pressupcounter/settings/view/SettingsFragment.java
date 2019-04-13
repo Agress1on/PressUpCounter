@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSettingsBinding;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
-import com.example.alexa.pressupcounter.settings.inject.SettingsModule;
+import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 import com.example.alexa.pressupcounter.settings.viewmodel.SettingsViewModel;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 
@@ -33,6 +32,9 @@ public class SettingsFragment extends Fragment {
     @Inject
     SettingsViewModel mSettingsViewModel;
 
+    @Inject
+    SettingsRouter mSettingsRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -44,6 +46,7 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSettingsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
         binding.setViewModel(mSettingsViewModel);
+        mSettingsViewModel.setRouter(mSettingsRouter);
         return binding.getRoot();
     }
 

@@ -39,7 +39,6 @@ public class SettingsModule {
         return new SettingsViewModelFactory(settingsInteractor, router);
     }
 
-    @SettingsScope
     @Provides
     SettingsRouter provideRouter(SettingsFragment fragment) {
         return new SettingsRouterImpl(fragment);
