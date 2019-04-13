@@ -36,8 +36,17 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         mTrainingInteractor = trainingInteractor;
         mTrainingRouter = trainingRouter;
 
+        mCompositeDisposable = new CompositeDisposable();
+
         mPressUp = new PressUp(0, 0, 0, 0, 0, 0);
         mQuantityOfRepetitionOrRestTime = new ObservableField<>("0");
+
+        Disposable disposable = mTrainingInteractor.getPressUpForTraining()
+                .subscribe(pressUp -> {
+                    mPressUp = pressUp;
+                    mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
+                });
+        mCompositeDisposable.add(disposable);
 
         mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
         mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
@@ -46,7 +55,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         mRepetition = new ObservableField<>(1);
 
         mStateOfRestButton = new ObservableField<>(true);
-        mCompositeDisposable = new CompositeDisposable();
+
     }
 
     @Override
@@ -56,13 +65,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public void onCreateView() {
-        Disposable disposable = mTrainingInteractor.getPressUpForTraining()
-                .subscribe(pressUp -> {
-                    mPressUp = pressUp;
-                    mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
-                });
-        mCompositeDisposable.add(disposable);
+    public void setRouter(TrainingRouter router) {
+        mTrainingRouter = router;
     }
 
     @Override

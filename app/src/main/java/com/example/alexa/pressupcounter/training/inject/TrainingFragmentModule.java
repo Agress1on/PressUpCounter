@@ -39,7 +39,6 @@ public class TrainingFragmentModule {
         return new TrainingViewModelFactory(interactor, router);
     }
 
-    @TrainingFragmentScope
     @Provides
     TrainingRouter provideRouter(TrainingFragment fragment) {
         return new TrainingRouterImpl(fragment);

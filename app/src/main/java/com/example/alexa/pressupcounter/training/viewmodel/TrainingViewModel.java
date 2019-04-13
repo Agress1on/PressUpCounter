@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import com.example.alexa.pressupcounter.training.router.TrainingRouter;
+
 import androidx.databinding.ObservableField;
 
 /**
@@ -9,7 +11,7 @@ import androidx.databinding.ObservableField;
  */
 public interface TrainingViewModel {
 
-    void onCreateView();
+    void setRouter(TrainingRouter router);
 
     ObservableField<Integer> getRepetition();
 

@@ -12,6 +12,7 @@ import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
 import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
+import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 
 import javax.inject.Inject;
@@ -39,6 +40,9 @@ public class TrainingFragment extends Fragment
     @Inject
     TrainingViewModel mTrainingViewModel;
 
+    @Inject
+    TrainingRouter mTrainingRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -50,7 +54,7 @@ public class TrainingFragment extends Fragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training, container, false);
         binding.setViewModel(mTrainingViewModel);
-        mTrainingViewModel.onCreateView();
+        mTrainingViewModel.setRouter(mTrainingRouter);
         return binding.getRoot();
     }
 
