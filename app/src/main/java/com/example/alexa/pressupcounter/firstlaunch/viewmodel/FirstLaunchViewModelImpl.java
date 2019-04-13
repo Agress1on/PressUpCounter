@@ -1,7 +1,5 @@
 package com.example.alexa.pressupcounter.firstlaunch.viewmodel;
 
-import android.util.Log;
-
 import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
 

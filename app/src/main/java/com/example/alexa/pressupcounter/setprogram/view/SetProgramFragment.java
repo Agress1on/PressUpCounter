@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
+import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
@@ -29,6 +30,9 @@ public class SetProgramFragment extends Fragment {
     @Inject
     SetProgramViewModel mSetProgramViewModel;
 
+    @Inject
+    SetProgramRouter mSetProgramRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -40,6 +44,7 @@ public class SetProgramFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetProgramBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_program, container, false);
         binding.setViewModel(mSetProgramViewModel);
+        mSetProgramViewModel.setRouter(mSetProgramRouter);
         return binding.getRoot();
     }
 

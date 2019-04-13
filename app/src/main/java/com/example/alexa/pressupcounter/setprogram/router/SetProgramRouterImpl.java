@@ -4,8 +4,6 @@ import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 
-import androidx.lifecycle.LiveData;
-
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
  *
@@ -13,7 +11,7 @@ import androidx.lifecycle.LiveData;
  */
 public class SetProgramRouterImpl implements SetProgramRouter {
 
-    private LiveData<FragmentEvent> mGoToStartFragmentEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToStartFragmentEvent;
 
     public SetProgramRouterImpl(SetProgramFragment fragment) {
         mGoToStartFragmentEvent = new SingleLiveEvent<>();
@@ -22,6 +20,6 @@ public class SetProgramRouterImpl implements SetProgramRouter {
 
     @Override
     public void goToStartTraining() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToStartFragmentEvent).postValue(new FragmentEvent());
+        mGoToStartFragmentEvent.postValue(new FragmentEvent());
     }
 }

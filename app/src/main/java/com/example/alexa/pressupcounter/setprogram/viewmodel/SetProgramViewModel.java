@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
+import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
+
 import java.util.List;
 
 import androidx.databinding.ObservableField;
@@ -10,6 +12,8 @@ import androidx.databinding.ObservableField;
  * @author Alexandr Mikhalev
  */
 public interface SetProgramViewModel {
+
+    void setRouter(SetProgramRouter setProgramRouter);
 
     List<ObservableField<Integer>> getListOfRepetitions();
 

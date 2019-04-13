@@ -7,15 +7,12 @@ import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableCompletableObserver;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 05.01.2019.
@@ -55,6 +52,11 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
                     setFinalQuantity();
                 });
         mCompositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void setRouter(SetProgramRouter setProgramRouter) {
+        mSetProgramRouter = setProgramRouter;
     }
 
     @Override

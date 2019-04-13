@@ -1,14 +1,9 @@
 package com.example.alexa.pressupcounter.firstlaunch.router;
 
-import android.util.Log;
-
 import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
-
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.

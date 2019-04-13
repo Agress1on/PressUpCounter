@@ -39,7 +39,6 @@ public class SetProgramModule {
         return new SetProgramViewModelFactory(setProgramInteractor, router);
     }
 
-    @SetProgramScope
     @Provides
     SetProgramRouter provideRouter(SetProgramFragment fragment) {
         return new SetProgramRouterImpl(fragment);
