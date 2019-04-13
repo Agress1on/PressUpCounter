@@ -24,6 +24,11 @@ public class ResultTrainingViewModelImpl extends ViewModel implements ResultTrai
     }
 
     @Override
+    public void setRouter(ResultTrainingRouter router) {
+        mResultTrainingRouter = router;
+    }
+
+    @Override
     public ObservableField<String> getHeaderText() {
         return mHeaderText;
     }

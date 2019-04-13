@@ -4,8 +4,6 @@ import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 
-import androidx.lifecycle.LiveData;
-
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
  *
@@ -13,7 +11,7 @@ import androidx.lifecycle.LiveData;
  */
 public class ResultTrainingRouterImpl implements ResultTrainingRouter {
 
-    private LiveData<FragmentEvent> mGoToStartTrainingEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToStartTrainingEvent;
 
     public ResultTrainingRouterImpl(ResultTrainingFragment fragment) {
         mGoToStartTrainingEvent = new SingleLiveEvent<>();
@@ -22,6 +20,6 @@ public class ResultTrainingRouterImpl implements ResultTrainingRouter {
 
     @Override
     public void goToStartTrainingFragment() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToStartTrainingEvent).postValue(new FragmentEvent());
+        mGoToStartTrainingEvent.postValue(new FragmentEvent());
     }
 }

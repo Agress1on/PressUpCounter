@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentResultTrainingBinding;
-import com.example.alexa.pressupcounter.resulttraining.inject.ResultTrainingModule;
+import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouter;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
@@ -32,6 +31,9 @@ public class ResultTrainingFragment extends Fragment {
     @Inject
     ResultTrainingViewModel mResultTrainingViewModel;
 
+    @Inject
+    ResultTrainingRouter mResultTrainingRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -43,6 +45,7 @@ public class ResultTrainingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentResultTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_result_training, container, false);
         binding.setViewModel(mResultTrainingViewModel);
+        mResultTrainingViewModel.setRouter(mResultTrainingRouter);
         return binding.getRoot();
     }
 

@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
+import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouter;
+
 import androidx.databinding.ObservableField;
 
 /**
@@ -8,6 +10,8 @@ import androidx.databinding.ObservableField;
  * @author Alexandr Mikhalev
  */
 public interface ResultTrainingViewModel {
+
+    void setRouter(ResultTrainingRouter router);
 
     ObservableField<String> getHeaderText();
 

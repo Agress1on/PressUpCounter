@@ -8,8 +8,6 @@ import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingV
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelFactory;
 import com.example.alexa.pressupcounter.resulttraining.viewmodel.ResultTrainingViewModelImpl;
 
-import javax.inject.Named;
-
 import androidx.lifecycle.ViewModelProviders;
 import dagger.Module;
 import dagger.Provides;
@@ -35,7 +33,6 @@ public class ResultTrainingModule {
         return new ResultTrainingViewModelFactory(router, isSuccess);
     }
 
-    @ResultTrainingScope
     @Provides
     ResultTrainingRouter provideRouter(ResultTrainingFragment fragment) {
         return new ResultTrainingRouterImpl(fragment);
