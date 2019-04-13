@@ -11,6 +11,7 @@ import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
 import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
+import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 
@@ -35,6 +36,9 @@ public class SetTimeFragment extends Fragment {
     @Inject
     SetTimeViewModel mSetTimeViewModel;
 
+    @Inject
+    SetTimeRouter mSetTimeRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -46,6 +50,7 @@ public class SetTimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetTimeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_time, container, false);
         binding.setViewModel(mSetTimeViewModel);
+        mSetTimeViewModel.setRouter(mSetTimeRouter);
         return binding.getRoot();
     }
 

@@ -41,6 +41,11 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     }
 
     @Override
+    public void setRouter(SetTimeRouter setTimeRouter) {
+        mSetTimeRouter = setTimeRouter;
+    }
+
+    @Override
     public List<ObservableField<String>> getListTime() {
         return mListTime;
     }

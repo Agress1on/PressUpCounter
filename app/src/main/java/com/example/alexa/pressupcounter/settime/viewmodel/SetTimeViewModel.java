@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.settime.viewmodel;
 
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
+import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import androidx.databinding.ObservableField;
  * @author Alexandr Mikhalev
  */
 public interface SetTimeViewModel {
+
+    void setRouter(SetTimeRouter setTimeRouter);
 
     List<ObservableField<String>> getListTime();
 

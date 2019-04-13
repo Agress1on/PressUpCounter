@@ -42,7 +42,6 @@ public class SetTimeModule {
         return new SetTimeInteractor();
     }
 
-    @SetTimeScope
     @Provides
     SetTimeRouter provideRouter(SetTimeFragment fragment) {
         return new SetTimeRouterImpl(fragment);
