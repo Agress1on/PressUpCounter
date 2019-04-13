@@ -17,33 +17,38 @@ import io.reactivex.disposables.Disposable;
 public class StartTrainingViewModelImpl extends ViewModel implements StartTrainingViewModel {
 
     private StartTrainingInteractor mStartTrainingInteractor;
+    private StartTrainingRouter mStartTrainingRouter;
 
     private ObservableField<PressUp> mPressUpObservableField;
     private ObservableField<Integer> mFinalQuantityRepetition;
 
     private CompositeDisposable mCompositeDisposable;
 
-    private StartTrainingRouter mStartTrainingRouter;
-
     public StartTrainingViewModelImpl(StartTrainingInteractor startTrainingInteractor, StartTrainingRouter startTrainingRouter) {
         mStartTrainingInteractor = startTrainingInteractor;
         mStartTrainingRouter = startTrainingRouter;
+        mCompositeDisposable = new CompositeDisposable();
 
         mPressUpObservableField = new ObservableField<>(new PressUp(1, 0, 0, 0, 0, 0));
         mFinalQuantityRepetition = new ObservableField<>(0);
 
-        mCompositeDisposable = new CompositeDisposable();
-    }
-
-    @Override
-    public void onCreateView() {
         Disposable disposablePressUp = mStartTrainingInteractor.getLastProgram()
                 .subscribe(pressUp -> mPressUpObservableField.set(pressUp));
 
         Disposable disposableSum = mStartTrainingInteractor.getSumOfRepetitions()
                 .subscribe(integer -> mFinalQuantityRepetition.set(integer));
-        mCompositeDisposable.add(disposablePressUp);
-        mCompositeDisposable.add(disposableSum);
+        mCompositeDisposable.addAll(disposablePressUp, disposableSum);
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        mCompositeDisposable.clear();
+    }
+
+    @Override
+    public void setRouter(StartTrainingRouter startTrainingRouter) {
+        mStartTrainingRouter = startTrainingRouter;
     }
 
     @Override

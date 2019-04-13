@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
 import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
 
 import androidx.databinding.ObservableField;
 
@@ -11,7 +12,7 @@ import androidx.databinding.ObservableField;
  */
 public interface StartTrainingViewModel {
 
-    void onCreateView();
+    void setRouter(StartTrainingRouter startTrainingRouter);
 
     ObservableField<PressUp> getPressUp();
 

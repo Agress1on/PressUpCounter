@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentStartTrainingBinding;
 import com.example.alexa.pressupcounter.dialogs.ExclamationDialog;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
-import com.example.alexa.pressupcounter.starttraining.inject.StartTrainingModule;
+import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
 import com.example.alexa.pressupcounter.starttraining.viewmodel.StartTrainingViewModel;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 import com.example.alexa.pressupcounter.traininglist.view.TrainingListFragment;
@@ -34,6 +33,9 @@ public class StartTrainingFragment extends Fragment {
     @Inject
     StartTrainingViewModel mStartTrainingViewModel;
 
+    @Inject
+    StartTrainingRouter mStartTrainingRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -45,9 +47,9 @@ public class StartTrainingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentStartTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start_training, container, false);
         binding.setViewModel(mStartTrainingViewModel);
-        mStartTrainingViewModel.onCreateView();
         ExclamationDialog exclamationDialog = new ExclamationDialog();
         exclamationDialog.show(getFragmentManager(), "TAG");
+        mStartTrainingViewModel.setRouter(mStartTrainingRouter);
         return binding.getRoot();
     }
 

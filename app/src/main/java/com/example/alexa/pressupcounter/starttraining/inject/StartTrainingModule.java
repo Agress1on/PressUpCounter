@@ -39,7 +39,6 @@ public class StartTrainingModule {
         return new StartTrainingViewModelFactory(interactor, startTrainingRouter);
     }
 
-    @StartTrainingScope
     @Provides
     StartTrainingRouter provideRouter(StartTrainingFragment fragment) {
         return new StartTrainingRouterImpl(fragment);
