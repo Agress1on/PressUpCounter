@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.settrainingday.viewmodel;
 
+import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
+
 import java.util.List;
 
 import androidx.databinding.ObservableField;
@@ -10,6 +12,8 @@ import androidx.databinding.ObservableField;
  * @author Alexandr Mikhalev
  */
 public interface SetTrainingDayViewModel {
+
+    void setRouter(SetTrainingDayRouter setTrainingDayRouter);
 
     List<ObservableField<Boolean>> getDayOfWeekState();
 

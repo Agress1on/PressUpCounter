@@ -38,7 +38,6 @@ public class SetTrainingDayModule {
         return new SetTrainingDayViewModelFactory(setTrainingDayInteractor, router);
     }
 
-    @SetTrainingDayScope
     @Provides
     SetTrainingDayRouter provideRouter(SetTrainingDayFragment fragment) {
         return new SetTrainingDayRouterImpl(fragment);

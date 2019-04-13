@@ -34,7 +34,12 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
         }
 
         mButtonState = new ObservableField<>(false);
-        mIndexList = new ArrayList();
+        mIndexList = new ArrayList<>();
+    }
+
+    @Override
+    public void setRouter(SetTrainingDayRouter setTrainingDayRouter) {
+        mSetTrainingDayRouter = setTrainingDayRouter;
     }
 
     @Override

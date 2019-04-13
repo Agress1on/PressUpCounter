@@ -4,8 +4,6 @@ import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragment;
 
-import androidx.lifecycle.LiveData;
-
 /**
  * Created by Alexandr Mikhalev on 07.04.2019.
  *
@@ -13,7 +11,7 @@ import androidx.lifecycle.LiveData;
  */
 public class SetTrainingDayRouterImpl implements SetTrainingDayRouter {
 
-    private LiveData<FragmentEvent> mGoToSetTimeEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToSetTimeEvent;
 
     public SetTrainingDayRouterImpl(SetTrainingDayFragment fragment) {
         mGoToSetTimeEvent = new SingleLiveEvent<>();
@@ -22,6 +20,6 @@ public class SetTrainingDayRouterImpl implements SetTrainingDayRouter {
 
     @Override
     public void goToSetTime() {
-        ((SingleLiveEvent<FragmentEvent>) mGoToSetTimeEvent).postValue(new FragmentEvent());
+        mGoToSetTimeEvent.postValue(new FragmentEvent());
     }
 }

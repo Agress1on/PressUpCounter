@@ -7,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTrainingDayBinding;
-import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.settime.view.SetTimeFragment;
-import com.example.alexa.pressupcounter.settrainingday.inject.SetTrainingDayModule;
+import com.example.alexa.pressupcounter.settrainingday.router.SetTrainingDayRouter;
 import com.example.alexa.pressupcounter.settrainingday.viewmodel.SetTrainingDayViewModel;
 
 import javax.inject.Inject;
@@ -20,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -33,6 +30,9 @@ public class SetTrainingDayFragment extends Fragment {
     @Inject
     SetTrainingDayViewModel mSetTrainingDayViewModel;
 
+    @Inject
+    SetTrainingDayRouter mSetTrainingDayRouter;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -44,6 +44,7 @@ public class SetTrainingDayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetTrainingDayBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_training_day, container, false);
         binding.setViewModel(mSetTrainingDayViewModel);
+        mSetTrainingDayViewModel.setRouter(mSetTrainingDayRouter);
         return binding.getRoot();
     }
 
