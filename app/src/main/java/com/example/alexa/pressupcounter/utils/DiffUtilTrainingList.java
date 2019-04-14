@@ -41,10 +41,17 @@ public class DiffUtilTrainingList extends DiffUtil.Callback {
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         PressUp oldItem = oldList.get(oldItemPosition);
         PressUp newItem = newList.get(newItemPosition);
+        boolean isSame = true;
+        for (int i = 0; i < newList.size(); i++) {
+            if (!oldItem.getRepetitions().get(i).equals(newItem.getRepetitions().get(i))) isSame = false;
+        }
+        /*
         return (oldItem.getFirstRepetition() == newItem.getFirstRepetition())
                 && (oldItem.getSecondRepetition() == newItem.getSecondRepetition())
                 && (oldItem.getThirdRepetition() == newItem.getThirdRepetition())
                 && (oldItem.getFourthRepetition() == newItem.getFourthRepetition())
                 && (oldItem.getFifthRepetition() == newItem.getFifthRepetition());
+        */
+        return isSame;
     }
 }

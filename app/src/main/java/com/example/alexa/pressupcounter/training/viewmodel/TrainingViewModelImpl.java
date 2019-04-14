@@ -4,6 +4,9 @@ import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 import io.reactivex.Observer;
@@ -38,13 +41,13 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
         mCompositeDisposable = new CompositeDisposable();
 
-        mPressUp = new PressUp(0, 0, 0, 0, 0, 0);
+        mPressUp = new PressUp(0, new ArrayList<>());
         mQuantityOfRepetitionOrRestTime = new ObservableField<>("0");
 
         Disposable disposable = mTrainingInteractor.getPressUpForTraining()
                 .subscribe(pressUp -> {
                     mPressUp = pressUp;
-                    mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
+                    mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(0)));
                 });
         mCompositeDisposable.add(disposable);
 
@@ -176,19 +179,19 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         }
         switch (mRepetition.get()) {
             case 1:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFirstRepetition()));
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(0)));
                 break;
             case 2:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getSecondRepetition()));
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(1)));
                 break;
             case 3:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getThirdRepetition()));
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(2)));
                 break;
             case 4:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFourthRepetition()));
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(3)));
                 break;
             case 5:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getFifthRepetition()));
+                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(4)));
                 break;
         }
     }
@@ -201,11 +204,30 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     @Override
     public void onClickPositiveButtonFinishDialog() {
         PressUp pressUpNew;
+        List<Integer> newList = new ArrayList<>();
+        long newId = mPressUp.getId() + 1;
+        if (mPressUp.getRepetitions().get(0) == mPressUp.getRepetitions().get(1)) {
+            newList.add(mPressUp.getRepetitions().get(0));
+            newList.add(mPressUp.getRepetitions().get(1) + 1);
+            newList.add(mPressUp.getRepetitions().get(2));
+            newList.add(mPressUp.getRepetitions().get(3));
+            newList.add(mPressUp.getRepetitions().get(4) + 1);
+        } else {
+            newList.add(mPressUp.getRepetitions().get(0) + 1);
+            newList.add(mPressUp.getRepetitions().get(1));
+            newList.add(mPressUp.getRepetitions().get(2) + 1);
+            newList.add(mPressUp.getRepetitions().get(3) + 1);
+            newList.add(mPressUp.getRepetitions().get(4));
+        }
+        pressUpNew = new PressUp(newId, newList);
+        /*
+        PressUp pressUpNew;
         if (mPressUp.getFirstRepetition() == mPressUp.getSecondRepetition()) {
             pressUpNew = new PressUp(mPressUp.getId() + 1, mPressUp.getFirstRepetition(), mPressUp.getSecondRepetition() + 1, mPressUp.getThirdRepetition(), mPressUp.getFourthRepetition(), mPressUp.getFifthRepetition() + 1);
         } else {
             pressUpNew = new PressUp(mPressUp.getId() + 1, mPressUp.getFirstRepetition() + 1, mPressUp.getSecondRepetition(), mPressUp.getThirdRepetition() + 1, mPressUp.getFourthRepetition() + 1, mPressUp.getFifthRepetition());
         }
+        */
         mTrainingInteractor.insertInDB(pressUpNew).subscribe();
     }
 }

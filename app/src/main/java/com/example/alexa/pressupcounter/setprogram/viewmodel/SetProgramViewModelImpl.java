@@ -96,14 +96,12 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     @Override
     public void onSetProgramButtonClick() {
         int id = 1;
-        int firstRepetition = mListOfRepetitions.get(0).get();
-        int secondRepetition = mListOfRepetitions.get(1).get();
-        int thirdRepetition = mListOfRepetitions.get(2).get();
-        int fourthRepetition = mListOfRepetitions.get(3).get();
-        int fifthRepetition = mListOfRepetitions.get(4).get();
+        List<Integer> repetitions = new ArrayList<>();
+        for (int i = 0; i < mListOfRepetitions.size(); i++) {
+            repetitions.add(mListOfRepetitions.get(i).get());
+        }
 
-        PressUp pressUp = new PressUp(id, firstRepetition, secondRepetition, thirdRepetition,
-                fourthRepetition, fifthRepetition);
+        PressUp pressUp = new PressUp(id, repetitions);
         mSetProgramInteractor.insertInDataBase(pressUp)
                 .subscribe(new DisposableCompletableObserver() {
                     @Override

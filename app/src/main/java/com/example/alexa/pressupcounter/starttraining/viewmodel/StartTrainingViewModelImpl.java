@@ -1,8 +1,11 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
+import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.starttraining.interactor.StartTrainingInteractor;
 import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
+
+import java.util.ArrayList;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
@@ -29,14 +32,15 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
         mStartTrainingRouter = startTrainingRouter;
         mCompositeDisposable = new CompositeDisposable();
 
-        mPressUpObservableField = new ObservableField<>(new PressUp(1, 0, 0, 0, 0, 0));
-        mFinalQuantityRepetition = new ObservableField<>(0);
+        mPressUpObservableField = new ObservableField<>(new PressUp(1, Constants.initList));
+        mFinalQuantityRepetition = new ObservableField<>(10);
 
         Disposable disposablePressUp = mStartTrainingInteractor.getLastProgram()
                 .subscribe(pressUp -> mPressUpObservableField.set(pressUp));
 
         Disposable disposableSum = mStartTrainingInteractor.getSumOfRepetitions()
                 .subscribe(integer -> mFinalQuantityRepetition.set(integer));
+
         mCompositeDisposable.addAll(disposablePressUp, disposableSum);
     }
 

@@ -3,8 +3,11 @@ package com.example.alexa.pressupcounter.starttraining.interactor;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.data.PressUpDao;
 
+import java.util.List;
+
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -32,10 +35,12 @@ public class StartTrainingInteractor {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> pressUps.get(pressUps.size() - 1))
-                .map(pressUp -> pressUp.getFirstRepetition()
-                        + pressUp.getSecondRepetition()
-                        + pressUp.getThirdRepetition()
-                        + pressUp.getFourthRepetition()
-                        + pressUp.getFifthRepetition());
+                .map(pressUp -> {
+                    int sum = 0;
+                    for (Integer item : pressUp.getRepetitions()) {
+                        sum = sum + item;
+                    }
+                    return sum;
+                });
     }
 }
