@@ -16,7 +16,7 @@ import androidx.fragment.app.DialogFragment;
  *
  * @author Alexandr Mikhalev
  */
-public class TimePickerDialogFragment extends DialogFragment implements android.app.TimePickerDialog.OnTimeSetListener {
+public class TimePickerDialog extends DialogFragment implements android.app.TimePickerDialog.OnTimeSetListener {
 
     private SetTimeListener mSetTimeListener;
 

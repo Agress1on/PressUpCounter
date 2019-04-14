@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.example.alexa.pressupcounter.Constants" />
+
         <variable
             name="viewModel"
             type="com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel" />
@@ -38,7 +40,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/ic_choice"
-            android:onClick="@{() -> viewModel.onClickChoiceView()}"
+            android:onClick="@{() -> viewModel.onChoiceViewClick()}"
             app:layout_constraintBottom_toTopOf="@id/tab_layout"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -230,7 +232,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/colorForestGreen"
-            android:onClick="@{() -> viewModel.onIncrementButton()}"
+            android:onClick="@{() -> viewModel.onIncrementButtonClick()}"
             android:text="+"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toTopOf="@id/start_train_btn"
@@ -243,10 +245,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:background="@color/colorFireBrick"
-            android:onClick="@{() -> viewModel.onDecrementButton()}"
+            android:onClick="@{() -> viewModel.onDecrementButtonClick()}"
             android:text="-"
             android:textColor="@color/colorWhite"
-            android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > 10 ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > Constants.MINIMUM_SUM_REPETITIONS ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toEndOf="@id/vertical_center_guideline"
             app:layout_constraintTop_toTopOf="@id/increment_button" />
 
@@ -256,24 +258,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:background="@color/colorSlateGrey"
-            android:onClick="@{() -> viewModel.onClickTrainingButton()}"
+            android:onClick="@{() -> viewModel.onSetProgramButtonClick()}"
             android:text="выбрать программу"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/decrement_button"
             app:layout_constraintStart_toStartOf="@id/increment_button" />
-
-        <TextView
-            android:id="@+id/service_info_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@{viewModel.serviceInfo}"
-            android:textSize="25sp"
-            app:layout_constraintBottom_toTopOf="@id/increment_button"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="SERVICE_INFO" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

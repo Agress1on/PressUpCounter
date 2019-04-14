@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
-import com.example.alexa.pressupcounter.dialogs.DialogFinishTraining;
-import com.example.alexa.pressupcounter.dialogs.DialogTrainingRest;
-import com.example.alexa.pressupcounter.dialogs.DialogTrainingRestOff;
+import com.example.alexa.pressupcounter.dialogs.FinishTrainingDialog;
+import com.example.alexa.pressupcounter.dialogs.TrainingRestDialog;
+import com.example.alexa.pressupcounter.dialogs.TrainingRestOffDialog;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
@@ -29,9 +29,9 @@ import dagger.android.support.AndroidSupportInjection;
  * @author Alexandr Mikhalev
  */
 public class TrainingFragment extends Fragment
-        implements DialogTrainingRest.OnButtonDialogRestClickListener,
-        DialogTrainingRestOff.OnButtonDialogRestOffClickListener,
-        DialogFinishTraining.OnButtonClickDialogFinishTraining {
+        implements TrainingRestDialog.OnButtonDialogRestClickListener,
+        TrainingRestOffDialog.OnButtonDialogRestOffClickListener,
+        FinishTrainingDialog.OnButtonClickDialogFinishTraining {
 
     public static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
     public static final String TAG_FOR_DIALOG_TRAINING_REST_OFF = "TAG_FOR_DIALOG_TRAINING_REST_OFF";
@@ -59,18 +59,18 @@ public class TrainingFragment extends Fragment
     }
 
     public void showDialogTrainingRest() {
-        DialogTrainingRest dialogTrainingRest = new DialogTrainingRest();
-        dialogTrainingRest.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST);
+        TrainingRestDialog trainingRestDialog = new TrainingRestDialog();
+        trainingRestDialog.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST);
     }
 
     public void showDialogTrainingRestOff() {
-        DialogTrainingRestOff dialogTrainingRestOff = new DialogTrainingRestOff();
-        dialogTrainingRestOff.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
+        TrainingRestOffDialog trainingRestOffDialog = new TrainingRestOffDialog();
+        trainingRestOffDialog.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_REST_OFF);
     }
 
     public void showDialogFinishTraining() {
-        DialogFinishTraining dialogFinishTraining = new DialogFinishTraining();
-        dialogFinishTraining.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
+        FinishTrainingDialog finishTrainingDialog = new FinishTrainingDialog();
+        finishTrainingDialog.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
     }
 
     public static TrainingFragment newInstance() {
@@ -81,51 +81,51 @@ public class TrainingFragment extends Fragment
     }
 
     @Override
-    public void onPositiveButtonTrainingRestDialog(DialogTrainingRest dialogTrainingRest) {
+    public void onPositiveButtonTrainingRestDialog(TrainingRestDialog trainingRestDialog) {
         mTrainingViewModel.onClickPositiveButtonOfRestDialog();
-        dialogTrainingRest.dismiss();
+        trainingRestDialog.dismiss();
     }
 
     @Override
-    public void onNegativeButtonTrainingRestDialog(DialogTrainingRest dialogTrainingRest) {
+    public void onNegativeButtonTrainingRestDialog(TrainingRestDialog trainingRestDialog) {
         mTrainingViewModel.onClickNegativeButtonOfRestDialog();
-        dialogTrainingRest.dismiss();
+        trainingRestDialog.dismiss();
     }
 
     @Override
-    public void onCancelTrainingRestDialog(DialogTrainingRest dialogTrainingRest) {
+    public void onCancelTrainingRestDialog(TrainingRestDialog trainingRestDialog) {
         mTrainingViewModel.onCancelOfRestDialog();
-        dialogTrainingRest.dismiss();
+        trainingRestDialog.dismiss();
     }
 
     @Override
-    public void onPositiveButtonTrainingRestOfDialog(DialogTrainingRestOff dialogTrainingRestOff) {
+    public void onPositiveButtonTrainingRestOfDialog(TrainingRestOffDialog trainingRestOffDialog) {
         mTrainingViewModel.goToNextRepetition();
-        dialogTrainingRestOff.dismiss();
+        trainingRestOffDialog.dismiss();
     }
 
     @Override
-    public void onNegativeButtonTrainingRestOfDialog(DialogTrainingRestOff dialogTrainingRestOff) {
+    public void onNegativeButtonTrainingRestOfDialog(TrainingRestOffDialog trainingRestOffDialog) {
         mTrainingViewModel.onClickAdditionalTimeForRest();
-        dialogTrainingRestOff.dismiss();
+        trainingRestOffDialog.dismiss();
     }
 
     @Override
-    public void onPositiveButtonDialogFinishTraining(DialogFinishTraining dialogFinishTraining) {
+    public void onPositiveButtonDialogFinishTraining(FinishTrainingDialog finishTrainingDialog) {
         mTrainingViewModel.onClickPositiveButtonFinishDialog();
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(true))
                 .commit();
-        dialogFinishTraining.dismiss();
+        finishTrainingDialog.dismiss();
     }
 
     @Override
-    public void onNegativeButtonDialogFinishTraining(DialogFinishTraining dialogFinishTraining) {
+    public void onNegativeButtonDialogFinishTraining(FinishTrainingDialog finishTrainingDialog) {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(false))
                 .commit();
-        dialogFinishTraining.dismiss();
+        finishTrainingDialog.dismiss();
     }
 }

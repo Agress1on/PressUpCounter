@@ -6,7 +6,7 @@ import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouterImpl;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
-import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelFactory;
+import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramFactory;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModelImpl;
 
 import androidx.lifecycle.ViewModelProviders;
@@ -29,18 +29,18 @@ public class SetProgramModule {
 
     @SetProgramScope
     @Provides
-    SetProgramViewModel provideSetTrainingDayViewModel(SetProgramFragment fragment, SetProgramViewModelFactory factory) {
+    SetProgramViewModel provideSetTrainingDayViewModel(SetProgramFragment fragment, SetProgramFactory factory) {
         return ViewModelProviders.of(fragment, factory).get(SetProgramViewModelImpl.class);
     }
 
     @SetProgramScope
     @Provides
-    SetProgramViewModelFactory provideFactory(SetProgramInteractor setProgramInteractor, SetProgramRouter router) {
-        return new SetProgramViewModelFactory(setProgramInteractor, router);
+    SetProgramFactory provideSetProgramFactory(SetProgramInteractor setProgramInteractor, SetProgramRouter router) {
+        return new SetProgramFactory(setProgramInteractor, router);
     }
 
     @Provides
-    SetProgramRouter provideRouter(SetProgramFragment fragment) {
+    SetProgramRouter provideSetProgramRouter(SetProgramFragment fragment) {
         return new SetProgramRouterImpl(fragment);
     }
 }

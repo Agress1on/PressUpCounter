@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetProgramBinding;
+import com.example.alexa.pressupcounter.dialogs.ErrorDialog;
 import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 import com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
@@ -26,6 +27,8 @@ import dagger.android.support.AndroidSupportInjection;
  * @author Alexandr Mikhalev
  */
 public class SetProgramFragment extends Fragment {
+
+    private static final String ERROR_DIALOG = "Error_Dialog_Set_Program_Fragment";
 
     @Inject
     SetProgramViewModel mSetProgramViewModel;
@@ -53,6 +56,11 @@ public class SetProgramFragment extends Fragment {
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
                 .commit();
+    }
+
+    public void showErrorDialog() {
+        ErrorDialog errorDialog = new ErrorDialog();
+        errorDialog.show(getChildFragmentManager(), ERROR_DIALOG);
     }
 
     public static SetProgramFragment newInstance() {

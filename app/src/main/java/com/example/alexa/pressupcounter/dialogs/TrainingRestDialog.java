@@ -21,7 +21,7 @@ import androidx.fragment.app.DialogFragment;
  *
  * @author Alexandr Mikhalev
  */
-public class DialogTrainingRest extends DialogFragment implements View.OnClickListener {
+public class TrainingRestDialog extends DialogFragment implements View.OnClickListener {
 
     private OnButtonDialogRestClickListener mOnButtonDialogRestClickListener;
 
@@ -48,7 +48,7 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.dialog_training_rest, container, false);
         mPositiveButton = (TextView) view.findViewById(R.id.positive_button);
         mNegativeButton = (TextView) view.findViewById(R.id.negative_button);
-        mMessage = (TextView) view.findViewById(R.id.question_header);
+        mMessage = (TextView) view.findViewById(R.id.attention_header);
 
         mMessage.setText("Начать отдых?");
         mPositiveButton.setOnClickListener(this);
@@ -89,10 +89,10 @@ public class DialogTrainingRest extends DialogFragment implements View.OnClickLi
     }
 
     public interface OnButtonDialogRestClickListener {
-        void onPositiveButtonTrainingRestDialog(DialogTrainingRest dialogTrainingRest);
+        void onPositiveButtonTrainingRestDialog(TrainingRestDialog trainingRestDialog);
 
-        void onNegativeButtonTrainingRestDialog(DialogTrainingRest dialogTrainingRest);
+        void onNegativeButtonTrainingRestDialog(TrainingRestDialog trainingRestDialog);
 
-        void onCancelTrainingRestDialog(DialogTrainingRest dialogTrainingRest);
+        void onCancelTrainingRestDialog(TrainingRestDialog trainingRestDialog);
     }
 }

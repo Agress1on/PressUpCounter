@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.alexa.pressupcounter.R;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
@@ -20,31 +21,32 @@ import androidx.fragment.app.DialogFragment;
  *
  * @author Alexandr Mikhalev
  */
-public class DialogFinishTraining extends DialogFragment implements View.OnClickListener {
+public class TrainingRestOffDialog extends DialogFragment implements View.OnClickListener {
 
-    private OnButtonClickDialogFinishTraining mOnButtonClickDialogFinishTraining;
+    private OnButtonDialogRestOffClickListener mOnButtonDialogRestOffClickListener;
     private TextView mPositiveButton;
     private TextView mNegativeButton;
     private TextView mQuestion;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOnButtonClickDialogFinishTraining = (OnButtonClickDialogFinishTraining) getParentFragment();
+        mOnButtonDialogRestOffClickListener = (OnButtonDialogRestOffClickListener) getParentFragment();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        View view = inflater.inflate(R.layout.dialog_finish_training, container, false);
+        View view = inflater.inflate(R.layout.dialog_training_rest_off, container, false);
         mPositiveButton = (TextView) view.findViewById(R.id.positive_button);
         mNegativeButton = (TextView) view.findViewById(R.id.negative_button);
-        mQuestion = (TextView) view.findViewById(R.id.question_header);
+        mQuestion = (TextView) view.findViewById(R.id.attention_header);
 
+        mQuestion.setText("Удалось сделать подход?");
         mPositiveButton.setOnClickListener(this);
         mNegativeButton.setOnClickListener(this);
-        mQuestion.setText(getResources().getString(R.string.for_dialog_finish_training));
         return view;
     }
 
@@ -67,22 +69,22 @@ public class DialogFinishTraining extends DialogFragment implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.positive_button:
-                mOnButtonClickDialogFinishTraining.onPositiveButtonDialogFinishTraining(this);
+                mOnButtonDialogRestOffClickListener.onPositiveButtonTrainingRestOfDialog(this);
                 break;
             case R.id.negative_button:
-                mOnButtonClickDialogFinishTraining.onNegativeButtonDialogFinishTraining(this);
+                mOnButtonDialogRestOffClickListener.onNegativeButtonTrainingRestOfDialog(this);
                 break;
         }
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        mOnButtonClickDialogFinishTraining.onNegativeButtonDialogFinishTraining(this);
+        mOnButtonDialogRestOffClickListener.onNegativeButtonTrainingRestOfDialog(this);
     }
 
-    public interface OnButtonClickDialogFinishTraining {
-        void onPositiveButtonDialogFinishTraining(DialogFinishTraining dialogFinishTraining);
+    public interface OnButtonDialogRestOffClickListener {
+        void onPositiveButtonTrainingRestOfDialog(TrainingRestOffDialog trainingRestOffDialog);
 
-        void onNegativeButtonDialogFinishTraining(DialogFinishTraining dialogFinishTraining);
+        void onNegativeButtonTrainingRestOfDialog(TrainingRestOffDialog trainingRestOffDialog);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.router;
 
 import com.example.alexa.pressupcounter.SingleLiveEvent;
+import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 
@@ -11,15 +12,24 @@ import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
  */
 public class SetProgramRouterImpl implements SetProgramRouter {
 
-    private SingleLiveEvent<FragmentEvent> mGoToStartFragmentEvent;
+    private SingleLiveEvent<FragmentEvent> mGoToStart;
+    private SingleLiveEvent<DialogEvent> mShowErrorDialog;
 
     public SetProgramRouterImpl(SetProgramFragment fragment) {
-        mGoToStartFragmentEvent = new SingleLiveEvent<>();
-        mGoToStartFragmentEvent.observe(fragment, fragmentEvent -> fragment.goToStartFragment());
+        mGoToStart = new SingleLiveEvent<>();
+        mGoToStart.observe(fragment, fragmentEvent -> fragment.goToStartFragment());
+
+        mShowErrorDialog = new SingleLiveEvent<>();
+        mShowErrorDialog.observe(fragment, dialogEvent -> fragment.showErrorDialog());
     }
 
     @Override
     public void goToStartTraining() {
-        mGoToStartFragmentEvent.postValue(new FragmentEvent());
+        mGoToStart.postValue(new FragmentEvent());
+    }
+
+    @Override
+    public void showErrorDialog() {
+        mShowErrorDialog.postValue(new DialogEvent());
     }
 }

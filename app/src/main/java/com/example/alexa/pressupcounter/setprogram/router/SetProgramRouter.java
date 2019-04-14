@@ -8,4 +8,6 @@ package com.example.alexa.pressupcounter.setprogram.router;
 public interface SetProgramRouter {
 
     void goToStartTraining();
+
+    void showErrorDialog();
 }

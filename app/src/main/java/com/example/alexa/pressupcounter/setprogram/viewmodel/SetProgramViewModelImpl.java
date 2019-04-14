@@ -26,7 +26,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     private List<ObservableField<Integer>> mListOfRepetitions;
     private ObservableField<Integer> mSumOfRepetitions;
-    private ObservableField<String> mServiceInfo;
 
     private CompositeDisposable mCompositeDisposable;
 
@@ -41,7 +40,6 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
         }
         //
         mSumOfRepetitions = new ObservableField<>(0);
-        mServiceInfo = new ObservableField<>();
         mCompositeDisposable = new CompositeDisposable();
 
         Disposable disposable = mSetProgramInteractor.getInitialRepetitionList()
@@ -70,12 +68,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public ObservableField<String> getServiceInfo() {
-        return mServiceInfo;
-    }
-
-    @Override
-    public void onIncrementButton() {
+    public void onIncrementButtonClick() {
         if (mListOfRepetitions.get(0).get().equals(mListOfRepetitions.get(1).get())) {
             mListOfRepetitions.get(1).set(mListOfRepetitions.get(1).get() + 1);
             mListOfRepetitions.get(4).set(mListOfRepetitions.get(4).get() + 1);
@@ -88,7 +81,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void onDecrementButton() {
+    public void onDecrementButtonClick() {
         if (mListOfRepetitions.get(0).get().equals(mListOfRepetitions.get(1).get())) {
             mListOfRepetitions.get(0).set(mListOfRepetitions.get(0).get() - 1);
             mListOfRepetitions.get(2).set(mListOfRepetitions.get(2).get() - 1);
@@ -101,10 +94,16 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void onClickTrainingButton() {
-        PressUp pressUp = new PressUp(1, mListOfRepetitions.get(0).get(),
-                mListOfRepetitions.get(1).get(), mListOfRepetitions.get(2).get(),
-                mListOfRepetitions.get(3).get(), mListOfRepetitions.get(4).get());
+    public void onSetProgramButtonClick() {
+        int id = 1;
+        int firstRepetition = mListOfRepetitions.get(0).get();
+        int secondRepetition = mListOfRepetitions.get(1).get();
+        int thirdRepetition = mListOfRepetitions.get(2).get();
+        int fourthRepetition = mListOfRepetitions.get(3).get();
+        int fifthRepetition = mListOfRepetitions.get(4).get();
+
+        PressUp pressUp = new PressUp(id, firstRepetition, secondRepetition, thirdRepetition,
+                fourthRepetition, fifthRepetition);
         mSetProgramInteractor.insertInDataBase(pressUp)
                 .subscribe(new DisposableCompletableObserver() {
                     @Override
@@ -114,13 +113,13 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mSetProgramRouter.showErrorDialog();
                     }
                 });
     }
 
     @Override
-    public void onClickChoiceView() {
+    public void onChoiceViewClick() {
         mSetProgramRouter.goToStartTraining();
     }
 

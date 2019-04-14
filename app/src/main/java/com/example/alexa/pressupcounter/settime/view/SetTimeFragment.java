@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSetTimeBinding;
-import com.example.alexa.pressupcounter.dialogs.TimePickerDialogFragment;
+import com.example.alexa.pressupcounter.dialogs.TimePickerDialog;
 import com.example.alexa.pressupcounter.events.TimePickerEvent;
 import com.example.alexa.pressupcounter.settime.router.SetTimeRouter;
 import com.example.alexa.pressupcounter.settime.viewmodel.SetTimeViewModel;
@@ -55,10 +55,10 @@ public class SetTimeFragment extends Fragment {
     }
 
     public void showTimePickerDialog(TimePickerEvent.DayNotification dayNotification) {
-        TimePickerDialogFragment timePickerDialogFragment = new TimePickerDialogFragment();
-        timePickerDialogFragment.setSetTimeListener((hourOfDay, minute)
+        TimePickerDialog timePickerDialog = new TimePickerDialog();
+        timePickerDialog.setSetTimeListener((hourOfDay, minute)
                 -> mSetTimeViewModel.setDayTime(dayNotification, hourOfDay, minute));
-        timePickerDialogFragment.show(getChildFragmentManager(), "TAG");
+        timePickerDialog.show(getChildFragmentManager(), "TAG");
     }
 
     public void goToStartTraining() {

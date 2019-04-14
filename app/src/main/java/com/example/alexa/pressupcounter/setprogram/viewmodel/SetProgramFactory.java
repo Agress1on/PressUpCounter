@@ -12,12 +12,12 @@ import androidx.lifecycle.ViewModelProvider;
  *
  * @author Alexandr Mikhalev
  */
-public class SetProgramViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+public class SetProgramFactory extends ViewModelProvider.NewInstanceFactory {
 
     private final SetProgramInteractor mSetProgramInteractor;
     private final SetProgramRouter mSetProgramRouter;
 
-    public SetProgramViewModelFactory(SetProgramInteractor setProgramInteractor, SetProgramRouter router) {
+    public SetProgramFactory(SetProgramInteractor setProgramInteractor, SetProgramRouter router) {
         super();
         mSetProgramInteractor = setProgramInteractor;
         mSetProgramRouter = router;

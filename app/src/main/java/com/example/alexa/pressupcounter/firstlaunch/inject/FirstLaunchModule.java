@@ -27,12 +27,12 @@ public class FirstLaunchModule {
 
     @FirstLaunchScope
     @Provides
-    FirstLaunchFactory provideFactory(FirstLaunchRouter router) {
+    FirstLaunchFactory provideFirstLaunchFactory(FirstLaunchRouter router) {
         return new FirstLaunchFactory(router);
     }
 
     @Provides
-    FirstLaunchRouter provideRouter(FirstLaunchFragment fragment) {
+    FirstLaunchRouter provideFirstLaunchRouter(FirstLaunchFragment fragment) {
         return new FirstLaunchRouterImpl(fragment);
     }
 }

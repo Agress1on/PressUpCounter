@@ -19,13 +19,11 @@ public interface SetProgramViewModel {
 
     ObservableField<Integer> getSumOfRepetitions();
 
-    ObservableField<String> getServiceInfo();
+    void onIncrementButtonClick();
 
-    void onIncrementButton();
+    void onDecrementButtonClick();
 
-    void onDecrementButton();
+    void onSetProgramButtonClick();
 
-    void onClickTrainingButton();
-
-    void onClickChoiceView();
+    void onChoiceViewClick();
 }

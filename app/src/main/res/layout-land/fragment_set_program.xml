@@ -7,6 +7,8 @@
 
         <import type="android.view.View" />
 
+        <import type="com.example.alexa.pressupcounter.Constants" />
+
         <variable
             name="viewModel"
             type="com.example.alexa.pressupcounter.setprogram.viewmodel.SetProgramViewModel" />
@@ -224,10 +226,10 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorForestGreen"
-            android:onClick="@{() -> viewModel.onIncrementButton()}"
+            android:onClick="@{() -> viewModel.onIncrementButtonClick()}"
             android:text="+"
             android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="@id/decrement_button"
+            app:layout_constraintBaseline_toBaselineOf="@+id/decrement_button"
             app:layout_constraintEnd_toStartOf="@id/decrement_button" />
 
         <Button
@@ -238,10 +240,10 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:background="@color/colorFireBrick"
-            android:onClick="@{() -> viewModel.onDecrementButton()}"
+            android:onClick="@{() -> viewModel.onDecrementButtonClick()}"
             android:text="-"
             android:textColor="@color/colorWhite"
-            android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > 10 ? View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > Constants.MINIMUM_SUM_REPETITIONS ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -252,7 +254,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorSlateGrey"
-            android:onClick="@{() -> viewModel.onClickTrainingButton()}"
+            android:onClick="@{() -> viewModel.onSetProgramButtonClick()}"
             android:text="выбрать программу"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="@id/decrement_button"
