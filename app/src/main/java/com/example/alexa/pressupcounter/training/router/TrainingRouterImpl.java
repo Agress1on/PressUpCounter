@@ -2,6 +2,7 @@ package com.example.alexa.pressupcounter.training.router;
 
 import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.events.DialogEvent;
+import com.example.alexa.pressupcounter.events.SoundEvent;
 import com.example.alexa.pressupcounter.training.view.TrainingFragment;
 
 /**
@@ -14,6 +15,7 @@ public class TrainingRouterImpl implements TrainingRouter {
     private SingleLiveEvent<DialogEvent> mDialogEventForRest;
     private SingleLiveEvent<DialogEvent> mDialogEventForRestOff;
     private SingleLiveEvent<DialogEvent> mDialogEventFinishTraining;
+    private SingleLiveEvent<SoundEvent> mPlaySound;
 
     public TrainingRouterImpl(TrainingFragment fragment) {
         mDialogEventForRest = new SingleLiveEvent<>();
@@ -24,6 +26,9 @@ public class TrainingRouterImpl implements TrainingRouter {
 
         mDialogEventFinishTraining = new SingleLiveEvent<>();
         mDialogEventFinishTraining.observe(fragment, dialogEvent -> fragment.showDialogFinishTraining());
+
+        mPlaySound = new SingleLiveEvent<>();
+        mPlaySound.observe(fragment, soundEvent -> fragment.playSound());
     }
 
     @Override
@@ -39,5 +44,10 @@ public class TrainingRouterImpl implements TrainingRouter {
     @Override
     public void showDialogFinishTraining() {
         mDialogEventFinishTraining.postValue(new DialogEvent());
+    }
+
+    @Override
+    public void playSound() {
+        mPlaySound.postValue(new SoundEvent());
     }
 }

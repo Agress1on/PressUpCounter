@@ -128,6 +128,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                         mTextForTrainingOrRest.set(mTextForTraining);
                         mStateOfRestButton.set(true);
                         mTrainingRouter.showDialogTrainingRestOff();
+                        mTrainingRouter.playSound();
                     }
                 });
     }
@@ -165,6 +166,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                     @Override
                     public void onComplete() {
                         if (mRepetition.get() == 5) return;
+                        mTrainingRouter.playSound();
                         goToNextRepetition();
                     }
                 });

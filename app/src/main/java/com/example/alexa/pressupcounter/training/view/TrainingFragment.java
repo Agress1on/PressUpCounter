@@ -1,6 +1,8 @@
 package com.example.alexa.pressupcounter.training.view;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,8 @@ import dagger.android.support.AndroidSupportInjection;
 public class TrainingFragment extends Fragment
         implements TrainingRestDialog.OnButtonDialogRestClickListener,
         TrainingRestOffDialog.OnButtonDialogRestOffClickListener,
-        FinishTrainingDialog.OnButtonClickDialogFinishTraining {
+        FinishTrainingDialog.OnButtonClickDialogFinishTraining,
+        SoundPool.OnLoadCompleteListener {
 
     public static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
     public static final String TAG_FOR_DIALOG_TRAINING_REST_OFF = "TAG_FOR_DIALOG_TRAINING_REST_OFF";
@@ -42,6 +45,9 @@ public class TrainingFragment extends Fragment
 
     @Inject
     TrainingRouter mTrainingRouter;
+
+    private SoundPool mSoundPool;
+    private int soundIdShot;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -55,7 +61,18 @@ public class TrainingFragment extends Fragment
         FragmentTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training, container, false);
         binding.setViewModel(mTrainingViewModel);
         mTrainingViewModel.setRouter(mTrainingRouter);
+        init();
         return binding.getRoot();
+    }
+
+    private void init() {
+        mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
+        mSoundPool.setOnLoadCompleteListener(this);
+        soundIdShot = mSoundPool.load(getContext(), R.raw.timer, 1);
+    }
+
+    public void playSound() {
+        mSoundPool.play(soundIdShot, 1, 1, 0, 0, 1);
     }
 
     public void showDialogTrainingRest() {
@@ -127,5 +144,10 @@ public class TrainingFragment extends Fragment
                 .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(false))
                 .commit();
         finishTrainingDialog.dismiss();
+    }
+
+    @Override
+    public void onLoadComplete(SoundPool soundPool, int i, int i1) {
+
     }
 }

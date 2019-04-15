@@ -12,4 +12,6 @@ public interface TrainingRouter {
     void showDialogTrainingRestOff();
 
     void showDialogFinishTraining();
+
+    void playSound();
 }
