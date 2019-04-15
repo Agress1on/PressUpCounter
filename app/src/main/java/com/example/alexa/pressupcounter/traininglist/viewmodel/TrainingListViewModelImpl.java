@@ -4,18 +4,15 @@ import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.events.EventForUpdateList;
 import com.example.alexa.pressupcounter.traininglist.interactor.TrainingListInteractor;
+import com.example.alexa.pressupcounter.traininglist.router.TrainingListRouter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 12.03.2019.
@@ -25,32 +22,36 @@ import io.reactivex.schedulers.Schedulers;
 public class TrainingListViewModelImpl extends ViewModel implements TrainingListViewModel {
 
     private TrainingListInteractor mTrainingListInteractor;
+    private TrainingListRouter mTrainingListRouter;
 
     private List<PressUp> mPressUpList;
     private CompositeDisposable mCompositeDisposable;
 
     private ObservableField<Boolean> mProgressBarState;
 
-    private LiveData<EventForUpdateList> mEventForUpdateList;
+    private SingleLiveEvent<EventForUpdateList> mEventForUpdateList;
 
-    public TrainingListViewModelImpl(TrainingListInteractor trainingListInteractor) {
+    public TrainingListViewModelImpl(TrainingListInteractor trainingListInteractor, TrainingListRouter trainingListRouter) {
         mTrainingListInteractor = trainingListInteractor;
+        mTrainingListRouter = trainingListRouter;
+
         mCompositeDisposable = new CompositeDisposable();
         mPressUpList = new ArrayList<>();
         mProgressBarState = new ObservableField<>(true);
 
         mEventForUpdateList = new SingleLiveEvent<>();
-    }
-
-    @Override
-    public void onCreateView() {
         Disposable disposable = mTrainingListInteractor.getAllPressUps()
                 .subscribe(pressUps -> {
                     mPressUpList = pressUps;
-                    ((SingleLiveEvent<EventForUpdateList>) mEventForUpdateList).postValue(new EventForUpdateList());
+                    mEventForUpdateList.postValue(new EventForUpdateList());
                     mProgressBarState.set(false);
                 });
         mCompositeDisposable.add(disposable);
+    }
+
+    @Override
+    public void setRouter(TrainingListRouter trainingListRouter) {
+        mTrainingListRouter = trainingListRouter;
     }
 
     @Override
@@ -64,7 +65,12 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
     }
 
     @Override
-    public LiveData<EventForUpdateList> getEventForUpdateList() {
+    public SingleLiveEvent<EventForUpdateList> getEventForUpdateList() {
         return mEventForUpdateList;
+    }
+
+    @Override
+    public void onClickHomeView() {
+        mTrainingListRouter.goToStartFragment();
     }
 }

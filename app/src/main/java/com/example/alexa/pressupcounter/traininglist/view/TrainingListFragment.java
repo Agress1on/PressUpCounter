@@ -7,11 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.app.App;
 import com.example.alexa.pressupcounter.data.PressUp;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
-import com.example.alexa.pressupcounter.events.EventForUpdateList;
-import com.example.alexa.pressupcounter.traininglist.inject.TrainingListModule;
+import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+import com.example.alexa.pressupcounter.traininglist.router.TrainingListRouter;
 import com.example.alexa.pressupcounter.traininglist.viewmodel.TrainingListViewModel;
 import com.example.alexa.pressupcounter.utils.DiffUtilTrainingList;
 
@@ -23,7 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +36,9 @@ public class TrainingListFragment extends Fragment {
 
     @Inject
     TrainingListViewModel mTrainingListViewModel;
+
+    @Inject
+    TrainingListRouter mTrainingListRouter;
 
     private RecyclerView mRecyclerView;
     private PressUpAdapter mPressUpAdapter;
@@ -68,7 +69,7 @@ public class TrainingListFragment extends Fragment {
 
         mRecyclerView.setAdapter(mPressUpAdapter);
         mPressUpAdapter.setData(mTrainingListViewModel.getPressUpList());
-        mTrainingListViewModel.onCreateView();
+        mTrainingListViewModel.setRouter(mTrainingListRouter);
         return binding.getRoot();
     }
 
@@ -82,6 +83,13 @@ public class TrainingListFragment extends Fragment {
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilTrainingList);
         mPressUpAdapter.setData(newList);
         diffResult.dispatchUpdatesTo(mPressUpAdapter);
+    }
+
+    public void goToStartTraining() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
+                .commit();
     }
 
     public static TrainingListFragment newInstance() {
