@@ -1,6 +1,11 @@
 package com.example.alexa.pressupcounter.main.interactor;
 
+import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.data.PressUpDao;
+
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Alexandr Mikhalev on 19.04.2019.

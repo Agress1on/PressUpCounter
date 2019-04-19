@@ -1,8 +1,13 @@
 package com.example.alexa.pressupcounter.main.viewmodel;
 
+import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.example.alexa.pressupcounter.main.interactor.MainInteractor;
+import com.example.alexa.pressupcounter.main.router.MainRouter;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by Alexandr Mikhalev on 06.01.2019.
@@ -12,8 +17,15 @@ import com.example.alexa.pressupcounter.main.interactor.MainInteractor;
 public class MainViewModelImpl extends ViewModel implements MainViewModel {
 
     private MainInteractor mMainInteractor;
+    private MainRouter mMainRouter;
 
-    public MainViewModelImpl(MainInteractor mainInteractor) {
+    private ObservableField<Boolean> mVisibleFrame;
+    private CompositeDisposable mCompositeDisposable;
+
+    private boolean mIsExistDatabase;
+    private boolean mIsFirstLaunch;
+
+    public MainViewModelImpl(MainInteractor mainInteractor, MainRouter mainRouter) {
         mMainInteractor = mainInteractor;
         mMainRouter = mainRouter;
 

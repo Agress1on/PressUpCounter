@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
             }
         }
-        Logger.d("MainActivity", "onCreate");
         // JSON example
         /*
         try {
