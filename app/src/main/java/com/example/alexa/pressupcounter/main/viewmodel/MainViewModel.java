@@ -15,7 +15,5 @@ public interface MainViewModel {
 
     void setRouter(MainRouter mainRouter);
 
-    void goToNextFragment();
-
     ObservableField<Boolean> isVisibleFrame();
 }

@@ -60,15 +60,6 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
     }
 
     @Override
-    public void goToNextFragment() {
-        if (mIsExistDatabase) {
-            mMainRouter.goToStartTraining();
-        } else {
-            mMainRouter.goToSetProgram();
-        }
-    }
-
-    @Override
     public ObservableField<Boolean> isVisibleFrame() {
         return mVisibleFrame;
     }
