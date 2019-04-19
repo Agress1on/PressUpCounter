@@ -15,7 +15,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
  * @author Alexandr Mikhalev
  */
 @AppScope
-@Component(modules = {FragmentBuilder.class, RoomModule.class, AppModule.class, AndroidSupportInjectionModule.class})
+@Component(modules = {ActivityBuilder.class, FragmentBuilder.class, RoomModule.class,
+        AppModule.class, AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<App> {
 
     //FirstLaunchComponent createFirstLaunchComponent(FirstLaunchModule firstLaunchModule);

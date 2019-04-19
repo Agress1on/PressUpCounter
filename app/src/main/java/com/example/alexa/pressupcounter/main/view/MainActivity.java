@@ -17,9 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
-    private MainViewModel mMainViewModel;
+    @Inject
+    MainViewModel mMainViewModel;
 
     private SharedPreferences mSharedPreferences;
 
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mMainViewModel = new MainViewModelImpl();
         binding.setViewModel(mMainViewModel);
 
         mSharedPreferences = getSharedPreferences(LAUNCH_SETTINGS, Context.MODE_PRIVATE);
