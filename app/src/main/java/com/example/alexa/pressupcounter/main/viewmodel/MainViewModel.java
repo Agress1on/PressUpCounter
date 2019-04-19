@@ -1,5 +1,9 @@
 package com.example.alexa.pressupcounter.main.viewmodel;
 
+import androidx.databinding.ObservableField;
+
+import com.example.alexa.pressupcounter.main.router.MainRouter;
+
 /**
  * Created by Alexandr Mikhalev on 06.01.2019.
  *
@@ -7,4 +11,11 @@ package com.example.alexa.pressupcounter.main.viewmodel;
  */
 public interface MainViewModel {
 
+    void onFirstLaunch();
+
+    void setRouter(MainRouter mainRouter);
+
+    void goToNextFragment();
+
+    ObservableField<Boolean> isVisibleFrame();
 }

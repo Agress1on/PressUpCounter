@@ -1,10 +1,11 @@
 package com.example.alexa.pressupcounter.main.inject;
 
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.alexa.pressupcounter.data.PressUpDao;
 import com.example.alexa.pressupcounter.main.interactor.MainInteractor;
+import com.example.alexa.pressupcounter.main.router.MainRouter;
+import com.example.alexa.pressupcounter.main.router.MainRouterImpl;
 import com.example.alexa.pressupcounter.main.view.MainActivity;
 import com.example.alexa.pressupcounter.main.viewmodel.MainFactory;
 import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
@@ -36,7 +37,12 @@ public class MainModule {
 
     @Provides
     @MainScope
-    MainFactory provideMainFactory(MainInteractor mainInteractor) {
-        return new MainFactory(mainInteractor);
+    MainFactory provideMainFactory(MainInteractor mainInteractor, MainRouter mainRouter) {
+        return new MainFactory(mainInteractor, mainRouter);
+    }
+
+    @Provides
+    MainRouter provideMainRouter(MainActivity mainActivity) {
+        return new MainRouterImpl(mainActivity);
     }
 }
