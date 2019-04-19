@@ -21,6 +21,8 @@ public class Constants {
         initList.add(3); //FifthRepetition
     }
 
+    public static final int FIRST_ID = 1;
+
     //Settings
     public static final int PAGE_COUNT = 3;
 

@@ -14,4 +14,11 @@ public class MainInteractor {
     public MainInteractor(PressUpDao pressUpDao) {
         mPressUpDao = pressUpDao;
     }
+
+    public Single<Boolean> isExistDataBase() {
+        return mPressUpDao.getPressUpById(Constants.FIRST_ID)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(pressUps -> !pressUps.isEmpty());
+    }
 }

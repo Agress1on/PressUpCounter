@@ -5,47 +5,53 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.alexa.pressupcounter.Logger;
-import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
-import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
-import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
-import com.example.alexa.pressupcounter.main.viewmodel.MainViewModelImpl;
-import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import com.example.alexa.pressupcounter.Logger;
+import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
+import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
+import com.example.alexa.pressupcounter.main.router.MainRouter;
+import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
+import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+
 import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 
 public class MainActivity extends AppCompatActivity {
 
     @Inject
     MainViewModel mMainViewModel;
 
+    @Inject
+    MainRouter mMainRouter;
+
     private SharedPreferences mSharedPreferences;
 
     private static final String LAUNCH_SETTINGS = "launch";
+    private static final String HAS_VISITED = "has_visited";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(mMainViewModel);
-
+        mMainViewModel.setRouter(mMainRouter);
         mSharedPreferences = getSharedPreferences(LAUNCH_SETTINGS, Context.MODE_PRIVATE);
-        boolean hasVisited = mSharedPreferences.getBoolean("hasVisited", false);
+        boolean hasVisited = mSharedPreferences.getBoolean(HAS_VISITED, false);
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         if (fragment == null) {
             if (!hasVisited) {
-                goToSetProgram();
+                mMainViewModel.onFirstLaunch();
                 SharedPreferences.Editor editor = mSharedPreferences.edit();
-                editor.putBoolean("hasVisited", true);
+                editor.putBoolean(HAS_VISITED, true);
                 editor.apply();
-            } else {
-                goToStartTraining();
             }
         }
         Logger.d("MainActivity", "onCreate");
@@ -73,13 +79,19 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    private void goToSetProgram() {
+    public void goToFirstLaunch() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, FirstLaunchFragment.newInstance())
                 .commit();
     }
 
-    private void goToStartTraining() {
+    public void goToSetProgram() {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, SetProgramFragment.newInstance())
+                .commit();
+    }
+
+    public void goToStartTraining() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, StartTrainingFragment.newInstance())
                 .commit();

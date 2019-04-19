@@ -53,6 +53,12 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
+    protected void onCleared() {
+        super.onCleared();
+        mCompositeDisposable.clear();
+    }
+
+    @Override
     public void setRouter(SetProgramRouter setProgramRouter) {
         mSetProgramRouter = setProgramRouter;
     }
@@ -95,13 +101,12 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
 
     @Override
     public void onSetProgramButtonClick() {
-        int id = 1;
         List<Integer> repetitions = new ArrayList<>();
         for (int i = 0; i < mListOfRepetitions.size(); i++) {
             repetitions.add(mListOfRepetitions.get(i).get());
         }
 
-        PressUp pressUp = new PressUp(id, repetitions);
+        PressUp pressUp = new PressUp(Constants.FIRST_ID, repetitions);
         mSetProgramInteractor.insertInDataBase(pressUp)
                 .subscribe(new DisposableCompletableObserver() {
                     @Override
