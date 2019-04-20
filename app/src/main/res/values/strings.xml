@@ -64,4 +64,10 @@
     <string name="for_add_additional_time">+30 секунд</string>
     <string name="for_yes">Да</string>
     <string name="for_no">Нет</string>
+
+    <!--
+    Dynamic text
+    -->
+    <string name="for_title_rest">Жди, когда закончится время отдыха и приступай к следующему повторению!</string>
+    <string name="for_title_training">Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!</string>
 </resources>

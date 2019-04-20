@@ -20,6 +20,7 @@ import com.example.alexa.pressupcounter.dialogs.ErrorDialog;
 import com.example.alexa.pressupcounter.dialogs.FinishTrainingDialog;
 import com.example.alexa.pressupcounter.dialogs.TrainingRestDialog;
 import com.example.alexa.pressupcounter.dialogs.TrainingRestOffDialog;
+import com.example.alexa.pressupcounter.events.TrainingTitleSetEvent;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
@@ -51,6 +52,8 @@ public class TrainingFragment extends Fragment
     @Inject
     TrainingRouter mTrainingRouter;
 
+    private FragmentTrainingBinding mFragmentTrainingBinding;
+
     private SoundPool mSoundPool;
     private int soundIdShot;
 
@@ -63,33 +66,52 @@ public class TrainingFragment extends Fragment
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_training, container, false);
-        binding.setViewModel(mTrainingViewModel);
+        mFragmentTrainingBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_training, container, false);
+        mFragmentTrainingBinding.setViewModel(mTrainingViewModel);
         mTrainingViewModel.setRouter(mTrainingRouter);
         init();
-        return binding.getRoot();
+        return mFragmentTrainingBinding.getRoot();
     }
 
     private void init() {
         mSoundPool = new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
         mSoundPool.setOnLoadCompleteListener(this);
         soundIdShot = mSoundPool.load(getContext(), R.raw.timer, 1);
+
+        mTrainingViewModel.getTitleSetEvent()
+                .observe(this, trainingTitleSetEvent
+                        -> setTitleText(trainingTitleSetEvent.getTitleText()));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (getActivity() != null) getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        if (getActivity() != null)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (getActivity() != null) getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+        if (getActivity() != null)
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
     }
 
     public void playSound() {
         mSoundPool.play(soundIdShot, 1, 1, 0, 0, 1);
+    }
+
+    public void setTitleText(TrainingTitleSetEvent.TitleText titleText) {
+        String text = "";
+        switch (titleText) {
+            case TEXT_FOR_REST:
+                text = getString(R.string.for_title_rest);
+                break;
+            case TEXT_FOR_TRAINING:
+                text = getString(R.string.for_title_training);
+                break;
+        }
+        mFragmentTrainingBinding.title.setText(text);
     }
 
     public void showDialogTrainingRest() {

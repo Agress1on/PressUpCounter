@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import com.example.alexa.pressupcounter.SingleLiveEvent;
+import com.example.alexa.pressupcounter.events.TrainingTitleSetEvent;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 
 import androidx.databinding.ObservableField;
@@ -17,9 +19,11 @@ public interface TrainingViewModel {
 
     ObservableField<String> getCounter();
 
-    ObservableField<String> getTitle();
+    //ObservableField<String> getTitle();
 
     ObservableField<Boolean> getStateOfRestButton();
+
+    SingleLiveEvent<TrainingTitleSetEvent> getTitleSetEvent();
 
     void goToNextRepetition();
 

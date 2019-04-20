@@ -105,13 +105,12 @@
         </TableLayout>
 
         <TextView
-            android:id="@+id/header_quantity_current_repetition"
+            android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="10dp"
-            android:text="@{viewModel.title}"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textSize="20sp"

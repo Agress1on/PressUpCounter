@@ -4,7 +4,9 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.ViewModel;
 
 import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.SingleLiveEvent;
 import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.events.TrainingTitleSetEvent;
 import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 
@@ -29,19 +31,22 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private ObservableField<String> mCounter;
     private ObservableField<Boolean> mStateOfRestButton;
 
-    private String mTextForTraining;
-    private String mTextForRest;
-    private ObservableField<String> mTitle;
+    //private String mTextForTraining;
+    // private String mTextForRest;
+    //private ObservableField<String> mTitle;
 
     private Program mProgram;
 
     private CompositeDisposable mCompositeDisposable;
+
+    private SingleLiveEvent<TrainingTitleSetEvent> mTitleSetEventLiveData;
 
     public TrainingViewModelImpl(TrainingInteractor trainingInteractor, TrainingRouter trainingRouter) {
         mTrainingInteractor = trainingInteractor;
         mTrainingRouter = trainingRouter;
 
         mCompositeDisposable = new CompositeDisposable();
+        mTitleSetEventLiveData = new SingleLiveEvent<>();
 
         mProgram = new Program(0, new ArrayList<>());
         mCounter = new ObservableField<>("0");
@@ -53,9 +58,10 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                 });
         mCompositeDisposable.add(disposable);
 
-        mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
-        mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
-        mTitle = new ObservableField<>(mTextForTraining);
+        //mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
+        //mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
+        //mTitle = new ObservableField<>("");
+        mTitleSetEventLiveData.postValue(new TrainingTitleSetEvent(TrainingTitleSetEvent.TitleText.TEXT_FOR_TRAINING));
 
         mRepetition = new ObservableField<>(1);
 
@@ -84,14 +90,21 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
         return mCounter;
     }
 
+    /*
     @Override
     public ObservableField<String> getTitle() {
         return mTitle;
     }
+    */
 
     @Override
     public ObservableField<Boolean> getStateOfRestButton() {
         return mStateOfRestButton;
+    }
+
+    @Override
+    public SingleLiveEvent<TrainingTitleSetEvent> getTitleSetEvent() {
+        return mTitleSetEventLiveData;
     }
 
     @Override
@@ -107,7 +120,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickPositiveButtonOfRestDialog() {
-        mTitle.set(mTextForRest);
+        //mTitle.set(mTextForRest);
+        mTitleSetEventLiveData.postValue(new TrainingTitleSetEvent(TrainingTitleSetEvent.TitleText.TEXT_FOR_REST));
         mTrainingInteractor.getMainTimer()
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -127,7 +141,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onComplete() {
-                        mTitle.set(mTextForTraining);
+                        //mTitle.set(mTextForTraining);
+                        mTitleSetEventLiveData.postValue(new TrainingTitleSetEvent(TrainingTitleSetEvent.TitleText.TEXT_FOR_TRAINING));
                         mStateOfRestButton.set(true);
                         mTrainingRouter.showDialogTrainingRestOff();
                         mTrainingRouter.playSound();
@@ -147,7 +162,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickAdditionalTimeForRest() {
-        mTitle.set(mTextForRest);
+        //mTitle.set(mTextForRest);
+        mTitleSetEventLiveData.postValue(new TrainingTitleSetEvent(TrainingTitleSetEvent.TitleText.TEXT_FOR_REST));
         mTrainingInteractor.getAdditionalTimer()
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -169,7 +185,8 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
                     public void onComplete() {
                         if (mRepetition.get() == Constants.MAX_REPETITION) return;
                         mTrainingRouter.playSound();
-                        mTitle.set(mTextForTraining);
+                        //mTitle.set(mTextForTraining);
+                        mTitleSetEventLiveData.postValue(new TrainingTitleSetEvent(TrainingTitleSetEvent.TitleText.TEXT_FOR_TRAINING));
                         goToNextRepetition();
                     }
                 });
