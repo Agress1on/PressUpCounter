@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:text="Выберите программу для первого занятия:"
+            android:text="@string/for_set_program_header"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,6 +40,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/ic_choice"
+            android:contentDescription="@string/for_choice_view_description"
             app:layout_constraintBottom_toTopOf="@id/tab_layout"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -69,7 +70,7 @@
                     android:id="@+id/repetition_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Подход"
+                    android:text="@string/for_repetition_number_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -125,7 +126,7 @@
                     android:id="@+id/repetition_quantity_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Повторения"
+                    android:text="@string/for_repetition_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -188,15 +189,16 @@
         </TableLayout>
 
         <ImageView
-        android:id="@+id/sum_image_view"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_sum"
-        app:layout_constraintBottom_toBottomOf="@id/decrement_button"
-        app:layout_constraintTop_toTopOf="@id/decrement_button"
-        app:layout_constraintStart_toStartOf="parent" />
+            android:id="@+id/sum_image_view"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/for_sum_image_view_description"
+            android:src="@drawable/ic_sum"
+            app:layout_constraintBottom_toBottomOf="@id/decrement_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/decrement_button" />
 
         <TextView
             android:id="@+id/sum_of_repetition"
@@ -227,7 +229,7 @@
             android:layout_marginRight="10dp"
             android:background="@color/colorForestGreen"
             android:onClick="@{() -> viewModel.onClickIncrementButton()}"
-            android:text="+"
+            android:text="@string/for_plus"
             android:textColor="@color/colorWhite"
             app:layout_constraintBaseline_toBaselineOf="@+id/decrement_button"
             app:layout_constraintEnd_toStartOf="@id/decrement_button" />
@@ -241,21 +243,21 @@
             android:layout_marginBottom="10dp"
             android:background="@color/colorFireBrick"
             android:onClick="@{() -> viewModel.onClickDecrementButton()}"
-            android:text="-"
+            android:text="@string/for_minus"
             android:textColor="@color/colorWhite"
             android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > Constants.MINIMUM_SUM_REPETITIONS ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
-            android:id="@+id/start_train_btn"
+            android:id="@+id/set_program_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
             android:background="@color/colorSlateGrey"
             android:onClick="@{() -> viewModel.onClickSetProgramButton()}"
-            android:text="выбрать программу"
+            android:text="@string/for_set_program_button"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="@id/decrement_button"
             app:layout_constraintEnd_toStartOf="@id/increment_button" />

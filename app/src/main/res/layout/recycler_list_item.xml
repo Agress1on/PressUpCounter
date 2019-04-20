@@ -20,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Успешное занятие №"
+            android:text="@string/for_recycler_list_item_header"
             android:textAlignment="center"
             android:textColor="@color/colorForTextInTable"
             android:textSize="25sp"
@@ -62,7 +62,7 @@
                     android:id="@+id/repetition_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Подход"
+                    android:text="@string/for_repetition_number_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -118,7 +118,7 @@
                     android:id="@+id/repetition_quantity_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Повторения"
+                    android:text="@string/for_repetition_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 

@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
-            android:text="Выберите программу для первого занятия:"
+            android:text="@string/for_set_program_header"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:textSize="30dp"
+            android:textSize="30sp"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,8 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/introduction_text" />
+            app:layout_constraintTop_toBottomOf="@id/introduction_text"
+            android:contentDescription="@string/for_choice_view_description" />
 
         <TableLayout
             android:id="@+id/tab_layout"
@@ -73,7 +74,7 @@
                     android:id="@+id/repetition_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Подход"
+                    android:text="@string/for_repetition_number_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -129,7 +130,7 @@
                     android:id="@+id/repetition_quantity_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Повторения"
+                    android:text="@string/for_repetition_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -207,7 +208,8 @@
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_sum"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
+            android:contentDescription="@string/for_sum_image_view_description" />
 
         <TextView
             android:id="@+id/sum_of_repetition"
@@ -233,9 +235,9 @@
             android:layout_marginBottom="10dp"
             android:background="@color/colorForestGreen"
             android:onClick="@{() -> viewModel.onClickIncrementButton()}"
-            android:text="+"
+            android:text="@string/for_plus"
             android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toTopOf="@id/start_train_btn"
+            app:layout_constraintBottom_toTopOf="@id/set_program_btn"
             app:layout_constraintEnd_toStartOf="@id/vertical_center_guideline" />
 
         <Button
@@ -246,20 +248,20 @@
             android:layout_marginLeft="10dp"
             android:background="@color/colorFireBrick"
             android:onClick="@{() -> viewModel.onClickDecrementButton()}"
-            android:text="-"
+            android:text="@string/for_minus"
             android:textColor="@color/colorWhite"
             android:visibility="@{safeUnbox(viewModel.sumOfRepetitions) > Constants.MINIMUM_SUM_REPETITIONS ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintStart_toEndOf="@id/vertical_center_guideline"
             app:layout_constraintTop_toTopOf="@id/increment_button" />
 
         <Button
-            android:id="@+id/start_train_btn"
+            android:id="@+id/set_program_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:background="@color/colorSlateGrey"
             android:onClick="@{() -> viewModel.onClickSetProgramButton()}"
-            android:text="выбрать программу"
+            android:text="@string/for_set_program_button"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/decrement_button"

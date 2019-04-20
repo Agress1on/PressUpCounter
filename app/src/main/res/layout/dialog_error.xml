@@ -11,13 +11,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/colorCrimson"
-        app:layout_constraintBottom_toBottomOf="@id/error_logo"
+        app:layout_constraintBottom_toBottomOf="@id/finish_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/error_logo"
+        android:id="@+id/finish_logo"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:padding="20dp"
@@ -39,7 +39,7 @@
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/error_logo"
+        app:layout_constraintTop_toBottomOf="@id/finish_logo"
         tools:text="QUESTION" />
 
     <TextView

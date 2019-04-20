@@ -34,7 +34,7 @@ public class ExclamationDialog extends DialogFragment implements View.OnClickLis
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_exclamation, container, false);
         mMessageTextView = (TextView) view.findViewById(R.id.message);
-        mCancel = (ImageView) view.findViewById(R.id.cancel);
+        mCancel = (ImageView) view.findViewById(R.id.cancel_image_view);
         mMessageTextView.setText("Установите уведомления");
         mCancel.setOnClickListener(this);
         return view;

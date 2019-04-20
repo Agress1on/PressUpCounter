@@ -24,7 +24,7 @@
             android:gravity="start"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="Текущая программа"
+            android:text="@string/for_start_training_header"
             android:textAlignment="viewStart"
             android:textColor="@color/colorWhite"
             android:textSize="30sp"
@@ -42,7 +42,8 @@
             android:onClick="@{() -> viewModel.onClickSettingsButton()}"
             app:layout_constraintBottom_toBottomOf="@id/start_train_header"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/start_train_header" />
+            app:layout_constraintTop_toTopOf="@id/start_train_header"
+            android:contentDescription="@string/for_settings_image_view_description" />
 
         <ImageView
             android:id="@+id/logo_press_up"
@@ -52,7 +53,8 @@
             app:layout_constraintBottom_toTopOf="@id/tab_layout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/start_train_header" />
+            app:layout_constraintTop_toBottomOf="@id/start_train_header"
+            android:contentDescription="@string/for_logo_press_up_description" />
 
         <TableLayout
             android:id="@+id/tab_layout"
@@ -80,7 +82,7 @@
                     android:id="@+id/repetition_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Подход"
+                    android:text="@string/for_repetition_number_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -136,7 +138,7 @@
                     android:id="@+id/repetition_quantity_header_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Повторения"
+                    android:text="@string/for_repetition_header"
                     android:textColor="@color/colorForTextInTable"
                     android:textSize="25sp" />
 
@@ -209,7 +211,8 @@
             android:layout_marginTop="20dp"
             android:src="@drawable/ic_sum"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
+            android:contentDescription="@string/for_sum_image_view_description" />
 
         <TextView
             android:id="@+id/summ_static"
@@ -232,20 +235,20 @@
             android:layout_marginTop="40dp"
             android:background="@color/colorForestGreen"
             android:onClick="@{() -> viewModel.onClickStartTrainingButton()}"
-            android:text="start"
+            android:text="@string/for_start_training_button"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/summ_static" />
 
         <Button
-            android:id="@+id/go_to_pressup_list_btn"
+            android:id="@+id/list_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/colorSlateGrey"
             android:onClick="@{() -> viewModel.onClickListButton()}"
-            android:text="список"
+            android:text="@string/for_list_button"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

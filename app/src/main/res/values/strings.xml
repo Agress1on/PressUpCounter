@@ -1,6 +1,42 @@
 <resources>
     <string name="app_name">PressUpCounter</string>
-    <string name="for_repetition_header">Подход:</string>
+    <!--
+    for descriptions of view
+    -->
+    <string name="for_choice_view_description">CHOICE_VIEW</string>
+    <string name="for_sum_image_view_description">SUM_IMAGE_VIEW</string>
+    <string name="for_settings_logo_description">SETTING_LOGO</string>
+    <string name="for_settings_image_view_description">SETTINGS_IMAGE_VIEW</string>
+    <string name="for_logo_press_up_description">LOGO_PRESS_UP</string>
+    <string name="for_home_image_view_description">HOME_IMAGE_VIEW</string>
+    <string name="for_plus_logo_description">ERROR_LOGO</string>
+    <string name="for_finish_logo_description">FINISH_LOGO</string>
+    <string name="for_exclamation_logo_description">EXCLAMATION_LOGO</string>
+    <string name="for_cancel_image_view_description">CANCEL_IMAGE_VIEW</string>
+    <string name="for_question_logo_description">QUESTION_LOGO</string>
+
+    <!--
+    for headers
+    -->
+    <string name="for_set_time_header">Выберите время уведомления   для каждого дня:</string>
+    <string name="for_recycler_list_item_header">Успешное занятие №</string>
+    <string name="for_set_program_header">Выберите программу для первого занятия:</string>
+    <string name="for_set_training_day_header">Выберите 3 дня недели:</string>
+    <string name="for_start_training_header">Текущая программа</string>
+
+    <!--
+    Day of weeks
+    -->
+    <string name="for_monday">Monday</string>
+    <string name="for_tuesday">Tuesday</string>
+    <string name="for_wednesday">Wednesday</string>
+    <string name="for_thursday">Thursday</string>
+    <string name="for_friday">Friday</string>
+    <string name="for_saturday">Saturday</string>
+    <string name="for_sunday">Sunday</string>
+
+    <string name="for_repetition_number_header">Подход:</string>
+    <string name="for_repetition_header">Повторение:</string>
     <string name="for_first_repetition">1</string>
     <string name="for_third_repetition">3</string>
     <string name="for_second_repetition">2</string>
@@ -8,4 +44,24 @@
     <string name="for_fifth_repetition">5</string>
     <string name="for_start_rest_button">Начать отдых</string>
     <string name="for_dialog_finish_training">Удалось ли выполнить все подходы, понять смысл жизни?</string>
+    <string name="for_first_fragment_introduction">FIRST FRAGMENT</string>
+    <string name="for_second_fragment_introduction">SECOND FRAGMENT</string>
+    <string name="for_third_fragment_introduction">THIRD FRAGMENT</string>
+    <string name="for_home_button">Домой</string>
+    <string name="for_miss_button">Пропустить</string>
+    <string name="for_plus">+</string>
+    <string name="for_minus">-</string>
+    <string name="for_set_program_button">Выбрать программу</string>
+    <string name="for_set_time_button">Установить время</string>
+    <string name="for_set_days_button">Выбрать дни</string>
+    <string name="for_set_notifications_button">настроить уведомления</string>
+    <string name="for_delete_last_program_button">Удалить последнюю программу</string>
+    <string name="for_reset_all_progress_button">сбросить весь прогресс</string>
+    <string name="for_start_training_button">start</string>
+    <string name="for_list_button">список</string>
+    <string name="for_finish_training_button">Закончить занятие</string>
+    <string name="for_next_repetition">След.подход</string>
+    <string name="for_add_additional_time">+30 секунд</string>
+    <string name="for_yes">Да</string>
+    <string name="for_no">Нет</string>
 </resources>

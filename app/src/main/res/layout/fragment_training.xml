@@ -37,7 +37,7 @@
                     android:id="@+id/repetition_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/for_repetition_header"
+                    android:text="@string/for_repetition_number_header"
                     android:textColor="@color/colorWhite"
                     android:textSize="30sp" />
 
@@ -141,19 +141,19 @@
             android:onClick="@{() -> viewModel.onClickRestButton()}"
             android:text="@string/for_start_rest_button"
             android:visibility="@{safeUnbox(viewModel.repetition) != 5 ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintBottom_toTopOf="@id/finish_training"
+            app:layout_constraintBottom_toTopOf="@id/finish_training_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:enabled="@{safeUnbox(viewModel.stateOfRestButton)}"
             />
 
         <Button
-            android:id="@+id/finish_training"
+            android:id="@+id/finish_training_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:onClick="@{() -> viewModel.onClickFinishTrainingButton()}"
-            android:text="Закончить занятие"
+            android:text="@string/for_finish_training_button"
             android:visibility="@{safeUnbox(viewModel.repetition) == 5 ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
