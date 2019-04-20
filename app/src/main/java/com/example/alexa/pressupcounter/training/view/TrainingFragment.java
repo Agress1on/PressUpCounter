@@ -75,6 +75,18 @@ public class TrainingFragment extends Fragment
         soundIdShot = mSoundPool.load(getContext(), R.raw.timer, 1);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getActivity() != null) getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR);
+    }
+
     public void playSound() {
         mSoundPool.play(soundIdShot, 1, 1, 0, 0, 1);
     }
