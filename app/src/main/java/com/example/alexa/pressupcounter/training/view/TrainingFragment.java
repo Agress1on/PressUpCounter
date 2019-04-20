@@ -8,8 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
+import com.example.alexa.pressupcounter.dialogs.ErrorDialog;
 import com.example.alexa.pressupcounter.dialogs.FinishTrainingDialog;
 import com.example.alexa.pressupcounter.dialogs.TrainingRestDialog;
 import com.example.alexa.pressupcounter.dialogs.TrainingRestOffDialog;
@@ -19,10 +25,6 @@ import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -36,9 +38,11 @@ public class TrainingFragment extends Fragment
         FinishTrainingDialog.OnButtonClickDialogFinishTraining,
         SoundPool.OnLoadCompleteListener {
 
-    public static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
-    public static final String TAG_FOR_DIALOG_TRAINING_REST_OFF = "TAG_FOR_DIALOG_TRAINING_REST_OFF";
-    public static final String TAG_FOR_DIALOG_TRAINING_FINISH = "TAG_FOR_DIALOG_TRAINING_FINISH";
+    private static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
+    private static final String TAG_FOR_DIALOG_TRAINING_REST_OFF = "TAG_FOR_DIALOG_TRAINING_REST_OFF";
+    private static final String TAG_FOR_DIALOG_TRAINING_FINISH = "TAG_FOR_DIALOG_TRAINING_FINISH";
+
+    private static final String ERROR_DIALOG = "Error_Dialog_Training_Fragment";
 
     @Inject
     TrainingViewModel mTrainingViewModel;
@@ -88,6 +92,11 @@ public class TrainingFragment extends Fragment
     public void showDialogFinishTraining() {
         FinishTrainingDialog finishTrainingDialog = new FinishTrainingDialog();
         finishTrainingDialog.show(getChildFragmentManager(), TAG_FOR_DIALOG_TRAINING_FINISH);
+    }
+
+    public void showErrorDialog() {
+        ErrorDialog errorDialog = new ErrorDialog();
+        errorDialog.show(getChildFragmentManager(), ERROR_DIALOG);
     }
 
     public static TrainingFragment newInstance() {

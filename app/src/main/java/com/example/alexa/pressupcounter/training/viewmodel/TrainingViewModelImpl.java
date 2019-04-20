@@ -1,5 +1,8 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
+import androidx.databinding.ObservableField;
+import androidx.lifecycle.ViewModel;
+
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
@@ -8,8 +11,6 @@ import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.databinding.ObservableField;
-import androidx.lifecycle.ViewModel;
 import io.reactivex.Observer;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -121,7 +122,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mTrainingRouter.showErrorDialog();
                     }
 
                     @Override
@@ -161,7 +162,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mTrainingRouter.showErrorDialog();
                     }
 
                     @Override

@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.settings.router;
 
 import com.example.alexa.pressupcounter.SingleLiveEvent;
+import com.example.alexa.pressupcounter.events.DialogEvent;
 import com.example.alexa.pressupcounter.events.FragmentEvent;
 import com.example.alexa.pressupcounter.events.ShowToastEvent;
 import com.example.alexa.pressupcounter.settings.view.SettingsFragment;
@@ -15,6 +16,7 @@ public class SettingsRouterImpl implements SettingsRouter {
     private SingleLiveEvent<FragmentEvent> mGoToSetNotificationsEvent;
     private SingleLiveEvent<ShowToastEvent> mShowToastEvent;
     private SingleLiveEvent<FragmentEvent> mGoToSetProgram;
+    private SingleLiveEvent<DialogEvent> mShowErrorDialog;
 
     public SettingsRouterImpl(SettingsFragment fragment) {
         mGoToSetNotificationsEvent = new SingleLiveEvent<>();
@@ -25,6 +27,9 @@ public class SettingsRouterImpl implements SettingsRouter {
 
         mGoToSetProgram = new SingleLiveEvent<>();
         mGoToSetProgram.observe(fragment, fragmentEvent -> fragment.setSetProgram());
+
+        mShowErrorDialog = new SingleLiveEvent<>();
+        mShowErrorDialog.observe(fragment, dialogEvent -> fragment.showErrorDialog());
     }
 
     @Override
@@ -40,5 +45,10 @@ public class SettingsRouterImpl implements SettingsRouter {
     @Override
     public void goToSetProgram() {
         mGoToSetProgram.postValue(new FragmentEvent());
+    }
+
+    @Override
+    public void showErrorDialog() {
+        mShowErrorDialog.postValue(new DialogEvent());
     }
 }

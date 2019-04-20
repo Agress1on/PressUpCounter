@@ -1,10 +1,11 @@
 package com.example.alexa.pressupcounter.settings.viewmodel;
 
+import androidx.lifecycle.ViewModel;
+
 import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.settings.interactor.SettingsInteractor;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 
-import androidx.lifecycle.ViewModel;
 import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -60,7 +61,7 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mSettingsRouter.showErrorDialog();
                     }
                 });
     }
@@ -81,7 +82,7 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
 
                     @Override
                     public void onError(Throwable e) {
-
+                        mSettingsRouter.showErrorDialog();
                     }
                 });
     }

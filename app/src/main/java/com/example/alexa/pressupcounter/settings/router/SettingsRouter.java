@@ -12,4 +12,6 @@ public interface SettingsRouter {
     void showToast();
 
     void goToSetProgram();
+
+    void showErrorDialog();
 }

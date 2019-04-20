@@ -16,6 +16,7 @@ public class TrainingRouterImpl implements TrainingRouter {
     private SingleLiveEvent<DialogEvent> mDialogEventForRestOff;
     private SingleLiveEvent<DialogEvent> mDialogEventFinishTraining;
     private SingleLiveEvent<SoundEvent> mPlaySound;
+    private SingleLiveEvent<DialogEvent> mShowErrorDialog;
 
     public TrainingRouterImpl(TrainingFragment fragment) {
         mDialogEventForRest = new SingleLiveEvent<>();
@@ -29,6 +30,9 @@ public class TrainingRouterImpl implements TrainingRouter {
 
         mPlaySound = new SingleLiveEvent<>();
         mPlaySound.observe(fragment, soundEvent -> fragment.playSound());
+
+        mShowErrorDialog = new SingleLiveEvent<>();
+        mShowErrorDialog.observe(fragment, dialogEvent -> fragment.showErrorDialog());
     }
 
     @Override
@@ -49,5 +53,10 @@ public class TrainingRouterImpl implements TrainingRouter {
     @Override
     public void playSound() {
         mPlaySound.postValue(new SoundEvent());
+    }
+
+    @Override
+    public void showErrorDialog() {
+        mShowErrorDialog.postValue(new DialogEvent());
     }
 }

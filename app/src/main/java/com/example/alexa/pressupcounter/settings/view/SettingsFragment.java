@@ -7,8 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentSettingsBinding;
+import com.example.alexa.pressupcounter.dialogs.ErrorDialog;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 import com.example.alexa.pressupcounter.settings.viewmodel.SettingsViewModel;
@@ -16,10 +22,6 @@ import com.example.alexa.pressupcounter.settrainingday.view.SetTrainingDayFragme
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -34,6 +36,8 @@ public class SettingsFragment extends Fragment {
 
     @Inject
     SettingsRouter mSettingsRouter;
+
+    private static final String ERROR_DIALOG = "Error_Dialog_Settings_Fragment";
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -66,6 +70,11 @@ public class SettingsFragment extends Fragment {
 
     public void showToast() {
         Toast.makeText(getContext(), "Последняя программа удалена", Toast.LENGTH_SHORT).show();
+    }
+
+    public void showErrorDialog() {
+        ErrorDialog errorDialog = new ErrorDialog();
+        errorDialog.show(getChildFragmentManager(), ERROR_DIALOG);
     }
 
     public static SettingsFragment newInstance() {
