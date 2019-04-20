@@ -105,10 +105,10 @@ public class TrainingFragment extends Fragment
         String text = "";
         switch (titleText) {
             case TEXT_FOR_REST:
-                text = getString(R.string.for_title_rest);
+                text = getString(R.string.for_training_title_rest);
                 break;
             case TEXT_FOR_TRAINING:
-                text = getString(R.string.for_title_training);
+                text = getString(R.string.for_training_title_training);
                 break;
         }
         mFragmentTrainingBinding.title.setText(text);

@@ -34,6 +34,8 @@ public class ResultTrainingFragment extends Fragment {
     @Inject
     ResultTrainingRouter mResultTrainingRouter;
 
+    private FragmentResultTrainingBinding mFragmentResultTrainingBinding;
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -43,10 +45,24 @@ public class ResultTrainingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentResultTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_result_training, container, false);
-        binding.setViewModel(mResultTrainingViewModel);
+        mFragmentResultTrainingBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_result_training, container, false);
+        mFragmentResultTrainingBinding.setViewModel(mResultTrainingViewModel);
         mResultTrainingViewModel.setCurrentRouter(mResultTrainingRouter);
-        return binding.getRoot();
+        init();
+        return mFragmentResultTrainingBinding.getRoot();
+    }
+
+    private void init() {
+        mResultTrainingViewModel.getSetTextEvent()
+                .observe(this, resultTrainingSetTextEvent
+                        -> setText(resultTrainingSetTextEvent.isResult()));
+    }
+
+    private void setText(boolean isSuccess) {
+        String title = isSuccess ? getString(R.string.for_result_training_title_success) : getString(R.string.for_result_training_title_no_success);
+        String message = isSuccess ? getString(R.string.for_result_training_message_success) : getString(R.string.for_result_training_message_not_success);
+        mFragmentResultTrainingBinding.resultTrainingHeaderTextView.setText(title);
+        mFragmentResultTrainingBinding.resultTrainingTextView.setText(message);
     }
 
     public void setStartTraining() {

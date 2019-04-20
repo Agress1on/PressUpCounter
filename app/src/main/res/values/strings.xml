@@ -68,6 +68,11 @@
     <!--
     Dynamic text
     -->
-    <string name="for_title_rest">Жди, когда закончится время отдыха и приступай к следующему повторению!</string>
-    <string name="for_title_training">Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!</string>
+    <string name="for_training_title_rest">Жди, когда закончится время отдыха и приступай к следующему повторению!</string>
+    <string name="for_training_title_training">Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!</string>
+
+    <string name="for_result_training_title_success">Поздравляем!</string>
+    <string name="for_result_training_title_no_success">Получится в другой раз!</string>
+    <string name="for_result_training_message_success">Успешно выполнил программу!</string>
+    <string name="for_result_training_message_not_success">Получится в следующий раз!</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.resulttraining.viewmodel;
 
+import com.example.alexa.pressupcounter.SingleLiveEvent;
+import com.example.alexa.pressupcounter.events.ResultTrainingSetTextEvent;
 import com.example.alexa.pressupcounter.resulttraining.router.ResultTrainingRouter;
 
 import androidx.databinding.ObservableField;
@@ -13,9 +15,11 @@ public interface ResultTrainingViewModel {
 
     void setCurrentRouter(ResultTrainingRouter router);
 
-    ObservableField<String> getHeaderText();
+    //ObservableField<String> getHeaderText();
 
-    ObservableField<String> getResultText();
+    //ObservableField<String> getResultText();
+
+    SingleLiveEvent<ResultTrainingSetTextEvent> getSetTextEvent();
 
     void onClickHomeButton();
 }
