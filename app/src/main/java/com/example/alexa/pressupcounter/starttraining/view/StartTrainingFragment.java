@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.starttraining.view;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +37,13 @@ public class StartTrainingFragment extends Fragment {
     @Inject
     StartTrainingRouter mStartTrainingRouter;
 
+    private static final String TAG_FOR_EXCLAMATION_DIALOG = "TAG_FOR_EXCLAMATION_DIALOG";
+
+    private SharedPreferences mSharedPreferences;
+
+    private static final String LAUNCH_SETTINGS = "launch_start_training";
+    private static final String HAS_VISITED = "has_visited_start_training";
+
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -47,12 +55,23 @@ public class StartTrainingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentStartTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start_training, container, false);
         binding.setViewModel(mStartTrainingViewModel);
-        ExclamationDialog exclamationDialog = new ExclamationDialog();
-        exclamationDialog.show(getFragmentManager(), "TAG");
         mStartTrainingViewModel.setCurrentRouter(mStartTrainingRouter);
+
+        mSharedPreferences = getActivity().getSharedPreferences(LAUNCH_SETTINGS, Context.MODE_PRIVATE);
+        boolean hasVisited = mSharedPreferences.getBoolean(HAS_VISITED, false);
+        if (!hasVisited) {
+            mStartTrainingViewModel.onFirstLaunch();
+            SharedPreferences.Editor editor = mSharedPreferences.edit();
+            editor.putBoolean(HAS_VISITED, true);
+            editor.apply();
+        }
         return binding.getRoot();
     }
 
+    public void showExclamationDialog() {
+        ExclamationDialog exclamationDialog = new ExclamationDialog();
+        exclamationDialog.show(getChildFragmentManager(), TAG_FOR_EXCLAMATION_DIALOG);
+    }
 
     public void setTraining() {
         getActivity().getSupportFragmentManager().beginTransaction()

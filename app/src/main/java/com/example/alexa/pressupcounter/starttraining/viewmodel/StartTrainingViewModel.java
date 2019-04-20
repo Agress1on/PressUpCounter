@@ -12,6 +12,8 @@ import androidx.databinding.ObservableField;
  */
 public interface StartTrainingViewModel {
 
+    void onFirstLaunch();
+
     void setCurrentRouter(StartTrainingRouter startTrainingRouter);
 
     ObservableField<Program> getProgram();

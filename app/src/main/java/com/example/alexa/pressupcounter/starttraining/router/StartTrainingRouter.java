@@ -7,6 +7,8 @@ package com.example.alexa.pressupcounter.starttraining.router;
  */
 public interface StartTrainingRouter {
 
+    void showExclamationDialog();
+
     void goToTraining();
 
     void goToTrainingList();

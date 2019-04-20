@@ -49,6 +49,11 @@ public class StartTrainingViewModelImpl extends ViewModel implements StartTraini
     }
 
     @Override
+    public void onFirstLaunch() {
+        mStartTrainingRouter.showExclamationDialog();
+    }
+
+    @Override
     public void setCurrentRouter(StartTrainingRouter startTrainingRouter) {
         mStartTrainingRouter = startTrainingRouter;
     }
