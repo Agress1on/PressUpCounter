@@ -44,11 +44,11 @@ public class SetTrainingDayFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetTrainingDayBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_training_day, container, false);
         binding.setViewModel(mSetTrainingDayViewModel);
-        mSetTrainingDayViewModel.setRouter(mSetTrainingDayRouter);
+        mSetTrainingDayViewModel.setCurrentRouter(mSetTrainingDayRouter);
         return binding.getRoot();
     }
 
-    public void goToSetTime() {
+    public void setSetTime() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetTimeFragment.newInstance(mSetTrainingDayViewModel.getDaysIndexList()))

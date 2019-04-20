@@ -41,7 +41,7 @@ public class SetTimeViewModelImpl extends ViewModel implements SetTimeViewModel 
     }
 
     @Override
-    public void setRouter(SetTimeRouter setTimeRouter) {
+    public void setCurrentRouter(SetTimeRouter setTimeRouter) {
         mSetTimeRouter = setTimeRouter;
     }
 

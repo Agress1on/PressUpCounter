@@ -24,7 +24,7 @@ public class ResultTrainingViewModelImpl extends ViewModel implements ResultTrai
     }
 
     @Override
-    public void setRouter(ResultTrainingRouter router) {
+    public void setCurrentRouter(ResultTrainingRouter router) {
         mResultTrainingRouter = router;
     }
 
@@ -39,7 +39,7 @@ public class ResultTrainingViewModelImpl extends ViewModel implements ResultTrai
     }
 
     @Override
-    public void goToStartTrainingFragment() {
-        mResultTrainingRouter.goToStartTrainingFragment();
+    public void onClickHomeButton() {
+        mResultTrainingRouter.goToStartTraining();
     }
 }

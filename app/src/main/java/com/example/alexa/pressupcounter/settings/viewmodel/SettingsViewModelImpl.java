@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settings.viewmodel;
 
-import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.settings.interactor.SettingsInteractor;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 
@@ -19,7 +19,7 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
     private SettingsInteractor mSettingsInteractor;
     private SettingsRouter mSettingsRouter;
 
-    private PressUp mLastPressUp;
+    private Program mLastProgram;
     private CompositeDisposable mCompositeDisposable;
 
     public SettingsViewModelImpl(SettingsInteractor settingsInteractor, SettingsRouter router) {
@@ -29,23 +29,23 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
         mCompositeDisposable = new CompositeDisposable();
 
         Disposable disposable = mSettingsInteractor.getLastPressUp()
-                .subscribe(pressUp -> mLastPressUp = pressUp);
+                .subscribe(pressUp -> mLastProgram = pressUp);
         mCompositeDisposable.add(disposable);
     }
 
     @Override
-    public void setRouter(SettingsRouter settingsRouter) {
+    public void setCurrentRouter(SettingsRouter settingsRouter) {
         mSettingsRouter = settingsRouter;
     }
 
     @Override
-    public void onSetNotificationsClick() {
+    public void onClickSetNotifications() {
         mSettingsRouter.goToSetTrainingDay();
     }
 
     @Override
     public void onClickDeleteLastProgram() {
-        mSettingsInteractor.deleteLastProgram(mLastPressUp)
+        mSettingsInteractor.deleteLastProgram(mLastProgram)
                 .subscribe(new CompletableObserver() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -55,7 +55,7 @@ public class SettingsViewModelImpl extends ViewModel implements SettingsViewMode
                     @Override
                     public void onComplete() {
                         mSettingsRouter.showToast();
-                        if (mLastPressUp.getId() == 1) mSettingsRouter.goToSetProgram();
+                        if (mLastProgram.getId() == 1) mSettingsRouter.goToSetProgram();
                     }
 
                     @Override

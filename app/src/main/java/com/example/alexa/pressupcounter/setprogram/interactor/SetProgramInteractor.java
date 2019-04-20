@@ -1,13 +1,11 @@
 package com.example.alexa.pressupcounter.setprogram.interactor;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import androidx.databinding.ObservableField;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,11 +18,11 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SetProgramInteractor {
 
-    private PressUpDao mPressUpDao;
+    private ProgramDao mProgramDao;
     private List<Integer> mInitialRepetitionList;
 
-    public SetProgramInteractor(PressUpDao pressUpDao) {
-        mPressUpDao = pressUpDao;
+    public SetProgramInteractor(ProgramDao programDao) {
+        mProgramDao = programDao;
         mInitialRepetitionList = Constants.initList;
     }
 
@@ -34,8 +32,8 @@ public class SetProgramInteractor {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable insertInDataBase(PressUp pressUp) {
-        return Completable.wrap(mPressUpDao.insert(pressUp))
+    public Completable insertInDataBase(Program program) {
+        return Completable.wrap(mProgramDao.insert(program))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

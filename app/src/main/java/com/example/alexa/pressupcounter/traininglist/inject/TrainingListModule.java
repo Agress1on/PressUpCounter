@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.traininglist.inject;
 
 import com.example.alexa.pressupcounter.data.AppDatabase;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 import com.example.alexa.pressupcounter.traininglist.interactor.TrainingListInteractor;
 import com.example.alexa.pressupcounter.traininglist.router.TrainingListRouter;
 import com.example.alexa.pressupcounter.traininglist.router.TrainingListRouterImpl;
@@ -24,8 +24,8 @@ public class TrainingListModule {
 
     @TrainingListScope
     @Provides
-    TrainingListInteractor provideTrainingListModel(AppDatabase appDatabase, PressUpDao pressUpDao) {
-        return new TrainingListInteractor(appDatabase, pressUpDao);
+    TrainingListInteractor provideTrainingListModel(AppDatabase appDatabase, ProgramDao programDao) {
+        return new TrainingListInteractor(appDatabase, programDao);
     }
 
     @TrainingListScope

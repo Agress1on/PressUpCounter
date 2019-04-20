@@ -46,26 +46,26 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSettingsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false);
         binding.setViewModel(mSettingsViewModel);
-        mSettingsViewModel.setRouter(mSettingsRouter);
+        mSettingsViewModel.setCurrentRouter(mSettingsRouter);
         return binding.getRoot();
     }
 
-    public void goToSetTrainingDay() {
+    public void setSetTrainingDay() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
                 .commit();
     }
 
-    public void showToast() {
-        Toast.makeText(getContext(), "Последняя программа удалена", Toast.LENGTH_SHORT).show();
-    }
-
-    public void goToSetProgram() {
+    public void setSetProgram() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetProgramFragment.newInstance())
                 .commit();
+    }
+
+    public void showToast() {
+        Toast.makeText(getContext(), "Последняя программа удалена", Toast.LENGTH_SHORT).show();
     }
 
     public static SettingsFragment newInstance() {

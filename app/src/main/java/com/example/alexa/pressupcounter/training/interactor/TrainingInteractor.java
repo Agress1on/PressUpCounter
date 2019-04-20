@@ -1,19 +1,15 @@
 package com.example.alexa.pressupcounter.training.interactor;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.data.AppDatabase;
-import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
-import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -23,23 +19,23 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class TrainingInteractor {
 
-    private PressUpDao mPressUpDao;
+    private ProgramDao mProgramDao;
 
     private Observable<Long> mMainTimer;
     private Observable<Long> mAdditionalTimer;
 
-    public TrainingInteractor(PressUpDao pressUpDao) {
-        mPressUpDao = pressUpDao;
+    public TrainingInteractor(ProgramDao programDao) {
+        mProgramDao = programDao;
     }
 
-    public Completable insertInDB(PressUp pressUp) {
-        return mPressUpDao.insert(pressUp)
+    public Completable insertInDB(Program program) {
+        return mProgramDao.insert(program)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Single<PressUp> getPressUpForTraining() {
-        return mPressUpDao.getAll()
+    public Single<Program> getPressUpForTraining() {
+        return mProgramDao.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> pressUps.get(pressUps.size() - 1));

@@ -3,7 +3,7 @@ package com.example.alexa.pressupcounter.app.inject;
 import android.content.Context;
 
 import com.example.alexa.pressupcounter.data.AppDatabase;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
 import androidx.room.Room;
 import dagger.Module;
@@ -27,7 +27,7 @@ public class RoomModule {
 
     @AppScope
     @Provides
-    PressUpDao providePressUpDao(AppDatabase appDatabase) {
-        return appDatabase.pressUpDao();
+    ProgramDao providePressUpDao(AppDatabase appDatabase) {
+        return appDatabase.programDao();
     }
 }

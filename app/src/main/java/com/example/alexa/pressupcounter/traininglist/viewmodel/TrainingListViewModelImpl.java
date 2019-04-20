@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.traininglist.viewmodel;
 
 import com.example.alexa.pressupcounter.SingleLiveEvent;
-import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.events.EventForUpdateList;
+import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.events.UpdateListEvent;
 import com.example.alexa.pressupcounter.traininglist.interactor.TrainingListInteractor;
 import com.example.alexa.pressupcounter.traininglist.router.TrainingListRouter;
 
@@ -24,39 +24,45 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
     private TrainingListInteractor mTrainingListInteractor;
     private TrainingListRouter mTrainingListRouter;
 
-    private List<PressUp> mPressUpList;
+    private List<Program> mProgramList;
     private CompositeDisposable mCompositeDisposable;
 
     private ObservableField<Boolean> mProgressBarState;
 
-    private SingleLiveEvent<EventForUpdateList> mEventForUpdateList;
+    private SingleLiveEvent<UpdateListEvent> mEventForUpdateList;
 
     public TrainingListViewModelImpl(TrainingListInteractor trainingListInteractor, TrainingListRouter trainingListRouter) {
         mTrainingListInteractor = trainingListInteractor;
         mTrainingListRouter = trainingListRouter;
 
         mCompositeDisposable = new CompositeDisposable();
-        mPressUpList = new ArrayList<>();
+        mProgramList = new ArrayList<>();
         mProgressBarState = new ObservableField<>(true);
 
         mEventForUpdateList = new SingleLiveEvent<>();
         Disposable disposable = mTrainingListInteractor.getAllPressUps()
                 .subscribe(pressUps -> {
-                    mPressUpList = pressUps;
-                    mEventForUpdateList.postValue(new EventForUpdateList());
+                    mProgramList = pressUps;
+                    mEventForUpdateList.postValue(new UpdateListEvent());
                     mProgressBarState.set(false);
                 });
         mCompositeDisposable.add(disposable);
     }
 
     @Override
-    public void setRouter(TrainingListRouter trainingListRouter) {
+    protected void onCleared() {
+        super.onCleared();
+        mCompositeDisposable.clear();
+    }
+
+    @Override
+    public void setCurrentRouter(TrainingListRouter trainingListRouter) {
         mTrainingListRouter = trainingListRouter;
     }
 
     @Override
-    public List<PressUp> getPressUpList() {
-        return mPressUpList;
+    public List<Program> getProgramList() {
+        return mProgramList;
     }
 
     @Override
@@ -65,7 +71,7 @@ public class TrainingListViewModelImpl extends ViewModel implements TrainingList
     }
 
     @Override
-    public SingleLiveEvent<EventForUpdateList> getEventForUpdateList() {
+    public SingleLiveEvent<UpdateListEvent> getEventForUpdateList() {
         return mEventForUpdateList;
     }
 

@@ -18,13 +18,13 @@ public class SettingsRouterImpl implements SettingsRouter {
 
     public SettingsRouterImpl(SettingsFragment fragment) {
         mGoToSetNotificationsEvent = new SingleLiveEvent<>();
-        mGoToSetNotificationsEvent.observe(fragment, fragmentEvent -> fragment.goToSetTrainingDay());
+        mGoToSetNotificationsEvent.observe(fragment, fragmentEvent -> fragment.setSetTrainingDay());
 
         mShowToastEvent = new SingleLiveEvent<>();
         mShowToastEvent.observe(fragment, showToastEvent -> fragment.showToast());
 
         mGoToSetProgram = new SingleLiveEvent<>();
-        mGoToSetProgram.observe(fragment, fragmentEvent -> fragment.goToSetProgram());
+        mGoToSetProgram.observe(fragment, fragmentEvent -> fragment.setSetProgram());
     }
 
     @Override

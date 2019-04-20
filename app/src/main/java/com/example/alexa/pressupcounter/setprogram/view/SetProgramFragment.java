@@ -47,11 +47,11 @@ public class SetProgramFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetProgramBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_program, container, false);
         binding.setViewModel(mSetProgramViewModel);
-        mSetProgramViewModel.setRouter(mSetProgramRouter);
+        mSetProgramViewModel.setCurrentRouter(mSetProgramRouter);
         return binding.getRoot();
     }
 
-    public void goToStartFragment() {
+    public void setStartTraining() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())

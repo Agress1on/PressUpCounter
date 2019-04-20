@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:drawablePadding="10dp"
-            android:onClick="@{() -> viewModel.onCheckButton()}"
+            android:onClick="@{() -> viewModel.onClickCheckButton()}"
             android:text="Выбрать дни"
             app:buttonStyle="@{safeUnbox(viewModel.checkButtonState)}"
             app:layout_constraintBottom_toBottomOf="parent"

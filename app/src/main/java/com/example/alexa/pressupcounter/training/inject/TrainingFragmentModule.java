@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.training.inject;
 
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import com.example.alexa.pressupcounter.training.router.TrainingRouterImpl;
@@ -23,8 +23,8 @@ public class TrainingFragmentModule {
 
     @TrainingFragmentScope
     @Provides
-    TrainingInteractor provideTrainingInteractor(PressUpDao pressUpDao) {
-        return new TrainingInteractor(pressUpDao);
+    TrainingInteractor provideTrainingInteractor(ProgramDao programDao) {
+        return new TrainingInteractor(programDao);
     }
 
     @TrainingFragmentScope

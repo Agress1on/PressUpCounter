@@ -9,7 +9,7 @@ import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
  */
 public interface FirstLaunchViewModel {
 
-    void setNewRouter(FirstLaunchRouter firstLaunchRouter);
+    void setCurrentRouter(FirstLaunchRouter firstLaunchRouter);
 
     void onClickMissButton();
 }

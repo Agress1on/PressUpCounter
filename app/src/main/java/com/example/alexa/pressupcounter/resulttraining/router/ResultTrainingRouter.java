@@ -7,5 +7,5 @@ package com.example.alexa.pressupcounter.resulttraining.router;
  */
 public interface ResultTrainingRouter {
 
-    void goToStartTrainingFragment();
+    void goToStartTraining();
 }

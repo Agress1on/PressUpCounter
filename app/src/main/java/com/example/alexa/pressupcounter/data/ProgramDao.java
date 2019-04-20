@@ -16,28 +16,28 @@ import io.reactivex.Single;
  * @author Alexandr Mikhalev
  */
 @Dao
-public interface PressUpDao {
+public interface ProgramDao {
 
-    @Query("SELECT * FROM PressUp")
-    Single<List<PressUp>> getAll();
+    @Query("SELECT * FROM Program")
+    Single<List<Program>> getAll();
 
     /*
     @Query("SELECT * FROM pressup2 WHERE id = :id")
-    Flowable<List<PressUp>> getById(long id);
+    Flowable<List<Program>> getById(long id);
     */
 
-    @Query("SELECT * FROM PressUp WHERE id = :id")
-    Single<List<PressUp>> getPressUpById(long id);
+    @Query("SELECT * FROM Program WHERE id = :id")
+    Single<List<Program>> getProgramById(long id);
 
     @Insert
-    Completable insert(PressUp pressUp);
+    Completable insert(Program program);
 
     @Update
-    void update(PressUp pressUp);
+    void update(Program program);
 
     @Delete
-    Completable delete(PressUp pressUp);
+    Completable delete(Program program);
 
-    @Query("DELETE FROM PressUp")
+    @Query("DELETE FROM Program")
     Completable deleteAll();
 }

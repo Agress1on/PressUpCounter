@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.setprogram.viewmodel;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
 import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 
@@ -59,7 +59,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void setRouter(SetProgramRouter setProgramRouter) {
+    public void setCurrentRouter(SetProgramRouter setProgramRouter) {
         mSetProgramRouter = setProgramRouter;
     }
 
@@ -74,7 +74,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void onIncrementButtonClick() {
+    public void onClickIncrementButton() {
         if (mListOfRepetitions.get(0).get().equals(mListOfRepetitions.get(1).get())) {
             mListOfRepetitions.get(1).set(mListOfRepetitions.get(1).get() + 1);
             mListOfRepetitions.get(4).set(mListOfRepetitions.get(4).get() + 1);
@@ -87,7 +87,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void onDecrementButtonClick() {
+    public void onClickDecrementButton() {
         if (mListOfRepetitions.get(0).get().equals(mListOfRepetitions.get(1).get())) {
             mListOfRepetitions.get(0).set(mListOfRepetitions.get(0).get() - 1);
             mListOfRepetitions.get(2).set(mListOfRepetitions.get(2).get() - 1);
@@ -100,14 +100,14 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void onSetProgramButtonClick() {
+    public void onClickSetProgramButton() {
         List<Integer> repetitions = new ArrayList<>();
         for (int i = 0; i < mListOfRepetitions.size(); i++) {
             repetitions.add(mListOfRepetitions.get(i).get());
         }
 
-        PressUp pressUp = new PressUp(Constants.FIRST_ID, repetitions);
-        mSetProgramInteractor.insertInDataBase(pressUp)
+        Program program = new Program(Constants.FIRST_ID, repetitions);
+        mSetProgramInteractor.insertInDataBase(program)
                 .subscribe(new DisposableCompletableObserver() {
                     @Override
                     public void onComplete() {
@@ -122,7 +122,7 @@ public class SetProgramViewModelImpl extends ViewModel implements SetProgramView
     }
 
     @Override
-    public void onChoiceViewClick() {
+    public void onClickChoiceView() {
         mSetProgramRouter.goToStartTraining();
     }
 

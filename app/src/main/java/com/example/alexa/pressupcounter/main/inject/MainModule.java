@@ -2,7 +2,7 @@ package com.example.alexa.pressupcounter.main.inject;
 
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 import com.example.alexa.pressupcounter.main.interactor.MainInteractor;
 import com.example.alexa.pressupcounter.main.router.MainRouter;
 import com.example.alexa.pressupcounter.main.router.MainRouterImpl;
@@ -24,8 +24,8 @@ public class MainModule {
 
     @Provides
     @MainScope
-    MainInteractor provideMainInteractor(PressUpDao pressUpDao) {
-        return new MainInteractor(pressUpDao);
+    MainInteractor provideMainInteractor(ProgramDao programDao) {
+        return new MainInteractor(programDao);
     }
 
 

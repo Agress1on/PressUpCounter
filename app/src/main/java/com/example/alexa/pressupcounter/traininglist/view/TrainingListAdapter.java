@@ -5,7 +5,7 @@ import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.RecyclerListItemBinding;
-import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.data.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,30 +19,30 @@ import androidx.recyclerview.widget.RecyclerView;
  *
  * @author Alexandr Mikhalev
  */
-public class PressUpAdapter extends RecyclerView.Adapter<PressUpHolder> {
+public class TrainingListAdapter extends RecyclerView.Adapter<TrainingListHolder> {
 
-    private List<PressUp> items = new ArrayList<>();
+    private List<Program> items = new ArrayList<>();
 
-    public void setData(List<PressUp> data) {
+    public void setData(List<Program> data) {
         //items.clear();
         items.addAll(data);
         //notifyDataSetChanged();
     }
 
-    public List<PressUp> getData() {
+    public List<Program> getData() {
         return items;
     }
 
     @NonNull
     @Override
-    public PressUpHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TrainingListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         RecyclerListItemBinding binding = DataBindingUtil.inflate(inflater, R.layout.recycler_list_item, parent, false);
-        return new PressUpHolder(binding);
+        return new TrainingListHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PressUpHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TrainingListHolder holder, int position) {
         holder.bind(items.get(position));
     }
 

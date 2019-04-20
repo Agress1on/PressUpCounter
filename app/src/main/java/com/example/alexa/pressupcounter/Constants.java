@@ -21,7 +21,11 @@ public class Constants {
         initList.add(3); //FifthRepetition
     }
 
+    public static final int INIT_SUM = 10;
+
     public static final int FIRST_ID = 1;
+
+    public static final int MAX_REPETITION = 5;
 
     //Settings
     public static final int PAGE_COUNT = 3;

@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.main.interactor;
 
 import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,14 +14,14 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class MainInteractor {
 
-    private PressUpDao mPressUpDao;
+    private ProgramDao mProgramDao;
 
-    public MainInteractor(PressUpDao pressUpDao) {
-        mPressUpDao = pressUpDao;
+    public MainInteractor(ProgramDao programDao) {
+        mProgramDao = programDao;
     }
 
     public Single<Boolean> isExistDataBase() {
-        return mPressUpDao.getPressUpById(Constants.FIRST_ID)
+        return mProgramDao.getProgramById(Constants.FIRST_ID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> !pressUps.isEmpty());

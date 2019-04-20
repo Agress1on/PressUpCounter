@@ -13,17 +13,17 @@ import androidx.databinding.ObservableField;
  */
 public interface SetProgramViewModel {
 
-    void setRouter(SetProgramRouter setProgramRouter);
+    void setCurrentRouter(SetProgramRouter setProgramRouter);
 
     List<ObservableField<Integer>> getListOfRepetitions();
 
     ObservableField<Integer> getSumOfRepetitions();
 
-    void onIncrementButtonClick();
+    void onClickIncrementButton();
 
-    void onDecrementButtonClick();
+    void onClickDecrementButton();
 
-    void onSetProgramButtonClick();
+    void onClickSetProgramButton();
 
-    void onChoiceViewClick();
+    void onClickChoiceView();
 }

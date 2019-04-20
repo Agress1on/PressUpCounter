@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.training.viewmodel;
 
-import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.training.interactor.TrainingInteractor;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 
@@ -24,14 +25,14 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     private TrainingRouter mTrainingRouter;
 
     private ObservableField<Integer> mRepetition;
-    private ObservableField<String> mQuantityOfRepetitionOrRestTime;
+    private ObservableField<String> mCounter;
     private ObservableField<Boolean> mStateOfRestButton;
 
     private String mTextForTraining;
     private String mTextForRest;
-    private ObservableField<String> mTextForTrainingOrRest;
+    private ObservableField<String> mTitle;
 
-    private PressUp mPressUp;
+    private Program mProgram;
 
     private CompositeDisposable mCompositeDisposable;
 
@@ -41,19 +42,19 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
         mCompositeDisposable = new CompositeDisposable();
 
-        mPressUp = new PressUp(0, new ArrayList<>());
-        mQuantityOfRepetitionOrRestTime = new ObservableField<>("0");
+        mProgram = new Program(0, new ArrayList<>());
+        mCounter = new ObservableField<>("0");
 
         Disposable disposable = mTrainingInteractor.getPressUpForTraining()
                 .subscribe(pressUp -> {
-                    mPressUp = pressUp;
-                    mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(0)));
+                    mProgram = pressUp;
+                    mCounter.set(String.valueOf(mProgram.getRepetitions().get(0)));
                 });
         mCompositeDisposable.add(disposable);
 
         mTextForTraining = "Эй, Амиго! Сделай количество повторений и жми кнопку отдыха!";
         mTextForRest = "Жди, когда закончится время отдыха и приступай к следующему повторению!";
-        mTextForTrainingOrRest = new ObservableField<>(mTextForTraining);
+        mTitle = new ObservableField<>(mTextForTraining);
 
         mRepetition = new ObservableField<>(1);
 
@@ -78,13 +79,13 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
     }
 
     @Override
-    public ObservableField<String> getQuantityOfRepetitionOrRestTime() {
-        return mQuantityOfRepetitionOrRestTime;
+    public ObservableField<String> getCounter() {
+        return mCounter;
     }
 
     @Override
-    public ObservableField<String> getTextForTrainingOrRest() {
-        return mTextForTrainingOrRest;
+    public ObservableField<String> getTitle() {
+        return mTitle;
     }
 
     @Override
@@ -105,7 +106,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickPositiveButtonOfRestDialog() {
-        mTextForTrainingOrRest.set(mTextForRest);
+        mTitle.set(mTextForRest);
         mTrainingInteractor.getMainTimer()
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -115,7 +116,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onNext(Long aLong) {
-                        mQuantityOfRepetitionOrRestTime.set(String.valueOf(aLong));
+                        mCounter.set(String.valueOf(aLong));
                     }
 
                     @Override
@@ -125,7 +126,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onComplete() {
-                        mTextForTrainingOrRest.set(mTextForTraining);
+                        mTitle.set(mTextForTraining);
                         mStateOfRestButton.set(true);
                         mTrainingRouter.showDialogTrainingRestOff();
                         mTrainingRouter.playSound();
@@ -145,7 +146,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickAdditionalTimeForRest() {
-        mTextForTrainingOrRest.set(mTextForRest);
+        mTitle.set(mTextForRest);
         mTrainingInteractor.getAdditionalTimer()
                 .subscribe(new Observer<Long>() {
                     @Override
@@ -155,7 +156,7 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onNext(Long aLong) {
-                        mQuantityOfRepetitionOrRestTime.set(String.valueOf(aLong));
+                        mCounter.set(String.valueOf(aLong));
                     }
 
                     @Override
@@ -165,8 +166,9 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
                     @Override
                     public void onComplete() {
-                        if (mRepetition.get() == 5) return;
+                        if (mRepetition.get() == Constants.MAX_REPETITION) return;
                         mTrainingRouter.playSound();
+                        mTitle.set(mTextForTraining);
                         goToNextRepetition();
                     }
                 });
@@ -174,26 +176,26 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void goToNextRepetition() {
-        if (mRepetition.get() < 5) {
+        if (mRepetition.get() < Constants.MAX_REPETITION) {
             mRepetition.set(mRepetition.get() + 1);
         } else {
             mRepetition.set(1);
         }
         switch (mRepetition.get()) {
             case 1:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(0)));
+                mCounter.set(String.valueOf(mProgram.getRepetitions().get(0)));
                 break;
             case 2:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(1)));
+                mCounter.set(String.valueOf(mProgram.getRepetitions().get(1)));
                 break;
             case 3:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(2)));
+                mCounter.set(String.valueOf(mProgram.getRepetitions().get(2)));
                 break;
             case 4:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(3)));
+                mCounter.set(String.valueOf(mProgram.getRepetitions().get(3)));
                 break;
             case 5:
-                mQuantityOfRepetitionOrRestTime.set(String.valueOf(mPressUp.getRepetitions().get(4)));
+                mCounter.set(String.valueOf(mProgram.getRepetitions().get(4)));
                 break;
         }
     }
@@ -205,31 +207,31 @@ public class TrainingViewModelImpl extends ViewModel implements TrainingViewMode
 
     @Override
     public void onClickPositiveButtonFinishDialog() {
-        PressUp pressUpNew;
+        Program programNew;
         List<Integer> newList = new ArrayList<>();
-        long newId = mPressUp.getId() + 1;
-        if (mPressUp.getRepetitions().get(0) == mPressUp.getRepetitions().get(1)) {
-            newList.add(mPressUp.getRepetitions().get(0));
-            newList.add(mPressUp.getRepetitions().get(1) + 1);
-            newList.add(mPressUp.getRepetitions().get(2));
-            newList.add(mPressUp.getRepetitions().get(3));
-            newList.add(mPressUp.getRepetitions().get(4) + 1);
+        long newId = mProgram.getId() + 1;
+        if (mProgram.getRepetitions().get(0) == mProgram.getRepetitions().get(1)) {
+            newList.add(mProgram.getRepetitions().get(0));
+            newList.add(mProgram.getRepetitions().get(1) + 1);
+            newList.add(mProgram.getRepetitions().get(2));
+            newList.add(mProgram.getRepetitions().get(3));
+            newList.add(mProgram.getRepetitions().get(4) + 1);
         } else {
-            newList.add(mPressUp.getRepetitions().get(0) + 1);
-            newList.add(mPressUp.getRepetitions().get(1));
-            newList.add(mPressUp.getRepetitions().get(2) + 1);
-            newList.add(mPressUp.getRepetitions().get(3) + 1);
-            newList.add(mPressUp.getRepetitions().get(4));
+            newList.add(mProgram.getRepetitions().get(0) + 1);
+            newList.add(mProgram.getRepetitions().get(1));
+            newList.add(mProgram.getRepetitions().get(2) + 1);
+            newList.add(mProgram.getRepetitions().get(3) + 1);
+            newList.add(mProgram.getRepetitions().get(4));
         }
-        pressUpNew = new PressUp(newId, newList);
+        programNew = new Program(newId, newList);
         /*
-        PressUp pressUpNew;
-        if (mPressUp.getFirstRepetition() == mPressUp.getSecondRepetition()) {
-            pressUpNew = new PressUp(mPressUp.getId() + 1, mPressUp.getFirstRepetition(), mPressUp.getSecondRepetition() + 1, mPressUp.getThirdRepetition(), mPressUp.getFourthRepetition(), mPressUp.getFifthRepetition() + 1);
+        Program programNew;
+        if (mProgram.getFirstRepetition() == mProgram.getSecondRepetition()) {
+            programNew = new Program(mProgram.getId() + 1, mProgram.getFirstRepetition(), mProgram.getSecondRepetition() + 1, mProgram.getThirdRepetition(), mProgram.getFourthRepetition(), mProgram.getFifthRepetition() + 1);
         } else {
-            pressUpNew = new PressUp(mPressUp.getId() + 1, mPressUp.getFirstRepetition() + 1, mPressUp.getSecondRepetition(), mPressUp.getThirdRepetition() + 1, mPressUp.getFourthRepetition() + 1, mPressUp.getFifthRepetition());
+            programNew = new Program(mProgram.getId() + 1, mProgram.getFirstRepetition() + 1, mProgram.getSecondRepetition(), mProgram.getThirdRepetition() + 1, mProgram.getFourthRepetition() + 1, mProgram.getFifthRepetition());
         }
         */
-        mTrainingInteractor.insertInDB(pressUpNew).subscribe();
+        mTrainingInteractor.insertInDB(programNew).subscribe();
     }
 }

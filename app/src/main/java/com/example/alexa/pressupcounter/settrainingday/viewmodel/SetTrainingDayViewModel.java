@@ -13,7 +13,7 @@ import androidx.databinding.ObservableField;
  */
 public interface SetTrainingDayViewModel {
 
-    void setRouter(SetTrainingDayRouter setTrainingDayRouter);
+    void setCurrentRouter(SetTrainingDayRouter setTrainingDayRouter);
 
     List<ObservableField<Boolean>> getDayOfWeekState();
 
@@ -23,5 +23,5 @@ public interface SetTrainingDayViewModel {
 
     void onCheckedChanged(int i, boolean state);
 
-    void onCheckButton();
+    void onClickCheckButton();
 }

@@ -1,13 +1,10 @@
 package com.example.alexa.pressupcounter.starttraining.interactor;
 
-import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.data.PressUpDao;
-
-import java.util.List;
+import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
 import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -17,21 +14,21 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class StartTrainingInteractor {
 
-    private PressUpDao mPressUpDao;
+    private ProgramDao mProgramDao;
 
-    public StartTrainingInteractor(PressUpDao pressUpDao) {
-        mPressUpDao = pressUpDao;
+    public StartTrainingInteractor(ProgramDao programDao) {
+        mProgramDao = programDao;
     }
 
-    public Single<PressUp> getLastProgram() {
-        return mPressUpDao.getAll()
+    public Single<Program> getLastProgram() {
+        return mProgramDao.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> pressUps.get(pressUps.size() - 1));
     }
 
     public Single<Integer> getSumOfRepetitions() {
-        return mPressUpDao.getAll()
+        return mProgramDao.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> pressUps.get(pressUps.size() - 1))

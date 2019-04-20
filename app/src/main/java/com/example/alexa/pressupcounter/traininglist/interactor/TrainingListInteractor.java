@@ -1,8 +1,8 @@
 package com.example.alexa.pressupcounter.traininglist.interactor;
 
 import com.example.alexa.pressupcounter.data.AppDatabase;
-import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -19,15 +19,15 @@ import io.reactivex.schedulers.Schedulers;
 public class TrainingListInteractor {
 
     private AppDatabase mAppDatabase;
-    private PressUpDao mPressUpDao;
+    private ProgramDao mProgramDao;
 
-    public TrainingListInteractor(AppDatabase appDatabase, PressUpDao pressUpDao) {
+    public TrainingListInteractor(AppDatabase appDatabase, ProgramDao programDao) {
         mAppDatabase = appDatabase;
-        mPressUpDao = pressUpDao;
+        mProgramDao = programDao;
     }
 
-    public Single<List<PressUp>> getAllPressUps() {
-        return mPressUpDao.getAll()
+    public Single<List<Program>> getAllPressUps() {
+        return mProgramDao.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .delay(3, TimeUnit.SECONDS);

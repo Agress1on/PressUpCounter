@@ -130,20 +130,21 @@ public class TrainingFragment extends Fragment
     @Override
     public void onPositiveButtonDialogFinishTraining(FinishTrainingDialog finishTrainingDialog) {
         mTrainingViewModel.onClickPositiveButtonFinishDialog();
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(true))
-                .commit();
+        setResultTraining(true);
         finishTrainingDialog.dismiss();
     }
 
     @Override
     public void onNegativeButtonDialogFinishTraining(FinishTrainingDialog finishTrainingDialog) {
+        setResultTraining(false);
+        finishTrainingDialog.dismiss();
+    }
+
+    private void setResultTraining(boolean resultTraining) {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(false))
+                .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(resultTraining))
                 .commit();
-        finishTrainingDialog.dismiss();
     }
 
     @Override

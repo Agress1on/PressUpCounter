@@ -11,11 +11,11 @@ import androidx.databinding.ObservableField;
  */
 public interface ResultTrainingViewModel {
 
-    void setRouter(ResultTrainingRouter router);
+    void setCurrentRouter(ResultTrainingRouter router);
 
     ObservableField<String> getHeaderText();
 
     ObservableField<String> getResultText();
 
-    void goToStartTrainingFragment();
+    void onClickHomeButton();
 }

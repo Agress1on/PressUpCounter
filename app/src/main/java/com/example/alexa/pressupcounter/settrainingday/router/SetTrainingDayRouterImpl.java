@@ -15,7 +15,7 @@ public class SetTrainingDayRouterImpl implements SetTrainingDayRouter {
 
     public SetTrainingDayRouterImpl(SetTrainingDayFragment fragment) {
         mGoToSetTimeEvent = new SingleLiveEvent<>();
-        mGoToSetTimeEvent.observe(fragment, fragmentEvent -> fragment.goToSetTime());
+        mGoToSetTimeEvent.observe(fragment, fragmentEvent -> fragment.setSetTime());
     }
 
     @Override

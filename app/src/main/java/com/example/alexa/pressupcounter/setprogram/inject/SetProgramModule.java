@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.setprogram.inject;
 
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 import com.example.alexa.pressupcounter.setprogram.interactor.SetProgramInteractor;
 import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouter;
 import com.example.alexa.pressupcounter.setprogram.router.SetProgramRouterImpl;
@@ -23,8 +23,8 @@ public class SetProgramModule {
 
     @SetProgramScope
     @Provides
-    SetProgramInteractor provideSetProgramInteractor(PressUpDao pressUpDao) {
-        return new SetProgramInteractor(pressUpDao);
+    SetProgramInteractor provideSetProgramInteractor(ProgramDao programDao) {
+        return new SetProgramInteractor(programDao);
     }
 
     @SetProgramScope

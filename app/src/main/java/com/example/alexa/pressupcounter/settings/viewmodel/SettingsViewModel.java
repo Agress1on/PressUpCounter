@@ -9,9 +9,9 @@ import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
  */
 public interface SettingsViewModel {
 
-    void setRouter(SettingsRouter settingsRouter);
+    void setCurrentRouter(SettingsRouter settingsRouter);
 
-    void onSetNotificationsClick();
+    void onClickSetNotifications();
 
     void onClickDeleteLastProgram();
 

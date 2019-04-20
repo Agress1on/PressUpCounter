@@ -1,7 +1,7 @@
 package com.example.alexa.pressupcounter.settings.interactor;
 
-import com.example.alexa.pressupcounter.data.PressUp;
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.Program;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
@@ -15,27 +15,27 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SettingsInteractor {
 
-    private PressUpDao mPressUpDao;
+    private ProgramDao mProgramDao;
 
-    public SettingsInteractor(PressUpDao pressUpDao) {
-        mPressUpDao = pressUpDao;
+    public SettingsInteractor(ProgramDao programDao) {
+        mProgramDao = programDao;
     }
 
-    public Single<PressUp> getLastPressUp() {
-        return mPressUpDao.getAll()
+    public Single<Program> getLastPressUp() {
+        return mProgramDao.getAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(pressUps -> pressUps.get(pressUps.size() - 1));
     }
 
-    public Completable deleteLastProgram(PressUp pressUp) {
-        return mPressUpDao.delete(pressUp)
+    public Completable deleteLastProgram(Program program) {
+        return mProgramDao.delete(program)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
     public Completable deleteAllProgress() {
-        return mPressUpDao.deleteAll()
+        return mProgramDao.deleteAll()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

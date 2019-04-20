@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.starttraining.viewmodel;
 
-import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
 
 import androidx.databinding.ObservableField;
@@ -12,11 +12,11 @@ import androidx.databinding.ObservableField;
  */
 public interface StartTrainingViewModel {
 
-    void setRouter(StartTrainingRouter startTrainingRouter);
+    void setCurrentRouter(StartTrainingRouter startTrainingRouter);
 
-    ObservableField<PressUp> getPressUp();
+    ObservableField<Program> getProgram();
 
-    ObservableField<Integer> getFinalQuantityRepetition();
+    ObservableField<Integer> getSumRepetitions();
 
     void onClickStartTrainingButton();
 

@@ -49,26 +49,26 @@ public class StartTrainingFragment extends Fragment {
         binding.setViewModel(mStartTrainingViewModel);
         ExclamationDialog exclamationDialog = new ExclamationDialog();
         exclamationDialog.show(getFragmentManager(), "TAG");
-        mStartTrainingViewModel.setRouter(mStartTrainingRouter);
+        mStartTrainingViewModel.setCurrentRouter(mStartTrainingRouter);
         return binding.getRoot();
     }
 
 
-    public void goToTraining() {
+    public void setTraining() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, TrainingFragment.newInstance())
                 .commit();
     }
 
-    public void goToTrainingList() {
+    public void setTrainingList() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, TrainingListFragment.newInstance())
                 .commit();
     }
 
-    public void goToSettings() {
+    public void setSettings() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SettingsFragment.newInstance())

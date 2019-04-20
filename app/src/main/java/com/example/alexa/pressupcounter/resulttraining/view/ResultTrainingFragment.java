@@ -45,11 +45,11 @@ public class ResultTrainingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentResultTrainingBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_result_training, container, false);
         binding.setViewModel(mResultTrainingViewModel);
-        mResultTrainingViewModel.setRouter(mResultTrainingRouter);
+        mResultTrainingViewModel.setCurrentRouter(mResultTrainingRouter);
         return binding.getRoot();
     }
 
-    public void goToStartTraining() {
+    public void setStartTraining() {
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())

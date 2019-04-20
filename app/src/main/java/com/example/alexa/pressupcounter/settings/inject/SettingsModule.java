@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.settings.inject;
 
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 import com.example.alexa.pressupcounter.settings.interactor.SettingsInteractor;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouter;
 import com.example.alexa.pressupcounter.settings.router.SettingsRouterImpl;
@@ -23,8 +23,8 @@ public class SettingsModule {
 
     @SettingsScope
     @Provides
-    SettingsInteractor provideSettingsInteractor(PressUpDao pressUpDao) {
-        return new SettingsInteractor(pressUpDao);
+    SettingsInteractor provideSettingsInteractor(ProgramDao programDao) {
+        return new SettingsInteractor(programDao);
     }
 
     @SettingsScope

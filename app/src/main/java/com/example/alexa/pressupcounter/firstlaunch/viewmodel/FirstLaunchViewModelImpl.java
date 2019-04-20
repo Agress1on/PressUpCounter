@@ -19,11 +19,10 @@ public class FirstLaunchViewModelImpl extends ViewModel implements FirstLaunchVi
     @Inject
     public FirstLaunchViewModelImpl(FirstLaunchRouter firstLaunchRouter) {
         mFirstLaunchRouter = firstLaunchRouter;
-        Logger.d("FirstLaunchViewModelImpl", "create");
     }
 
     @Override
-    public void setNewRouter(FirstLaunchRouter firstLaunchRouter) {
+    public void setCurrentRouter(FirstLaunchRouter firstLaunchRouter) {
         mFirstLaunchRouter = firstLaunchRouter;
     }
 

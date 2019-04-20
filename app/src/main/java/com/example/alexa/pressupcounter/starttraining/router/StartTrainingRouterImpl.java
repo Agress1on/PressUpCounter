@@ -17,13 +17,13 @@ public class StartTrainingRouterImpl implements StartTrainingRouter {
 
     public StartTrainingRouterImpl(StartTrainingFragment fragment) {
         mGoToTrainingEvent = new SingleLiveEvent<>();
-        mGoToTrainingEvent.observe(fragment, fragmentEvent -> fragment.goToTraining());
+        mGoToTrainingEvent.observe(fragment, fragmentEvent -> fragment.setTraining());
 
         mGoToTrainingListEvent = new SingleLiveEvent<>();
-        mGoToTrainingListEvent.observe(fragment, fragmentEvent -> fragment.goToTrainingList());
+        mGoToTrainingListEvent.observe(fragment, fragmentEvent -> fragment.setTrainingList());
 
         mGoToSettingsEvent = new SingleLiveEvent<>();
-        mGoToSettingsEvent.observe(fragment, fragmentEvent -> fragment.goToSettings());
+        mGoToSettingsEvent.observe(fragment, fragmentEvent -> fragment.setSettings());
     }
 
 

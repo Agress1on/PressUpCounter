@@ -13,7 +13,7 @@ public interface MainViewModel {
 
     void onFirstLaunch();
 
-    void setRouter(MainRouter mainRouter);
+    void setCurrentRouter(MainRouter mainRouter);
 
-    ObservableField<Boolean> isVisibleFrame();
+    ObservableField<Boolean> isVisibleContainer();
 }

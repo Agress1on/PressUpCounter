@@ -15,11 +15,11 @@ public class ResultTrainingRouterImpl implements ResultTrainingRouter {
 
     public ResultTrainingRouterImpl(ResultTrainingFragment fragment) {
         mGoToStartTrainingEvent = new SingleLiveEvent<>();
-        mGoToStartTrainingEvent.observe(fragment, fragmentEvent -> fragment.goToStartTraining());
+        mGoToStartTrainingEvent.observe(fragment, fragmentEvent -> fragment.setStartTraining());
     }
 
     @Override
-    public void goToStartTrainingFragment() {
+    public void goToStartTraining() {
         mGoToStartTrainingEvent.postValue(new FragmentEvent());
     }
 }

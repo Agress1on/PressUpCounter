@@ -1,6 +1,6 @@
 package com.example.alexa.pressupcounter.starttraining.inject;
 
-import com.example.alexa.pressupcounter.data.PressUpDao;
+import com.example.alexa.pressupcounter.data.ProgramDao;
 import com.example.alexa.pressupcounter.starttraining.interactor.StartTrainingInteractor;
 import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouter;
 import com.example.alexa.pressupcounter.starttraining.router.StartTrainingRouterImpl;
@@ -23,8 +23,8 @@ public class StartTrainingModule {
 
     @StartTrainingScope
     @Provides
-    StartTrainingInteractor provideStartTrainingInteractor(PressUpDao pressUpDao) {
-        return new StartTrainingInteractor(pressUpDao);
+    StartTrainingInteractor provideStartTrainingInteractor(ProgramDao programDao) {
+        return new StartTrainingInteractor(programDao);
     }
 
     @StartTrainingScope

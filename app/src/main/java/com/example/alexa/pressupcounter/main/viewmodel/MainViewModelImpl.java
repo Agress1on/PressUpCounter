@@ -19,7 +19,7 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
     private MainInteractor mMainInteractor;
     private MainRouter mMainRouter;
 
-    private ObservableField<Boolean> mVisibleFrame;
+    private ObservableField<Boolean> mVisibleContainer;
     private CompositeDisposable mCompositeDisposable;
 
     private boolean mIsExistDatabase;
@@ -29,7 +29,7 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
         mMainInteractor = mainInteractor;
         mMainRouter = mainRouter;
 
-        mVisibleFrame = new ObservableField<>(false);
+        mVisibleContainer = new ObservableField<>(false);
         mCompositeDisposable = new CompositeDisposable();
 
         Disposable disposable = mMainInteractor.isExistDataBase()
@@ -37,7 +37,7 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
                     mIsExistDatabase = aBoolean;
                     if (!mIsExistDatabase && !mIsFirstLaunch) mMainRouter.goToSetProgram();
                     if (mIsExistDatabase) mMainRouter.goToStartTraining();
-                    mVisibleFrame.set(true);
+                    mVisibleContainer.set(true);
                 });
         mCompositeDisposable.add(disposable);
     }
@@ -55,12 +55,12 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
     }
 
     @Override
-    public void setRouter(MainRouter mainRouter) {
+    public void setCurrentRouter(MainRouter mainRouter) {
         mMainRouter = mainRouter;
     }
 
     @Override
-    public ObservableField<Boolean> isVisibleFrame() {
-        return mVisibleFrame;
+    public ObservableField<Boolean> isVisibleContainer() {
+        return mVisibleContainer;
     }
 }

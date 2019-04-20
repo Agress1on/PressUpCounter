@@ -7,7 +7,5 @@ package com.example.alexa.pressupcounter.firstlaunch.router;
  */
 public interface FirstLaunchRouter {
 
-    void setSubscription();
-
     void goToSetProgram();
 }

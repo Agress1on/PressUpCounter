@@ -14,7 +14,7 @@ import androidx.databinding.ObservableField;
  */
 public interface SetTimeViewModel {
 
-    void setRouter(SetTimeRouter setTimeRouter);
+    void setCurrentRouter(SetTimeRouter setTimeRouter);
 
     List<ObservableField<String>> getListTime();
 

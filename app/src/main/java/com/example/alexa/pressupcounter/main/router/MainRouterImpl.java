@@ -17,13 +17,13 @@ public class MainRouterImpl implements MainRouter {
 
     public MainRouterImpl(MainActivity activity) {
         mGoToFirstLaunch = new SingleLiveEvent<>();
-        mGoToFirstLaunch.observe(activity, fragmentEvent -> activity.goToFirstLaunch());
+        mGoToFirstLaunch.observe(activity, fragmentEvent -> activity.setFirstLaunch());
 
         mGoToSetProgram = new SingleLiveEvent<>();
-        mGoToSetProgram.observe(activity, fragmentEvent -> activity.goToSetProgram());
+        mGoToSetProgram.observe(activity, fragmentEvent -> activity.setSetProgram());
 
         mGoToStartTraining = new SingleLiveEvent<>();
-        mGoToStartTraining.observe(activity, fragmentEvent -> activity.goToStartTraining());
+        mGoToStartTraining.observe(activity, fragmentEvent -> activity.setStartTraining());
     }
 
     @Override

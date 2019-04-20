@@ -17,7 +17,7 @@ public class SetProgramRouterImpl implements SetProgramRouter {
 
     public SetProgramRouterImpl(SetProgramFragment fragment) {
         mGoToStart = new SingleLiveEvent<>();
-        mGoToStart.observe(fragment, fragmentEvent -> fragment.goToStartFragment());
+        mGoToStart.observe(fragment, fragmentEvent -> fragment.setStartTraining());
 
         mShowErrorDialog = new SingleLiveEvent<>();
         mShowErrorDialog.observe(fragment, dialogEvent -> fragment.showErrorDialog());

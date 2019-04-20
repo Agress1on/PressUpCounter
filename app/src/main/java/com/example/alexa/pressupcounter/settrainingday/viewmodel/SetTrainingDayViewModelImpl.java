@@ -38,7 +38,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     }
 
     @Override
-    public void setRouter(SetTrainingDayRouter setTrainingDayRouter) {
+    public void setCurrentRouter(SetTrainingDayRouter setTrainingDayRouter) {
         mSetTrainingDayRouter = setTrainingDayRouter;
     }
 
@@ -64,7 +64,7 @@ public class SetTrainingDayViewModelImpl extends ViewModel implements SetTrainin
     }
 
     @Override
-    public void onCheckButton() {
+    public void onClickCheckButton() {
         writeIndexDayOfWeekInList();
         mSetTrainingDayRouter.goToSetTime();
     }

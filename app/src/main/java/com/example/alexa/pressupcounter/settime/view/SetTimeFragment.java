@@ -50,8 +50,15 @@ public class SetTimeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         FragmentSetTimeBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_set_time, container, false);
         binding.setViewModel(mSetTimeViewModel);
-        mSetTimeViewModel.setRouter(mSetTimeRouter);
+        mSetTimeViewModel.setCurrentRouter(mSetTimeRouter);
         return binding.getRoot();
+    }
+
+    public void setStartTraining() {
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
+                .commit();
     }
 
     public void showTimePickerDialog(TimePickerEvent.DayNotification dayNotification) {
@@ -59,13 +66,6 @@ public class SetTimeFragment extends Fragment {
         timePickerDialog.setSetTimeListener((hourOfDay, minute)
                 -> mSetTimeViewModel.setDayTime(dayNotification, hourOfDay, minute));
         timePickerDialog.show(getChildFragmentManager(), "TAG");
-    }
-
-    public void goToStartTraining() {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.fragment_container, StartTrainingFragment.newInstance())
-                .commit();
     }
 
     public static SetTimeFragment newInstance(List<Integer> indexList) {

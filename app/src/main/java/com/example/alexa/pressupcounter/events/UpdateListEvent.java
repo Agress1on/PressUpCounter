@@ -5,5 +5,5 @@ package com.example.alexa.pressupcounter.events;
  *
  * @author Alexandr Mikhalev
  */
-public class EventForUpdateList {
+public class UpdateListEvent {
 }

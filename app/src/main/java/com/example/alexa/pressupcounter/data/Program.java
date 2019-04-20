@@ -12,7 +12,7 @@ import androidx.room.TypeConverters;
  * @author Alexandr Mikhalev
  */
 @Entity
-public class PressUp {
+public class Program {
 
     @PrimaryKey
     private long id;
@@ -27,7 +27,7 @@ public class PressUp {
     @TypeConverters(RepetitionsConverter.class)
     private List<Integer> mRepetitions;
 
-    public PressUp(long id, List<Integer> repetitions) {
+    public Program(long id, List<Integer> repetitions) {
         this.id = id;
         mRepetitions = repetitions;
         /*

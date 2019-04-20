@@ -6,17 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.alexa.pressupcounter.Constants;
-import com.example.alexa.pressupcounter.Logger;
-import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.databinding.FragmentContainerForTabsBinding;
-import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
-import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
-import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
-import com.google.android.material.tabs.TabLayout;
-
-import javax.inject.Inject;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -25,6 +14,17 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+
+import com.example.alexa.pressupcounter.Constants;
+import com.example.alexa.pressupcounter.R;
+import com.example.alexa.pressupcounter.databinding.FragmentFirstLaunchBinding;
+import com.example.alexa.pressupcounter.firstlaunch.router.FirstLaunchRouter;
+import com.example.alexa.pressupcounter.firstlaunch.viewmodel.FirstLaunchViewModel;
+import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
+import com.google.android.material.tabs.TabLayout;
+
+import javax.inject.Inject;
+
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -51,24 +51,25 @@ public class FirstLaunchFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        FragmentContainerForTabsBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_container_for_tabs, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        FragmentFirstLaunchBinding binding = DataBindingUtil
+                .inflate(inflater, R.layout.fragment_first_launch, container, false);
         binding.setViewModel(mFirstLaunchViewModel);
-        Logger.d("FirstLaunchFragment", mFirstLaunchViewModel.toString());
+
         mPager = binding.pager;
         mPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         mPager.setAdapter(mPagerAdapter);
-
         mTabLayout = binding.tabLayout;
         mTabLayout.setupWithViewPager(mPager, true);
-        mFirstLaunchViewModel.setNewRouter(mFirstLaunchRouter);
+
+        mFirstLaunchViewModel.setCurrentRouter(mFirstLaunchRouter);
         return binding.getRoot();
     }
 
-    public void goToSetProgram() {
+    public void setSetProgram() {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.fragment_container, SetProgramFragment.newInstance())
+                .add(R.id.fragment_container, SetProgramFragment.newInstance())
                 .commit();
     }
 

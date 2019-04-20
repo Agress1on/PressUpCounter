@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
-import com.example.alexa.pressupcounter.Logger;
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.ActivityMainBinding;
 import com.example.alexa.pressupcounter.firstlaunch.view.FirstLaunchFragment;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(mMainViewModel);
-        mMainViewModel.setRouter(mMainRouter);
+        mMainViewModel.setCurrentRouter(mMainRouter);
         mSharedPreferences = getSharedPreferences(LAUNCH_SETTINGS, Context.MODE_PRIVATE);
         boolean hasVisited = mSharedPreferences.getBoolean(HAS_VISITED, false);
 
@@ -78,19 +77,19 @@ public class MainActivity extends AppCompatActivity {
         */
     }
 
-    public void goToFirstLaunch() {
+    public void setFirstLaunch() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, FirstLaunchFragment.newInstance())
                 .commit();
     }
 
-    public void goToSetProgram() {
+    public void setSetProgram() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, SetProgramFragment.newInstance())
                 .commit();
     }
 
-    public void goToStartTraining() {
+    public void setStartTraining() {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, StartTrainingFragment.newInstance())
                 .commit();

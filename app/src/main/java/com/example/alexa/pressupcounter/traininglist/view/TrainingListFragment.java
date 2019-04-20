@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alexa.pressupcounter.R;
-import com.example.alexa.pressupcounter.data.PressUp;
+import com.example.alexa.pressupcounter.data.Program;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingListBinding;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
 import com.example.alexa.pressupcounter.traininglist.router.TrainingListRouter;
@@ -41,7 +41,7 @@ public class TrainingListFragment extends Fragment {
     TrainingListRouter mTrainingListRouter;
 
     private RecyclerView mRecyclerView;
-    private PressUpAdapter mPressUpAdapter;
+    private TrainingListAdapter mTrainingListAdapter;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -65,24 +65,24 @@ public class TrainingListFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mPressUpAdapter = new PressUpAdapter();
+        mTrainingListAdapter = new TrainingListAdapter();
 
-        mRecyclerView.setAdapter(mPressUpAdapter);
-        mPressUpAdapter.setData(mTrainingListViewModel.getPressUpList());
-        mTrainingListViewModel.setRouter(mTrainingListRouter);
+        mRecyclerView.setAdapter(mTrainingListAdapter);
+        mTrainingListAdapter.setData(mTrainingListViewModel.getProgramList());
+        mTrainingListViewModel.setCurrentRouter(mTrainingListRouter);
         return binding.getRoot();
     }
 
     private void init() {
         mTrainingListViewModel.getEventForUpdateList()
-                .observe(this, eventForUpdateList -> updateAdapter(mTrainingListViewModel.getPressUpList()));
+                .observe(this, eventForUpdateList -> updateAdapter(mTrainingListViewModel.getProgramList()));
     }
 
-    private void updateAdapter(List<PressUp> newList) {
-        DiffUtilTrainingList diffUtilTrainingList = new DiffUtilTrainingList(mPressUpAdapter.getData(), newList);
+    private void updateAdapter(List<Program> newList) {
+        DiffUtilTrainingList diffUtilTrainingList = new DiffUtilTrainingList(mTrainingListAdapter.getData(), newList);
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffUtilTrainingList);
-        mPressUpAdapter.setData(newList);
-        diffResult.dispatchUpdatesTo(mPressUpAdapter);
+        mTrainingListAdapter.setData(newList);
+        diffResult.dispatchUpdatesTo(mTrainingListAdapter);
     }
 
     public void goToStartTraining() {

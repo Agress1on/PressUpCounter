@@ -21,7 +21,7 @@ public class SetTimeRouterImpl implements SetTimeRouter {
     public SetTimeRouterImpl(SetTimeFragment fragment) {
         mGoToStartTrainingEvent = new SingleLiveEvent<>();
         mGoToStartTrainingEvent.observe(fragment, fragmentEvent
-                -> fragment.goToStartTraining());
+                -> fragment.setStartTraining());
 
         mTimePickerEventForFirstDay = new SingleLiveEvent<>();
         mTimePickerEventForFirstDay.observe(fragment, timePickerEvent

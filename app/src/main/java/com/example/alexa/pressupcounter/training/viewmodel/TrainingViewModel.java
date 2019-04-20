@@ -15,9 +15,9 @@ public interface TrainingViewModel {
 
     ObservableField<Integer> getRepetition();
 
-    ObservableField<String> getQuantityOfRepetitionOrRestTime();
+    ObservableField<String> getCounter();
 
-    ObservableField<String> getTextForTrainingOrRest();
+    ObservableField<String> getTitle();
 
     ObservableField<Boolean> getStateOfRestButton();
 
