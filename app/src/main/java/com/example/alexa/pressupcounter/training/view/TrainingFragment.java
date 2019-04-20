@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.training.view;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
