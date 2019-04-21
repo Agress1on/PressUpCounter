@@ -64,6 +64,7 @@
     <string name="for_add_additional_time">+30 секунд</string>
     <string name="for_yes">Да</string>
     <string name="for_no">Нет</string>
+    <string name="for_dialog_back_pressed">Вы действительно хотите выйти? Прогресс будет потерян!</string>
 
     <!--
     Dynamic text

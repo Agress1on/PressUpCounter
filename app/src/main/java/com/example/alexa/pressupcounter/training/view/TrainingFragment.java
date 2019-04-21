@@ -16,12 +16,14 @@ import androidx.fragment.app.Fragment;
 
 import com.example.alexa.pressupcounter.R;
 import com.example.alexa.pressupcounter.databinding.FragmentTrainingBinding;
+import com.example.alexa.pressupcounter.dialogs.BackPressedDialog;
 import com.example.alexa.pressupcounter.dialogs.ErrorDialog;
 import com.example.alexa.pressupcounter.dialogs.FinishTrainingDialog;
 import com.example.alexa.pressupcounter.dialogs.TrainingRestDialog;
 import com.example.alexa.pressupcounter.dialogs.TrainingRestOffDialog;
 import com.example.alexa.pressupcounter.events.TrainingTitleSetEvent;
 import com.example.alexa.pressupcounter.resulttraining.view.ResultTrainingFragment;
+import com.example.alexa.pressupcounter.training.IOnBackPressed;
 import com.example.alexa.pressupcounter.training.router.TrainingRouter;
 import com.example.alexa.pressupcounter.training.viewmodel.TrainingViewModel;
 
@@ -38,7 +40,7 @@ public class TrainingFragment extends Fragment
         implements TrainingRestDialog.OnButtonDialogRestClickListener,
         TrainingRestOffDialog.OnButtonDialogRestOffClickListener,
         FinishTrainingDialog.OnButtonClickDialogFinishTraining,
-        SoundPool.OnLoadCompleteListener {
+        SoundPool.OnLoadCompleteListener, IOnBackPressed, BackPressedDialog.OnClickBackPressedDialog {
 
     private static final String TAG_FOR_DIALOG_TRAINING_REST = "TAG_FOR_DIALOG_TRAINING_REST";
     private static final String TAG_FOR_DIALOG_TRAINING_REST_OFF = "TAG_FOR_DIALOG_TRAINING_REST_OFF";
@@ -186,7 +188,6 @@ public class TrainingFragment extends Fragment
 
     private void setResultTraining(boolean resultTraining) {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .addToBackStack(null)
                 .replace(R.id.fragment_container, ResultTrainingFragment.newInstance(resultTraining))
                 .commit();
     }
@@ -194,5 +195,23 @@ public class TrainingFragment extends Fragment
     @Override
     public void onLoadComplete(SoundPool soundPool, int i, int i1) {
 
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        BackPressedDialog backPressedDialog = new BackPressedDialog();
+        backPressedDialog.show(getChildFragmentManager(), "TAG");
+        return true;
+    }
+
+    @Override
+    public void onPositiveButtonBackPressedDialog(BackPressedDialog backPressedDialog) {
+        backPressedDialog.dismiss();
+    }
+
+    @Override
+    public void onNegativeButtonBackPressedDialog(BackPressedDialog backPressedDialog) {
+        getActivity().getSupportFragmentManager().popBackStack();
+        backPressedDialog.dismiss();
     }
 }

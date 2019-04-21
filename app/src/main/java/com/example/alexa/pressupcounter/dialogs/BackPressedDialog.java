@@ -10,19 +10,20 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.alexa.pressupcounter.R;
 
 /**
- * Created by Alexandr Mikhalev on 06.02.2019.
+ * Created by Alexandr Mikhalev on 21.04.2019.
  *
  * @author Alexandr Mikhalev
  */
-public class FinishTrainingDialog extends DialogFragment implements View.OnClickListener {
+public class BackPressedDialog extends DialogFragment implements View.OnClickListener {
 
-    private OnButtonClickDialogFinishTraining mOnButtonClickDialogFinishTraining;
+    private OnClickBackPressedDialog mOnClickBackPressedDialog;
     private TextView mPositiveButton;
     private TextView mNegativeButton;
     private TextView mQuestion;
@@ -30,21 +31,21 @@ public class FinishTrainingDialog extends DialogFragment implements View.OnClick
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mOnButtonClickDialogFinishTraining = (OnButtonClickDialogFinishTraining) getParentFragment();
+        mOnClickBackPressedDialog = (OnClickBackPressedDialog) getParentFragment();
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        View view = inflater.inflate(R.layout.dialog_finish_training, container, false);
+        View view = inflater.inflate(R.layout.dialog_back_pressed, container, false);
         mPositiveButton = (TextView) view.findViewById(R.id.positive_button);
         mNegativeButton = (TextView) view.findViewById(R.id.negative_button);
         mQuestion = (TextView) view.findViewById(R.id.attention_header);
 
         mPositiveButton.setOnClickListener(this);
         mNegativeButton.setOnClickListener(this);
-        mQuestion.setText(getResources().getString(R.string.for_dialog_finish_training));
+        mQuestion.setText(getResources().getString(R.string.for_dialog_back_pressed));
         return view;
     }
 
@@ -64,25 +65,26 @@ public class FinishTrainingDialog extends DialogFragment implements View.OnClick
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.positive_button:
-                mOnButtonClickDialogFinishTraining.onPositiveButtonDialogFinishTraining(this);
+                mOnClickBackPressedDialog.onPositiveButtonBackPressedDialog(this);
                 break;
             case R.id.negative_button:
-                mOnButtonClickDialogFinishTraining.onNegativeButtonDialogFinishTraining(this);
+                mOnClickBackPressedDialog.onNegativeButtonBackPressedDialog(this);
                 break;
         }
     }
 
     @Override
-    public void onCancel(DialogInterface dialog) {
-        mOnButtonClickDialogFinishTraining.onNegativeButtonDialogFinishTraining(this);
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+        mOnClickBackPressedDialog.onPositiveButtonBackPressedDialog(this);
     }
 
-    public interface OnButtonClickDialogFinishTraining {
-        void onPositiveButtonDialogFinishTraining(FinishTrainingDialog finishTrainingDialog);
+    public interface OnClickBackPressedDialog {
+        void onPositiveButtonBackPressedDialog(BackPressedDialog backPressedDialog);
 
-        void onNegativeButtonDialogFinishTraining(FinishTrainingDialog finishTrainingDialog);
+        void onNegativeButtonBackPressedDialog(BackPressedDialog backPressedDialog);
     }
 }

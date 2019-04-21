@@ -16,6 +16,7 @@ import com.example.alexa.pressupcounter.main.router.MainRouter;
 import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
 import com.example.alexa.pressupcounter.setprogram.view.SetProgramFragment;
 import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment;
+import com.example.alexa.pressupcounter.training.IOnBackPressed;
 
 import javax.inject.Inject;
 
@@ -93,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, StartTrainingFragment.newInstance())
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        if (!(fragment instanceof IOnBackPressed) || !((IOnBackPressed) fragment).onBackPressed()) {
+            super.onBackPressed();
+        }
     }
 
     public static Intent getIntent(Context context) {
