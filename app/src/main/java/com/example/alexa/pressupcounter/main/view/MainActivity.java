@@ -2,7 +2,6 @@ package com.example.alexa.pressupcounter.main.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     MainRouter mMainRouter;
 
-    private SharedPreferences mSharedPreferences;
-
     private static final String LAUNCH_SETTINGS = "launch";
     private static final String HAS_VISITED = "has_visited";
 
@@ -42,18 +39,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setViewModel(mMainViewModel);
         mMainViewModel.setCurrentRouter(mMainRouter);
-        mSharedPreferences = getSharedPreferences(LAUNCH_SETTINGS, Context.MODE_PRIVATE);
-        boolean hasVisited = mSharedPreferences.getBoolean(HAS_VISITED, false);
 
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
-        if (fragment == null) {
-            if (!hasVisited) {
-                mMainViewModel.onFirstLaunch();
-                SharedPreferences.Editor editor = mSharedPreferences.edit();
-                editor.putBoolean(HAS_VISITED, true);
-                editor.apply();
-            }
-        }
         // JSON example
         /*
         try {
@@ -80,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void setFirstLaunch() {
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, FirstLaunchFragment.newInstance())
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, FirstLaunchFragment.newInstance())
                 .commit();
     }
 

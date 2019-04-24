@@ -10,6 +10,7 @@ import com.example.alexa.pressupcounter.main.view.MainActivity;
 import com.example.alexa.pressupcounter.main.viewmodel.MainFactory;
 import com.example.alexa.pressupcounter.main.viewmodel.MainViewModel;
 import com.example.alexa.pressupcounter.main.viewmodel.MainViewModelImpl;
+import com.example.alexa.pressupcounter.preferences.Preferences;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,8 +25,8 @@ public class MainModule {
 
     @Provides
     @MainScope
-    MainInteractor provideMainInteractor(ProgramDao programDao) {
-        return new MainInteractor(programDao);
+    MainInteractor provideMainInteractor(ProgramDao programDao, Preferences preferences) {
+        return new MainInteractor(programDao, preferences);
     }
 
 

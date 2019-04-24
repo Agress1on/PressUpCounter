@@ -58,7 +58,7 @@ public class FirstLaunchFragment extends Fragment {
         binding.setViewModel(mFirstLaunchViewModel);
 
         mPager = binding.pager;
-        mPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
+        mPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager());
         mPager.setAdapter(mPagerAdapter);
         mTabLayout = binding.tabLayout;
         mTabLayout.setupWithViewPager(mPager, true);
@@ -69,7 +69,8 @@ public class FirstLaunchFragment extends Fragment {
 
     public void setSetProgram() {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, SetProgramFragment.newInstance())
+                .addToBackStack(null)
+                .replace(R.id.fragment_container, SetProgramFragment.newInstance())
                 .commit();
     }
 

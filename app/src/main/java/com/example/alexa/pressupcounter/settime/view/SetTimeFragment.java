@@ -31,7 +31,7 @@ import dagger.android.support.AndroidSupportInjection;
  *
  * @author Alexandr Mikhalev
  */
-public class SetTimeFragment extends Fragment {
+public class SetTimeFragment extends Fragment implements TimePickerDialog.SetTimeListener {
 
     @Inject
     SetTimeViewModel mSetTimeViewModel;
@@ -62,10 +62,15 @@ public class SetTimeFragment extends Fragment {
     }
 
     public void showTimePickerDialog(TimePickerEvent.DayNotification dayNotification) {
-        TimePickerDialog timePickerDialog = new TimePickerDialog();
-        timePickerDialog.setSetTimeListener((hourOfDay, minute)
-                -> mSetTimeViewModel.setDayTime(dayNotification, hourOfDay, minute));
+        TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(dayNotification);
+//        timePickerDialog.setSetTimeListener((hourOfDay, minute)
+//                -> mSetTimeViewModel.setDayTime(dayNotification, hourOfDay, minute));
         timePickerDialog.show(getChildFragmentManager(), "TAG");
+    }
+
+    @Override
+    public void setTime(TimePickerEvent.DayNotification dayNotification, int hourOfDay, int minute) {
+        mSetTimeViewModel.setDayTime(dayNotification, hourOfDay, minute);
     }
 
     public static SetTimeFragment newInstance(List<Integer> indexList) {

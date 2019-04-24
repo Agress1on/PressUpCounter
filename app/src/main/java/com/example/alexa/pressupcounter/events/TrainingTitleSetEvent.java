@@ -1,5 +1,7 @@
 package com.example.alexa.pressupcounter.events;
 
+import com.example.alexa.pressupcounter.R;
+
 /**
  * Created by Alexandr Mikhalev on 20.04.2019.
  *
@@ -18,7 +20,17 @@ public class TrainingTitleSetEvent {
     }
 
     public enum TitleText {
-        TEXT_FOR_TRAINING,
-        TEXT_FOR_REST
+        TEXT_FOR_TRAINING(R.string.for_training_title_rest),
+        TEXT_FOR_REST(R.string.for_training_title_training);
+
+        private int text;
+
+        TitleText(int text) {
+            this.text = text;
+        }
+
+        public int getText() {
+            return text;
+        }
     }
 }

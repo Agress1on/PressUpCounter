@@ -104,15 +104,7 @@ public class TrainingFragment extends Fragment
     }
 
     public void setTitleText(TrainingTitleSetEvent.TitleText titleText) {
-        String text = "";
-        switch (titleText) {
-            case TEXT_FOR_REST:
-                text = getString(R.string.for_training_title_rest);
-                break;
-            case TEXT_FOR_TRAINING:
-                text = getString(R.string.for_training_title_training);
-                break;
-        }
+        String text = getString(titleText.getText());
         mFragmentTrainingBinding.title.setText(text);
     }
 

@@ -11,8 +11,6 @@ import com.example.alexa.pressupcounter.main.router.MainRouter;
  */
 public interface MainViewModel {
 
-    void onFirstLaunch();
-
     void setCurrentRouter(MainRouter mainRouter);
 
     ObservableField<Boolean> isVisibleContainer();

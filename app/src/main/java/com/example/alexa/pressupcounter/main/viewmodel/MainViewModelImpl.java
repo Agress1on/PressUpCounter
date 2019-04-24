@@ -32,6 +32,18 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
         mVisibleContainer = new ObservableField<>(false);
         mCompositeDisposable = new CompositeDisposable();
 
+        init();
+    }
+
+    private void init() {
+        Disposable isVisitedDisposable = mMainInteractor.isVisited()
+                .filter((isVisited) -> !isVisited)
+                .subscribe((isVisited) -> {
+                    setVisited();
+                    mMainRouter.goToFirstLaunch();
+                    mIsFirstLaunch = true;
+                });
+
         Disposable disposable = mMainInteractor.isExistDataBase()
                 .subscribe(aBoolean -> {
                     mIsExistDatabase = aBoolean;
@@ -39,6 +51,11 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
                     if (mIsExistDatabase) mMainRouter.goToStartTraining();
                     mVisibleContainer.set(true);
                 });
+        mCompositeDisposable.addAll(disposable, isVisitedDisposable);
+    }
+
+    private void setVisited() {
+        Disposable disposable = mMainInteractor.setVisited(true).subscribe();
         mCompositeDisposable.add(disposable);
     }
 
@@ -46,12 +63,6 @@ public class MainViewModelImpl extends ViewModel implements MainViewModel {
     protected void onCleared() {
         super.onCleared();
         mCompositeDisposable.clear();
-    }
-
-    @Override
-    public void onFirstLaunch() {
-        mMainRouter.goToFirstLaunch();
-        mIsFirstLaunch = true;
     }
 
     @Override

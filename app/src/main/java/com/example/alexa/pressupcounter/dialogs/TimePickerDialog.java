@@ -1,6 +1,7 @@
 package com.example.alexa.pressupcounter.dialogs;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.alexa.pressupcounter.events.TimePickerEvent;
+
 /**
  * Created by Alexandr Mikhalev on 18.03.2019.
  *
@@ -19,9 +22,20 @@ import androidx.fragment.app.DialogFragment;
 public class TimePickerDialog extends DialogFragment implements android.app.TimePickerDialog.OnTimeSetListener {
 
     private SetTimeListener mSetTimeListener;
+    private TimePickerEvent.DayNotification dayNotification;
 
-    public void setSetTimeListener(SetTimeListener setTimeListener) {
-        mSetTimeListener = setTimeListener;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (getParentFragment() instanceof SetTimeListener) {
+            mSetTimeListener = (SetTimeListener) getParentFragment();
+        }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        dayNotification = (TimePickerEvent.DayNotification) getArguments().getSerializable("day");
     }
 
     @NonNull
@@ -35,10 +49,19 @@ public class TimePickerDialog extends DialogFragment implements android.app.Time
 
     @Override
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
-        mSetTimeListener.setTime(i, i1);
+        if (mSetTimeListener == null) return;
+        mSetTimeListener.setTime(dayNotification, i, i1);
+    }
+
+    public static TimePickerDialog newInstance(TimePickerEvent.DayNotification dayNotification) {
+        Bundle args = new Bundle();
+        args.putSerializable("day", dayNotification);
+        TimePickerDialog fragment = new TimePickerDialog();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public interface SetTimeListener {
-        void setTime(int hourOfDay, int minute);
+        void setTime(TimePickerEvent.DayNotification dayNotification, int hourOfDay, int minute);
     }
 }
