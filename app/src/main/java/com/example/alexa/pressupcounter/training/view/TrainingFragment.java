@@ -203,6 +203,7 @@ public class TrainingFragment extends Fragment
 
     @Override
     public void onNegativeButtonBackPressedDialog(BackPressedDialog backPressedDialog) {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().popBackStack();
         backPressedDialog.dismiss();
     }

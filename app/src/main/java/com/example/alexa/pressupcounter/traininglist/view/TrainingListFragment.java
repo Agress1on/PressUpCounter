@@ -86,6 +86,7 @@ public class TrainingListFragment extends Fragment {
     }
 
     public void goToStartTraining() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())

@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
     @Inject
     MainRouter mMainRouter;
 
-    private static final String LAUNCH_SETTINGS = "launch";
-    private static final String HAS_VISITED = "has_visited";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);

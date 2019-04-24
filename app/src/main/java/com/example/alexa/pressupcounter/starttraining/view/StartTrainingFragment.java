@@ -74,6 +74,7 @@ public class StartTrainingFragment extends Fragment {
     }
 
     public void setTraining() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, TrainingFragment.newInstance())
@@ -81,6 +82,7 @@ public class StartTrainingFragment extends Fragment {
     }
 
     public void setTrainingList() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, TrainingListFragment.newInstance())
@@ -88,6 +90,7 @@ public class StartTrainingFragment extends Fragment {
     }
 
     public void setSettings() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SettingsFragment.newInstance())

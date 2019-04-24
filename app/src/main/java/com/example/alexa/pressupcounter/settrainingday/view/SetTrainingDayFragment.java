@@ -49,6 +49,7 @@ public class SetTrainingDayFragment extends Fragment {
     }
 
     public void setSetTime() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetTimeFragment.newInstance(mSetTrainingDayViewModel.getDaysIndexList()))

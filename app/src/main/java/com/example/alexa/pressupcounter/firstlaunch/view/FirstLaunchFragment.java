@@ -39,10 +39,6 @@ public class FirstLaunchFragment extends Fragment {
     @Inject
     FirstLaunchRouter mFirstLaunchRouter;
 
-    private ViewPager mPager;
-    private PagerAdapter mPagerAdapter;
-    private TabLayout mTabLayout;
-
     @Override
     public void onAttach(@NonNull Context context) {
         AndroidSupportInjection.inject(this);
@@ -57,17 +53,18 @@ public class FirstLaunchFragment extends Fragment {
                 .inflate(inflater, R.layout.fragment_first_launch, container, false);
         binding.setViewModel(mFirstLaunchViewModel);
 
-        mPager = binding.pager;
-        mPagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
-        mTabLayout = binding.tabLayout;
-        mTabLayout.setupWithViewPager(mPager, true);
+        ViewPager pager = binding.pager;
+        PagerAdapter pagerAdapter = new MyFragmentPagerAdapter(getChildFragmentManager());
+        pager.setAdapter(pagerAdapter);
+        TabLayout tabLayout = binding.tabLayout;
+        tabLayout.setupWithViewPager(pager, true);
 
         mFirstLaunchViewModel.setCurrentRouter(mFirstLaunchRouter);
         return binding.getRoot();
     }
 
     public void setSetProgram() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetProgramFragment.newInstance())

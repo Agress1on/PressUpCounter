@@ -53,6 +53,7 @@ public class SetProgramFragment extends Fragment {
     }
 
     public void setStartTraining() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())

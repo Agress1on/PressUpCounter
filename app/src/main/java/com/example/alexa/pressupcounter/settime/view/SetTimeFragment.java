@@ -55,6 +55,7 @@ public class SetTimeFragment extends Fragment implements TimePickerDialog.SetTim
     }
 
     public void setStartTraining() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, StartTrainingFragment.newInstance())

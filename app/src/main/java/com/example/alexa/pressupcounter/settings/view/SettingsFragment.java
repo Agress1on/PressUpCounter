@@ -55,6 +55,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public void setSetTrainingDay() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetTrainingDayFragment.newInstance())
@@ -62,6 +63,7 @@ public class SettingsFragment extends Fragment {
     }
 
     public void setSetProgram() {
+        if (getActivity() == null) return;
         getActivity().getSupportFragmentManager().beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.fragment_container, SetProgramFragment.newInstance())
