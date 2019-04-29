@@ -1,10 +1,16 @@
 package com.example.alexa.pressupcounter.resulttraining.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
 
 import com.example.alexa.pressupcounter.Constants;
 import com.example.alexa.pressupcounter.R;
@@ -15,10 +21,6 @@ import com.example.alexa.pressupcounter.starttraining.view.StartTrainingFragment
 
 import javax.inject.Inject;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
@@ -42,6 +44,12 @@ public class ResultTrainingFragment extends Fragment {
         super.onAttach(context);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mResultTrainingViewModel.onCreate();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,6 +64,8 @@ public class ResultTrainingFragment extends Fragment {
         mResultTrainingViewModel.getSetTextEvent()
                 .observe(this, resultTrainingSetTextEvent
                         -> setText(resultTrainingSetTextEvent.isResult()));
+
+        mResultTrainingViewModel.getSetResultLogoEvent().observe(this, setResultLogoEvent -> setLogo(setResultLogoEvent.getResultLogo().getLogoId()));
     }
 
     private void setText(boolean isSuccess) {
@@ -63,6 +73,15 @@ public class ResultTrainingFragment extends Fragment {
         String message = isSuccess ? getString(R.string.for_result_training_message_success) : getString(R.string.for_result_training_message_not_success);
         mFragmentResultTrainingBinding.resultTrainingHeaderTextView.setText(title);
         mFragmentResultTrainingBinding.resultTrainingTextView.setText(message);
+    }
+
+    private void setLogo(int logoId) {
+        if (getActivity() == null) return;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            Drawable drawable = getActivity().getDrawable(logoId);
+            mFragmentResultTrainingBinding.resultLogo.setImageDrawable(drawable);
+        }
+
     }
 
     public void setStartTraining() {
